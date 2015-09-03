@@ -144,11 +144,16 @@
   opacity: 1;
 }
 
+.newtab-site{
+  background-color: transparent;
+}
 .newtab-site:hover .newtab-thumbnail.enhanced-content,
 .newtab-cell:not([ignorehover]) .newtab-site:hover .newtab-thumbnail.enhanced-content {
   opacity: 0;
 }
-
+.newtab-thumbnail:first-child{
+  background-color: #FFF;
+}
 .newtab-site[type=affiliate] .newtab-thumbnail,
 .newtab-site[type=enhanced] .newtab-thumbnail,
 .newtab-site[type=organic] .newtab-thumbnail,
@@ -157,25 +162,51 @@
   background-size: auto;
 }
 
+.newtab-link{
+  background-color: transparent;
+}
+
 /* TITLES */
 .newtab-title {
   color: #000;
+  background: none;
+  bottom: 0;
+  height: 27px;
   font-size: 12px;
   line-height: 24px;
   text-align: center;
   opacity: 0;
+  z-index: -1;
   transition: opacity 100ms ease-out;
 }
 .newtab-site:not([dragged]):hover .newtab-title {
   opacity: 1;
   transition: opacity 100ms ease-in;
+  bottom: -27px;
+}
+
+.newtab-sponsored{
+  z-index: -1;
+  top:-15px;
+}
+.newtab-site:not([dragged]):hover .newtab-sponsored{
+  top: 11px;
+}
+
+#newtab-grid[locked] .newtab-sponsored,
+#newtab-grid[locked] .newtab-title,
+#newtab-grid[locked] .newtab-suggested{
+  visibility: hidden;
 }
 
 .newtab-suggested:hover {
   color: #588FE4;
   border: 1px solid #588FE4;
 }
-
+.newtab-site:not([dragged]):hover .newtab-suggested{
+  top: 231px;
+  top: calc(100% + 26px);
+}
 .newtab-suggested[active] {
   background-color: rgba(51, 51, 51, 0.95);
   border: 0;
@@ -184,6 +215,8 @@
 
 .newtab-suggested {
   background-color: white;
+  top: 205px;
+  top: calc(100%);
 }
 
 /*.newtab-site[pinned] .newtab-title {
@@ -341,4 +374,114 @@
 #newtab-search-text + #newtab-search-submit:hover:active {
   box-shadow: none;
   background-position: 30px -33px;
+}
+
+/* NEW TAB CONTROLS -johngraciliano */
+#newtab-customize-panel{  /* This is for Firefox 40 and before only to reposition a static element */
+  margin: -3px 0 0 -21px;
+}
+.newtab-customize-panel-container{ /* Affects Firefox 41+ */
+  margin-right: 34px;
+}
+.newtab-customize-panel-container #newtab-customize-panel{  /* Affects Firefox 41+ */
+  margin: 45px 0 0 0;
+}
+
+.newtab-customize-panel-item,
+.newtab-customize-complex-option{
+  background-color: transparent;
+}
+#newtab-customize-learn{
+  background-color: hsla(210,4%,10%,.07);
+
+}
+#newtab-customize-learn:hover{
+ background-color: hsla(210,4%,10%,.14);
+  color: #000;
+}
+
+
+#newtab-customize-overlay{
+  display: none !important;
+}
+#newtab-customize-panel{
+  min-width: 160px;
+  white-space: nowrap;
+}
+#newtab-customize-panel:nth-child(+4) .panel-arrowcontent { /* This should only affect Firefox 40 */
+  border-radius: 6px;
+}
+#newtab-customize-title{ /* This is for Firefox 40-41 */
+  display: block; /* This is for FireFox 41 */
+  border-radius: 5px 5px 0 0;
+}
+#newtab-customize-learn{ /* This is for Firefox 40-41 */
+  border-radius: 0 0 5px 5px;
+}
+#newtab-customize-title,
+#newtab-customize-learn:not(:hover){
+  color: black;
+}
+#newtab-customize-title,
+#newtab-customize-classic:first-child,
+#newtab-customize-enhanced:nth-child(+2),
+#newtab-customize-title ~ #newtab-customize-blank,
+#newtab-customize-learn{
+  padding: 10px 10px 10px 30px;
+  line-height: initial;
+}
+#newtab-customize-title{
+  padding-left: 10px;
+}
+#newtab-customize-classic:first-child{
+  padding-bottom: 7px;
+}
+#newtab-customize-enhanced:nth-child(+2){
+  padding-top: 0;
+}
+#newtab-customize-enhanced:nth-child(+2) > .checkbox {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  height: 13px;
+  width: 13px;
+  padding: 0;
+  margin-right: -3px;
+  background: transparent;
+}
+#newtab-customize-enhanced:nth-child(+2)[selected] .checkbox::after{
+  content:"";
+  display:block;
+  position: relative;
+  width:16px;
+  height: 16px;
+  background: url("chrome://global/skin/menu/shared-menu-check.png") no-repeat transparent;
+  background-size: 16px 16px;
+  top: -4px;
+  left: 0px;
+}
+#newtab-customize-classic:first-child[selected],
+#newtab-customize-title ~ #newtab-customize-blank[selected]{
+  background: url("chrome://global/skin/menu/shared-menu-check.png") no-repeat transparent;
+  background-size: 16px 16px;
+  background-position: left 9px center;
+  background-position: left 12px center;
+  color: black;
+  font-weight: 600;
+}
+.newtab-customize-complex-option:hover #newtab-customize-classic:first-child:not([selected]),
+#newtab-customize-title ~ #newtab-customize-blank:hover:not([selected]){
+  background: transparent;
+}
+#newtab-customize-learn label::before{
+  display:inline-block;
+  content:"";
+  width:16px;
+  height: 16px;
+  background: url("chrome://browser/skin/menuPanel-help.png") no-repeat transparent;
+  background-size: cover;
+  margin:-3px 5px -3px -21px;
+}
+#newtab-customize-learn:hover label::before{
+  background-position: -16px 0;
 }
