@@ -433,6 +433,7 @@
   background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75));
   border: 1px solid #CCC;
   border-radius: 5px;
+  overflow: hidden; /* to propely cut the round corners -johngraciliano */
 }
 
 /*** list ***/
