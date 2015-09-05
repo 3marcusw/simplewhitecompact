@@ -82,7 +82,7 @@
   to { transform: perspective(5000px) rotateY(360deg); }
 }
 
-#PanelUI-button {
+/*#PanelUI-button {
   -moz-margin-start: 2px;
   -moz-border-start: 1px solid;
   border-image: linear-gradient(transparent, rgba(0,0,0,.1) 20%, rgba(0,0,0,.1) 80%, transparent);
@@ -91,7 +91,7 @@
 
 #nav-bar[brighttext] > #PanelUI-button {
   border-image-source: linear-gradient(transparent, rgba(100%,100%,100%,.2) 20%, rgba(100%,100%,100%,.2) 80%, transparent);
-}
+}*/
 
 #PanelUI-menu-button[update-status="succeeded"] .toolbarbutton-badge::after {
   content: url(chrome://browser/skin/update-badge.svg);
