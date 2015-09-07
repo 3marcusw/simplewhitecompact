@@ -2,6 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+:root{
+  --panel-separator-color: hsla(210,4%,10%,.10);
+}
+
 #identity-popup-securityView:not(.verifiedIdentity) > #identity-popup-content-owner,
 #identity-popup-securityView:not(.verifiedIdentity):not(.verifiedDomain) > #identity-popup-content-verifier,
 #identity-popup-securityView:not(.verifiedIdentity):not(.mixedContent) > #identity-popup-content-supplemental,
@@ -221,11 +225,13 @@
 
 /* FOOTER BUTTONS */
 
-#identity-popup-button-container {
+hbox#identity-popup-button-container {
   background-color: hsla(210,4%,10%,.07);
+  margin: 0;
+  padding: 0;
 }
 
-#identity-popup-more-info-button {
+button#identity-popup-more-info-button {
   border: none;
   border-top: 1px solid var(--panel-separator-color);
   background: transparent;
