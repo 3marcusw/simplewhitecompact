@@ -122,7 +122,12 @@
   transition-timing-function: ease-in-out;
   background-color: rgba(255,255,255,1);
   box-shadow: 0 20px 17px rgba(0,0,0,.15);
+  transition: top 1ms, left 1ms, box-shadow 150ms;
   /*transition: box-shadow 200ms ease-out;*/
+}
+
+#newtab-grid[locked] .newtab-site:not([dragged]){
+  transition: top 300ms, left 300ms;
 }
 
 .newtab-site:hover {
@@ -374,6 +379,10 @@
 #newtab-search-text + #newtab-search-submit:hover:active {
   box-shadow: none;
   background-position: 30px -33px;
+}
+
+#newtab-search-manage > label { /* To fix some uglyness in Firefox 40+ */
+  line-height: normal;
 }
 
 /* NEW TAB CONTROLS -johngraciliano */
