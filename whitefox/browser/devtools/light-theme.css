@@ -335,7 +335,7 @@ div.CodeMirror span.eval-text {
   background-position: -14px 0;
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.25dppx) {
   .theme-twisty, .theme-checkbox {
     background-image: url("chrome://browser/skin/devtools/controls@2x.png");
   }
@@ -373,7 +373,7 @@ div.CodeMirror span.eval-text {
   margin-left: -4px;
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.25dppx) {
   .theme-tooltip-panel .panel-arrow[side="top"],
   .theme-tooltip-panel .panel-arrow[side="bottom"] {
     list-style-image: url("chrome://browser/skin/devtools/tooltip/arrow-vertical-light@2x.png");
@@ -423,6 +423,8 @@ div.CodeMirror span.eval-text {
 .devtools-toolbar checkbox {
   margin: 0 2px;
   padding: 0;
+  font: -moz-window; /* added by Graciliano */
+  font-size: 12px; /* added by Graciliano */
 }
 .devtools-toolbar checkbox .checkbox-check {
   margin: 0;
@@ -693,7 +695,12 @@ div.CodeMirror span.eval-text {
   background-repeat: no-repeat;
 }
 
-@media (min-resolution: 2dppx) {
+.devtools-button[disabled]::before,
+.devtools-button:disabled::before {
+  opacity: 0.5;
+}
+
+@media (min-resolution: 1.25dppx) {
   .devtools-button::before {
     background-size: 32px;
   }
@@ -716,7 +723,7 @@ div.CodeMirror span.eval-text {
   margin-bottom: 1px;
   padding: 0;
   -moz-padding-start: 22px;
-  -moz-padding-end: 12px;
+  -moz-padding-end: 4px;
   background-position: 8px center;
   background-size: 11px 11px;
   background-repeat: no-repeat;
@@ -731,7 +738,7 @@ div.CodeMirror span.eval-text {
   background-image: url(magnifying-glass-light.png);
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.25dppx) {
   .theme-dark .devtools-searchinput {
     background-image: url(magnifying-glass@2x.png);
   }
@@ -745,12 +752,87 @@ div.CodeMirror span.eval-text {
   background-position: calc(100% - 8px) center;
 }
 
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons {
-  display: none;
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-icon {
+  visibility: hidden;
 }
 
+/* Searchbox is a div container element for a search input element */
+.devtools-searchbox {
+  display: flex;
+  flex: 1;
+  -moz-box-flex: 1; /* Needed for Firefox 40 --johnGraciliano */
+  position: relative;
+}
+
+.devtools-rule-searchbox {
+  -moz-box-flex: 1;
+  padding-right: 23px;
+  width: 100%;
+  font: inherit;
+}
+
+.devtools-searchinput.devtools-rule-searchbox{
+  font: -moz-window; /* --johnGraciliano */
+  font-size: 12px; /* --johnGraciliano */
+}
+#preview-text-input.devtools-textinput::-moz-placeholder,
+.devtools-searchinput.devtools-rule-searchbox::-moz-placeholder {
+  font-style: italic;
+}
+
+
+.devtools-style-searchbox-no-match,
 .devtools-no-search-result {
   border-color: var(--theme-highlight-red) !important;
+}
+
+.devtools-searchinput-clear {
+  position: absolute;
+  top: 3.5px;
+  right: 7px;
+  padding: 0;
+  border: 0;
+  width: 16px;
+  height: 16px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.theme-dark .devtools-searchinput-clear { /* This goes elsewhere and it is inverted! --graciliano */
+  background-image: url("chrome://global/skin/icons/close.png");
+}
+
+.theme-light .devtools-searchinput-clear {
+  background-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
+}
+
+.devtools-searchinput-clear:hover {
+  background-position: -16px 0;
+}
+
+.theme-dark .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear { /* This goes elsewhere and it is inverted! --graciliano */
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+}
+
+.theme-light .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
+}
+
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover {
+  -moz-image-region: rect(0, 32px, 16px, 16px);
+}
+
+@media (min-resolution: 1.25dppx) {
+  .theme-dark .devtools-searchinput {
+    background-image: url(magnifying-glass@2x.png);
+  }
+
+  .theme-light .devtools-searchinput {
+    background-image: url(magnifying-glass-light@2x.png);
+  }
 }
 
 /* Close button */
@@ -959,6 +1041,21 @@ div.CodeMirror span.eval-text {
   background-image: url("chrome://browser/skin/devtools/undock@2x.png");
 }
 
+/*  I don't want to hide it! --johnGraciliano
+#toolbox-dock-bottom-minimize {
+  /* Bug 1177463 - The minimize button is currently hidden until we agree on
+     the UI for it, and until bug 1173849 is fixed too. *%
+  display: none;
+} */
+
+#toolbox-dock-bottom-minimize > image {
+  background-image: url("chrome://browser/skin/devtools/dock-bottom-minimize@2x.png");
+}
+
+#toolbox-dock-bottom-minimize.minimized > image {
+  background-image: url("chrome://browser/skin/devtools/dock-bottom-maximize@2x.png");
+}
+
 #toolbox-dock-window,
 #toolbox-dock-bottom,
 #toolbox-dock-side {
@@ -1067,7 +1164,7 @@ div.CodeMirror span.eval-text {
   background-image: url("chrome://browser/skin/devtools/command-eyedropper.png");
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.25dppx) {
   #command-button-paintflashing > image {
     background-image: url("chrome://browser/skin/devtools/command-paintflashing@2x.png");
   }
