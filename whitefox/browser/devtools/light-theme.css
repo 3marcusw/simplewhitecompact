@@ -423,8 +423,8 @@ div.CodeMirror span.eval-text {
 .devtools-toolbar checkbox {
   margin: 0 2px;
   padding: 0;
-  font: -moz-window; /* added by Graciliano */
-  font-size: 12px; /* added by Graciliano */
+  font: -moz-window; /* --johnGraciliano */
+  font-size: 12px; /* --johnGraciliano */
 }
 .devtools-toolbar checkbox .checkbox-check {
   margin: 0;
@@ -799,8 +799,9 @@ div.CodeMirror span.eval-text {
   background-color: transparent;
 }
 
-.theme-dark .devtools-searchinput-clear { /* This goes elsewhere and it is inverted! --graciliano */
-  background-image: url("chrome://global/skin/icons/close.png");
+.theme-dark .devtools-searchinput-clear {
+  background-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
+  filter: url(filters.svg#invert-white);
 }
 
 .theme-light .devtools-searchinput-clear {
@@ -811,18 +812,8 @@ div.CodeMirror span.eval-text {
   background-position: -16px 0;
 }
 
-.theme-dark .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear { /* This goes elsewhere and it is inverted! --graciliano */
-  list-style-image: url("chrome://global/skin/icons/close.png");
-  -moz-image-region: rect(0, 16px, 16px, 0);
-}
-
-.theme-light .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
-  list-style-image: url("chrome://global/skin/icons/close.png");
-  -moz-image-region: rect(0, 16px, 16px, 0);
-}
-
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover {
-  -moz-image-region: rect(0, 32px, 16px, 16px);
+.theme-dark .textbox-search-clear {
+  filter: url(filters.svg#invert-white);
 }
 
 @media (min-resolution: 1.25dppx) {
