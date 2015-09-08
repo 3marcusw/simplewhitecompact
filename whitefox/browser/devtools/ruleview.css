@@ -246,3 +246,41 @@
 .ruleview-selectorhighlighter.highlighted {
   background-position: -16px 0;
 }
+
+/***  Code imported from Aurora 42.0a1 for compatibility with Firefox 40+ --johnGraciliano   *************/
+#ruleview-add-rule-button::before {
+  background-image: url("chrome://browser/skin/devtools/add.svg");
+  background-size: cover;
+}
+
+#pseudo-class-panel-toggle::before {
+  background-image: url("chrome://browser/skin/devtools/pseudo-class.svg#pseudo-class");
+  background-size: cover;
+}
+#pseudo-class-panel-toggle[checked]::before {
+  background-image: url("chrome://browser/skin/devtools/pseudo-class.svg#pseudo-class-checked");
+  filter: none !important;
+}
+
+/**
+ * These buttons are using opacity instead of background color to indicate
+ * the state
+ */
+#ruleview-add-rule-button,
+#pseudo-class-panel-toggle {
+  opacity: 0.8;
+}
+
+#ruleview-add-rule-button:not([disabled]):hover,
+#pseudo-class-panel-toggle:hover,
+#pseudo-class-panel-toggle[checked] {
+  opacity: 1;
+}
+
+#ruleview-add-rule-button,
+#pseudo-class-panel-toggle,
+#pseudo-class-panel-toggle:hover,
+#pseudo-class-panel-toggle[checked]::before {
+  background-color: transparent !important;
+}
+/****  End of import  ************************************************************************************/
