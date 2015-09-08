@@ -155,6 +155,11 @@ body {
   width: 100%;
   border-bottom-width: 0;
 }
+/* The following adds compatibility with Firefox 40+ but does not break with previous versions --johnGraciliano */
+#root:first-child > .devtools-toolbar{
+  display: flex;
+  border-bottom-width: 1px;
+}
 
 .link {
   padding: 0 3px;
