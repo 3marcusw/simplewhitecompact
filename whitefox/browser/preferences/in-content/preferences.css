@@ -607,9 +607,6 @@ description > html|a {
   .androidLogo {
     list-style-image: url(chrome://browser/skin/fxa/android@2x.png);
   }
-  #fxaProfileImage {
-    list-style-image: url(chrome://browser/skin/fxa/default-avatar@2x.png);
-  }
 }
 
 /*@media not all and (-moz-windows-default-theme) {
