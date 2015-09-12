@@ -633,6 +633,8 @@ toolbarbutton#PanelUI-fxa-status[syncstatus="active"],
   list-style-image: url(chrome://browser/skin/syncProgress-horizontalbar.png);
 }
 
+toolbarbutton#PanelUI-fxa-status[fxastatus="migrate-signup"],
+toolbarbutton#PanelUI-fxa-status[fxastatus="migrate-verify"],
 #PanelUI-footer-fxa[fxastatus="migrate-signup"] > #PanelUI-fxa-status > #PanelUI-fxa-label,
 #PanelUI-footer-fxa[fxastatus="migrate-verify"] > #PanelUI-fxa-status > #PanelUI-fxa-label {
   list-style-image: url(chrome://browser/skin/warning16.png);
@@ -679,7 +681,7 @@ toolbarbutton#PanelUI-fxa-status,
   display: none;
 }
 
-#PanelUI-fxa-status[disabled] {
+hbox#PanelUI-fxa-status[disabled] {
   pointer-events: none;
 }
 
@@ -1490,15 +1492,19 @@ menuitem[checked="true"].subviewbutton > .menu-iconic-left {
     list-style-image: url(chrome://branding/content/icon32.png);
   }
 
+  toolbarbutton#PanelUI-fxa-status,
   #PanelUI-fxa-label,
   #PanelUI-fxa-icon {
     list-style-image: url(chrome://browser/skin/sync-horizontalbar@2x.png);
   }
 
+  toolbarbutton#PanelUI-fxa-status[syncstatus="active"],
   #PanelUI-footer-fxa[syncstatus="active"] > #PanelUI-fxa-icon {
     list-style-image: url(chrome://browser/skin/syncProgress-horizontalbar@2x.png);
   }
 
+  toolbarbutton#PanelUI-fxa-status[fxastatus="migrate-signup"],
+  toolbarbutton#PanelUI-fxa-status[fxastatus="migrate-verify"],
   #PanelUI-footer-fxa[fxastatus="migrate-signup"] > #PanelUI-fxa-status > #PanelUI-fxa-label,
   #PanelUI-footer-fxa[fxastatus="migrate-verify"] > #PanelUI-fxa-status > #PanelUI-fxa-label {
     list-style-image: url(chrome://browser/skin/warning16@2x.png);
@@ -1521,6 +1527,7 @@ menuitem[checked="true"].subviewbutton > .menu-iconic-left {
     list-style-image: url(chrome://browser/skin/menuPanel-exit@2x.png);
   }
 
+  toolbarbutton#PanelUI-fxa-status,
   #PanelUI-fxa-label,
   #PanelUI-fxa-icon,
   #PanelUI-customize,
@@ -1530,6 +1537,7 @@ menuitem[checked="true"].subviewbutton > .menu-iconic-left {
   }
 
   #PanelUI-update-status > .toolbarbutton-icon,
+  toolbarbutton#PanelUI-fxa-status > .toolbarbutton-icon,
   #PanelUI-fxa-label > .toolbarbutton-icon,
   #PanelUI-fxa-icon > .toolbarbutton-icon,
   #PanelUI-customize > .toolbarbutton-icon,
