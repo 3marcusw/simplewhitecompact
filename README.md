@@ -11,8 +11,8 @@
 1. Clone or download the repository
 2. Pack all the files using `zip -qr9XD simplewhitex.xpi *`
 
-Then, you can open `simplewhitex.xpi` in Firefox and follow the installation procedure.  _Currently, this will install over the standard **Simple White** theme._
+Then, you can open `simplewhitex.xpi` in Firefox and follow the installation procedure.
 
 ## Releases
 
-Pre-packaged releases _(of **Simple White**)_ can be downloaded from [here](https://addons.mozilla.org/addon/simplewhite/versions/).
+A pre-packaged release of the first version of this fork can be found [here](https://github.com/johngraciliano/simplewhite/releases/tag/v2.2b18x1-rc1).  Pre-packaged releases of the original **Simple White** can be downloaded from [here](https://addons.mozilla.org/addon/simplewhite/versions/).
