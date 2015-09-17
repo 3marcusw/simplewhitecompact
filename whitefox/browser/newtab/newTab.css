@@ -293,93 +293,98 @@
   margin-bottom: 40px;
 }
 
-#newtab-search-logo,
-#newtab-search-icon {
-  position: absolute;
-  top: 32px;
-  background-image: url("chrome://browser/skin/newtab/newtab-search.png") !important;
-  background-position: 0 bottom;
-  background-size: 58px 96px !important;
+#newtab-search-logo#newtab-search-logo,
+#newtab-search-icon#newtab-search-icon{
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  background: url("chrome://browser/skin/newtab/newtab-search.png");
+  background-size: 58px 96px;
+  background-position: 2px 0;
   height: 32px;
-  width: 25px !important;
-  border: none;
-  -moz-margin-start: 46px;
+  width: 30px;
+  border: 1px solid #DEDEDE;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
 }
-#newtab-search-logo[active],
-#newtab-search-logo:hover,
-#newtab-search-icon[active],
-#newtab-search-icon:hover {
-  background-position: -29px bottom;
-  background-color: transparent;
-  border: none;
+#newtab-search-logo#newtab-search-logo:hover,
+#newtab-search-logo#newtab-search-logo:active{
+  background-position: 2px -32px;
+}
+@media (min-resolution: 1.1dppx) {
+  #newtab-search-logo#newtab-search-logo,
+  #newtab-search-icon#newtab-search-icon{
+    background-image: url("chrome://browser/skin/newtab/newtab-search@2x.png");
+  }
 }
 
-#newtab-search-text {
+#newtab-search-text#newtab-search-text{
   height: 32px;
+  margin: 0 -30px;
+  padding: 0 2px;
+  border: 1px solid #DEDEDE;
+  border-radius: 5px;
+  border-left: 30px solid #FFF;
+  border-right: 30px solid #FFF;
+  background: #FFF;
   box-shadow: none;
-  background-color: #eee;
-  border-color: #eee;
-  transition-property: background-color;
-  transition-duration: 100ms;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -moz-padding-start: 30px;
-  -moz-margin-start: 46px;
 }
-#newtab-search-text:focus,
-#newtab-search-text[autofocus] {
-  background-color: #eaeaea;
-  border-color: #eaeaea;
+#newtab-search-text::-moz-placeholder {
+  font-style: italic;
 }
 
+#newtab-search-submit#newtab-search-submit{
+  height: 32px;
+  max-height: 32px;
+  font-size: 0px !important;
+  width: 30px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
+      <style>*{stroke: GrayText;stoke-width:1px;}</style>\
+      <line x1="10" y1="4" x2="16.2" y2="10.2"  />\
+      <line x1="3" y1="10" x2="15.5" y2="10"  />\
+      <line x1="10" y1="16" x2="16.2" y2="9.8"  />\
+    </svg>')  no-repeat;
+  background-position: center center;
+  border: 1px solid #DEDEDE;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  box-shadow: none;
+}
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:hover,
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:active,
+#newtab-search-text:focus + #newtab-search-submit#newtab-search-submit,
+#newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit,
+#newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit{
+  background: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
+      <style>*{stroke: MenuText;stoke-width:1px;}</style>\
+      <line x1="10" y1="4" x2="16.2" y2="10.2"  />\
+      <line x1="3" y1="10" x2="15.5" y2="10"  />\
+      <line x1="10" y1="16" x2="16.2" y2="9.8"  />\
+    </svg>')  no-repeat center center;
+  border: 1px solid #DEDEDE;
+  border-left: transparent;
+  box-shadow: none;
+}
 .searchSuggestionTable {
   -moz-margin-start: 23px;
   background-color: rgba(255, 255, 255, .97);
   border: none;
   box-shadow: 0 5px 5px rgba(0, 0, 0, .2);
 }
+#searchSuggestionTable{
+  margin-left: 0;
+}
+#searchSuggestionTable > tr.searchSuggestionRow > :first-child {
+      padding-left: 31px;
 
-#newtab-search-submit {
-  height: 32px;
-  color: transparent;
-  border-color: #eee;
-  border-left: none;
-  -moz-margin-start: -27px;
-  -moz-margin-end: 46px;
-  background: #eee no-repeat 30px -1px;
-  background-image: url("chrome://browser/skin/newtab/newtab-search.png") !important;
-  box-shadow: none;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  transition-duration: 100ms;
-}
-@media (min-resolution: 2dppx) {
-  #newtab-search-logo,
-  #newtab-search-icon,
-  #newtab-search-submit {
-    background-image: url("chrome://browser/skin/newtab/newtab-search@2x.png") !important;
-    background-size: 58px 96px;
-  }
-}
-#newtab-search-text:focus + #newtab-search-submit,
-#newtab-search-text + #newtab-search-submit:hover,
-#newtab-search-text[autofocus] + #newtab-search-submit {
-  border-color: transparent;
-  color: transparent;
 }
 
-#newtab-search-text:focus + #newtab-search-submit,
-#newtab-search-text[autofocus] + #newtab-search-submit {
-  background-color: #eaeaea;
-  border-color: #eaeaea;
-  box-shadow: none;
-}
-
-#newtab-search-text + #newtab-search-submit:hover,
-#newtab-search-text + #newtab-search-submit:hover:active {
-  box-shadow: none;
-  background-position: 30px -33px;
-}
 
 #newtab-search-manage > label { /* To fix some uglyness in Firefox 40+ */
   line-height: normal;
