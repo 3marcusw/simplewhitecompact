@@ -143,6 +143,7 @@ toolbarbutton[type="menu-button"][disabled="true"]:hover:active {
 
 /* ::::: toolbarbutton badged ::::: */
 
+.toolbarbutton-badge-stack > .toolbarbutton-icon[label]:not([label=""]),
 .toolbarbutton-badge-container > .toolbarbutton-icon[label]:not([label=""]) {
   -moz-margin-end: 0;
 }
