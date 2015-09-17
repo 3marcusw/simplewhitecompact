@@ -61,6 +61,7 @@
   -moz-box-flex: 1; /* make menu items expand to fill toolbar height */
 }
 
+/**/ @media (-moz-windows-theme) { /* Change reversal #1 --johnGraciliano */
 /* Hides the titlebar-placeholder underneath the window caption buttons when we
    are not autohiding the menubar. */
 #toolbar-menubar:not([autohide="true"]) + #TabsToolbar > .titlebar-placeholder[type="caption-buttons"] {
@@ -78,6 +79,7 @@
 #main-window[tabsintitlebar][sizemode="normal"]:not([inFullscreen])[chromehidden~="menubar"] #toolbar-menubar ~ #TabsToolbar,
 #main-window[tabsintitlebar][sizemode="normal"]:not([inFullscreen]) #toolbar-menubar[autohide="true"][inactive] ~ #TabsToolbar {
   margin-top: var(--space-above-tabbar);
+/**/ } /* Change reversal #1 --johnGraciliano */
 }
 
 #toolbar-menubar:not([autohide="true"]) {
@@ -322,20 +324,20 @@
   /*box-shadow: 0 1px 0 rgba(253,253,253,0.45) inset;*/
 }
 
-@media (-moz-os-version: windows-xp),
+/* @media (-moz-os-version: windows-xp),
        (-moz-os-version: windows-vista),
        (-moz-os-version: windows-win7),
-       (-moz-os-version: windows-win8) {
+       (-moz-os-version: windows-win8) {   ** Change Reversal #2 --johnGraciliano *%
   #nav-bar {
     border-top: 1px solid hsla(209,67%,12%,0.35) !important;
     box-shadow: 0 1px 0 rgba(253,253,253,0.45) inset;
-  }
+  }   %* This was not in the original SimpleWhite --johnGraciliano */
   @media not all and (-moz-windows-compositor) {
     #TabsToolbar[collapsed="true"] + #nav-bar {
       border-top-style: none !important;
     }
   }
-}
+/* } **Change Reversal #2 --johnGraciliano */
 
 #personal-bookmarks {
   min-height: 24px;
@@ -349,11 +351,12 @@
   background-color: -moz-dialog;
 }
 
+/*** Change Reversal #3 --johnGraciliano **%
 @media (-moz-os-version: windows-xp) and (-moz-windows-default-theme) {
   #main-window[tabsintitlebar][sizemode="normal"] #toolbar-menubar {
     margin-top: 4px;
   }
-}
+} %* Change Reversal #3 --johnGraciliano **/
 
 /* ::::: titlebar ::::: */
 
@@ -385,11 +388,12 @@
   margin-left: 22px; /* space needed for Aero Snap */
 }
 
+/*** Change Reversal #4 --johnGraciliano **%
 @media (-moz-os-version: windows-xp) {
   .titlebar-placeholder[type="caption-buttons"] {
-    margin-left: 10px; /* less space needed on XP because there's no Aero Snap */
+    margin-left: 10px; /* less space needed on XP because there's no Aero Snap *%
   }
-}
+} ** Change Reversal #4 --johnGraciliano **/
 
 /* titlebar command buttons */
 
@@ -615,12 +619,12 @@ menuitem.bookmark-item {
 
 /* Note that this file isn't used for HiDPI on OS X. */
 
-:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button),
+:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button),
 #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
   list-style-image: url("chrome://browser/skin/Toolbar.png");
 }
 
-toolbar[brighttext] :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button),
+toolbar[brighttext] :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button),
 toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
   list-style-image: url(chrome://browser/skin/Toolbar-inverted.png);
 }
@@ -794,36 +798,45 @@ toolbar[brighttext] #sync-button[status="active"] {
   -moz-image-region: rect(0, 720px, 18px, 702px);
 }
 
+#loop-button,
 #loop-button > .toolbarbutton-badge-container {
   list-style-image: url(chrome://browser/skin/loop/toolbar.png);
   -moz-image-region: rect(0, 18px, 18px, 0);
 }
 
+toolbar[brighttext] #loop-button,
 toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   list-style-image: url(chrome://browser/skin/loop/toolbar-inverted.png);
 }
 
+#loop-button[state="disabled"],
+#loop-button[disabled="true"],
 #loop-button[state="disabled"] > .toolbarbutton-badge-container,
 #loop-button[disabled="true"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 36px, 18px, 18px);
 }
 
+#loop-button:not([disabled="true"])[state="error"],
 #loop-button:not([disabled="true"])[state="error"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 54px, 18px, 36px);
 }
 
+#loop-button:not([disabled="true"])[state="action"],
 #loop-button:not([disabled="true"])[state="action"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 72px, 18px, 54px);
 }
 
+#loop-button:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
 #loop-button:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 90px, 18px, 72px);
 }
 
+#loop-button:not([disabled="true"])[state="active"],
 #loop-button:not([disabled="true"])[state="active"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 108px, 18px, 90px);
 }
 
+#loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
 #loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 126px, 18px, 108px);
 }
@@ -1253,6 +1266,8 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 832px, 32px, 800px);
   }
 
+  #loop-button[cui-areatype="menu-panel"],
+  toolbarpaletteitem[place="palette"] > #loop-button,
   #loop-button[cui-areatype="menu-panel"] > .toolbarbutton-badge-container,
   toolbarpaletteitem[place="palette"] > #loop-button > .toolbarbutton-badge-container {
     list-style-image: url(chrome://browser/skin/loop/menuPanel.png);
@@ -1260,31 +1275,39 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   }
 
   /* Make sure that the state icons are not shown in the customization palette. */
+  toolbarpaletteitem[place="palette"] > #loop-button,
   toolbarpaletteitem[place="palette"] > #loop-button > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 32px, 32px, 0) !important;
   }
 
+  #loop-button[cui-areatype="menu-panel"][state="disabled"],
+  #loop-button[cui-areatype="menu-panel"][disabled="true"],
   #loop-button[cui-areatype="menu-panel"][state="disabled"] > .toolbarbutton-badge-container,
   #loop-button[cui-areatype="menu-panel"][disabled="true"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 64px, 32px, 32px);
   }
 
+  #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 96px, 32px, 64px);
   }
 
+  #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 128px, 32px, 96px);
   }
 
+  #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 160px, 32px, 128px);
   }
 
+  #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 192px, 32px, 160px);
   }
 
+  #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 224px, 32px, 192px);
   }
@@ -1682,6 +1705,7 @@ toolbar[brighttext] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
 .findbar-button > .toolbarbutton-text,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-text,
+#nav-bar .toolbarbutton-1 > .toolbarbutton-badge-stack, /* Firefox 42+ --johnGraciliano */
 #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-container,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
@@ -1695,6 +1719,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-an
 }
 
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-icon,
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano */
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-container,
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
   padding: 3px 7px;
@@ -1703,6 +1728,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-an
 /*****  All this taken from default theme shall be gone --johnGraciliano *******%
 toolbarbutton[cui-areatype="toolbar"] > :-moz-any(#zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button) > .toolbarbutton-icon,
 :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button):-moz-any([cui-areatype="toolbar"],:not([cui-areatype])):not(:-moz-any(#zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button)) > .toolbarbutton-icon,
+:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button):-moz-any([cui-areatype="toolbar"],:not([cui-areatype])) > .toolbarbutton-badge-stack > .toolbarbutton-icon,  /* Firefox 42+ --johnGraciliano *%
 :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button):-moz-any([cui-areatype="toolbar"],:not([cui-areatype])) > .toolbarbutton-badge-container > .toolbarbutton-icon,
 :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button):-moz-any([cui-areatype="toolbar"],:not([cui-areatype])) > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
@@ -1744,6 +1770,7 @@ toolbarbutton[cui-areatype="toolbar"] > :-moz-any(#zoom-out-button, #zoom-reset-
   .findbar-button > .toolbarbutton-text,
   #nav-bar .toolbarbutton-1 > .toolbarbutton-icon,
   #nav-bar .toolbarbutton-1 > .toolbarbutton-text,
+  #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-stack, /* Firefox 42+ --johnGraciliano *%
   #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-container,
   #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
   #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
@@ -1760,6 +1787,7 @@ toolbarbutton[cui-areatype="toolbar"] > :-moz-any(#zoom-out-button, #zoom-reset-
 }
 
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-icon,
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-stack, /* Firefox 42+  --johnGraciliano *%
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-container,
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
   padding: calc(var(--toolbarbutton-vertical-inner-padding) + 1px) 7px;
@@ -1767,11 +1795,14 @@ toolbarbutton[cui-areatype="toolbar"] > :-moz-any(#zoom-out-button, #zoom-reset-
 %****************  it's gone!   ************************************************/
 
 /* Help SDK icons fit: */
+toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon, /* as it was in SW 2.2b18 --johnGraciliano */
 toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-icon,
+toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-badge-stack > .toolbarbutton-icon, /* Firefox 42+ --johnGraciliano */
 toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-badge-container > .toolbarbutton-icon {
   width: 16px;
 }
 
+#nav-bar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon, /* as it was in SW 2.2b18 --johnGraciliano */
 #nav-bar toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
   /* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
   width: 32px;
@@ -1835,6 +1866,7 @@ toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-ba
 #nav-bar .toolbarbutton-1:not([disabled=true]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
 #nav-bar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text,
+#nav-bar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano *%
 #nav-bar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-container,
 window:not([chromehidden~="toolbar"]) #urlbar-wrapper > #forward-button:not([open]):not(:active):not([disabled]):hover > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1:not([buttonover]):not([open]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
@@ -1880,6 +1912,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > #forward-button:not([ope
 #nav-bar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled=true]) > .dropmarker-icon,
 #nav-bar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
+#nav-bar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-stack, /* Firefox 42+ --johnGraciliano *%
 #nav-bar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
   background: var(--toolbarbutton-active-background);
   border-color: var(--toolbarbutton-active-bordercolor);
@@ -1896,6 +1929,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > #forward-button:not([ope
   #nav-bar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon,
   #nav-bar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
   #nav-bar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
+  #nav-bar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-stack, /* Firefox 42+  --johnGraciliano */
   #nav-bar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
     background: var(--toolbarbutton-active-background);
     border-color: var(--toolbarbutton-active-bordercolor);
@@ -2562,26 +2596,38 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   list-style-image: url(chrome://browser/skin/identity-icons-generic.png);
 }
 
+.chromeUI > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+  -moz-image-region: unset;
+}
 .chromeUI > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://branding/content/identity-icons-brand.png);
 }
 
+.verifiedDomain > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedDomain > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https.png);
 }
 
+.verifiedIdentity > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedIdentity > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-ev.png);
 }
 
+.mixedActiveContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedActiveContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-active.png);
 }
 
+
+.weakCipher > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContentLoadedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
 
+.mixedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContentLoadedActiveBlocked > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
@@ -2610,13 +2656,34 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
     -moz-image-region: rect(0, 16px, 16px, 0);
   }
 
+  #identity-box:hover > #identity-icons > #page-proxy-favicon,
   #identity-box:hover > #page-proxy-favicon {
     -moz-image-region: rect(0, 32px, 16px, 16px);
   }
+  #identity-box.chromeUI:hover > #identity-icons > #page-proxy-favicon{
+    -moz-image-region: unset;
+      opacity: .8;
+  }
 
+  #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
+  #identity-box[open=true] > #identity-icons > #page-proxy-favicon,
   #identity-box:hover:active > #page-proxy-favicon,
   #identity-box[open=true] > #page-proxy-favicon {
     -moz-image-region: rect(0, 48px, 16px, 32px);
+  }
+  #identity-box.chromeUI:hover:active > #identity-icons > #page-proxy-favicon,
+  #identity-box.chromeUI[open=true] > #identity-icons > #page-proxy-favicon{
+    -moz-image-region: unset;
+    opacity: 1;
+    filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+      <svg height="0" xmlns="http://www.w3.org/2000/svg">\
+        <filter id="dimLight"  x="0%" y="0%" width="100%" height="100%" >\
+          <feDiffuseLighting in="SourceGraphic" result="light" lighting-color="white">\
+            <feDistantLight azimuth="180" elevation="60"/>\
+          </feDiffuseLighting>\
+          <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>\
+        </filter>\
+      </svg>#dimLight');
   }
 /*} ** for all resolutions ***/
 
@@ -6171,6 +6238,7 @@ toolbarpaletteitem[notransition][place="panel"] {
 }
 
 toolbarpaletteitem > toolbarbutton > .toolbarbutton-icon,
+toolbarpaletteitem > toolbarbutton > .toolbarbutton-badge-stack > .toolbarbutton-icon, /* Firefox 42+  --johnGraciliano */
 toolbarpaletteitem > toolbarbutton > .toolbarbutton-badge-container > .toolbarbutton-icon,
 toolbarpaletteitem > toolbaritem.panel-wide-item,
 toolbarpaletteitem > toolbarbutton[type="menu-button"] {
@@ -6178,6 +6246,7 @@ toolbarpaletteitem > toolbarbutton[type="menu-button"] {
 }
 
 toolbarpaletteitem[mousedown] > toolbarbutton > .toolbarbutton-icon,
+toolbarpaletteitem[mousedown] > toolbarbutton > .toolbarbutton-badge-stack > .toolbarbutton-icon, /* Firefox 42+  --johnGraciliano */
 toolbarpaletteitem[mousedown] > toolbarbutton > .toolbarbutton-badge-container > .toolbarbutton-icon {
   transform: scale(1.3);
 }
@@ -7274,8 +7343,9 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
       -moz-appearance: -moz-win-exclude-glass;
     }
 
+    /** The following code was removed by Lootyhoof  (unitl gone) --johnGraciliano ****%
     /* Artificially draw window borders that are covered by lwtheme, see bug 591930.
-     * Not necessary on windows 10+ */
+     * Not necessary on windows 10+ *%
     #main-window[sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme {
       border-top: 2px solid;
       -moz-border-top-colors: rgb(37, 44, 51) rgba(255,255,255,.6);
@@ -7284,6 +7354,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
     #main-window[sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme:-moz-window-inactive {
       -moz-border-top-colors: rgb(102, 102, 102) rgba(255,255,255,.6);
     }
+    %***  it's gone!   ****************************************************************/
   }
 
   @media (-moz-windows-default-theme) {
