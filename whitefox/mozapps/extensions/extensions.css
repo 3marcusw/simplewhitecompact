@@ -1230,3 +1230,6 @@ button.button-link:not([disabled="true"]):active:hover {
 .sw-show {
   visibility: visible;
 }
+
+.addon-view[type="extension"][notification="warning"]{background-image: none !important;}
+.addon-view[type="extension"] .warning{display: none !important;}
