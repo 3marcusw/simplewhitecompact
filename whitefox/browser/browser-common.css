@@ -7183,7 +7183,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
       @media not all and (-moz-os-version: windows-win8) {
         @media (-moz-windows-default-theme) {
           #main-window {
-            background-color: #F0F0F0; /* As per Lootyhoof. It was hsl(0, 0%, 78%).
+            background-color: transparent; /* As per Lootyhoof. It was hsl(0, 0%, 78%).
                                           It may well be #f6f6f6 but I dunno --johnGraciliano */
           }
         }
@@ -7199,15 +7199,26 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
           padding: 10px 17px;
         }
 
-        #main-window[sizemode=maximized] .titlebar-button {
-          padding-top: 8px;
-          padding-bottom: 8px;
+        #main-window[sizemode=maximized] .titlebar-button:not(:hover) {
+          padding-top: 14px;
+          padding-bottom: 14px;
+        }
+        
+        #titlebar-close:hover.titlebar-button{
+          padding-top: 8px !important;
+          padding-bottom: 8px !important;
         }
 
         .titlebar-button > .toolbarbutton-icon {
           width: 12px;
+          height: 0px;
+        }
+        
+        #titlebar-close:hover > .toolbarbutton-icon{
+          width: 12px;
           height: 12px;
         }
+
 
         #titlebar-min {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#minimize);
