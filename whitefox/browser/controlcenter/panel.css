@@ -316,11 +316,15 @@ description#identity-popup-content-verifier,
 /* TRACKING PROTECTION */
 
 #tracking-protection-content {
-  background-image: url("chrome://browser/skin/controlcenter/tracking-protection.svg");
+  background-image: url("chrome://browser/skin/bad-content-blocked-16@2x.png"); /* Use a picture from this theme --johnGraciliano */
 }
-
+@media (min-resolution: 1.1dppx) {
+  #tracking-protection-content {
+    background-image: url("chrome://browser/skin/bad-content-blocked-64.png"); /* Use a picture from this theme --johnGraciliano */
+  }
+}
 #tracking-protection-content[state="loaded-tracking-content"]  {
-  background-image: url("chrome://browser/skin/controlcenter/tracking-protection-disabled.svg");
+  background-image: url("chrome://browser/skin/bad-content-unblocked-64.png"); /* Use a picture from this theme --johnGraciliano */
 }
 
 #tracking-action-block,
