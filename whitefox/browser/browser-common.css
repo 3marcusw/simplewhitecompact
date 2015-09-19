@@ -7204,6 +7204,11 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
           padding-bottom: 14px;
         }
         
+        #main-window[sizemode=normal] .titlebar-button:not(:hover) {
+          padding-top: 14px;
+          padding-bottom: 14px;
+        }
+        
         #titlebar-close:hover.titlebar-button{
           padding-top: 8px !important;
           padding-bottom: 8px !important;
