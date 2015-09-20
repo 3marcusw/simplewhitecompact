@@ -2593,18 +2593,27 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 #tracking-protection-icon {
   width: 16px;
   height: 16px;
+  margin: 1px 0; /* added margin to match #page-proxy-favicon and avoid a strecthed icon --johnGraciliano */
   margin-inline-start: 0;
   margin-inline-end: 2px;
-  list-style-image: url(chrome://browser/skin/tracking-protection-16.svg);
+  list-style-image: url(chrome://browser/skin/bad-content-blocked-16.png); /* use the icon that was already in the theme --johnGraciliano */
   opacity: 1;
 }
 
 #tracking-protection-icon[state="loaded-tracking-content"] {
-  list-style-image: url(chrome://browser/skin/tracking-protection-disabled-16.svg);
+  list-style-image: url(chrome://browser/skin/bad-content-unblocked-16.png); /* use the icon that was already in the theme --johnGraciliano */
 }
 
 #tracking-protection-icon[animate] {
   transition: margin-left 200ms ease-out, margin-right 200ms ease-out;
+}
+@media (min-resolution: 1.1dppx) {  /* use the icon that was already in the theme --johnGraciliano */
+  #tracking-protection-icon {
+    list-style-image: url(chrome://browser/skin/bad-content-blocked-16@2x.png);
+  }
+  #tracking-protection-icon[state="loaded-tracking-content"] {
+    list-style-image: url(chrome://browser/skin/bad-content-unblocked-64.png);
+  }
 }
 
 #tracking-protection-icon:not([state]) {
@@ -2709,15 +2718,18 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   #identity-box.chromeUI[open=true] > #identity-icons > #page-proxy-favicon{
     -moz-image-region: unset;
     opacity: 1;
+    /* Changed filter -johnGraciliano */
     filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
       <svg height="0" xmlns="http://www.w3.org/2000/svg">\
-        <filter id="dimLight"  x="0%" y="0%" width="100%" height="100%" >\
-          <feDiffuseLighting in="SourceGraphic" result="light" lighting-color="white">\
-            <feDistantLight azimuth="180" elevation="60"/>\
-          </feDiffuseLighting>\
-          <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>\
+        <filter id="dimLights">\
+          <feColorMatrix in="SourceGraphic"\
+            type="matrix"\
+            values="0.7 0  0  0 0 \
+                     0 0.7 0  0 0 \
+                     0  0 0.7 0 0 \
+                     0  0  0  1 0" />\
         </filter>\
-      </svg>#dimLight');
+      </svg>#dimLights');
   }
 /*} ** for all resolutions ***/
 
@@ -3804,7 +3816,8 @@ toolbarbutton.bookmark-item[dragover="true"][open="true"] {
 .popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-failed"],
 .popup-notification-icon[popupid="addon-install-confirmation"],
-.popup-notification-icon[popupid="addon-install-complete"] {
+.popup-notification-icon[popupid="addon-install-complete"],
+.popup-notification-icon[popupid="addon-install-restart"] {
   list-style-image: url(chrome://mozapps/skin/extensions/extensionGeneric.png);
   width: 32px;
   height: 32px;
