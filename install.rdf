@@ -4,8 +4,8 @@
     <em:id>SimpleX@White.Theme</em:id>
     <em:type>4</em:type>
     <em:name>Simple White X</em:name>
-    <em:description>Paint your firefox white. Make it look simpler, nicer.</em:description>
-    <em:version>2.2b18.x1.01</em:version>
+    <em:description>Paint your Firefox white. Make it look simpler, nicer.</em:description>
+    <em:version>2.2b18.x1.02</em:version>
     <em:creator>Louis Chan (updated by Graciliano)</em:creator>
     <em:contributor>Graciliano</em:contributor>
     <em:homepageURL>http://www.louis.hk/whitefox/</em:homepageURL>
@@ -14,7 +14,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
         <em:minVersion>37.0</em:minVersion>
-        <em:maxVersion>43.*</em:maxVersion>
+        <em:maxVersion>44.0</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
