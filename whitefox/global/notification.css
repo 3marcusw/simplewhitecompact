@@ -4,20 +4,20 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-notification {
+notification { /* warning et al. */
   color: InfoText;
   background-color: InfoBackground;
   text-shadow: none;
 }
 
 notification[type="info"] {
-  background-color: -moz-Dialog;
   color: -moz-DialogText;
+  background-color: -moz-Dialog;
 }
 
 notification[type="critical"] {
-  color: white;
-  background-image: linear-gradient(rgb(212,0,0), rgb(152,0,0));
+  color: -moz-DialogText;
+  background-color: #ffe5e5;
 }
 
 .messageText > .text-link {
@@ -43,7 +43,7 @@ notification[type="critical"] {
 }
 
 .messageImage[type="critical"] {
-  list-style-image: url("chrome://global/skin/icons/error-16.png");
+  list-style-image: url("chrome://global/skin/icons/error-16.svg");
 }
 
 .messageCloseButton {
