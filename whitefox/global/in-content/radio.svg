@@ -6,7 +6,7 @@
       display: none;
     }
     use {
-      fill: #2292d0;
+      fill: #424e5a;
     }
     use[id$="-native"] {
       fill: -moz-dialogText;
