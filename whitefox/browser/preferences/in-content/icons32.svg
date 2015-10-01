@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="32"
+     height="32"
+     viewBox="0 0 32 32">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+    use[id="security"] {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+	<g id="general-shape">
+	  <rect  x="4.5"  y="5.5"  width="22"  height="22"  rx="2"  ry="2"/>
+	  <line  x1="11.5"  y1="10.0"  x2="11.5"  y2="23.0"/>
+	  <line  x1="19.5"  y1="10.0"  x2="19.5"  y2="23.0"/>
+	  <line  x1="10.0"  y1="13.5"  x2="13.0"  y2="13.5"/>
+	  <line  x1="18.0"  y1="19.5"  x2="21.0"  y2="19.5"/>
+	</g>
+	<g id="search-shape">
+	  <circle  cx="14"  cy="13"  r="9.5"/>
+	  <line  x1="21"  y1="20"  x2="27.5"  y2="26.5"/>
+	</g>
+	<g id="content-shape">
+	  <path  d="M 5.5,3.5   v 24   h 20   v -17   l -7,-7   Z   m 12,.5   v 7.5   h 7.5"/>
+	  <path  d="M 9.0,15.5   h 13   m -13,4   h 13   m -13,4   h 8"/>
+	</g>
+	<g id="applications-shape">
+	  <ellipse  cx="16"  cy="11.5"  rx="2.5"  ry="4"/>
+	  <path  d="M 5.5,28.5   v -10   c 2,-2.5 3,-3.5 5,-5   a 4,9 0 0,1 11,0   c 2,1.5 3,2.5 5,5   v 10  
+	            c -5,-5.5 -5.5,-5.5 -6.5,-5.5   c -3,2 -4,2 -8,0   c -1,0 -1.5,0 -6.5,5.5   v -3"/>
+	  <path  d="M 13.5,23.5   c 0,6 2.5,6 2.5,9   c 0,-5 2.5,-3 2.5,-9"/>
+	</g>
+	<g id="privacy-shape">
+	  <path  d="M 0.5,9.5   c 8,0.5 12,-3.5 15,0   t 1,0   c 3,-3.5 7,0.5 15,0
+	            c 0,19 -12,17 -14,15   c -1,-.5 -2,-.5 -3,0   c -2,2 -14,4 -14,-15   Z"/>
+	  <path  d="M 14,19.5   c -4,0 -6,2 -8.5,-5   c 3,1 8,-3 8.5,5   Z"/>
+	  <path  d="M 18,19.5   c 4,0 6,2 8.5,-5   c -3,1 -8,-3 -8.5,5   Z"/>
+	</g>
+	<g id="security-shape">
+	  <rect  x="5.5"  y="13.5"  width="21"  height="14"  rx="2"  ry="2"/>
+	  <path  d="M 9.5,13.5   v -4.5   a 6.5,6.5 0 0,1 13,0   v 4.5"/>
+	</g>
+	<g id="sync-shape">
+	  <path  d="M 19.5,19.5   v 8   h 8"  transform="rotate(20,19.5,27.5)"/>
+	  <path  d="M 5.5,4.5   h 8  v 8"  transform="rotate(20,13.5,4.5)"/>
+	  <path  d="M 13.5,4.5   a 14,12 0 0,0 -1,23
+	            M 20.5,5.5   a 14,12 0 0,1 -1,22"/>
+	</g>
+	<g id="advanced-shape">
+	  <path d="M 15.5,3.5 l 2.979,9.167  l 9.639,0   l -7.798,5.666   l 2.979,9.167   l -7.798,-5.666 
+	           l  -7.798,5.666    l 2.979,-9.167   l -7.798,-5.666  l 9.639,0   l 2.979,-9.167   l 2.979,9.167 "/>
+	</g>
+  </defs>
+  <use id="general"  xlink:href="#general-shape"/>
+  <use id="search"   xlink:href="#search-shape"/>
+  <use id="content"  xlink:href="#content-shape"/>
+  <use id="applications"  xlink:href="#applications-shape"/>
+  <use id="privacy"  xlink:href="#privacy-shape"/>
+  <use id="security" xlink:href="#security-shape"/>
+  <use id="sync"     xlink:href="#sync-shape"/>
+  <use id="advanced" xlink:href="#advanced-shape"/>
+</svg>
