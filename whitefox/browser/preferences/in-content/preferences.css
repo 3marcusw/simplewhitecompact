@@ -51,7 +51,7 @@ treecol {
 /* Category List */
 
 .category-icon {
-  list-style-image: url("chrome://browser/skin/preferences/in-content/icons.png");
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg);
 }
 
 #categories {
@@ -73,37 +73,38 @@ treecol {
 }
 
 #category-general > .category-icon {
-  -moz-image-region: rect(0, 24px, 24px, 0);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#general);
 }
 
 #category-search > .category-icon {
-  -moz-image-region: rect(0, 192px, 24px, 168px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#search);
 }
 
 #category-content > .category-icon {
-  -moz-image-region: rect(0, 48px, 24px, 24px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#content);
 }
 
 #category-application > .category-icon {
-  -moz-image-region: rect(0, 72px, 24px, 48px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#applications);
 }
 
 #category-privacy > .category-icon {
-  -moz-image-region: rect(0, 96px, 24px, 72px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#privacy);
 }
 
 #category-security > .category-icon {
-  -moz-image-region: rect(0, 120px, 24px, 96px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#security);
 }
 
 #category-sync > .category-icon {
-  -moz-image-region: rect(0, 144px, 24px, 120px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#sync);
 }
 
 #category-advanced > .category-icon {
-  -moz-image-region: rect(0, 168px, 24px, 144px);
+  list-style-image: url(chrome://browser/skin/preferences/in-content/icons32.svg#advanced);
 }
 
+/* No need for HiDPI icons because of using SVG **********%
 @media (min-resolution: 2dppx) {
   .category-icon {
     list-style-image: url("chrome://browser/skin/preferences/in-content/icons@2x.png");
@@ -141,12 +142,15 @@ treecol {
     -moz-image-region: rect(0, 336px, 48px, 288px);
   }
 }
+%*********************************************************/
 
+/*  This is now elswhere in /ostarget/general/global/in-content/common.css
 @media (max-width: 800px) {
   .category-name {
     display: none;
   }
 }
+****/
 
 /* header */
 
@@ -616,10 +620,6 @@ description > html|a {
   padding: 0 1px !important;
 }
 
-#tosPP-small #tosPP-small-ToS {
-  -moz-margin-end: 20px !important; /* This has no use after Firefox 37 --johnGraciliano */
-}
-
 #noFxaCaption {
   font-weight: bold;
   margin-bottom: 11px;
@@ -633,7 +633,7 @@ description > html|a {
   margin-bottom: 11px;
 }
 
-#fxaDeviceName {
+spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
   margin-bottom: 27.5px;
 }
 
@@ -695,7 +695,7 @@ description > html|a {
 
 .fxaMobilePromo {
   margin-top: 14px;
-  margin-bottom: 41px;
+  margin-bottom: 14px;
 }
 
 #fxaLoginRejectedWarning {
@@ -721,14 +721,27 @@ description > html|a {
   margin: 0;
 }
 
+/* I want the ToS PP labels (links) laid out with the format used by Firefox 37 --johnGraciliano */
 #tosPP-small {
   margin-top: 12px;
   margin-bottom: 20px;
+  -moz-box-orient: horizontal;
+  -moz-box-pack: center;
+}
+#tosPP-small > label{
+  font-size: 1rem;
+}
+#tosPP-small > label:not(:last-of-type) {
+  -moz-margin-end: 20px !important; /* !important over another in common.css --johnGraciliano */
 }
 
 .androidAttribution {
   font-size: 12px;
   color: #D1D2D3;
+  margin-top: 18px;
+}
+#tosPP-small + .androidAttribution {
+  margin-top: -12px; /* Go inside #tosPP-small bottom margin --johnGraciliano */
 }
 
 @media (min-resolution: 1.1dppx) {
@@ -781,10 +794,15 @@ description > html|a {
   -moz-margin-end: 9px;
 }
 
+/** I don't like this rule --johnGraciliano       **%
+ ** It's complement is a rule in common.css       **%
+ ** (a bad coding practice!).  I removed them     **%
+ ** for being an unnecessary decoration.          **%
 textbox + button,
 filefield + button {
   -moz-margin-start: -4px;
 }
+ ***************************************************/
 
 #advancedPrefs {
   padding-bottom: 0; /* override padding from normal preferences.css */
