@@ -586,7 +586,7 @@ xul|*.checkbox-check[checked] {
 }
 
 html|input[type="checkbox"]:checked + html|label:before {
-  background-image: url("chrome://global/skin/in-content/check.svg#check");
+  background-image: url("chrome://global/skin/in-content/check.svg#check") !important;
 }
 
 xul|checkbox[disabled="true"] > xul|*.checkbox-check,
