@@ -7196,8 +7196,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
       @media not all and (-moz-os-version: windows-win8) {
         @media (-moz-windows-default-theme) {
           #main-window {
-            background-color: transparent; /* As per Lootyhoof. It was hsl(0, 0%, 78%).
-                                          It may well be #f6f6f6 but I dunno --johnGraciliano */
+            background-color: transparent;
           }
         }
 
