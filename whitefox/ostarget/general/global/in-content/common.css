@@ -971,3 +971,26 @@ xul|checkbox:not(:-moz-focusring) > xul|*.checkbox-label-box {
      border: 2px dotted Highlight;
   }
 }
+
+@-moz-document url-prefix("about:privatebrowsing"){
+  div#bar{
+    background-color: #000;
+  }
+  ul#forgotten > li{
+    background-image: url("chrome://global/skin/in-content/check.svg#check");
+    background-position: -2px ;
+    background-size: 24px 24px;
+  }
+  ul#kept > li{
+    background-image: url("chrome://browser/skin/warning16.png");
+    background-size: 32px 16px;
+    background-position: -16px 7px;
+  }
+  span#tpEnabled{
+    background-color: #424e5a;
+    background-color: #9b9b9b;
+  }
+  span#tpDisabled{
+    background-color: #000;
+  }
+}
