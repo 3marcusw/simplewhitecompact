@@ -2,11 +2,6 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this file,
    - You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-
-
-
-
-
 @namespace html "http://www.w3.org/1999/xhtml";
 @namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
@@ -56,12 +51,75 @@ xul|description {
   -moz-margin-start: 0;
 }
 
-*|*.main-content {
-  padding-top: 40px;
-  -moz-padding-end: 44px; /* compensate the 4px margin of child elements */
-  padding-bottom: 48px;
-  -moz-padding-start: 48px;
-  overflow: auto;
+/* Set the page frame for the options page content with round corners */
+@-moz-document url-prefix("about:preferences"){
+  xul|page > stack {
+    min-height: 214px;  /* If the viewport is too small some content will be hidden! */
+    padding: 18px;
+    background-color: #F8F8F8;
+  }
+
+  /* Hide anything beyond the round corners */
+  xul|page > stack > hbox:first-child{
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  /* Draw round corners borders that may be missing on top of the .main-content */
+  xul|page > stack > hbox:first-child::before,
+  xul|page > stack > hbox:first-child::after{
+    position: absolute;
+    z-index: 2000000;
+    width:5px;
+    height:5px;
+    border-radius: 0;
+    border: 1px solid #CCCCCC;
+    background: transparent;
+    -moz-border-start-width: 0;
+    content: "";
+  }
+  xul|page > stack > hbox:-moz-locale-dir(rtl):first-child::before{
+    top: 0;
+    left: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
+  }
+  xul|page > stack > hbox:-moz-locale-dir(ltr):first-child::before{
+    top: 0;
+    right: 0;
+    border-bottom-width: 0;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
+  }
+  xul|page > stack > hbox:-moz-locale-dir(rtl):first-child::after{
+    bottom: 0;
+    left: 0;
+    border-top-width: 0;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
+  }
+  xul|page > stack > hbox:-moz-locale-dir(ltr):first-child::after{
+    bottom: 0;
+    right: 0;
+    border-top-width: 0;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
+  }
+
+  *|*.main-content {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.35);
+    background-image: -moz-linear-gradient(top,
+                                           rgba(255, 255, 255, 0),
+                                           rgba(255, 255, 255, 0.75));
+    padding-top: 25px;
+    -moz-padding-end: 44px; /* compensate the 4px margin of child elements */
+    padding-bottom: 40px;
+    -moz-padding-start: 48px;
+    overflow: auto;
+  }
 }
 
 xul|prefpane > xul|*.content-box {
@@ -98,10 +156,11 @@ xul|tabpanels {
 }
 
 xul|tabs {
+  position:relative;
+  margin-top: 4px;
   margin-bottom: 15px;
-  border-top: 1px solid #c1c1c1;
+  border: 0;
   border-bottom: 1px solid #c1c1c1;
-  background-color: #fbfbfb;
 }
 
 xul|*.tabs-left,
@@ -111,13 +170,55 @@ xul|*.tabs-right {
 
 xul|tab {
   -moz-appearance: none;
+  position: relative;
   margin-top: 0;
+  -moz-margin-end: -1px;
   padding: 4px 20px;
   min-height: 44px;
-  color: #424f5a;
-  background-color: #fbfbfb;
-  border-width: 0;
-  transition: background-color 50ms ease 0s;
+  max-height: 45px;
+  height: 45px;
+  color: #6d6d6d;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom-width: 0;
+  border-radius: 0;
+  transition: background-color 50ms ease 0s,
+              border-color 150ms ease 0s;
+}
+xul|tab:last-of-type{
+  -moz-margin-end: 0;
+}
+
+xul|tab::before{
+  display: block;
+  margin: calc(.5em - 4px);
+  -moz-margin-start: -21px;
+  -moz-margin-end: 20px;
+  height: calc(44px - 1em);
+  border-right: 1px solid #c1c1c1;
+  transition: border-color 150ms ease 0s;
+  content: ""; /* just show a border! */
+}
+xul|tab:first-of-type::before{
+  border-color: transparent;
+}
+xul|tabs:hover > tab::before{
+  border-color: transparent;
+}
+
+xul|tabs:hover > tab:-moz-locale-dir(ltr){
+  border-left-color: #c1c1c1;
+  border-top-color: #c1c1c1;
+}
+xul|tabs:hover > tab:-moz-locale-dir(rtl){
+  border-right-color: #c1c1c1;
+  border-top-color: #c1c1c1;
+}
+xul|tabs:hover > tab:last-of-type:-moz-locale-dir(ltr){
+  border-right-color: #c1c1c1;
+}
+xul|tabs:hover > tab:last-of-type:-moz-locale-dir(rtl){
+  border-left-color: #c1c1c1;
 }
 
 xul|tab:hover {
@@ -125,13 +226,35 @@ xul|tab:hover {
 }
 
 xul|tab[selected] {
+  z-index: 2;
   background-color: #ebebeb;
-  padding-bottom: 0; /* compensate the 4px border */
-  border-bottom: 4px solid #ff9500;
+  color: #424e5a;
+  border-color: #c1c1c1;
+  transition: background-color 50ms ease 0s, 
+              border-color 0ms ease 0s;
+}
+xul|tab[selected]::before,
+xul|tab[selected] + tab::before{
+  border-color: transparent;
+  transition: border-color 0ms ease 0s;
+}
+
+xul|tab[selected] + tab:-moz-locale-dir(ltr){
+  border-left-color: transparent;
+  transition: background-color 50ms ease 0s, 
+              border-left-color 0ms ease 0s,
+              border-color 150ms ease 0s;
+}
+xul|tab[selected] + tab:-moz-locale-dir(rtl){
+  border-left-color: transparent;
+  transition: background-color 50ms ease 0s, 
+              border-right-color 0ms ease 0s,
+              border-color 150ms ease 0s; 
 }
 
 xul|*.tab-text {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  font-weight: 600; /* semi-bold --johnGraciliano */
   line-height: 22px;
 }
 
@@ -228,22 +351,21 @@ xul|button[type="menu"] > xul|*.button-box > xul|*.button-menu-dropmarker {
 
 xul|*.help-button {
   min-width: 30px;
-  border-radius: 2px;
-  border-width: 0;
-  background-color: #ffcb00;
-  background-image: none;
-  box-shadow: none;
-  list-style-image: url("chrome://global/skin/in-content/help-glyph.svg");
+  border-radius: 50%;
+  border: 1px solid #424e5a;
+  background: initial;
+  list-style-image: url("chrome://global/skin/in-content/help-glyphs.svg#q-mark");
 }
 
-xul|*.help-button:not([disabled="true"]):hover {
-  background-color: #f4c200;
-  background-image: none;
+xul|*.help-button:not([disabled="true"]):hover:not(:active) {
+  background: initial;
+  border-color: -moz-dialogText; /* #000 */
+  list-style-image: url("chrome://global/skin/in-content/help-glyphs.svg#q-native");
 }
 
 xul|*.help-button:not([disabled="true"]):hover:active {
-  background-color: #eaba00;
-  background-image: none;
+  background: initial;
+  opacity: .7;
 }
 
 xul|*.close-icon > xul|*.button-box,
@@ -382,7 +504,12 @@ xul|button[type="menu"] > xul|menupopup xul|menuseparator {
 
 html|textbox:focus,
 xul|textbox[focused] {
-  border-color: #0095dd;
+  border-color: #424e5a;
+}
+
+html|textbox:not(:disabled):not(:focus):hover,
+xul|textbox:not([disabled="true"]):not([focused]):hover {
+  border-color: #7b7b7b;
 }
 
 html|textbox:disabled,
@@ -445,17 +572,12 @@ html|input[type="checkbox"] + html|label:before {
   border-radius: 2px;
   border: 1px solid #c1c1c1;
   -moz-margin-end: 10px;
-  background-color: #f1f1f1;
-  /* !important needed to override toolkit checked !important rule */
-  background-image: linear-gradient(#fff, rgba(255,255,255,0.8)) !important;
-  background-position: center center;
-  background-repeat: no-repeat;
-  box-shadow: 0 1px 1px 0 #fff, inset 0 2px 0 0 rgba(0,0,0,0.03);
+  background: initial !important;  /* !important needed to override toolkit checked !important rule */
 }
 
 xul|checkbox:not([disabled="true"]):hover > xul|*.checkbox-check,
 html|input[type="checkbox"]:not(:disabled) + html|label:hover:before {
-  border-color: #0095dd;
+  border-color: #7b7b7b;
 }
 
 xul|*.checkbox-check[checked] {
@@ -463,7 +585,7 @@ xul|*.checkbox-check[checked] {
 }
 
 html|input[type="checkbox"]:checked + html|label:before {
-  background-image: url("chrome://global/skin/in-content/check.svg#check"), linear-gradient(#fff, rgba(255,255,255,0.8)) !important;
+  background-image: url("chrome://global/skin/in-content/check.svg#check") !important;
 }
 
 xul|checkbox[disabled="true"] > xul|*.checkbox-check,
@@ -491,13 +613,11 @@ xul|*.radio-check {
   border: 1px solid #c1c1c1;
   border-radius: 50%;
   -moz-margin-end: 10px;
-  background-color: #f1f1f1;
-  background-image: linear-gradient(#fff, rgba(255,255,255,0.80));
-  box-shadow: 0 1px 1px 0 #fff, inset 0 2px 0 0 rgba(0,0,0,0.03);
+  background: initial;
 }
 
 xul|radio:not([disabled="true"]):hover > xul|*.radio-check {
-  border-color: #0095dd;
+  border-color: #7b7b7b;
 }
 
 xul|*.radio-check[selected] {
@@ -518,31 +638,42 @@ xul|*.radio-label-box {
 
 xul|*#categories {
   -moz-appearance: none;
-  background-color: #424f5a;
-  padding-top: 39px;
+  position: relative;
+  background-color: transparent;
   margin: 0;
+  -moz-margin-start: 4px;
+  -moz-margin-end: -1px;
+  margin-top: 74px;
+  margin-bottom: 7px;
   border-width: 0;
 }
 
 xul|*.category {
   -moz-appearance: none;
-  color: #c1c1c1;
-  -moz-border-end-width: 0;
-  -moz-padding-start: 15px;
-  -moz-padding-end: 21px;
-  min-height: 40px;
+  background-color: transparent;
+  color: #3b3b3b;
+  -moz-padding-start: 4px;
+  -moz-padding-end: 27px;
+  border: 1px solid transparent;
+  min-height: 0;
+  height: 52px;
+  -moz-box-align: center;
+  overflow: hidden;
   transition: background-color 150ms;
 }
-
-xul|*.category:hover {
-  background-color: #5e6972;
+xul|*.category:-moz-locale-dir(ltr) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+xul|*.category:-moz-locale-dir(rtl) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 xul|*.category[selected] {
-  background-color: #343f48;
-  color: #f2f2f2;
-  -moz-padding-start: 11px; /* compensate the 4px border */
-  -moz-border-start: solid 4px #ff9500;
+  background-color: #fdfdfd;
+  border-color: #ccc;
+  -moz-border-end-color: #E8E8E8;
 }
 
 xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[current] {
@@ -551,20 +682,33 @@ xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[cur
 }
 
 *|*.category-name {
-  line-height: 22px;
-  font-size: 1.25rem;
-  padding-bottom: 2px;
-  -moz-padding-start: 9px;
-  margin: 0;
+  line-height: -moz-use-system-font;
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 1px 5px 2px;
+  -moz-margin-start: 6px;
   -moz-user-select: none;
+}
+/* Allow more space to the .main-content when the window is narrow */
+@media (max-width: 800px) {
+  *|*.category-name {
+    display: none;
+  }
 }
 
 *|*.category-icon {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  -moz-margin-start: 6px;
 }
 
 /* header */
+/**  No headers in the options page --johnGraciliano ****/
+@-moz-document url-prefix("about:preferences"){
+  *|*.header {
+    display: none;
+  }
+}
 
 *|*.header {
   border-bottom: 1px solid #c8c8c8;
@@ -604,6 +748,7 @@ xul|*.fileFieldLabel {
   -moz-padding-start: 36px;
 }
 
+/*
 xul|textbox:-moz-locale-dir(rtl),
 xul|*.fileFieldLabel:-moz-locale-dir(rtl),
 xul|textbox + xul|button:-moz-locale-dir(ltr),
@@ -619,11 +764,19 @@ xul|filefield + xul|button:-moz-locale-dir(rtl) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+*/
 
+/** I don't like this rule --johnGraciliano       **%
+ ** It's complement is a rule in preferences.css  **%
+ ** (a bad coding practice!).  I removed them     **%
+ ** for being an unnecessary decoration.          **%
+ ** It needs the preceeding rules I also removed  **%
+ ** because they created bad style elsewhere!     **%
 xul|textbox + xul|button,
 xul|filefield + xul|button {
   -moz-border-start: none;
 }
+ ***************************************************/
 
 /* List boxes */
 
@@ -815,4 +968,27 @@ xul|tab:-moz-focusring > .tab-middle > .tab-text {
 
 xul|radio[focused="true"] > .radio-check {
 	-moz-outline-radius: 100%;
+}
+
+@-moz-document url-prefix("about:privatebrowsing"){
+  div#bar{
+    background-color: #000;
+  }
+  ul#forgotten > li{
+    background-image: url("chrome://global/skin/in-content/check.svg#check");
+    background-position: -2px ;
+    background-size: 24px 24px;
+  }
+  ul#kept > li{
+    background-image: url("chrome://browser/skin/warning16.png");
+    background-size: 32px 16px;
+    background-position: -16px 7px;
+  }
+  span#tpEnabled{
+    background-color: #424e5a;
+    background-color: #9b9b9b;
+  }
+  span#tpDisabled{
+    background-color: #000;
+  }
 }
