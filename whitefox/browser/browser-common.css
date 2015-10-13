@@ -1821,10 +1821,10 @@ toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-ba
   -moz-border-end: none transparent;
 }*/
 
-#nav-bar #bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-  /* horizontal padding + border + actual icon width */
-  width: 31px;
-}/*Is this supposed to be here??? (It was not in SimpleWhite) --johnGraciliano */
+/*#nav-bar #bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
+  /* horizontal padding + border + actual icon width *%
+  width: 31px;   %**Maybe this should be 32px... but it is unecessary code. **%
+}  **From the default theme, NOT for SimpleWhite!  It shrinks the bookmark icon.  I merged it by accident. --johnGraciliano */
 
 #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
   padding: 8px 5px 7px;
