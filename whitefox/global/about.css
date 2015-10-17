@@ -56,3 +56,12 @@ th, td {
   -moz-column-width: 20em;
   -moz-column-gap: 3em;
 }
+
+*|*:link {
+  color: #06C;
+  text-decoration: none;
+}
+*|*:link:hover {
+  color: #178ce5;
+  text-decoration: underline;
+}
