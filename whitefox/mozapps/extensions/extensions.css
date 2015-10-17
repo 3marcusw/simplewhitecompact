@@ -1140,20 +1140,30 @@ button.button-link {
   background: transparent;
   border: none;
   box-shadow: none;
-  text-decoration: underline;
-  color: #0066CC;
+  color: #0095dd;
   cursor: pointer;
   min-width: 0;
+  height: 20px;
   margin: 0 6px;
 }
 
-.text-link {
-  color: #3386D5;
+button.button-link:not(:-moz-focusring) > .button-box {
+  border-width: 0;
+  margin: 1px;
 }
 
-.button-link:hover,
+button.button-link:hover {
+  background-color: transparent;
+  color: #178ce5;
+  text-decoration: underline;
+}
+
+.text-link {
+  color: #0095dd;
+}
+
 .text-link:hover {
-  color: #3DA1FF;
+  color: #178ce5;
 }
 
 #header button:not(.header-button){ /* I need to overide this from button.css to avoid a pushing down #view-port --johngraciliano */
