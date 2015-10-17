@@ -52,22 +52,23 @@ xul|description {
 }
 
 /* Set the page frame for the options page content with round corners */
-@-moz-document url-prefix("about:preferences"){
-  xul|page > stack {
+/* @-moz-document url-prefix("about:preferences"){ */
+
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack{
     min-height: 214px;  /* If the viewport is too small some content will be hidden! */
     padding: 18px;
     background-color: #F8F8F8;
   }
 
   /* Hide anything beyond the round corners */
-  xul|page > stack > hbox:first-child{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:first-child{
     position: relative;
     border-radius: 5px;
     overflow: hidden;
   }
   /* Draw round corners borders that may be missing on top of the .main-content */
-  xul|page > stack > hbox:first-child::before,
-  xul|page > stack > hbox:first-child::after{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:first-child::before,
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:first-child::after{
     position: absolute;
     z-index: 2000000;
     width:5px;
@@ -78,28 +79,28 @@ xul|description {
     -moz-border-start-width: 0;
     content: "";
   }
-  xul|page > stack > hbox:-moz-locale-dir(rtl):first-child::before{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:-moz-locale-dir(rtl):first-child::before{
     top: 0;
     left: 0;
     border-bottom-width: 0;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
   }
-  xul|page > stack > hbox:-moz-locale-dir(ltr):first-child::before{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:-moz-locale-dir(ltr):first-child::before{
     top: 0;
     right: 0;
     border-bottom-width: 0;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
   }
-  xul|page > stack > hbox:-moz-locale-dir(rtl):first-child::after{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:-moz-locale-dir(rtl):first-child::after{
     bottom: 0;
     left: 0;
     border-top-width: 0;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
   }
-  xul|page > stack > hbox:-moz-locale-dir(ltr):first-child::after{
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox:-moz-locale-dir(ltr):first-child::after{
     bottom: 0;
     right: 0;
     border-top-width: 0;
@@ -107,7 +108,7 @@ xul|description {
     border-top-left-radius: 5px; /* To lessen the effect of covering the corner element, i.e., the scrollbar button --johnGraciliano */
   }
 
-  *|*.main-content {
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack > hbox > vbox.main-content{
     border: 1px solid #CCCCCC;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.35);
@@ -120,7 +121,7 @@ xul|description {
     -moz-padding-start: 48px;
     overflow: auto;
   }
-}
+/* } */
 
 xul|prefpane > xul|*.content-box {
   overflow: visible;
@@ -257,6 +258,7 @@ xul|*.tab-text {
   font-weight: 600; /* semi-bold --johnGraciliano */
   line-height: 22px;
 }
+
 
 /* html buttons */
 
@@ -704,11 +706,11 @@ xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[cur
 
 /* header */
 /**  No headers in the options page --johnGraciliano ****/
-@-moz-document url-prefix("about:preferences"){
-  *|*.header {
+/* @-moz-document url-prefix("about:preferences"){ */
+  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack  hbox.header {
     display: none;
   }
-}
+/* } */
 
 *|*.header {
   border-bottom: 1px solid #c8c8c8;
@@ -970,25 +972,25 @@ xul|radio[focused="true"] > .radio-check {
 	-moz-outline-radius: 100%;
 }
 
-@-moz-document url-prefix("about:privatebrowsing"){
-  div#bar{
+/* @-moz-document url-prefix("about:privatebrowsing"){ */
+  div#bar.showPrivate{
     background-color: #000;
   }
-  ul#forgotten > li{
+  .showPrivate ul#forgotten > li{
     background-image: url("chrome://global/skin/in-content/check.svg#check");
     background-position: -2px ;
     background-size: 24px 24px;
   }
-  ul#kept > li{
+  .showPrivate ul#kept > li{
     background-image: url("chrome://browser/skin/warning16.png");
     background-size: 32px 16px;
     background-position: -16px 7px;
   }
-  span#tpEnabled{
+  .showPrivate span#tpEnabled{
     background-color: #424e5a;
     background-color: #9b9b9b;
   }
-  span#tpDisabled{
+  .showPrivate span#tpDisabled{
     background-color: #000;
   }
-}
+/* } */
