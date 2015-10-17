@@ -637,6 +637,11 @@ toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarke
   -moz-image-region: rect(0, 72px, 18px, 54px);
 }
 
+#forward-button:-moz-locale-dir(rtl),
+#back-button:-moz-locale-dir(rtl) {
+  transform: scaleX(-1);
+}
+
 #home-button[cui-areatype="toolbar"] {
   -moz-image-region: rect(0, 126px, 18px, 108px);
 }
