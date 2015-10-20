@@ -171,6 +171,9 @@ searchbar[oneoffui] .search-go-button:-moz-locale-dir(rtl) > .toolbarbutton-icon
   background-repeat: no-repeat;
   background-position: right center;
 }
+.searchbar-engine-one-off-item:-moz-locale-dir(rtl){
+  background-position: left center;
+}
 
 .searchbar-engine-one-off-item:not(.last-row) {
   box-sizing: padding-box;
