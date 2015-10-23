@@ -289,6 +289,11 @@
 }
 
 /* SEARCHBAR -Louis */
+
+[dir="auto"]:-moz-dir(ltr){ /* [dir="auto"]:-moz-dir(ltr) seems to apply even on Firefox with rtl locales! --johnGraciliano */
+  direction: inherit;       /* Therefore keep the direction that from the ancestor. --johnGraciliano */
+}
+
 #newtab-search-form {
   margin-bottom: 40px;
 }
@@ -301,31 +306,21 @@
   margin: 0;
   height: 32px;
   width: 30px;
-  background: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <style> * {stroke: %23666;  stroke-width: 1.25px;  fill: none;} </style>\
-      <circle  cx="9.75"  cy="9.75"  r="5.55"/>\
-      <line  x1="13.674"  y1="13.674"  x2="18.25"  y2="18.25"/>\
-    </svg>') no-repeat 5.25px 5.25px;
+  background: url(chrome://browser/skin/newtab/newTab-search.svg#lens-plain) no-repeat 5.25px 5.25px;
   border: 1px solid #DEDEDE;
   -moz-border-end: none;
   border-radius: 5px 0 0 5px;
 }
 #newtab-search-logo#newtab-search-logo:-moz-locale-dir(rtl),
 #newtab-search-icon#newtab-search-icon:-moz-locale-dir(rtl),
-[dir="rtl"] #newtab-search-logo#newtab-search-logo,
-[dir="rtl"] #newtab-search-icon#newtab-search-icon{
+#newtab-search-logo#newtab-search-logo:-moz-dir(rtl),
+#newtab-search-icon#newtab-search-icon:-moz-dir(rtl){
   background-position: 2.25px 5.25px;
   border-radius: 0 5px 5px 0;
 }
 #newtab-search-logo#newtab-search-logo:hover,
 #newtab-search-logo#newtab-search-logo:active{
-  background-image: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <style> * {stroke: %23333;  stroke-width: 1.25px;  fill: none;} </style>\
-      <circle  cx="9.75"  cy="9.75"  r="5.55"/>\
-      <line  x1="13.674"  y1="13.674"  x2="18.25"  y2="18.25"/>\
-    </svg>');
+  background-image: url(chrome://browser/skin/newtab/newTab-search.svg#lens-hover);
 }
 
 #newtab-search-text#newtab-search-text{
@@ -351,22 +346,15 @@
   overflow: hidden;
   padding: 0;
   margin: 0;
-  background: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <path d="M 15.5,10.5   h -12.5   M 10,4.5   l 6,6   l -6,6"  stroke="%23666"  stroke-width="1.25"  fill="none"/>\
-    </svg>')  no-repeat;
-  background-position: center center;
+  background: url(chrome://browser/skin/newtab/newTab-search.svg#go-plain)  no-repeat  center center;
   border: 1px solid #DEDEDE;
   -moz-border-start: none;
   border-radius: 0 5px 5px 0;
   box-shadow: none;
 }
 #newtab-search-submit#newtab-search-submit:-moz-locale-dir(rtl),
-[dir="rtl"] #newtab-search-submit#newtab-search-submit{
-  background-image: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <path d="M 4.5,10.5   h 12.5   M 10,4.5   l -6,6   l 6,6"  stroke="%23666"  stroke-width="1.25"  fill="none"/>\
-    </svg>');
+#newtab-search-submit#newtab-search-submit:-moz-dir(rtl){
+  background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-plain);
   border-radius: 5px 0 0 5px;
 }
 #newtab-search-text + #newtab-search-submit#newtab-search-submit:hover,
@@ -374,10 +362,7 @@
 #newtab-search-text:focus + #newtab-search-submit#newtab-search-submit,
 #newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit,
 #newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit{
-  background: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <path d="M 15.5,10.5   h -12.5   M 10,4.5   l 6,6   l -6,6"  stroke="%23333"  stroke-width="1.25"  fill="none"/>\
-    </svg>')  no-repeat center center;
+  background: url(chrome://browser/skin/newtab/newTab-search.svg#go-hover)  no-repeat  center center;
   border: 1px solid #DEDEDE;
   -moz-border-start: none;
   box-shadow: none;
@@ -387,15 +372,12 @@
 #newtab-search-text:focus + #newtab-search-submit#newtab-search-submit:-moz-locale-dir(rtl),
 #newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit:-moz-locale-dir(rtl),
 #newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit:-moz-locale-dir(rtl),
-[dir="rtl"] #newtab-search-text + #newtab-search-submit#newtab-search-submit:hover,
-[dir="rtl"] #newtab-search-text + #newtab-search-submit#newtab-search-submit:active,
-[dir="rtl"] #newtab-search-text:focus + #newtab-search-submit#newtab-search-submit,
-[dir="rtl"] #newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit,
-[dir="rtl"] #newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit{
-  background-image: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" version="1.1">\
-      <path d="M 4.5,10.5   h 12.5   M 10,4.5   l -6,6   l 6,6"  stroke="%23333"  stroke-width="1.25"  fill="none"/>\
-    </svg>');
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl):hover,
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl):active,
+#newtab-search-text:focus + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl),
+#newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl),
+#newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl){
+  background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-hover);
 }
 
 .searchSuggestionTable {
@@ -407,9 +389,29 @@
 #searchSuggestionTable{
   margin-left: 0;
 }
-#searchSuggestionTable > tr.searchSuggestionRow > :first-child {
-      padding-left: 31px;
+/* Firefox 37 - 41 will not stretch the search results table to the left on rtl locales, so no stretching at all --johnGraciliano */
+.searchSuggestionTable[style*="left"]:-moz-locale-dir(rtl){ 
+  max-width: 0 !important; /*This has to be important! to overide the setting from the xml code --johnGraciliano */
+}
+/* Correct the stretching direction for the results table for rtl locales for newer versions of Firefox --johnGraciliano */
+/* body[dir=rtl] .contentSearchSuggestionTable:not([style*="left"]){ */
+.contentSearchSuggestionTable:-moz-dir(rtl){
+  left: auto;
+  right: 0;
+}
 
+.contentSearchHeaderRow > td > img,
+.contentSearchSuggestionRow > td > .historyIcon{
+  margin-right: 0;
+  -moz-margin-end: 8px;
+}
+.contentSearchOneOffItem:-moz-dir(rtl) {
+  background-position: left center;
+}
+
+#searchSuggestionTable > tr.searchSuggestionRow > :first-child {
+  padding-left: 0;
+  -moz-padding-start: 31px;
 }
 
 
@@ -507,7 +509,7 @@
   left: 0px;
 }
 #newtab-customize-enhanced:nth-child(+2)[selected] .checkbox:-moz-locale-dir(rtl)::after,
-[dir="rtl"] #newtab-customize-enhanced:nth-child(+2)[selected] .checkbox::after{
+#newtab-customize-enhanced:nth-child(+2)[selected] .checkbox:-moz-dir(rtl)::after{
   left: 6px;
 }
 #newtab-customize-classic:first-child[selected],
@@ -520,8 +522,8 @@
 }
 #newtab-customize-classic:first-child[selected]:-moz-locale-dir(rtl),
 #newtab-customize-title ~ #newtab-customize-blank[selected]:-moz-locale-dir(rtl),
-[dir="rtl"] #newtab-customize-classic:first-child[selected],
-[dir="rtl"] #newtab-customize-title ~ #newtab-customize-blank[selected]{
+#newtab-customize-classic:first-child[selected]:-moz-dir(rtl),
+#newtab-customize-title ~ #newtab-customize-blank[selected]:-moz-dir(rtl){
   background-position: right 12px center;
 }
 .newtab-customize-complex-option:hover #newtab-customize-classic:first-child:not([selected]),
