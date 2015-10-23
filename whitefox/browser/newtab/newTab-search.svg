@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     height="20"
+     width="20">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use[id$="-plain"] {
+      stroke: #666;
+      stroke-width: 1.25px;
+      fill: none;
+    }
+    use[id$="-hover"] {
+      stroke: #333;
+      stroke-width: 1.25px;
+      fill: none;
+    }
+  </style>
+  <defs style="display: none;">
+    <g id="lens-shape">
+      <circle  cx="9.75"  cy="9.75"  r="5.55"/>
+      <line  x1="13.674"  y1="13.674"  x2="18.25"  y2="18.25"/>
+    </g>
+    <g id="go-shape">
+      <path d="M 15.5,10.5   h -12.5   M 10,4.5   l 6,6   l -6,6"/>
+    </g>
+    <g id="go-rtl-shape">
+      <path d="M 4.5,10.5   h 12.5   M 10,4.5   l -6,6   l 6,6"/>
+    </g>
+  </defs>
+  <use id="lens-plain"   xlink:href="#lens-shape"/>
+  <use id="lens-hover"   xlink:href="#lens-shape"/>
+  <use id="go-plain"     xlink:href="#go-shape"/>
+  <use id="go-hover"     xlink:href="#go-shape"/>
+  <use id="go-rtl-plain" xlink:href="#go-rtl-shape"/>
+  <use id="go-rtl-hover" xlink:href="#go-rtl-shape"/>
+</svg>
