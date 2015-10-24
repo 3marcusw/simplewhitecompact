@@ -495,7 +495,7 @@ description > html|a {
 }
 
 #fxaContentWrapper {
-  padding-right: 15px;
+  -moz-padding-end: 15px;
 }
 
 #tosPP-small, /* Firefox 41- (et al.) -johnGraciliano */
@@ -571,7 +571,7 @@ description > html|a {
 
 #syncStatusMessageWrapper {
   -moz-box-flex: 1;
-  padding-right: 5px;
+  -moz-padding-end: 5px;
 }
 
 #syncStatusMessageTitle, #syncStatusMessageDescription {
@@ -600,7 +600,7 @@ description > html|a {
 }
 
 #fxaSyncEngines > vbox:first-child {
-  margin-right: 80px;
+  -moz-margin-end: 80px;
 }
 
 #fxaSyncComputerName {
@@ -673,7 +673,7 @@ spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
 }
 
 .fxaAccountBoxButtons > button:first-child {
-  margin-right: 14px !important;
+  -moz-margin-end: 14px;
 }
 
 .fxaSyncIllustration {
