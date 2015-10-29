@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>SimpleWhite@Compact.Theme</em:id>
+    <em:id>SimpleWhiteCompact@Theme.Theme</em:id>
     <em:type>4</em:type>
     <em:name>Simple White Compact</em:name>
     <em:description>Paint your Firefox white. Make it look simpler, nicer, compact.</em:description>
