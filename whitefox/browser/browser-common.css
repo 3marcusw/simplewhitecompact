@@ -7752,3 +7752,58 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
 #theFoxOnlyBetter-slimChrome-container #nav-bar > * {
   background: rgba(250,250,250,1) !important;
 }
+
+/** compact customizations **/
+
+/** hide back and forward buttons when it makes sense to do that **/
+#forward-button[disabled="true"]{
+display: none;
+}
+#back-button[disabled="true"]{
+display: none;
+}
+
+/** make navigator toolbar as compact as possible**/
+
+#navigator-toolbox #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button)){
+margin-top: -4px !important;
+margin-bottom: -4px !important;
+max-height: 31px !important;
+padding-bottom: 0px !important;
+padding-top: 0px !important;
+}
+
+#urlbar-container, #search-container, #urlbar, #searchbar-textbox{
+    -moz-appearance: none !important;
+    margin-top: -2px !important;
+    margin-bottom: -2px  !important;
+    border-width: 0px !important;
+}
+
+#urlbar, #urlbar-container{
+     border-radius: 2px  !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+}
+
+#navigator-toolbox #back-button{
+    margin-top: -5px !important;
+    margin-bottom: -5px !important;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#navigator-toolbox > #toolbar-menubar {
+    margin-top: 0;
+}
+
+
+/*Reduce horizontal padding of buttons icons*/
+#navigator-toolbox > #nav-bar .toolbarbutton-1:not([type=menu]):not(#back-button):not(#forward-button) > .toolbarbutton-icon,
+#navigator-toolbox > #nav-bar .toolbarbutton-1[type=menu]:not(#back-button):not(#forward-button):not(#feed-button),
+#navigator-toolbox > #nav-bar #feed-button > .toolbarbutton-icon,
+#navigator-toolbox > #nav-bar #bookmarks-menu-button > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+#navigator-toolbox > #nav-bar #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+padding-left: 1px !important;
+padding-right: 1px !important;
+}

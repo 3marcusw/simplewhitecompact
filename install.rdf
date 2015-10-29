@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>SimpleX@White.Theme</em:id>
+    <em:id>SimpleWhite@Compact.Theme</em:id>
     <em:type>4</em:type>
-    <em:name>Simple White X</em:name>
-    <em:description>Paint your Firefox white. Make it look simpler, nicer.</em:description>
-    <em:version>2.2b18.x1.03</em:version>
-    <em:creator>Louis Chan (updated by Graciliano)</em:creator>
-    <em:contributor>Graciliano</em:contributor>
-    <em:homepageURL>http://www.louis.hk/whitefox/</em:homepageURL>
+    <em:name>Simple White Compact</em:name>
+    <em:description>Paint your Firefox white. Make it look simpler, nicer, compact.</em:description>
+    <em:version>2.2b18.C1.03</em:version>
+    <em:creator>Louis Chan (updated by Graciliano, 3marcusw)</em:creator>
+    <em:contributor>3marcusw</em:contributor>
+    <em:homepageURL>https://github.com/3marcusw/simplewhitecompact</em:homepageURL>
     <em:internalName>simplewhitex</em:internalName>
     <em:targetApplication>
       <Description>
