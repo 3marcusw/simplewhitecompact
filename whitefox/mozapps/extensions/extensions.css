@@ -487,6 +487,11 @@
   max-height: 48px;
 }
 
+.addon .icon {
+    max-width: 24px;
+    max-height: 24px;
+}
+
 .addon[active="false"] .icon {
   filter: url("chrome://mozapps/skin/extensions/extensions.svg#greyscale");
 }
