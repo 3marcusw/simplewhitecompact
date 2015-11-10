@@ -41,11 +41,11 @@
 #main-window:not([tabsintitlebar]) > #titlebar {
   height: 22px;
 }
-#main-window:not([tabsintitlebar]):not([inFullscreen]):not([privatebrowsingmode]) #navigator-toolbox toolbar:first-child { /*hack by Louis*/
+#main-window:not([tabsintitlebar]):not([inFullscreen]):not([privatebrowsingmode])[chromemargin] #navigator-toolbox toolbar:first-child { /*hack by Louis*/  /* Added [chromemargin] --johnGraciliano */
   height: 22px;
   display: -moz-box;
 }
-#main-window:not([tabsintitlebar]):not([privatebrowsingmode]) {
+#main-window:not([tabsintitlebar]):not([privatebrowsingmode])[chromemargin] { /* Added [chromemargin] --johnGraciliano */
   -moz-binding: url("chrome://ostarget/skin/tab.xml#drawintitlebar");
 }
 
