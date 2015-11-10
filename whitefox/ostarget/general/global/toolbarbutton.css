@@ -184,6 +184,24 @@ toolbarbutton[type="menu-button"][disabled="true"]:hover:active {
   position: relative;
 }
 
+label.toolbarbutton-badge{ /* .toolbarbutton-badge is a label in Firefox 42+ but it was an hbox in earlier versions ?!?!? --johngraciliano */
+  background-color: #d90000;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 0 2px;  /* padding-bottom was 1px, I changed it to 0px --johngraciliano */
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 hsla(0, 100%, 100%, .2) inset,
+              0 -1px 0 hsla(0, 0%, 0%, .1) inset,
+              0 1px 0 hsla(206, 50%, 10%, .2);
+  margin: -7px 0 0 !important; /* margin-top was -6px, I changed it to -7px --johngraciliano */
+  -moz-margin-end: -8px !important;
+  min-width: 14px;
+  line-height: 10px;
+  text-align: center;
+  -moz-stack-sizing: ignore;
+}
+
 /* .......... dropmarker .......... */
 
 .toolbarbutton-menubutton-dropmarker {
