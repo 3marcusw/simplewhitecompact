@@ -53,7 +53,6 @@ xul|description {
 
 /* Set the page frame for the options page content with round corners */
 /* @-moz-document url-prefix("about:preferences"){ */
-
   /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack{
     min-height: 214px;  /* If the viewport is too small some content will be hidden! */
     padding: 18px;
@@ -877,6 +876,11 @@ xul|treechildren::-moz-tree-cell-text {
 
 xul|treechildren::-moz-tree-cell-text(selected) {
   color: #fff;
+}
+
+/* Remove the gray background from the groupbox bodies in the Options page for the mac --johnGraciliano */
+/* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack .groupbox-body {
+  -moz-appearance: none;
 }
 
 xul|tabs {
