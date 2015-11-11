@@ -200,7 +200,7 @@ treecol {
 
 #useFirefoxSync  {
   font-size: 90%;
-  -moz-margin-end: 8px !important;
+  -moz-margin-end: calc(1.5em - 6px) !important; /* it was 8px --johnGraciliano */
 }
 
 #getStarted {
@@ -220,6 +220,10 @@ treecol {
   /* Line up with the buttons in the other grid bits: */
   margin-left: 4px !important;
   margin-right: 4px !important;
+}
+
+#notificationsPolicyLearnMore {
+  -moz-margin-start: 1.5em !important;
 }
 
 #defaultFontSizeLabel {
