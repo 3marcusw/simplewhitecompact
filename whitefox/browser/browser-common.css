@@ -2415,6 +2415,14 @@ html|*.urlbar-input:-moz-lwtheme::-moz-placeholder,
   padding: 2px 2px;
 }
 
+#PopupAutoCompleteRichResult > hbox[anonid="search-suggestions-notification"] {
+  border-bottom: 1px solid #CCC;
+}
+
+#urlbar-search-footer {
+  border-top: 1px solid #CCC;
+}
+
 #urlbar-search-splitter {
   min-width: 6px;
   -moz-margin-start: -3px;
@@ -2593,6 +2601,45 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   background-image: var(--identity-box-chrome-background-image);
 }
 
+/* MAIN IDENTITY ICON */
+
+#identity-icon {
+  width: 16px;
+  height: 16px;
+  list-style-image: url(chrome://browser/skin/identity-icon.svg#normal);
+  margin-inline-start: 3px;
+  margin-inline-end: -19px;
+  opacity: 0;
+}
+
+/*********  This is not in use here **********************************************************%
+#identity-box:hover > #identity-icon,
+#identity-box[open=true] > #identity-icon {
+  list-style-image: url(chrome://browser/skin/identity-icon.svg#hover);
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.chromeUI > #identity-icon {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+}
+
+#urlbar[pageproxystate="invalid"] > #identity-box > #identity-icon {
+  opacity: 0.3;
+}
+
+#urlbar[actiontype="searchengine"] > #identity-box > #identity-icon {
+  -moz-image-region: inherit;
+  list-style-image: url(chrome://global/skin/icons/autocomplete-search.svg#search-icon);
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+%**********************************************************************************************/
+
+#identity-box:not([open=true]):hover > #tracking-protection-icon[state]{
+  opacity: .675;
+}
+
 /* TRACKING PROTECTION ICON */
 
 #tracking-protection-icon {
@@ -2610,7 +2657,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 }
 
 #tracking-protection-icon[animate] {
-  transition: margin-left 200ms ease-out, margin-right 200ms ease-out;
+  transition: margin-left 200ms ease-out, margin-right 200ms ease-out, width 200ms ease-out;
 }
 @media (min-resolution: 1.1dppx) {  /* use the icon that was already in the theme --johnGraciliano */
   #tracking-protection-icon {
@@ -2622,18 +2669,88 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 }
 
 #tracking-protection-icon:not([state]) {
-  margin-inline-start: -18px;
+/*  margin-inline-start: -18px; */
+  margin-inline-end: 0;
+  width: 0;
   pointer-events: none;
   opacity: 0;
   /* Only animate the shield in, when it disappears hide it immediately. */
   transition: none;
 }
 
+#urlbar[pageproxystate="invalid"] > #identity-box > #tracking-protection-icon,
 #urlbar[pageproxystate="invalid"] > #identity-box > #identity-icons > #tracking-protection-icon {
   visibility: collapse;
 }
 
-/* page proxy icon */
+/* CONNECTION ICON (Firefox 45.0a1) */
+
+#connection-icon {
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 3px;
+  margin-inline-end: 1px;
+  list-style-image: url(chrome://browser/skin/identity-not-secure.svg);
+  visibility: visible;
+}
+
+#urlbar:not([pageproxystate="valid"]) > #identity-box > #connection-icon{
+  opacity: .325;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedDomain > #connection-icon{
+  list-style-image: url(chrome://browser/skin/identity-domain-secure.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedIdentity > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-secure.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.insecureLoginForms > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveContent > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-loaded.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.weakCipher > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContent > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContentLoadedActiveBlocked > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-passive-loaded.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-blocked.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.chromeUI > #connection-icon {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+  visibility: visible;
+}
+
+#identity-box:not([open=true]):hover > #connection-icon{
+  opacity: .675;
+}
+
+#identity-box[open=true] > #tracking-protection-icon[state],
+#identity-box[open=true] > #connection-icon{
+  filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg height="0" xmlns="http://www.w3.org/2000/svg">\
+      <filter id="dimLights">\
+        <feColorMatrix in="SourceGraphic"\
+          type="matrix"\
+          values="0.7 0  0  0 0 \
+                   0 0.7 0  0 0 \
+                   0  0 0.7 0 0 \
+                   0  0  0  1 0" />\
+      </filter>\
+    </svg>#dimLights');
+}
+
+/* page proxy icon (Before Firefox 45.0a1) */
 
 #page-proxy-favicon {
   width: 16px;
@@ -2641,41 +2758,63 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   list-style-image: url(chrome://browser/skin/identity-icons-generic.png);
 }
 
-.chromeUI > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
-  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
-  -moz-image-region: unset;
-}
 .chromeUI > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://branding/content/identity-icons-brand.png);
 }
 
-.verifiedDomain > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedDomain > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https.png);
 }
 
-.verifiedIdentity > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedIdentity > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-ev.png);
 }
 
-.mixedActiveContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedActiveContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-active.png);
 }
 
-
-.weakCipher > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
-.mixedDisplayContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
-.mixedDisplayContentLoadedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
 
-.mixedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContentLoadedActiveBlocked > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
+
+
+/* Firefox 42-44 */
+#identity-icons > #page-proxy-favicon {
+  list-style-image: url(chrome://browser/skin/identity-not-secure.svg);
+  -moz-image-region: unset;
+}
+
+.chromeUI > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+}
+
+.verifiedDomain > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-domain-secure.svg);
+}
+
+.verifiedIdentity > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-secure.svg);
+}
+
+.mixedActiveContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-loaded.svg);
+}
+
+.weakCipher > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContentLoadedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-passive-loaded.svg);
+}
+
+.mixedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-blocked.svg);
+}
+
 
 #page-proxy-favicon[pageproxystate="invalid"] {
   opacity: 0.3;
@@ -2701,27 +2840,24 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
     -moz-image-region: rect(0, 16px, 16px, 0);
   }
 
-  #identity-box:hover > #identity-icons > #page-proxy-favicon,
   #identity-box:hover > #page-proxy-favicon {
     -moz-image-region: rect(0, 32px, 16px, 16px);
   }
-  #identity-box:hover > #identity-icons > #tracking-protection-icon[state],
-  #identity-box.chromeUI:hover > #identity-icons > #page-proxy-favicon{
-    -moz-image-region: unset;
-      opacity: .8;
-  }
 
-  #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
-  #identity-box[open=true] > #identity-icons > #page-proxy-favicon,
   #identity-box:hover:active > #page-proxy-favicon,
   #identity-box[open=true] > #page-proxy-favicon {
     -moz-image-region: rect(0, 48px, 16px, 32px);
   }
+
+  #identity-box:hover > #identity-icons > #tracking-protection-icon[state],
+  #identity-box:hover > #identity-icons > #page-proxy-favicon{
+    opacity: .7;
+  }
+
   #identity-box:hover:active > #identity-icons > #tracking-protection-icon[state],
   #identity-box[open=true] > #identity-icons > #tracking-protection-icon[state],
-  #identity-box.chromeUI:hover:active > #identity-icons > #page-proxy-favicon,
-  #identity-box.chromeUI[open=true] > #identity-icons > #page-proxy-favicon{
-    -moz-image-region: unset;
+  #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
+  #identity-box[open=true] > #identity-icons > #page-proxy-favicon{
     opacity: 1;
     /* Changed filter -johnGraciliano */
     filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
