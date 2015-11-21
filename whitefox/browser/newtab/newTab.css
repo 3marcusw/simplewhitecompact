@@ -88,6 +88,7 @@
 
 /* CELLS */
 .newtab-cell {
+  margin: 20px 10px 25px;
   transform: rotateX(-8deg);
   transform-origin: 0 0;
   transition: 250ms;
@@ -294,8 +295,13 @@
   direction: inherit;       /* Therefore keep the direction that from the ancestor. --johnGraciliano */
 }
 
+#newtab-search-container{
+  margin-top:45px;
+  margin-bottom:15px;
+}
+
 #newtab-search-form {
-  margin-bottom: 40px;
+  margin: 20px 5px 15px;
 }
 
 #newtab-search-logo#newtab-search-logo,
