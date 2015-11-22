@@ -24,7 +24,7 @@
 /* End Firefox 41 Only */
 
 /* Hide all conditional elements by default. */
-:-moz-any([when-connection],[when-mixedcontent],[when-ciphers]) {
+:-moz-any([when-connection],[when-mixedcontent],[when-ciphers],[when-loginforms]) {
   display: none;
 }
 
@@ -34,6 +34,8 @@
 #identity-popup[connection=secure] [when-connection~=secure],
 #identity-popup[connection=chrome] [when-connection~=chrome],
 #identity-popup[connection=file] [when-connection~=file],
+/* Show insecure login forms messages when needed. */
+#identity-popup[loginforms=insecure] [when-loginforms=insecure],
 /* Show weak cipher messages when needed. */
 #identity-popup[ciphers=weak] [when-ciphers~=weak],
 /* Show mixed content warnings when needed */
@@ -45,6 +47,18 @@
 /* Show 'disable MCB' button always when there is mixed active content blocked. */
 #identity-popup-securityView-body[mixedcontent~=active-blocked] > button[when-mixedcontent=active-blocked] {
   display: inherit;
+}
+
+/* Hide redundant messages based on insecure login forms presence. */
+#identity-popup[loginforms=secure] [and-when-loginforms=insecure] {
+  display: none;
+}
+#identity-popup[loginforms=insecure] [and-when-loginforms=secure] {
+  display: none;
+}
+/* Hide contradictory messages based on insecure login forms presence. */
+#identity-popup[connection=chrome] [when-loginforms=insecure] {
+  display: none;
 }
 
 /* Hide 'not secure' message in subview when weak cipher or mixed content messages are shown. */
@@ -189,6 +203,7 @@
 #identity-popup-security-descriptions > description,
 #identity-popup-securityView-header > description,
 #identity-popup-securityView-body > description,
+#identity-popup-permissions-content > description,
 #tracking-protection-content > label,
 .identity-popup-text {
   white-space: pre-wrap;
@@ -209,6 +224,11 @@
 .identity-popup-warning-yellow {
   -moz-padding-start: 24px;
   background: url(chrome://browser/skin/controlcenter/warning-yellow.svg) no-repeat 0 50%;
+}
+
+.identity-popup-warning-gray:-moz-locale-dir(rtl),
+.identity-popup-warning-yellow:-moz-locale-dir(rtl) {
+  background-position: 100% 50%;
 }
 
 /* SECURITY */
@@ -241,11 +261,6 @@
   background-image: url(chrome://browser/skin/controlcenter/conn-not-secure.svg);
 }
 
-#identity-popup[connection=chrome] #identity-popup-securityView,
-#identity-popup[connection=chrome] #identity-popup-security-content {
-  background-image: url(chrome://branding/content/icon48.png);
-}
-
 #identity-popup[connection^=secure] #identity-popup-securityView,
 #identity-popup[connection^=secure] #identity-popup-security-content {
   background-image: url(chrome://browser/skin/controlcenter/conn-secure.svg);
@@ -266,9 +281,16 @@
   background-image: url(chrome://browser/skin/controlcenter/conn-degraded.svg);
 }
 
+#identity-popup[loginforms=insecure] #identity-popup-securityView,
+#identity-popup[loginforms=insecure] #identity-popup-security-content,
 #identity-popup[mixedcontent~=active-loaded][isbroken] #identity-popup-securityView,
 #identity-popup[mixedcontent~=active-loaded][isbroken] #identity-popup-security-content {
   background-image: url(chrome://browser/skin/controlcenter/mcb-disabled.svg);
+}
+
+#identity-popup[connection=chrome] #identity-popup-securityView,
+#identity-popup[connection=chrome] #identity-popup-security-content {
+  background-image: url(chrome://branding/content/icon48.png);
 }
 
 #identity-popup-security-descriptions > description {

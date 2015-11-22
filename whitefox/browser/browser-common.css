@@ -2415,6 +2415,14 @@ html|*.urlbar-input:-moz-lwtheme::-moz-placeholder,
   padding: 2px 2px;
 }
 
+#PopupAutoCompleteRichResult > hbox[anonid="search-suggestions-notification"] {
+  border-bottom: 1px solid #CCC;
+}
+
+#urlbar-search-footer {
+  border-top: 1px solid #CCC;
+}
+
 #urlbar-search-splitter {
   min-width: 6px;
   -moz-margin-start: -3px;
@@ -2593,6 +2601,41 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   background-image: var(--identity-box-chrome-background-image);
 }
 
+/* MAIN IDENTITY ICON */
+
+#identity-icon {
+  width: 16px;
+  height: 16px;
+  list-style-image: url(chrome://browser/skin/identity-icon.svg#normal);
+  margin-inline-start: 3px;
+  margin-inline-end: -19px;
+  opacity: 0;
+}
+
+/*********  This is not in use here **********************************************************%
+#identity-box:hover > #identity-icon,
+#identity-box[open=true] > #identity-icon {
+  list-style-image: url(chrome://browser/skin/identity-icon.svg#hover);
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.chromeUI > #identity-icon {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+}
+
+#urlbar[pageproxystate="invalid"] > #identity-box > #identity-icon {
+  opacity: 0.3;
+}
+
+#urlbar[actiontype="searchengine"] > #identity-box > #identity-icon {
+  -moz-image-region: inherit;
+  list-style-image: url(chrome://global/skin/icons/autocomplete-search.svg#search-icon);
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+%**********************************************************************************************/
+
 /* TRACKING PROTECTION ICON */
 
 #tracking-protection-icon {
@@ -2610,7 +2653,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 }
 
 #tracking-protection-icon[animate] {
-  transition: margin-left 200ms ease-out, margin-right 200ms ease-out;
+  transition: margin-left 200ms ease-out, margin-right 200ms ease-out, width 200ms ease-out;
 }
 @media (min-resolution: 1.1dppx) {  /* use the icon that was already in the theme --johnGraciliano */
   #tracking-protection-icon {
@@ -2622,18 +2665,92 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 }
 
 #tracking-protection-icon:not([state]) {
-  margin-inline-start: -18px;
+/*  margin-inline-start: -18px; */
+  margin-inline-end: 0;
+  width: 0;
   pointer-events: none;
   opacity: 0;
   /* Only animate the shield in, when it disappears hide it immediately. */
   transition: none;
 }
 
+#urlbar[pageproxystate="invalid"] > #identity-box > #tracking-protection-icon,
 #urlbar[pageproxystate="invalid"] > #identity-box > #identity-icons > #tracking-protection-icon {
   visibility: collapse;
 }
 
-/* page proxy icon */
+/* CONNECTION ICON (Firefox 45.0a1) */
+
+#connection-icon {
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 3px;
+  margin-inline-end: 1px;
+  list-style-image: url(chrome://browser/skin/identity-not-secure.svg);
+  visibility: visible;
+}
+
+#urlbar:not([pageproxystate="valid"]) > #identity-box > #connection-icon{
+  opacity: .375;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedDomain > #connection-icon{
+  list-style-image: url(chrome://browser/skin/identity-domain-secure.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedIdentity > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-secure.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.insecureLoginForms > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveContent > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-loaded.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.weakCipher > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContent > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContentLoadedActiveBlocked > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-passive-loaded.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-blocked.svg);
+  visibility: visible;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.chromeUI > #connection-icon {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+  visibility: visible;
+}
+
+#identity-box:hover > #tracking-protection-icon[state],
+#identity-box:hover > #connection-icon{
+  opacity: .675;
+}
+
+#identity-box:hover:active > #tracking-protection-icon[state],
+#identity-box:hover:active > #connection-icon,
+#identity-box[open=true] > #tracking-protection-icon[state],
+#identity-box[open=true] > #connection-icon{
+  opacity: 1;
+  filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg height="0" xmlns="http://www.w3.org/2000/svg">\
+      <filter id="dimLights">\
+        <feColorMatrix in="SourceGraphic"\
+          type="matrix"\
+          values="0.7 0  0  0 0 \
+                   0 0.7 0  0 0 \
+                   0  0 0.7 0 0 \
+                   0  0  0  1 0" />\
+      </filter>\
+    </svg>#dimLights');
+}
+
+/* page proxy icon (Before Firefox 45.0a1) */
 
 #page-proxy-favicon {
   width: 16px;
@@ -2641,44 +2758,66 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   list-style-image: url(chrome://browser/skin/identity-icons-generic.png);
 }
 
-.chromeUI > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
-  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
-  -moz-image-region: unset;
-}
 .chromeUI > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://branding/content/identity-icons-brand.png);
 }
 
-.verifiedDomain > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedDomain > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https.png);
 }
 
-.verifiedIdentity > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .verifiedIdentity > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-ev.png);
 }
 
-.mixedActiveContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedActiveContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-active.png);
 }
 
-
-.weakCipher > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
-.mixedDisplayContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
-.mixedDisplayContentLoadedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContent > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
 
-.mixedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
 .mixedDisplayContentLoadedActiveBlocked > #page-proxy-favicon[pageproxystate="valid"] {
   list-style-image: url(chrome://browser/skin/identity-icons-https-mixed-display.png);
 }
 
+
+/* Firefox 42-44 */
+#identity-icons > #page-proxy-favicon {
+  list-style-image: url(chrome://browser/skin/identity-not-secure.svg);
+  -moz-image-region: unset;
+}
+
+.chromeUI > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
+}
+
+.verifiedDomain > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-domain-secure.svg);
+}
+
+.verifiedIdentity > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-secure.svg);
+}
+
+.mixedActiveContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-loaded.svg);
+}
+
+.weakCipher > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContent > #identity-icons > #page-proxy-favicon[pageproxystate="valid"],
+.mixedDisplayContentLoadedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-passive-loaded.svg);
+}
+
+.mixedActiveBlocked > #identity-icons > #page-proxy-favicon[pageproxystate="valid"] {
+  list-style-image: url(chrome://browser/skin/identity-mixed-active-blocked.svg);
+}
+
+
 #page-proxy-favicon[pageproxystate="invalid"] {
-  opacity: 0.3;
+  opacity: 0.375;
 }
 
 #identity-popup.chromeUI > #identity-popup-container > #identity-popup-icon {
@@ -2701,27 +2840,24 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
     -moz-image-region: rect(0, 16px, 16px, 0);
   }
 
-  #identity-box:hover > #identity-icons > #page-proxy-favicon,
   #identity-box:hover > #page-proxy-favicon {
     -moz-image-region: rect(0, 32px, 16px, 16px);
   }
-  #identity-box:hover > #identity-icons > #tracking-protection-icon[state],
-  #identity-box.chromeUI:hover > #identity-icons > #page-proxy-favicon{
-    -moz-image-region: unset;
-      opacity: .8;
-  }
 
-  #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
-  #identity-box[open=true] > #identity-icons > #page-proxy-favicon,
   #identity-box:hover:active > #page-proxy-favicon,
   #identity-box[open=true] > #page-proxy-favicon {
     -moz-image-region: rect(0, 48px, 16px, 32px);
   }
+
+  #identity-box:hover > #identity-icons > #tracking-protection-icon[state],
+  #identity-box:hover > #identity-icons > #page-proxy-favicon{
+    opacity: .675;
+  }
+
   #identity-box:hover:active > #identity-icons > #tracking-protection-icon[state],
   #identity-box[open=true] > #identity-icons > #tracking-protection-icon[state],
-  #identity-box.chromeUI:hover:active > #identity-icons > #page-proxy-favicon,
-  #identity-box.chromeUI[open=true] > #identity-icons > #page-proxy-favicon{
-    -moz-image-region: unset;
+  #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
+  #identity-box[open=true] > #identity-icons > #page-proxy-favicon{
     opacity: 1;
     /* Changed filter -johnGraciliano */
     filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
@@ -5216,7 +5352,7 @@ svg|line.css-transform-line {
 :root[devtoolstheme="light"] #developer-toolbar {
   --gcli-background-color: #ebeced; /* --theme-tab-toolbar-background */
   --gcli-input-background: #f0f1f2; /* --theme-toolbar-background */
-  --gcli-input-focused-background: #f7f7f7; /* --theme-sidebar-background */
+  --gcli-input-focused-background: #f8f8f8 /* Was #f7f7f7 */; /* --theme-sidebar-background */
   --gcli-input-color: #18191a; /* --theme-body-color */
   --gcli-border-color: #aaaaaa; /* --theme-splitter-color */
   --selection-background: #4c9ed9; /* --theme-selection-background */
@@ -5224,24 +5360,22 @@ svg|line.css-transform-line {
 }
 
 :root[devtoolstheme="dark"] #developer-toolbar {
-  --gcli-background-color: #343c45; /* --theme-toolbar-background */
-  --gcli-input-background: rgba(37, 44, 51, .6); /* --theme-tab-toolbar-background */
-  --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
-  --gcli-input-color: #b6babf; /* --theme-body-color-alt */
-  --gcli-border-color: black; /* --theme-splitter-color */
-  --selection-background: #1d4f73; /* --theme-selection-background */
-  --selection-color: #f5f7fa; /* --theme-selection-color */
+  --gcli-background-color: #252c33 /* Was #343c45 */; /* --theme-toolbar-background */ /* SW had #343C45 */
+  --gcli-input-background: #343c45 /* Was rgba(37, 44, 51, .6) */; /* --theme-tab-toolbar-background */ /* SW had #242b33 */
+  --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */ /* SW had #232e38 */
+  --gcli-input-color: #b6babf; /* --theme-body-color-alt */ /* SW had hsl(210,30%,85%) */
+  --gcli-border-color: black; /* --theme-splitter-color */ /* SW had #060a0d  and hsla(206,37%,4%,.2) for inset shadows */
+  --selection-background: #1d4f73; /* --theme-selection-background */ /* SW had hsl(210,30%,85%) */
+  --selection-color: #f5f7fa; /* --theme-selection-color */ /* SW had hsl(210,24%,16%) */
 }
-
-/* Developer toolbar */
 
 #developer-toolbar {
   -moz-appearance: none;
   padding: 0;
   min-height: 32px;
-  background-color: #343C45; /* Toolbars */
-  border-top: 1px solid #060a0d;
-  box-shadow: 0 1px 0 hsla(204,45%,98%,.05) inset, 0 -1px 0 hsla(206,37%,4%,.1) inset;
+  background-color: var(--gcli-background-color);
+  border-top: 1px solid var(--gcli-border-color);
+  /* box-shadow: 0 1px 0 hsla(204,45%,98%,.05) inset, 0 -1px 0 hsla(206,37%,4%,.1) inset;  %* Removed in 45.0a1 Merge -johnGraciliano TEST */
 }
 
 #developer-toolbar > toolbarbutton {
@@ -5289,7 +5423,7 @@ svg|line.css-transform-line {
   -moz-image-region: rect(0px, 64px, 16px, 48px);
 }
 
-@media (min-resolution: 1.25dppx) {
+@media (min-resolution: 1.1dppx) {
   #developer-toolbar-toolbox-button {
     list-style-image: url("chrome://browser/skin/devtools/toggle-tools@2x.png");
     -moz-image-region: rect(0px, 32px, 32px, 0px);
@@ -5318,7 +5452,7 @@ svg|line.css-transform-line {
   opacity: 0.6;
 }
 
-@media (min-resolution: 1.25dppx) {
+@media (min-resolution: 1.1dppx) {
   #developer-toolbar-closebutton {
     list-style-image: url("chrome://browser/skin/devtools/close@2x.png");
   }
@@ -5369,24 +5503,27 @@ html|*#gcli-output-frame {
   box-shadow: none;
   border-width: 0;
   background-color: transparent;
+  border-radius: 0;
 }
 
 .gclitoolbar-input-node {
   -moz-appearance: none;
-  color: hsl(210,30%,85%);
-  background-color: #242b33;
+  color: var(--gcli-input-color);
+  background-color: var(--gcli-input-background);
   background-repeat: no-repeat;
   background-position: 4px center;
-  box-shadow: 0 1px 1px hsla(206,37%,4%,.2) inset,
+/*box-shadow: 0 1px 1px hsla(206,37%,4%,.2) inset,
               1px 0 0 hsla(206,37%,4%,.2) inset,
-              -1px 0 0 hsla(206,37%,4%,.2) inset;
+              -1px 0 0 hsla(206,37%,4%,.2) inset;  %* Changed in 45.0a1 Merge -johnGraciliano TEST */
+  box-shadow: 1px 0 0 var(--gcli-border-color) inset,
+              -1px 0 0 var(--gcli-border-color) inset;
   line-height: 32px;
   outline-style: none;
   padding: 0;
 }
 
 .gclitoolbar-input-node[focused="true"] {
-  background-color: #232e38;
+  background-color: var(--gcli-input-focused-background);
 }
 
 .gclitoolbar-input-node::before {
@@ -5405,15 +5542,15 @@ html|*#gcli-output-frame {
   background-position: -16px center;
 }
 
-@media (min-resolution: 1.25dppx) {
+@media (min-resolution: 1.1dppx) {
   .gclitoolbar-input-node::before {
     background-image: url("chrome://browser/skin/devtools/commandline-icon@2x.png");
   }
 }
 
 .gclitoolbar-input-node > .textbox-input-box > html|*.textbox-input::-moz-selection {
-  background-color: hsl(210,30%,85%);
-  color: hsl(210,24%,16%);
+  background-color: var(--selection-background);
+  color: var(--selection-color);
   text-shadow: none;
 }
 
@@ -6936,10 +7073,12 @@ toolbarpaletteitem[place="toolbar"] {
   padding: 2em 15px;
 }
 
+#UITourTooltipButtons > label,
 #UITourTooltipButtons > button {
   margin: 0 15px;
 }
 
+#UITourTooltipButtons > label:first-child,
 #UITourTooltipButtons > button:first-child {
   -moz-margin-start: 0;
 }
@@ -6950,6 +7089,7 @@ toolbarpaletteitem[place="toolbar"] {
   -moz-margin-end: 5px;
 }
 
+#UITourTooltipButtons > label,
 #UITourTooltipButtons > button .button-text {
   font-size: 1.15rem;
 }
@@ -6972,6 +7112,7 @@ toolbarpaletteitem[place="toolbar"] {
   box-shadow: 0 1px 0 0 hsla(210,4%,10%,.05) inset;
 }
 
+#UITourTooltipButtons > label,
 #UITourTooltipButtons > button.button-link {
   -moz-appearance: none;
   background: transparent;
@@ -7348,6 +7489,12 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
           #main-window {
             background-color: #F0F0F0; /* As per Lootyhoof. It was hsl(0, 0%, 78%).
                                           It may well be #f6f6f6 but I dunno --johnGraciliano */
+          }
+        }
+
+        @media not all and (-moz-windows-default-theme) {
+          #main-window {
+            background-color: transparent;
           }
         }
 
@@ -7883,6 +8030,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
   background: rgba(250,250,250,1) !important;
 }
 
+
 /** compact customizations **/
 
 /** hide back and forward buttons when it makes sense to do that **/
@@ -7936,4 +8084,80 @@ padding-top: 0px !important;
 #navigator-toolbox > #nav-bar #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
 padding-left: 1px !important;
 padding-right: 1px !important;
+
+/* All that follows is from the default in 44.0a2 and 45.0a1.  I am not sure of its use yet...  --johnGraciliano */
+
+.browser-extension-panel > .panel-arrowcontainer > .panel-arrowcontent {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* User Context UI browser styles */
+
+#menu_newUserContextTabPersonal {
+  list-style-image: url("chrome://browser/skin/usercontext/personal.svg");
+}
+
+#menu_newUserContextTabWork {
+  list-style-image: url("chrome://browser/skin/usercontext/work.svg");
+}
+
+#menu_newUserContextTabBanking {
+  list-style-image: url("chrome://browser/skin/usercontext/banking.svg");
+}
+
+#menu_newUserContextTabShopping {
+  list-style-image: url("chrome://browser/skin/usercontext/shopping.svg");
+}
+
+/* URL Bar Decoration */
+
+#userContext-indicator {
+  height: 16px;
+  width: 16px;
+}
+
+#userContext-label {
+  margin-inline-end: 3px;
+  color: #909090;
+}
+
+#userContext-icons:not([usercontextid]) {
+  display: none;
+}
+
+#userContext-icons {
+  -moz-box-align: center;
+}
+
+/* Personal User Context */
+#userContext-icons[usercontextid="1"] > #userContext-label {
+  color: #00a7e0;
+}
+#userContext-icons[usercontextid="1"] > #userContext-indicator {
+  list-style-image: url("chrome://browser/skin/usercontext/personal.svg");
+}
+
+/* Work User Context */
+#userContext-icons[usercontextid="2"] > #userContext-label {
+  color: #f89c24;
+}
+#userContext-icons[usercontextid="2"] > #userContext-indicator {
+  list-style-image: url("chrome://browser/skin/usercontext/work.svg");
+}
+
+/* Banking User Context */
+#userContext-icons[usercontextid="3"] > #userContext-label {
+  color: #7dc14c;
+}
+#userContext-icons[usercontextid="3"] > #userContext-indicator {
+  list-style-image: url("chrome://browser/skin/usercontext/banking.svg");
+}
+
+/* Shopping User Context */
+#userContext-icons[usercontextid="4"] > #userContext-label {
+  color: #ee5195;
+}
+#userContext-icons[usercontextid="4"] > #userContext-indicator {
+  list-style-image: url("chrome://browser/skin/usercontext/shopping.svg");
 }
