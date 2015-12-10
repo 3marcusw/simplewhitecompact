@@ -10,12 +10,12 @@
   overflow: auto;
 }
 
-.theme-dark #storage-tree {
-  background: #343c45; /* Toolbars */
+#storage-tree {
+  background: var(--theme-sidebar-background);
 }
 
 #storage-tree .tree-widget-item[type="store"]:after {
-  background-image: url(chrome://browser/skin/devtools/filetype-store.svg);
+  background-image: url(./images/filetypes/store.svg);
   background-size: 18px 18px;
   background-position: -1px 0;
 }

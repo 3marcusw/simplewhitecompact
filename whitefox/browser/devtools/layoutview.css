@@ -1,83 +1,26 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/ */
 
 .theme-sidebar {
   box-sizing: border-box;
 }
 
-#main {
-  background-color: white;
-  border-color: hsla(210,100%,85%,0.7);
-  border-style: dotted;
-  color: var(--theme-selection-color);
-}
-
-.margin,
-.size {
-  color: var(--theme-highlight-blue);
-}
-
-#content {
-  background-color: #87ceeb;
-  border-color: hsl(210,100%,85%);
-  border-style: dotted;
-}
-
-#padding,
-#margins {
-  border-color: hsla(210,100%,85%,0.2);
-  outline: dotted 1px hsl(210,100%,85%);
-}
-
-#padding {
-  background-color: #6a5acd;
-}
-
-#borders {
-  background-color: #444444;
-  border-style: dotted;
-  border-color: hsl(210,100%,85%);
-}
-
-#margins {
-  background-color: #edff64;
-  /* This opacity applies to all of the regions, since they are nested. */
-  opacity: .8;
-}
-
-.editable {
-  border-bottom: 1px dashed transparent;
-}
-
-.editable:hover {
-  border-bottom-color: hsl(0,0%,50%);
-}
-
-.styleinspector-propertyeditor {
-  border: 1px solid #CCC;
-  padding: 0;
-}
-
-/******* What follows is a literal import from Firefox 40.0.3 code taking   ********/
-/*******     chrome://browser/content/devtools/layoutview/view.css          ********/
-/******* That file was removed since Firefox 41 and its code lives now here ********/
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-body {
-  max-width: 320px;
-  position: relative;
+body.theme-sidebar.devtools-monospace { /* Added specificity so it supersedes rules elsewhere */
+  /* The view will grow bigger as the window gets resized, until 400px */
+  max-width: 350px;
   margin: 0px auto;
   padding: 0;
+  /* "Contain" the absolutely positioned #main element */
+  position: relative;
 }
+
+/* Header: contains the position and size of the element */
 
 #header {
   box-sizing: border-box;
   width: 100%;
-  padding: 4px 13px;
+  padding: 4px 14px;
   display: -moz-box;
   vertical-align: top;
 }
@@ -98,42 +41,100 @@ body {
   -moz-box-pack: end;
 }
 
-#main {
-  margin: 0 14px 10px 14px;
-  box-sizing: border-box;
-  width: calc(100% - 2 * 14px);
-  position: absolute;
-  border-width: 1px;
+@media (max-height: 228px) {
+  #header {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
 }
 
-#content,
-#borders {
-  border-width: 1px;
+/* Main: contains the box-model regions */
+
+#main {
+  position: absolute;
+  box-sizing: border-box;
+  /* The regions are semi-transparent, so the white background is partly
+     visible */
+  background-color: white;
+  color: var(--theme-selection-color);
+  /* Make sure there is some space between the window's edges and the regions */
+  margin: 0 14px 10px 14px;
+  width: calc(100% - 2 * 14px);
 }
+
+.margin,
+.size {
+  color: var(--theme-highlight-blue);
+}
+
+/* Regions are 3 nested elements with wide borders and outlines */
 
 #content {
   height: 25px;
 }
 
 #margins,
+#borders,
 #padding {
-  border-style: solid;
+  border-color: hsla(210,100%,85%,0.2);
   border-width: 25px;
+  border-style: solid;
+  outline: dotted 1px hsl(210,100%,85%);
+}
+
+div#borders{ /* Added specificity so it supersedes rules elsewhere */
+  border-width: 25px; /* Override Firefox 40 and earlier --johnGraciliano */
+  padding:0; /* Override Firefox 40 and earlier --johnGraciliano */
+  outline: dotted 1px hsl(210,100%,45%);
+}
+
+#margins{
+  outline: dotted 1px hsl(210,100%,75%);
+}
+
+#margins {
+  /* This opacity applies to all of the regions, since they are nested */
+  opacity: .8;
+}
+
+/* Respond to window size change by changing the size of the regions */
+
+@media (max-height: 228px) {
+  div#content {
+    height: 22px;
+  }
+
+  div#margins,
+  div#padding {
+    border-width: 21px;
+  }
+
+  div#borders {
+    border-width: 22px;
+  }
+}
+
+/* Regions colors */
+
+#margins {
+  border-color: #edff64;
 }
 
 #borders {
-  padding: 25px;
+  border-color: #444444;
 }
 
-.legend {
-  position: absolute;
-  margin: 5px 6px;
-  z-index: 1;
+#padding {
+  border-color: #6a5acd;
 }
 
-.legend[data-box="margin"] {
-  color: var(--theme-highlight-blue);
+#content {
+  background-color: #87ceeb;
 }
+
+/* Editable region sizes are contained in absolutely positioned <p> */
 
 #main > p {
   position: absolute;
@@ -150,13 +151,7 @@ body {
   pointer-events: auto;
 }
 
-.size > span {
-  cursor: default;
-}
-
-.editable {
-  -moz-user-select: text;
-}
+/* Coordinates for the region sizes */
 
 .top,
 .bottom {
@@ -244,32 +239,10 @@ body {
   transform: rotate(90deg);
 }
 
-
-body.dim > #header > #element-position,
-body.dim > #main > p {
-  visibility: hidden;
-}
+/* Coordinates should be different when the window is small, because we make
+   the regions smaller then */
 
 @media (max-height: 228px) {
-  #header {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 10px;
-    margin-bottom: 8px;
-  }
-
-  #margins,
-  #padding {
-    border-width: 21px;
-  }
-  #borders {
-    padding: 21px;
-  }
-
-  #content {
-    height: 21px;
-  }
-
   .padding.top {
     top: 46px;
   }
@@ -328,4 +301,52 @@ body.dim > #main > p {
   .border.right {
     right: 22px;
   }
+}
+
+/* Legend, displayed inside regions */
+
+.legend {
+  position: absolute;
+  margin: 5px 6px;
+  z-index: 1;
+}
+
+.legend[data-box="margin"] {
+  color: var(--theme-highlight-blue);
+}
+
+@media (max-height: 228px) {
+  .legend {
+    margin: 2px 6px;
+  }
+}
+
+/* Editable fields */
+
+.editable {
+  border: 1px dashed transparent;
+  -moz-user-select: text;
+}
+
+.editable:hover {
+  border-bottom-color: hsl(0, 0%, 50%);
+}
+
+.styleinspector-propertyeditor {
+  border: 1px solid #ccc;
+  padding: 0;
+}
+
+/* Make sure the content size doesn't appear as editable like the other sizes */
+
+.size > span {
+  cursor: default;
+}
+
+/* Hide all values when the view is inactive */
+
+body.inactive > #header > #element-position,
+body.inactive > #header > #element-size,
+body.inactive > #main > p {
+   visibility: hidden;
 }

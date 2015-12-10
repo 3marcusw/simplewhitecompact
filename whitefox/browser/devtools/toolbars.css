@@ -186,7 +186,7 @@
 .devtools-menulist > .menulist-dropmarker {
   -moz-appearance: none;
   display: -moz-box;
-  list-style-image: url("chrome://devtools/skin/images/dropmarker.svg");
+  list-style-image: url("./images/dropmarker.svg");
   -moz-box-align: center;
   min-width: 16px;
 }
@@ -194,9 +194,32 @@
 .devtools-toolbarbutton[type=menu] > .toolbarbutton-menu-dropmarker,
 .devtools-toolbarbutton[type=menu-button] > .toolbarbutton-menubutton-dropmarker {
   -moz-appearance: none !important;
-  list-style-image: url("chrome://devtools/skin/images/dropmarker.svg");
+  list-style-image: url("./images/dropmarker.svg");
   -moz-box-align: center;
   padding: 0 3px;
+}
+
+/* Some buttons not themed elsewhere --johnGraciliano */
+hbox > label + button:not([checked=true]),
+#requests-menu-network-summary-button {
+  opacity: 0.8;
+}
+
+hbox > label + button:hover:not([checked=true]),
+#requests-menu-network-summary-button:hover {
+  opacity: 1;
+}
+
+.theme-dark hbox > label + button[checked=true] {
+  background: rgba(29, 79, 115, .7); /* Select highlight blue */
+}
+
+.theme-light hbox > label + button[checked=true] {
+  background: rgba(76, 158, 217, .3); /* Select highlight blue */
+}
+
+#requests-menu-network-summary-label{
+  margin: 2px 2px -2px !important;      /* In needs to override an !important rule in .plain in chrome://ostarget/skin/global/global.css */
 }
 
 /* Icon-only buttons */
@@ -277,7 +300,13 @@
 }
 
 .devtools-option-toolbarbutton {
-  list-style-image: url("chrome://devtools/skin/images/tool-options.svg");
+  list-style-image: url("./tool-options.svg");
+}
+[id].devtools-option-toolbarbutton:not([open]) > image {
+  opacity: .6;
+}
+[id].devtools-option-toolbarbutton:hover:not([open]) > image {
+  opacity: .8;
 }
 
 /* Toolbar button groups */
@@ -325,6 +354,7 @@
   background-size: 11px 11px;
   background-repeat: no-repeat;
   font-size: inherit;
+  font: message-box;
 }
 
 .theme-dark .devtools-searchinput {
@@ -379,17 +409,22 @@
 .devtools-rule-searchbox {
   -moz-box-flex: 1;
   width: 100%;
-  font: inherit;
+  font: message-box;
+}
+
+#preview-text-input.devtools-textinput::-moz-placeholder,
+.devtools-searchinput.devtools-rule-searchbox::-moz-placeholder {
+  font-style: italic;
 }
 
 .devtools-rule-searchbox[filled] {
-  background-color: var(--searchbox-background-color);
-  border-color: var(--searchbox-border-color);
+/*  background-color: var(--searchbox-background-color);  ** Not here --johnGraciliano */
+/*  border-color: var(--searchbox-border-color);  ** Not here --johnGraciliano */
   -moz-padding-end: 23px;
 }
 
 .devtools-style-searchbox-no-match {
-  background-color: var(--searcbox-no-match-background-color) !important;
+/*  background-color: var(--searcbox-no-match-background-color) !important;  ** Not here --johnGraciliano */
   border-color: var(--searcbox-no-match-border-color) !important;
 }
 
@@ -416,15 +451,18 @@
 }
 
 .theme-dark .devtools-searchinput-clear {
-  background-image: url("chrome://devtools/skin/images/search-clear-dark.svg");
+/*  background-image: url("./images/search-clear-dark.svg");  ** Not here --johnGraciliano */
+  background-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
+  filter: invert(1);
 }
 
 .theme-light .devtools-searchinput-clear {
-  background-image: url("chrome://devtools/skin/images/search-clear-light.svg");
+/*  background-image: url("./images/search-clear-light.svg");  ** Not here --johnGraciliano */
+  background-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
 }
 
 .devtools-style-searchbox-no-match + .devtools-searchinput-clear {
-  background-image: url("chrome://devtools/skin/images/search-clear-failed.svg") !important;
+/*  background-image: url("./images/search-clear-failed.svg") !important;  ** Not here --johnGraciliano */
 }
 
 .devtools-searchinput-clear:hover {
@@ -432,12 +470,15 @@
 }
 
 .theme-dark .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
-  list-style-image: url("chrome://devtools/skin/images/search-clear-dark.svg");
+/*  list-style-image: url("./images/search-clear-dark.svg");  ** Not here --johnGraciliano */
+  list-style-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
+  filter: invert(1);
   -moz-image-region: rect(0, 16px, 16px, 0);
 }
 
 .theme-light .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
-  list-style-image: url("chrome://devtools/skin/images/search-clear-light.svg");
+/*  list-style-image: url("./images/search-clear-light.svg");  ** Not here --johnGraciliano */
+  list-style-image: url("chrome://global/skin/icons/close.png"); /* This goes with the theme --johnGraciliano */
   -moz-image-region: rect(0, 16px, 16px, 0);
 }
 
@@ -457,6 +498,25 @@
   .theme-light .devtools-searchinput {
     background-image: url(images/magnifying-glass-light@2x.png);
   }
+
+  .theme-dark  .devtools-searchinput-clear,
+  .theme-light .devtools-searchinput-clear {
+    background-image: url("chrome://global/skin/icons/close@2x.png"); /* This goes with the theme --johnGraciliano */
+    background-size: 64px;
+  }
+
+  .theme-dark  .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear,
+  .theme-light .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
+    height: 16px;
+    width: 16px;
+    list-style-image: url("chrome://global/skin/icons/close@2x.png"); /* This goes with the theme --johnGraciliano */
+    -moz-image-region: rect(0, 32px, 32px, 0);
+  }
+
+  .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover {
+    -moz-image-region: rect(0, 64px, 32px, 32px);
+  }
+
 }
 
 /* Close button */
@@ -475,7 +535,7 @@
   height: 16px;
   -moz-appearance: none;
   background-size: 16px 16px;
-  background-image: url("chrome://devtools/skin/images/close@2x.png");
+  background-image: url("./images/close@2x.png");
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -561,15 +621,18 @@
 }
 
 .devtools-sidebar-tabs tabs > tab {
-  border-image: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%) 1 1;
+  --border-img: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%) 1 1;
+  border-image: var(--border-img);
 }
 
 .devtools-sidebar-tabs tabs > tab[selected],
 .devtools-sidebar-tabs tabs > tab[selected] + tab {
-  border-image: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color)) 1 1;
+  --border-img: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color)) 1 1;
+  border-image: var(--border-img);
 }
 
 .devtools-sidebar-tabs tabs > tab:first-child {
+  -moz-border-start-width: 0;
   border-inline-start-width: 0;
 }
 
@@ -616,29 +679,30 @@
 }
 
 #toolbox-dock-bottom > image {
-  background-image: url("chrome://devtools/skin/images/dock-bottom@2x.png");
+  background-image: url("./images/dock-bottom@2x.png");
 }
 
 #toolbox-dock-side  > image {
-  background-image: url("chrome://devtools/skin/images/dock-side@2x.png");
+  background-image: url("./images/dock-side@2x.png");
 }
 
 #toolbox-dock-window > image {
-  background-image: url("chrome://devtools/skin/images/undock@2x.png");
+  background-image: url("./images/undock@2x.png");
 }
 
+/*  I don't want to hide it! --johnGraciliano
 #toolbox-dock-bottom-minimize {
   /* Bug 1177463 - The minimize button is currently hidden until we agree on
-     the UI for it, and until bug 1173849 is fixed too. */
+     the UI for it, and until bug 1173849 is fixed too. *%
   display: none;
-}
+} */
 
 #toolbox-dock-bottom-minimize > image {
-  background-image: url("chrome://devtools/skin/images/dock-bottom-minimize@2x.png");
+  background-image: url("./images/dock-bottom-minimize@2x.png");
 }
 
 #toolbox-dock-bottom-minimize.minimized > image {
-  background-image: url("chrome://devtools/skin/images/dock-bottom-maximize@2x.png");
+  background-image: url("./images/dock-bottom-maximize@2x.png");
 }
 
 #toolbox-dock-window,
@@ -713,92 +777,92 @@
 }
 
 #command-button-paintflashing > image {
-  background-image: url("chrome://devtools/skin/images/command-paintflashing.png");
+  background-image: url("./images/command-paintflashing.png");
 }
 
 #command-button-screenshot > image {
-  background-image: url("chrome://devtools/skin/images/command-screenshot.png");
+  background-image: url("./images/command-screenshot.png");
 }
 
 #command-button-responsive > image {
-  background-image: url("chrome://devtools/skin/images/command-responsivemode.png");
+  background-image: url("./images/command-responsivemode.png");
 }
 
 #command-button-tilt > image {
-  background-image: url("chrome://devtools/skin/images/command-tilt.png");
+  background-image: url("./images/command-tilt.png");
 }
 
 #command-button-scratchpad > image {
-  background-image: url("chrome://devtools/skin/images/command-scratchpad.png");
+  background-image: url("./images/command-scratchpad.png");
 }
 
 #command-button-pick > image {
-  background-image: url("chrome://devtools/skin/images/command-pick.png");
+  background-image: url("./images/command-pick.png");
 }
 
 #command-button-frames > image {
-  background-image: url("chrome://devtools/skin/images/command-frames.png");
+  background-image: url("./images/command-frames.png");
 }
 
 #command-button-splitconsole > image {
-  background-image: url("chrome://devtools/skin/images/command-console.png");
+  background-image: url("./images/command-console.png");
 }
 
 #command-button-eyedropper > image {
-  background-image: url("chrome://devtools/skin/images/command-eyedropper.png");
+  background-image: url("./images/command-eyedropper.png");
 }
 
 #command-button-rulers > image {
-  background-image: url("chrome://devtools/skin/images/command-rulers.png");
+  background-image: url("./images/command-rulers.png");
 }
 
 #command-button-measure > image {
-  background-image: url("chrome://devtools/skin/images/command-measure.png");
+  background-image: url("./images/command-measure.png");
 }
 
 @media (min-resolution: 1.1dppx) {
   #command-button-paintflashing > image {
-    background-image: url("chrome://devtools/skin/images/command-paintflashing@2x.png");
+    background-image: url("./images/command-paintflashing@2x.png");
   }
 
   #command-button-screenshot > image {
-    background-image: url("chrome://devtools/skin/images/command-screenshot@2x.png");
+    background-image: url("./images/command-screenshot@2x.png");
   }
 
   #command-button-responsive > image {
-    background-image: url("chrome://devtools/skin/images/command-responsivemode@2x.png");
+    background-image: url("./images/command-responsivemode@2x.png");
   }
 
   #command-button-tilt > image {
-    background-image: url("chrome://devtools/skin/images/command-tilt@2x.png");
+    background-image: url("./images/command-tilt@2x.png");
   }
 
   #command-button-scratchpad > image {
-    background-image: url("chrome://devtools/skin/images/command-scratchpad@2x.png");
+    background-image: url("./images/command-scratchpad@2x.png");
   }
 
   #command-button-pick > image {
-    background-image: url("chrome://devtools/skin/images/command-pick@2x.png");
+    background-image: url("./images/command-pick@2x.png");
   }
 
   #command-button-frames > image {
-    background-image: url("chrome://devtools/skin/images/command-frames@2x.png");
+    background-image: url("./images/command-frames@2x.png");
   }
 
   #command-button-splitconsole > image {
-    background-image: url("chrome://devtools/skin/images/command-console@2x.png");
+    background-image: url("./images/command-console@2x.png");
   }
 
   #command-button-eyedropper > image {
-    background-image: url("chrome://devtools/skin/images/command-eyedropper@2x.png");
+    background-image: url("./images/command-eyedropper@2x.png");
   }
 
   #command-button-rulers > image {
-    background-image: url("chrome://devtools/skin/images/command-rulers@2x.png");
+    background-image: url("./images/command-rulers@2x.png");
   }
 
   #command-button-measure > image {
-    background-image: url("chrome://devtools/skin/images/command-measure@2x.png");
+    background-image: url("./images/command-measure@2x.png");
   }
 }
 
@@ -974,11 +1038,13 @@
 .theme-light .command-button-invertable > image,
 .theme-light .devtools-closebutton > image,
 .theme-light .devtools-toolbarbutton > image,
+.theme-light .devtools-option-toolbarbutton > image, /* Old Firefox --johnGraciliano */
 .theme-light .devtools-button::before,
 .theme-light #breadcrumb-separator-normal,
 .theme-light .scrollbutton-up > .toolbarbutton-icon,
 .theme-light .scrollbutton-down > .toolbarbutton-icon,
 .theme-light #black-boxed-message-button .button-icon,
+.theme-light .notice-container button .button-icon, /* Old Firefox --johnGraciliano */
 .theme-light #requests-menu-perf-notice-button .button-icon,
 .theme-light #requests-menu-network-summary-button .button-icon,
 .theme-light #toggle-breakpoints[checked] > image,
@@ -988,6 +1054,7 @@
 
 /* Since selected backgrounds are blue, we want to use the normal
  * (light) icons. */
+.theme-light .notice-container button[checked] .button-icon, /* Old Firefox --johnGraciliano */
 .theme-light .devtools-tab[icon-invertable][selected] > image,
 .theme-light .devtools-tab[icon-invertable][highlighted] > image {
   filter: none !important;

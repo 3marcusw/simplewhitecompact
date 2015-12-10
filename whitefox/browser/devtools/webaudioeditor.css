@@ -1,8 +1,4 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-/* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
@@ -34,10 +30,10 @@ svg {
 }
 
 .theme-dark .edgePath path {
-  stroke: #b6babf; /* Grey foreground text */
+  stroke: var(--theme-body-color-alt);
 }
 .theme-light .edgePath path {
-  stroke: #aaaaaa; /* Splitters */
+  stroke: var(--theme-splitter-color);
 }
 
 /* AudioParam connection edges */
@@ -46,26 +42,20 @@ g.edgePath.param-connection {
 }
 
 .theme-dark .edgePath.param-connection path {
-  stroke: #b6babf; /* Grey foreground text */
+  stroke: var(--theme-body-color-alt);
 }
 .theme-light .edgePath.param-connection path {
-  stroke: #aaaaaa; /* Splitters */
+  stroke: var(--theme-splitter-color);
 }
 
 /* Labels in AudioParam connection should have background that match
  * the main background so there's whitespace around the label, on top of the
  * dotted lines. */
-.theme-dark g.edgeLabel rect {
-  fill: #14171a;
+g.edgeLabel rect {
+  fill: var(--theme-body-background);
 }
-.theme-light g.edgeLabel rect {
-  fill: #fcfcfc; /* Background - Editor */
-}
-.theme-dark g.edgeLabel tspan {
+g.edgeLabel tspan {
   fill: var(--theme-body-color-alt);
-}
-.theme-light g.edgeLabel tspan {
-  fill: #585959; /* Grey foreground text */
 }
 
 /* Audio Nodes */
@@ -89,10 +79,10 @@ g.edgePath.param-connection {
  */
 
 .theme-light .nodes g.bypassed rect {
-  fill: url(chrome://browser/skin/devtools/filters.svg#bypass-light);
+  fill: url(./images/filters.svg#bypass-light);
 }
 .theme-dark .nodes g.bypassed rect {
-  fill: url(chrome://browser/skin/devtools/filters.svg#bypass-dark);
+  fill: url(./images/filters.svg#bypass-dark);
 }
 .nodes g.bypassed.selected rect {
   stroke: var(--theme-selection-background);
@@ -149,7 +139,7 @@ text {
 }
 
 .web-audio-inspector .error {
-  background-image: url(alerticon-warning.png);
+  background-image: url(images/alerticon-warning.png);
   background-size: 13px 12px;
   -moz-appearance: none;
   opacity: 0;
@@ -160,8 +150,8 @@ text {
   background: none;
   box-shadow: none;
   border: none;
-  list-style-image: url(debugger-collapse.png);
-  -moz-image-region: rect(0px,16px,16px,0px);
+  list-style-image: url(images/pane-toggle.svg#collapse);
+  -moz-image-region: auto;
 }
 
 #inspector-pane-toggle > .toolbarbutton-icon {
@@ -170,11 +160,11 @@ text {
 }
 
 #inspector-pane-toggle[pane-collapsed] {
-  list-style-image: url(debugger-expand.png);
+  list-style-image: url(images/pane-toggle.svg#expand);
 }
 
 #inspector-pane-toggle:active {
-  -moz-image-region: rect(0px,32px,16px,16px);
+  -moz-image-region: auto;
 }
 
 /**
@@ -191,22 +181,9 @@ text {
   -moz-box-flex: 1;
 }
 
-@media (min-resolution: 2dppx) {
-  #inspector-pane-toggle {
-    list-style-image: url(debugger-collapse@2x.png);
-    -moz-image-region: rect(0px,32px,32px,0px);
-  }
-
-  #inspector-pane-toggle[pane-collapsed] {
-    list-style-image: url(debugger-expand@2x.png);
-  }
-
-  #inspector-pane-toggle:active {
-    -moz-image-region: rect(0px,64px,32px,32px);
-  }
-
+@media (min-resolution: 1.1dppx) {
   .web-audio-inspector .error {
-    background-image: url(alerticon-warning@2x.png);
+    background-image: url(images/alerticon-warning@2x.png);
   }
 }
 
@@ -215,26 +192,8 @@ text {
  */
 
 #audio-node-toolbar .bypass {
-  list-style-image: url(power.svg);
+  list-style-image: url(images/power.svg);
 }
-
-#audio-node-toolbar toolbarbutton[disabled] {
-  opacity: 0.5;
-  background-color: transparent;
-}
-
-.theme-dark #audio-node-toolbar toolbarbutton[checked] {
-  background-color: #1d4f73; /* Select Highlight Blue */
-}
-.theme-light #audio-node-toolbar toolbarbutton[checked] {
-  background-color: #4c9ed9; /* Select Highlight Blue */
-}
-
-/* don't invert checked buttons so we can have white icons on light theme */
-#audio-node-toolbar toolbarbutton[checked] > .toolbarbutton-icon {
-  filter: none;
-}
-
 
 /**
  * Responsive Styles

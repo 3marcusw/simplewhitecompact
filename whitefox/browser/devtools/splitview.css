@@ -86,25 +86,25 @@
 }
 
 .theme-dark .splitview-nav > li.splitview-active {
-  background-image: url(itemArrow-dark-ltr.svg),
+  background-image: url(images/itemArrow-dark-ltr.svg),
                     linear-gradient(#000, #000),
                     linear-gradient(#1d4f73, #1d4f73);
 }
 
 .theme-dark .splitview-nav > li.splitview-active:-moz-locale-dir(rtl) {
-  background-image: url(itemArrow-dark-rtl.svg),
+  background-image: url(images/itemArrow-dark-rtl.svg),
                     linear-gradient(#000, #000),
                     linear-gradient(#1d4f73, #1d4f73);
 }
 
 .theme-light .splitview-nav > li.splitview-active {
-  background-image: url(itemArrow-ltr.svg),
+  background-image: url(images/itemArrow-ltr.svg),
                     linear-gradient(#aaa, #aaa),
                     linear-gradient(#4c9ed9, #4c9ed9);
 }
 
 .theme-light .splitview-nav > li.splitview-active:-moz-locale-dir(rtl) {
-  background-image: url(itemArrow-rtl.svg),
+  background-image: url(images/itemArrow-rtl.svg),
                     linear-gradient(#aaa, #aaa),
                     linear-gradient(#4c9ed9, #4c9ed9);
 }
@@ -132,21 +132,4 @@
   width: auto;
   min-width: 48px;
   min-height: 0;
-}
-
-
-/* Resizers */
-
-.splitview-portrait-resizer {
-  -moz-appearance: none;
-  background: linear-gradient(black 1px, rgba(255,255,255,0.2) 1px),
-              linear-gradient(hsl(210,11%,36%), hsl(210,11%,18%));
-  height: 12px;
-  background-size: 10px 2px, 100% 12px;
-  background-clip: content-box, border-box;
-  background-repeat: repeat-y, no-repeat;
-  background-position: center center;
-  padding: 2px 0;
-  border-top: 1px solid hsla(210,8%,5%,.5);
-  border-bottom: 1px solid hsla(210,8%,5%,.5);
 }
