@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="16"
+     height="16"
+     viewBox="0 0 16 16">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: #f4f6f9;
+      stroke: #f4f6f9;
+      stroke-width: 1;
+      fill-opacity: .7;
+      stroke-opacity: .7;
+    }
+  </style>
+  <defs style="display: none;">
+  <g id="collapse-shape">
+    <path d="M 13,2.5  h -12.5  v 11  h 12.5" fill="none"/>
+    <line x1="14.5" x2="14.5" y1="2" y2="14" stroke-width="3"/>
+    <polygon points="4,4 12,8 4,12" stroke-width="0"/>
+  </g>
+  <g id="expand-shape">
+    <path d="M 13,2.5  h -12.5  v 11  h 12.5" fill="none"/>
+    <line x1="14.5" x2="14.5" y1="2" y2="14" stroke-width="3"/>
+    <polygon points="10,4 2,8 10,12" stroke-width="0"/>
+  </g>
+  </defs>
+  <use id="collapse" xlink:href="#collapse-shape"/>
+  <use id="expand"   xlink:href="#expand-shape"/>
+</svg>
