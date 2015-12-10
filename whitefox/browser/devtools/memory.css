@@ -53,7 +53,7 @@ html, body, #app, #memory-tool {
   align-items: center;
 }
 
-.devtools-toolbar > .toolbar-group:nth-of-type(1) {
+.devtools-toolbar > .toolbar-group:first-child { /* Firefox 45.0a1 --johnGraciliano */
   /**
    * We want this to be exactly at a `--sidebar-width` distance from the
    * toolbar's start boundary. A `.devtools-toolbar` has a 3px start padding.
@@ -76,6 +76,17 @@ html, body, #app, #memory-tool {
   text-overflow: ellipsis;
 }
 
+.devtools-toolbar > button + .toolbar-group { /* Firefox 44.0a2 --johnGraciliano */
+  /**
+   * We want this to be exactly at a --sidebar-width distance from the
+   * toolbar's start boundary. A .devtools-toolbar has a 3px start padding
+   * and the preceeding .take-snapshot button is exactly 32px.
+   */
+  margin-inline-start: calc(var(--sidebar-width) - 3px - 32px);
+  border-inline-start: 1px solid var(--theme-splitter-color);
+  padding-inline-start: 5px;
+}
+
 .devtools-toolbar > .toolbar-group > label {
   /**
    * Flex: contains form controls and text, which need to be laid out
@@ -90,10 +101,12 @@ html, body, #app, #memory-tool {
   margin-inline-end: 5px;
 }
 
+.devtools-button.take-snapshot::before, /* Firefox 44.0a2 --johnGraciliano */
 #take-snapshot::before {
   background-image: url(images/command-screenshot.png);
 }
 @media (min-resolution: 1.1dppx) {
+  .devtools-button.take-snapshot::before, /* Firefox 44.0a2 --johnGraciliano */
   #take-snapshot::before {
     background-image: url(images/command-screenshot@2x.png);
   }
@@ -114,6 +127,10 @@ html, body, #app, #memory-tool {
 #filter {
   align-self: stretch;
   margin: 2px;
+}
+
+#filter::-moz-placeholder {
+  font-style: oblique;
 }
 
 /**
@@ -244,6 +261,14 @@ html, body, #app, #memory-tool {
   background-color: var(--theme-body-background);
   margin: 20px;
   padding: 20px;
+}
+
+/* Two extra rules because no rule matches in toolbars.css --johnGraciliano */
+.theme-dark .devtools-toolbarbutton.take-snapshot:hover {
+  background: rgba(0, 0, 0, .3); /* Splitters */
+}
+.theme-light .devtools-toolbarbutton.take-snapshot:hover {
+  background: rgba(170, 170, 170, .3); /* Splitters */
 }
 
 /**
