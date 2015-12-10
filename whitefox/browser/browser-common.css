@@ -4994,7 +4994,7 @@ notification[value="loop-sharing-notification"] .messageImage {
   -moz-appearance: none;
   display: -moz-box;
   background-color: transparent;
-  list-style-image: url("chrome://browser/skin/devtools/dropmarker.svg");
+  list-style-image: url("chrome://browser/skin/devtools/images/dropmarker.svg");
   -moz-box-align: center;
   border-width: 0;
   min-width: 16px;
@@ -5020,7 +5020,7 @@ notification[value="loop-sharing-notification"] .messageImage {
 .devtools-responsiveui-toolbarbutton[type=menu] > .toolbarbutton-menu-dropmarker,
 .devtools-responsiveui-toolbarbutton[type=menu-button] > .toolbarbutton-menubutton-dropmarker {
   -moz-appearance: none !important;
-  list-style-image: url("chrome://browser/skin/devtools/dropmarker.svg");
+  list-style-image: url("chrome://browser/skin/devtools/images/dropmarker.svg");
   -moz-box-align: center;
   padding: 0 3px;
 }
@@ -5031,25 +5031,25 @@ notification[value="loop-sharing-notification"] .messageImage {
 }
 
 .devtools-responsiveui-close {
-  list-style-image: url("chrome://browser/skin/devtools/close.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/close.png");
 }
 
 .devtools-responsiveui-rotate {
-  list-style-image: url("chrome://browser/skin/devtools/responsiveui-rotate.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-rotate.png");
 }
 
 @media (min-resolution: 1.25dppx) {
   .devtools-responsiveui-close {
-    list-style-image: url("chrome://browser/skin/devtools/close@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/close@2x.png");
   }
 
   .devtools-responsiveui-rotate {
-    list-style-image: url("chrome://browser/skin/devtools/responsiveui-rotate@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-rotate@2x.png");
   }
 }
 
 .devtools-responsiveui-touch {
-  list-style-image: url("chrome://browser/skin/devtools/responsiveui-touch.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-touch.png");
   -moz-image-region: rect(0px,16px,16px,0px);
 }
 
@@ -5059,7 +5059,7 @@ notification[value="loop-sharing-notification"] .messageImage {
 
 @media (min-resolution: 1.25dppx) {
   .devtools-responsiveui-touch {
-    list-style-image: url("chrome://browser/skin/devtools/responsiveui-touch@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-touch@2x.png");
     -moz-image-region: rect(0px,32px,32px,0px);
   }
 
@@ -5069,12 +5069,12 @@ notification[value="loop-sharing-notification"] .messageImage {
 }
 
 .devtools-responsiveui-screenshot {
-  list-style-image: url("chrome://browser/skin/devtools/responsiveui-screenshot.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-screenshot.png");
 }
 
 @media (min-resolution: 1.25dppx) {
   .devtools-responsiveui-screenshot {
-    list-style-image: url("chrome://browser/skin/devtools/responsiveui-screenshot@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-screenshot@2x.png");
   }
 }
 
@@ -5084,7 +5084,7 @@ notification[value="loop-sharing-notification"] .messageImage {
   cursor: ew-resize;
   transform: translate(12px, -12px);
   background-size: cover;
-  background-image: url("chrome://browser/skin/devtools/responsive-vertical-resizer.png");
+  background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-vertical-resizer.png");
 }
 
 .devtools-responsiveui-resizebarH {
@@ -5093,7 +5093,7 @@ notification[value="loop-sharing-notification"] .messageImage {
   cursor: ns-resize;
   transform: translate(-12px, 12px);
   background-size: cover;
-  background-image: url("chrome://browser/skin/devtools/responsive-horizontal-resizer.png");
+  background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-horizontal-resizer.png");
 }
 
 .devtools-responsiveui-resizehandle {
@@ -5102,7 +5102,7 @@ notification[value="loop-sharing-notification"] .messageImage {
   cursor: se-resize;
   transform: translate(12px, 12px);
   background-size: cover;
-  background-image: url("chrome://browser/skin/devtools/responsive-se-resizer.png");
+  background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-se-resizer.png");
 }
 
 /* FxOS custom mode with additional buttons and phone look'n feel */
@@ -5149,7 +5149,7 @@ notification[value="loop-sharing-notification"] .messageImage {
 .devtools-responsiveui-home-button {
   width: 40px;
   height: 30px;
-  list-style-image: url("chrome://browser/skin/devtools/responsiveui-home.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/responsivemode/responsiveui-home.png");
 }
 
 .devtools-responsiveui-sleep-button {
@@ -5206,15 +5206,15 @@ notification[value="loop-sharing-notification"] .messageImage {
 
 @media (min-resolution: 1.25dppx) {
   .devtools-responsiveui-resizebarV {
-    background-image: url("chrome://browser/skin/devtools/responsive-vertical-resizer@2x.png");
+    background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-vertical-resizer@2x.png");
   }
 
   .devtools-responsiveui-resizebarH {
-    background-image: url("chrome://browser/skin/devtools/responsive-horizontal-resizer@2x.png");
+    background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-horizontal-resizer@2x.png");
   }
 
   .devtools-responsiveui-resizehandle {
-    background-image: url("chrome://browser/skin/devtools/responsive-se-resizer@2x.png");
+    background-image: url("chrome://browser/skin/devtools/images/responsivemode/responsive-se-resizer@2x.png");
   }
 }
 /* Box model highlighter */
@@ -5393,7 +5393,7 @@ svg|line.css-transform-line {
 
 :root[devtoolstheme="light"] #developer-toolbar > toolbarbutton:not([checked=true]) > image,
 :root[devtoolstheme="light"] .gclitoolbar-input-node:not([focused=true])::before  {
-  filter: url("chrome://browser/skin/devtools/filters.svg#invert");
+  filter: invert(1);
 }
 
 .developer-toolbar-button > .toolbarbutton-icon,
@@ -5403,7 +5403,7 @@ svg|line.css-transform-line {
 }
 
 #developer-toolbar-toolbox-button {
-  list-style-image: url("chrome://browser/skin/devtools/toggle-tools.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/toggle-tools.png");
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
@@ -5425,7 +5425,7 @@ svg|line.css-transform-line {
 
 @media (min-resolution: 1.1dppx) {
   #developer-toolbar-toolbox-button {
-    list-style-image: url("chrome://browser/skin/devtools/toggle-tools@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/toggle-tools@2x.png");
     -moz-image-region: rect(0px, 32px, 32px, 0px);
   }
 
@@ -5443,7 +5443,7 @@ svg|line.css-transform-line {
 }
 
 #developer-toolbar-closebutton {
-  list-style-image: url("chrome://browser/skin/devtools/close.png");
+  list-style-image: url("chrome://browser/skin/devtools/images/close.png");
   -moz-appearance: none;
   border: none;
   margin: 0 4px;
@@ -5454,7 +5454,7 @@ svg|line.css-transform-line {
 
 @media (min-resolution: 1.1dppx) {
   #developer-toolbar-closebutton {
-    list-style-image: url("chrome://browser/skin/devtools/close@2x.png");
+    list-style-image: url("chrome://browser/skin/devtools/images/close@2x.png");
   }
 }
 
@@ -5533,7 +5533,7 @@ html|*#gcli-output-frame {
   width: 16px;
   height: 16px;
   margin: 0 2px;
-  background-image: url("chrome://browser/skin/devtools/commandline-icon.png");
+  background-image: url("chrome://browser/skin/devtools/images/commandline-icon.png");
   background-position: 0 center;
   background-size: 32px 16px;
 }
@@ -5544,7 +5544,7 @@ html|*#gcli-output-frame {
 
 @media (min-resolution: 1.1dppx) {
   .gclitoolbar-input-node::before {
-    background-image: url("chrome://browser/skin/devtools/commandline-icon@2x.png");
+    background-image: url("chrome://browser/skin/devtools/images/commandline-icon@2x.png");
   }
 }
 
