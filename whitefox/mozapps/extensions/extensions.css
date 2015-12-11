@@ -289,7 +289,7 @@
   list-style-image: url("chrome://mozapps/skin/extensions/addons.svg#recent");
 }
 #category-userstyle > .category-icon {
-  list-style-image: url("chrome://mozapps/skin/extensions/addons.svg#userstyle") !important;
+  list-style-image: url("chrome://mozapps/skin/extensions/addons.svg#userstyles") !important;
 }
 
 /*** header ***/
