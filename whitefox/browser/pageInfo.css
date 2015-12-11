@@ -10,22 +10,23 @@
 }
 
 #viewGroup > radio {
-  list-style-image: url("chrome://browser/skin/pageInfo.png");
   -moz-box-orient: vertical;
   -moz-box-align: center;
   -moz-appearance: none;
-  padding: 5px 3px 1px 3px;
-  margin: 0 1px;
-  min-width: 4.5em;
+  padding: 5px 3px 1px;
+  margin: 0;
+  min-width: 60px;
+  border: 1px solid transparent;
 }
 
 #viewGroup > radio:hover {
-  background-color: #E0E8F6;
+  background-color: hsla(210,4%,10%,.05);
   color: black;
 }
 
 #viewGroup > radio[selected="true"] {
-  background-color: #C1D2EE;
+  border-color: hsla(210,4%,10%,.11);
+  background-color: hsla(210,4%,10%,.08);
   color: black;
 }
 
@@ -37,43 +38,24 @@
 }
 
 #generalTab {
-  -moz-image-region: rect(0px, 32px, 32px, 0px)
-}
-
-#generalTab:hover, #generalTab[selected="true"] {
-  -moz-image-region: rect(32px, 32px, 64px, 0px)
+  list-style-image: url("chrome://browser/skin/preferences/in-content/icons32.svg#content");
 }
 
 #mediaTab {
-  -moz-image-region: rect(0px, 64px, 32px, 32px)
-}
-
-#mediaTab:hover, #mediaTab[selected="true"] {
-  -moz-image-region: rect(32px, 64px, 64px, 32px)
+  list-style-image: url("chrome://browser/skin/preferences/in-content/icons32.svg#applications");
 }
 
 #feedTab {
-  -moz-image-region: rect(0px, 96px, 32px, 64px)
-}
-
-#feedTab:hover, #feedTab[selected="true"] {
-  -moz-image-region: rect(32px, 96px, 64px, 64px)
+  list-style-image: url("chrome://browser/skin/menuPanel.png");
+  -moz-image-region: rect(0px, 416px, 32px, 384px);
 }
 
 #permTab {
-  -moz-image-region: rect(0px, 128px, 32px, 96px)
-}
-
-#permTab:hover, #permTab[selected="true"] {
-  -moz-image-region: rect(32px, 128px, 64px, 96px)
+  list-style-image: url("chrome://browser/skin/preferences/in-content/icons32.svg#general");
 }
 
 #securityTab {
-  -moz-image-region: rect(0px, 160px, 32px, 128px)
-}
-
-#securityTab:hover, #securityTab[selected="true"] {
-  -moz-image-region: rect(32px, 160px, 64px, 128px)
+  list-style-image: url("chrome://browser/skin/preferences/in-content/icons32.svg#security");
 }
 
 deck {

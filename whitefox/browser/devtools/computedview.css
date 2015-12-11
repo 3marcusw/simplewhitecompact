@@ -20,6 +20,12 @@ body {
   height: 100%;
 }
 
+#browser-style-checkbox {
+  /* Bug 1200073 - extra space before the browser styles checkbox so
+     they aren't squished together in a small window. */
+  -moz-margin-start: 5px;
+}
+
 #propertyContainer {
   -moz-user-select: text;
   overflow: auto;
@@ -56,14 +62,14 @@ body {
 }
 
 .property-value, .other-property-value {
-  background-image: url(arrow-e.png);
+  background-image: url(images/arrow-e.png);
   background-repeat: no-repeat;
   background-size: 5px 8px;
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.1dppx) {
   .property-value, .other-property-value {
-    background-image: url(arrow-e@2x.png);
+    background-image: url(images/arrow-e@2x.png);
   }
 }
 
@@ -124,11 +130,6 @@ body {
   border-bottom-width: 1px;
 }
 
-/* This rule is necessary because Templater.jsm breaks LTR TDs in RTL docs */
-.rule-text {
-  direction: ltr;
-}
-
 .matched {
   text-decoration: line-through;
 }
@@ -153,12 +154,14 @@ body {
 
 #root .devtools-toolbar {
   width: 100%;
-  border-bottom-width: 0;
-}
-/* The following adds compatibility with Firefox 40+ but does not break with previous versions --johnGraciliano */
-#root:first-child > .devtools-toolbar{
   display: flex;
-  border-bottom-width: 1px;
+}
+
+
+#propertyContainer ~ #root > .devtools-toolbar{ /* Firefox 39 and earlier --johnGraciliano */
+  display: -moz-box;
+  border-bottom-width: 0px;
+  border-top-width: 1px;
 }
 
 .link {
@@ -188,9 +191,9 @@ body {
 
 .computedview-colorswatch {
   border-radius: 50%;
-  width: 1em;
-  height: 1em;
-  vertical-align: text-top;
+  width: 0.9em;
+  height: 0.9em;
+  vertical-align: middle;
   -moz-margin-end: 5px;
   display: inline-block;
   position: relative;

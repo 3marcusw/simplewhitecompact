@@ -67,14 +67,7 @@
 .stylesheet-sidebar {
   max-width: 400px;
   min-width: 100px;
-}
-
-.theme-light .stylesheet-sidebar {
-  border-color: #aaa; /* Splitters */
-}
-
-.theme-dark .stylesheet-sidebar {
-  border-color: #000;  /* Splitters */
+  border-color: var(--theme-splitter-color);
 }
 
 .theme-light .media-rule-label {
@@ -106,7 +99,7 @@
 .stylesheet-enabled {
   padding: 8px 0;
   margin: 0 8px;
-  background-image: url(itemToggle.png);
+  background-image: url(images/itemToggle.png);
   background-repeat: no-repeat;
   background-clip: content-box;
   background-position: 0 8px;
@@ -115,9 +108,9 @@
   height: 40px;
 }
 
-@media (min-resolution: 2dppx) {
+@media (min-resolution: 1.1dppx) {
   .stylesheet-enabled {
-    background-image: url(itemToggle@2x.png);
+    background-image: url(images/itemToggle@2x.png);
   }
 }
 
@@ -127,7 +120,7 @@
 
 /* Invert all toggle icons but the one in the active row for light theme */
 .theme-light .splitview-nav > li:not(.splitview-active) .stylesheet-enabled {
-  filter: url(filters.svg#invert);
+  filter: invert(1);
 }
 
 .splitview-nav > li > .stylesheet-enabled:focus,

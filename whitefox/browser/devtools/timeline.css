@@ -8,12 +8,12 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #record-button {
-  list-style-image: url(profiler-stopwatch.svg);
+  list-style-image: url(./images/profiler-stopwatch.svg);
   min-width: 24px;
 }
 
 #record-button[checked] {
-  list-style-image: url(profiler-stopwatch-checked.svg);
+  list-style-image: url(./images/profiler-stopwatch-checked.svg);
 }
 
 #record-button:not([checked]) ~ #record-label {
@@ -25,16 +25,7 @@
 }
 
 #filter-button {
-  list-style-image: url(timeline-filter.svg#filter);
-  min-width: 24px;
-}
-
-#filter-button[disabled] {
-  list-style-image: url(timeline-filter.svg#filter-disabled);
-}
-
-#filter-button[open] {
-  list-style-image: url(timeline-filter.svg#filter-open);
+  list-style-image: url(./images/timeline-filter.svg);
 }
 
 #timelineFilterPopup > menuitem:before {
@@ -69,12 +60,12 @@
   min-width: 30px;
   min-height: 28px;
   margin: 0;
-  list-style-image: url(profiler-stopwatch.svg);
+  list-style-image: url(./images/profiler-stopwatch.svg);
 }
 
 #empty-notice button[checked],
 #recording-notice button[checked] {
-  list-style-image: url(profiler-stopwatch-checked.svg);
+  list-style-image: url(./images/profiler-stopwatch-checked.svg);
 }
 
 #empty-notice button .button-text,

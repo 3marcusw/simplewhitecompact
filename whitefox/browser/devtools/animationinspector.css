@@ -39,9 +39,9 @@ body {
    containing playback control buttons, shown only when there are animations
    displayed in the timeline */
 
+#toolbar,
 #global-toolbar,
-#timeline-toolbar,
-#toolbar {
+#timeline-toolbar {
   border-bottom: 1px solid var(--theme-splitter-color);
   display: flex;
   flex-direction: row;
@@ -52,6 +52,7 @@ body {
 
 #timeline-toolbar {
   display: none;
+  justify-content: flex-start;
 }
 
 [timeline] #global-toolbar {
@@ -62,16 +63,13 @@ body {
   display: flex;
 }
 
-#global-toolbar .label {
-  padding: 1px 4px;
-}
-
 #toolbar .label {
   padding: 1px 4px;
 }
 
 #toggle-all {
-  border-width: 0 0 0 1px;
+  -moz-border-start-style: solid;
+  -moz-border-start-width: 1px;
   min-height: 20px;
 }
 
@@ -102,64 +100,76 @@ body {
   display: block;
 }
 
-/* Element picker and toggle-all buttons */
+/* Element picker, toggle-all buttons, timeline pause button, ... */
 
-#global-toolbar .devtools-button,
-#timeline-toolbar .devtools-button {
-  border-width: 0 0 0 1px;
+#global-toolbar > *,
+#timeline-toolbar > * {
   min-height: var(--toolbar-height);
+  border-width: 0;
+  -moz-border-start-width: 1px;
+  border-inline-start-width: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.devtools-button,
-#element-picker,
-#toggle-all {
-  position: relative;
+#global-toolbar .label,
+#timeline-toolbar .label {
+  padding: 0 5px;
+  border-style: solid;
+  border-color: rgba(170, 170, 170, .5);
 }
 
-.devtools-button::before,
-#element-picker::before,
-#toggle-all::before {
-  content: "";
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -8px 0 0 -8px;
-  background-image: url("chrome://browser/skin/devtools/command-pick.png");
+#timeline-toolbar .devtools-button,
+#timeline-toolbar .label {
+  border-width: 0;
+  -moz-border-end-width: 1px;
+  border-inline-end-width: 1px;
 }
 
-.pause-button::before,
-#toggle-all::before {
-  background-image: url("debugger-pause.png");
+#element-picker::before {
+  background-image: url("./images/command-pick.png");
 }
 
-#element-picker[checked]::before {
-  background-position: -48px 0;
-  filter: none; /* Icon is blue when checked, don't invert for light theme */
+#toggle-all::before,
+.pause-button::before {
+  background-image: url("images/debugger-pause.png");
 }
 
-.pause-button.paused::before,
-#toggle-all.paused::before {
-  background-image: url("debugger-play.png");
+#rewind-timeline::before {
+  background-image: url("images/rewind.png");
+}
+
+#toggle-all.paused::before,
+.pause-button.paused::before {
+  background-image: url("images/debugger-play.png");
 }
 
 @media (min-resolution: 1.1dppx) {
   #element-picker::before {
-    background-image: url("chrome://browser/skin/devtools/command-pick@2x.png");
-    background-size: 64px;
+    background-image: url("./images/command-pick@2x.png");
   }
 
-  .pause-button::before,
-  #toggle-all::before {
-    background-image: url("debugger-pause@2x.png");
+  #toggle-all::before,
+  .pause-button::before {
+    background-image: url("images/debugger-pause@2x.png");
   }
 
-  .pause-button.paused::before,
-  #toggle-all.paused::before {
-    background-image: url("debugger-play@2x.png");
+  #toggle-all.paused::before,
+  .pause-button.paused::before {
+    background-image: url("images/debugger-play@2x.png");
   }
+
+  #rewind-timeline::before {
+    background-image: url("images/rewind@2x.png");
+  }
+}
+
+#timeline-rate select {
+  -moz-appearance: none;
+  text-align: center;
+  color: inherit;
+  font-family: inherit;
 }
 
 /* Disabled playerWidget when the animation has ended */
@@ -176,24 +186,39 @@ body {
   overflow: hidden;
   position: relative;
   /* The timeline gets its background-image from a canvas element created in
-     /browser/devtools/animationinspector/utils.js drawGraphElementBackground
+     /devtools/client/animationinspector/utils.js drawGraphElementBackground
      thanks to document.mozSetImageElement("time-graduations", canvas)
      This is done so that the background can be built dynamically from script */
   background-image: -moz-element(#time-graduations);
   background-repeat: repeat-y;
-  /* The animations are drawn 150px from the left edge so that animated nodes
-     can be displayed in a sidebar */
+  /* Make the background be 100% of the timeline area so that it resizes with
+     it*/
+  background-size: calc(100% - var(--timeline-sidebar-width)) 100%;
   background-position: var(--timeline-sidebar-width) 0;
   display: flex;
   flex-direction: column;
 }
 
+.animation-timeline .scrubber-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--timeline-sidebar-width);
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .animation-timeline .scrubber {
   position: absolute;
   height: 100%;
-  width: var(--timeline-sidebar-width);
+  width: 0;
   border-right: 1px solid red;
   box-sizing: border-box;
+}
+
+.animation-timeline > div.scrubber { /* For the unwrapped scrubber before Firefox 45.0a1 --johnGraciliano */
+  width: var(--timeline-sidebar-width);
   z-index: 1;
   pointer-events: none;
 }
@@ -209,13 +234,26 @@ body {
   border-right: 5px solid transparent;
 }
 
+/* The scrubber handle is a transparent element displayed on top of the scrubber
+   line that allows users to drag it */
+.animation-timeline .scrubber .scrubber-handle {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  /* Make it thick enough for easy dragging */
+  width: 6px;
+  right: -3px;
+  cursor: col-resize;
+  pointer-events: all;
+}
+
 .animation-timeline .time-header {
   margin-left: var(--timeline-sidebar-width);
   min-height: var(--toolbar-height);
   overflow: hidden;
   position: relative;
   /* This is the same color as the time graduations in
-     browser/devtools/animationinspector/utils.js */
+     devtools/client/animationinspector/utils.js */
   border-bottom: 1px solid rgba(128, 136, 144, .5);
   cursor: col-resize;
   -moz-user-select: none;
@@ -238,13 +276,17 @@ body {
 /* Animation block widgets */
 
 .animation-timeline .animation {
-  margin: 4px 0;
+  padding: 2px 0;
   height: var(--timeline-animation-height);
   position: relative;
 }
 
 .animation-timeline .animation:nth-child(2n) {
   background-color: var(--even-animation-timeline-background-color);
+}
+
+.animation-timeline .animation.selected {
+  background-color: var(--theme-selection-background-semitransparent);
 }
 
 .animation-timeline .animation .target {
@@ -259,10 +301,11 @@ body {
 
 .animation-timeline .animation .time-block {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: var(--timeline-sidebar-width);
   right: 0;
-  height: 100%;
+  height: var(--timeline-animation-height);
+  cursor: pointer;
 }
 
 /* Animation iterations */
@@ -336,6 +379,13 @@ body {
   padding: 0 2px;
 }
 
+.animation-timeline .fast-track .name {
+  /* Animations running on the compositor have the fast-track background image*/
+  background-image: url("images/animation-fast-track.svg");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 5px) center;
+}
+
 .animation-timeline .animation .delay {
   position: absolute;
   top: 0;
@@ -371,25 +421,30 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .animation-target .attribute-name {
   padding-left: 4px;
 }
 
-.animation-target .node-selector {
-  background: url("chrome://browser/skin/devtools/vview-open-inspector.png") no-repeat 0 0;
+.animation-target .node-selector,
+.animation-target .node-highlighter {
+  background: url("./images/vview-open-inspector.png") no-repeat 0 0;
   padding-left: 16px;
   margin-right: 5px;
   cursor: pointer;
 }
 
-.animation-target .node-selector:hover {
-  background-position: -32px 0;
+.animation-target .node-selector:hover,
+.animation-target .node-highlighter:hover {
+  filter: url(images/filters.svg#checked-icon-state);
 }
 
-.animation-target .node-selector:active {
-  background-position: -16px 0;
+.animation-target .node-selector:active,
+.animation-target .node-highlighter:active,
+.animation-target .node-highlighter.selected {
+  filter: url(images/filters.svg#checked-icon-state) brightness(0.9);
 }
 
 /* Animation title gutter, contains the name, duration, iteration */
@@ -412,7 +467,7 @@ body {
 
 .animation-title .meta-data .compositor-icon {
     display: none;
-    background-image: url("animation-fast-track.svg");
+    background-image: url("images/animation-fast-track.svg");
     background-repeat: no-repeat;
     padding-left: 12px;
     /* Make sure the icon is positioned above the timeline range input so that
@@ -434,48 +489,50 @@ body {
 .timeline .playback-controls {
   display: flex;
   flex-direction: row;
+  background-color: var(--theme-toolbar-background);
 }
 
 /* Playback control buttons */
 
-.timeline .playback-controls button {
+.timeline .playback-controls .devtools-button {
   flex-grow: 1;
-  border-width: 0 1px 0 0;
+  -moz-border-end-style: solid;
+  -moz-border-end-width: 1px;
 }
 
 .timeline .toggle::before {
-  background-image: url(debugger-pause.png);
+  background-image: url(./images/debugger-pause.png);
 }
 
 .paused .timeline .toggle::before,
 .finished .timeline .toggle::before {
-  background-image: url(debugger-play.png);
+  background-image: url(./images/debugger-play.png);
 }
 
 .timeline .ff::before {
-  background-image: url(fast-forward.png);
+  background-image: url(./images/fast-forward.png);
 }
 
 .timeline .rw::before {
-  background-image: url(rewind.png);
+  background-image: url(./images/rewind.png);
 }
 
 @media (min-resolution: 1.1dppx) {
   .timeline .toggle::before {
-    background-image: url(debugger-pause@2x.png);
+    background-image: url(./images/debugger-pause@2x.png);
   }
 
   .paused .timeline .toggle::before,
   .finished .timeline .toggle::before {
-    background-image: url(debugger-play@2x.png);
+    background-image: url(./images/debugger-play@2x.png);
   }
 
   .timeline .ff::before {
-    background-image: url(fast-forward@2x.png);
+    background-image: url(./images/fast-forward@2x.png);
   }
 
   .timeline .rw::before {
-    background-image: url(rewind@2x.png);
+    background-image: url(./images/rewind@2x.png);
   }
 }
 
