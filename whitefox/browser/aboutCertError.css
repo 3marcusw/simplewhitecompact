@@ -70,3 +70,61 @@ h2 {
 .expander[collapsed] > button:-moz-dir(rtl) {
   background-image: url("chrome://browser/skin/aboutCertError_sectionCollapsed-rtl.png");
 }
+
+
+#buttonContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+#buttonSpacer {
+  flex: 0;
+}
+
+#certificateErrorDebugInformation {
+  display: none;
+  background-color: var(--in-content-box-background-hover) !important;
+  border-top: 1px solid var(--in-content-border-color);
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  width: 65%;
+  padding: 1em 17.5%;
+}
+
+#certificateErrorText {
+  font-family: monospace;
+  white-space: pre-wrap;
+  padding: 1em 0;
+}
+
+#errorCode {
+  white-space: nowrap;
+}
+
+#returnButton {
+  min-width: 150px;
+  margin-inline-start: 0;
+  margin-inline-end: 1ex;
+}
+
+#advancedButton {
+  min-width: 150px;
+}
+
+/* Advanced section is hidden via inline styles until the link is clicked */
+#advancedPanel {
+  border: 1px lightgray solid;
+  background-color: white;
+  /* Don't use top padding because the default p style has top padding, and it
+   * makes the overall div look uneven */
+  padding: 0 12px 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 4px #ddd;
+  font-size: 0.9em;
+}
+
+.hostname {
+  font-weight: bold;
+}
