@@ -77,8 +77,7 @@
 /* PANEL */
 
 #identity-popup,
-#identity-popup:not([panelopen]) .panel-viewstack[viewtype="main"]:not([transitioning]) #identity-popup-mainView,
-.panel-viewstack[viewtype="main"]:not([transitioning]) > .panel-mainview[panelid=identity-popup] > #identity-popup-mainView {
+#identity-popup:not([panelopen]) .panel-viewstack[viewtype="main"]:not([transitioning]) #identity-popup-mainView {
   /* Tiny hack to ensure the panel shrinks back to its original
      size after closing a subview that is bigger than the main view. */
   max-height: 0;
@@ -373,12 +372,21 @@ description#identity-popup-content-verifier,
   background-image: url(chrome://browser/skin/controlcenter/permissions.svg);
 }
 
-#identity-popup-permission-list {
+#identity-popup-permission-list:not(:empty) {
   margin-top: 5px;
+}
+
+#identity-popup-permission-list:not(:empty) + description {
+  display: none;
 }
 
 .identity-popup-permission-label {
   -moz-margin-start: 0;
+}
+
+#identity-popup-permission-list menulist,
+#identity-popup-permission-list menupopup{
+  min-width: 60px;
 }
 
 /* FOOTER BUTTONS */
