@@ -198,6 +198,10 @@ treecol {
   flex-grow: 1;
 }
 
+#separateProfileBox {
+ -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
+}
+
 #useFirefoxSync  {
   font-size: 90%;
   -moz-margin-end: calc(1.5em - 6px) !important; /* it was 8px --johnGraciliano */
@@ -280,6 +284,10 @@ treecol {
   margin-top: 0;
 }
 
+#locationBarGroup .groupbox-body {
+ -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
+}
+
 /* Collapse the non-active vboxes in decks to use only the height the
    active vbox needs */
 #historyPane:not([selectedIndex="1"]) > #historyDontRememberPane,
@@ -326,6 +334,17 @@ description > html|a {
   /* center the links */
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+#encryptionPanel {
+ -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
+}
+
+#certSelection {
+  -moz-box-align: start; /* --johnGraciliano */
+}
+#certSelection radio:not(:last-of-type) {
+  -moz-margin-end: 1.5em; /* Fix for Firefox 37 Only --johnGraciliano */
 }
 
 .indent {

@@ -157,8 +157,8 @@ xul|tabpanels {
 
 xul|tabs {
   position:relative;
-  margin-top: 4px;
-  margin-bottom: 15px;
+  margin: 8px 0 15px;
+  -moz-margin-end: 4px;
   border: 0;
   border-bottom: 1px solid #c1c1c1;
 }
@@ -351,22 +351,28 @@ xul|button[type="menu"] > xul|*.button-box > xul|*.button-menu-dropmarker {
 }
 
 xul|*.help-button {
-  min-width: 30px;
-  border-radius: 50%;
-  border: 1px solid #424e5a;
-  background: initial;
-  list-style-image: url("chrome://global/skin/in-content/help-glyphs.svg#q-mark");
+  min-width: 16px;
+  -moz-margin-end: 0;
+  border-width: 0;
+  background-image: none;
+  /* Override default button background */
+  background-color: transparent;
+  box-shadow: none;
+  list-style-image: url("chrome://global/skin/in-content/help-glyph.svg#help");
 }
 
-xul|*.help-button:not([disabled="true"]):hover:not(:active) {
-  background: initial;
-  border-color: -moz-dialogText; /* #000 */
-  list-style-image: url("chrome://global/skin/in-content/help-glyphs.svg#q-native");
+xul|*.help-button:not([disabled="true"]):hover {
+  background-image: none;
+  /* Override default button background */
+  background-color: transparent;
+  list-style-image: url("chrome://global/skin/in-content/help-glyph.svg#help-hover");
 }
 
 xul|*.help-button:not([disabled="true"]):hover:active {
-  background: initial;
-  opacity: .7;
+  background-image: none;
+  /* Override default button background */
+  background-color: transparent;
+  list-style-image: url("chrome://global/skin/in-content/help-glyph.svg#help-pressed");
 }
 
 xul|*.close-icon > xul|*.button-box,
@@ -384,6 +390,28 @@ xul|*.help-button > xul|*.button-box > xul|*.button-icon {
 
 xul|*.help-button > xul|*.button-box > xul|*.button-text {
   display: none;
+}
+
+/* Special dimensions for the help button in the options page  --johnGraciliano */
+script[src$="preferences.js"] ~ stack  *|button.help-button {
+  position: relative;
+  z-index: 1;
+  height: unset;
+  margin: -1px;
+  -moz-margin-end: 0;
+}
+
+/* Reposition the help buttom from the bottom to the top of the options page  --johnGraciliano */
+script[src$="preferences.js"] ~ stack  .main-content{
+  position: relative;
+}
+script[src$="preferences.js"] ~ stack  .main-content > hbox:last-child {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  top: 15px;
+  max-width: calc(100% - 96px);
+  width: 796px ;
 }
 
 xul|*.spinbuttons-button {
@@ -640,6 +668,7 @@ xul|*.radio-label-box {
 xul|*#categories {
   -moz-appearance: none;
   position: relative;
+  z-index: 1;
   background-color: transparent;
   margin: 0;
   -moz-margin-start: 4px;
@@ -678,8 +707,8 @@ xul|*.category[selected] {
 }
 
 xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[current] {
-  border-top: 1px #ffffff dotted;
-  border-bottom: 1px #ffffff dotted;
+  border: 1px #999 dotted;
+  -moz-border-end: 1px solid #E8E8E8;
 }
 
 *|*.category-name {
@@ -704,12 +733,6 @@ xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[cur
 }
 
 /* header */
-/**  No headers in the options page --johnGraciliano ****/
-/* @-moz-document url-prefix("about:preferences"){ */
-  /* xul|page[title="Options"] > */ script[src$="preferences.js"] ~ stack  hbox.header {
-    display: none;
-  }
-/* } */
 
 *|*.header {
   border-bottom: 1px solid #c8c8c8;
@@ -724,6 +747,20 @@ xul|*#categories[keyboard-navigation="true"]:-moz-focusring > xul|*.category[cur
   line-height: 40px;
   margin: 0;
   -moz-user-select: none;
+}
+
+/*  No text headers in the options page, but a smaller space for the help button  --johnGraciliano */
+script[src$="preferences.js"] ~ stack .header{
+  border: none;
+  margin: -10px 0 -7px;
+  -moz-margin-end: 4px; /* add the 4px end-margin of other elements */
+  padding-bottom: 0;
+}
+script[src$="preferences.js"] ~ stack .header-name{
+  height: 18px;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
 }
 
 /* File fields */
