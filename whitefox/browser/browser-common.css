@@ -629,17 +629,45 @@ toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarke
   list-style-image: url(chrome://browser/skin/Toolbar-inverted.png);
 }
 
-#back-button {
+/* Force CTR buttons to use our icons instead */
+:-moz-any(#ctraddon_back-button, #ctraddon_forward-button, #ctraddon_go-button, #ctraddon_reload-button, #ctraddon_stop-button, #ctraddon_history-menu-toolbar-button, #ctraddon_history-button, #ctraddon_bookmarks-menu-toolbar-button) {
+  list-style-image: url("chrome://browser/skin/Toolbar.png") !important;
+}
+
+toolbar[brighttext] :-moz-any(#ctraddon_back-button, #ctraddon_forward-button, #ctraddon_go-button, #ctraddon_reload-button, #ctraddon_stop-button, #ctraddon_history-menu-toolbar-button, #ctraddon_history-button, #ctraddon_bookmarks-menu-toolbar-button) {
+  list-style-image: url("chrome://browser/skin/Toolbar-inverted.png") !important;
+}
+
+#ctraddon_puib_separator {
+  /* Make the PanelUI separator more theme-native */
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(200, 200, 200)) !important;
+  background-size: 1px 20px !important;
+}
+
+#back-button,
+#ctraddon_back-button {
   -moz-image-region: rect(0, 36px, 18px, 18px);
 }
 
-#forward-button {
+#forward-button,
+#ctraddon_forward-button,
+#ctraddon_go-button[cui-areatype="toolbar"] {
   -moz-image-region: rect(0, 72px, 18px, 54px);
 }
 
 #forward-button:-moz-locale-dir(rtl),
-#back-button:-moz-locale-dir(rtl) {
+#ctraddon_forward-button:-moz-locale-dir(rtl),
+#back-button:-moz-locale-dir(rtl),
+#ctraddon_back-button:-moz-locale-dir(rtl) {
   transform: scaleX(-1);
+}
+
+#ctraddon_reload-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 90px, 18px, 72px);
+}
+
+#ctraddon_stop-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 108px, 18px, 90px);
 }
 
 #home-button[cui-areatype="toolbar"] {
@@ -654,11 +682,14 @@ toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarke
   -moz-image-region: rect(0, 162px, 18px, 144px);
 }
 
-#bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+#bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+#ctraddon_bookmarks-menu-toolbar-button[cui-areatype="toolbar"] {
   -moz-image-region: rect(0, 630px, 18px, 612px);
 }
 
-#history-panelmenu[cui-areatype="toolbar"] {
+#history-panelmenu[cui-areatype="toolbar"],
+#ctraddon_history-menu-toolbar-button[cui-areatype="toolbar"], 
+#ctraddon_history-button[cui-areatype="toolbar"] {
   -moz-image-region: rect(0, 180px, 18px, 162px);
 }
 
