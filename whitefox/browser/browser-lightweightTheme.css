@@ -1,0 +1,30 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+
+
+/*
+ * LightweightThemeListener will append the current lightweight theme's header
+ * image to the background-image for each of the following rulesets.
+ */
+
+/* Lightweight theme on tabs */
+.tabbrowser-tab[selected="true"]:-moz-lwtheme {
+  background-attachment: scroll, fixed;
+  background-color: transparent;
+  background-size:  calc(100% + 4px) calc(100% + 2px), auto auto;
+  background-position:  -2px -2px, right top;
+  background-repeat:  no-repeat, no-repeat;
+  background-origin:  padding-box;
+}
+
+.tabbrowser-tab[selected="true"]:-moz-lwtheme-darktext{
+  background-image: -moz-linear-gradient(rgba(250,250,250,.875), rgba(250,250,250,.875));/*, lwtHeader;*/
+}
+.tabbrowser-tab[selected="true"]:-moz-lwtheme-brighttext{
+  text-shadow: 1px 1px 1.5px black;
+  background-image:  -moz-linear-gradient(rgba(5,5,5,.875), rgba(5,5,5,.875));/*, lwtHeader;*/
+}
+
