@@ -494,7 +494,8 @@ a {
 .message .theme-twisty {
   display: inline-block;
   vertical-align: middle;
-  margin: 3px 3px 0 0;
+  margin: 3px 0 0 0;
+  flex-shrink: 0;
 }
 
 .stacktrace li {
@@ -579,6 +580,11 @@ a {
  * See http://hg.mozilla.org/mozilla-central/annotate/f38d6df93cad/toolkit/themes/winstripe/global/textbox-aero.css#l7
  */
 
-.hud-filter-box {
+:root[platform="win"] .hud-filter-box {
   width: 200px;
+}
+@media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
+  :root .hud-filter-box {
+    width: 200px;
+  }
 }

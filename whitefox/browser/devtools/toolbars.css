@@ -345,6 +345,12 @@ hbox > label + button:hover:not([checked=true]),
 :root[platform="mac"] .devtools-searchinput {
   border-radius: 20px;
 }
+@supports (-moz-osx-font-smoothing: auto) { /* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
+  :root .devtools-textinput,
+  :root .devtools-searchinput {
+    border-radius: 20px;
+  }
+}
 
 .devtools-searchinput {
   padding: 0;

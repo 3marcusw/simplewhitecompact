@@ -4,6 +4,23 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 
+:root[platform="mac"] #inspector-toolbar:-moz-locale-dir(ltr) {
+  padding-left: 2px;
+}
+
+:root[platform="mac"] #inspector-toolbar:-moz-locale-dir(rtl) {
+  padding-left: 4px;
+}
+
+@supports (-moz-osx-font-smoothing: auto) { /* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
+  :root #inspector-toolbar:-moz-locale-dir(ltr) {
+    padding-left: 2px;
+  }
+  :root #inspector-toolbar:-moz-locale-dir(rtl) {
+    padding-left: 4px;
+  }
+}
+
 #inspector-searchlabel {
   overflow: hidden;
 }
@@ -54,6 +71,14 @@
   cursor: pointer;
 }
 
+.event-header:first-child {
+  border-width: 0;
+}
+
+.event-header:not(:first-child) {
+  border-width: 1px 0 0 0;
+}
+
 .event-tooltip-event-type,
 .event-tooltip-filename,
 .event-tooltip-attributes {
@@ -87,8 +112,15 @@
 
 .event-tooltip-content-box {
   display: none;
-  overflow: auto;
+  height: 100px;
+  overflow: hidden;
   -moz-margin-end: 0;
+  border: 1px solid var(--theme-splitter-color);
+  border-width: 1px 0 0 0;
+}
+
+.event-toolbox-content-box iframe {
+  height: 100%;
 }
 
 .event-tooltip-content-box[open] {
