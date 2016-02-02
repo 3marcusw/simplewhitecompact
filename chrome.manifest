@@ -1,7 +1,8 @@
 skin browser simplewhitex whitefox/browser/
 skin mozapps simplewhitex whitefox/mozapps/
 skin global simplewhitex whitefox/global/
-skin devtools simplewhitex whitefox/browser/devtools/ appversion>=44.0a1
+##skin devtools simplewhitex whitefox/browser/devtools/ appversion>=44.0a1
+skin devtools simplewhitex whitefox/browser/devtools/ appversion<47.0a1
 
 skin ostarget simplewhitex whitefox/ostarget/general/
 skin ostarget simplewhitex whitefox/ostarget/darwin/ os=Darwin
@@ -16,36 +17,36 @@ skin apptarget simplewhitex whitefox/apptarget/38/ appversion>=38.0a1
 skin apptarget simplewhitex whitefox/apptarget/39/ appversion>=39.0a1
 
 
-override  chrome://devtools/skin/images/tool-inspector.svg        chrome://devtools/skin/tool-inspector.svg
-override  chrome://devtools/skin/images/tool-webconsole.svg       chrome://devtools/skin/tool-webconsole.svg
-override  chrome://devtools/skin/images/tool-debugger.svg         chrome://devtools/skin/tool-debugger.svg
-override  chrome://devtools/skin/images/tool-debugger-paused.svg  chrome://devtools/skin/tool-debugger-paused.svg
-override  chrome://devtools/skin/images/tool-styleeditor.svg      chrome://devtools/skin/tool-styleeditor.svg
-override  chrome://devtools/skin/images/tool-shadereditor.svg     chrome://devtools/skin/tool-shadereditor.svg
+override  chrome://devtools/skin/images/tool-inspector.svg        chrome://devtools/skin/tool-inspector.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-webconsole.svg       chrome://devtools/skin/tool-webconsole.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-debugger.svg         chrome://devtools/skin/tool-debugger.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-debugger-paused.svg  chrome://devtools/skin/tool-debugger-paused.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-styleeditor.svg      chrome://devtools/skin/tool-styleeditor.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-shadereditor.svg     chrome://devtools/skin/tool-shadereditor.svg           appversion<47.0a1
 ##
-override  chrome://devtools/skin/images/tool-canvas.svg           chrome://devtools/skin/tool-canvas.svg
-override  chrome://devtools/skin/images/tool-profiler.svg         chrome://devtools/skin/tool-profiler.svg
-override  chrome://devtools/skin/images/tool-profiler-active.svg  chrome://devtools/skin/tool-profiler-active.svg
+override  chrome://devtools/skin/images/tool-canvas.svg           chrome://devtools/skin/tool-canvas.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-profiler.svg         chrome://devtools/skin/tool-profiler.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-profiler-active.svg  chrome://devtools/skin/tool-profiler-active.svg           appversion<47.0a1
 ##
-override  chrome://devtools/skin/images/tool-memory.svg           chrome://devtools/skin/tool-memory.svg
+override  chrome://devtools/skin/images/tool-memory.svg           chrome://devtools/skin/tool-memory.svg           appversion<47.0a1
 ##
-override  chrome://devtools/skin/images/tool-memory-active.svg    chrome://devtools/skin/tool-memory-active.svg
-override  chrome://devtools/skin/images/tool-network.svg          chrome://devtools/skin/tool-network.svg
-override  chrome://devtools/skin/images/tool-storage.svg          chrome://devtools/skin/tool-storage.svg
-override  chrome://devtools/skin/images/tool-webaudio.svg         chrome://devtools/skin/tool-webaudio.svg
+override  chrome://devtools/skin/images/tool-memory-active.svg    chrome://devtools/skin/tool-memory-active.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-network.svg          chrome://devtools/skin/tool-network.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-storage.svg          chrome://devtools/skin/tool-storage.svg           appversion<47.0a1
+override  chrome://devtools/skin/images/tool-webaudio.svg         chrome://devtools/skin/tool-webaudio.svg           appversion<47.0a1
 
-override  chrome://devtools/skin/images/tool-scratchpad.svg       chrome://devtools/skin/tool-scratchpad.svg
+override  chrome://devtools/skin/images/tool-scratchpad.svg       chrome://devtools/skin/tool-scratchpad.svg           appversion<47.0a1
 
-override  chrome://devtools/skin/images/tool-options.svg          chrome://devtools/skin/tool-options.svg
+override  chrome://devtools/skin/images/tool-options.svg          chrome://devtools/skin/tool-options.svg           appversion<47.0a1
 
 ##  For Firefox 44.0a2 and similar only:
-override  chrome://devtools/skin/app-manager/images/default-app-icon.png  chrome://devtools/skin/app-manager/default-app-icon.png
-override  chrome://devtools/skin/app-manager/images/noise.png             chrome://devtools/skin/app-manager/noise.png
-override  chrome://devtools/skin/app-manager/images/rocket.svg            chrome://devtools/skin/app-manager/rocket.svg
+override  chrome://devtools/skin/app-manager/images/default-app-icon.png  chrome://devtools/skin/app-manager/default-app-icon.png           appversion<47.0a1
+override  chrome://devtools/skin/app-manager/images/noise.png             chrome://devtools/skin/app-manager/noise.png           appversion<47.0a1
+override  chrome://devtools/skin/app-manager/images/rocket.svg            chrome://devtools/skin/app-manager/rocket.svg           appversion<47.0a1
 
 ## For Firefox 46.0a1 (for changes found by 2015.01.14)
-override  chrome://devtools/skin/computed.css     chrome://devtools/skin/computedview.css
-override  chrome://devtools/skin/fonts.css        chrome://devtools/skin/font-inspector.css
-override  chrome://devtools/skin/layout.css       chrome://devtools/skin/layoutview.css
-override  chrome://devtools/skin/markup.css       chrome://devtools/skin/markup-view.css
-override  chrome://devtools/skin/rules.css        chrome://devtools/skin/ruleview.css
+override  chrome://devtools/skin/computed.css     chrome://devtools/skin/computedview.css           appversion<47.0a1
+override  chrome://devtools/skin/fonts.css        chrome://devtools/skin/font-inspector.css           appversion<47.0a1
+override  chrome://devtools/skin/layout.css       chrome://devtools/skin/layoutview.css           appversion<47.0a1
+override  chrome://devtools/skin/markup.css       chrome://devtools/skin/markup-view.css           appversion<47.0a1
+override  chrome://devtools/skin/rules.css        chrome://devtools/skin/ruleview.css           appversion<47.0a1
