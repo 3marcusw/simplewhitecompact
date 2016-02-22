@@ -141,6 +141,7 @@ toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-m
 #personaswitcher-button-popup{
   max-height: 35vh;
   min-height: 12ex;
+  min-width: 32ch;
 }
 
 
@@ -163,15 +164,15 @@ toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-m
   -moz-margin-end: 0;
 }
 
-#personaswitcher-button > .toolbarbutton-menu-dropmarker {
+#personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
   list-style-image: url("chrome://browser/skin/toolbarbutton-dropdown-arrow.png");
 }
 
-#nav-bar #personaswitcher-button > .toolbarbutton-menu-dropmarker {
+#nav-bar #personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
   -moz-margin-start: -12px;
   -moz-margin-end: 3px;
 }
-toolbar #personaswitcher-button > .toolbarbutton-menu-dropmarker {
+toolbar #personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
   -moz-margin-start: -3px;
   -moz-margin-end: -1px;
   padding-top: 2px;
@@ -185,7 +186,7 @@ toolbar #personaswitcher-button > .toolbarbutton-menu-dropmarker {
   transition: none;
 }
 
-#TabsToolbar #personaswitcher-button {
+#TabsToolbar #personaswitcher-button:not(.toolbarbutton-1) {
   -moz-appearance: none;
   border-style: none;
   padding: 0 calc(3px + 1px);
