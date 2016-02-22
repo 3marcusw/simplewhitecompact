@@ -794,12 +794,12 @@ toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarke
 
 #sync-button[cui-areatype="toolbar"][widget-type="view"] {
   -moz-image-region: initial;
-  list-style-image: url(chrome://browser/skin/toolbar.svg#SyncTabs);
+  list-style-image: url(chrome://browser/skin/Toolbar.svg#SyncTabs);
 }
 
 toolbar[brighttext] #sync-button[cui-areatype="toolbar"][widget-type="view"]:not([status="active"]) {
   -moz-image-region: initial;
-  list-style-image: url(chrome://browser/skin/toolbar.svg#SyncTabs-bright);
+  list-style-image: url(chrome://browser/skin/Toolbar.svg#SyncTabs-bright);
 }
 
 #sync-button[cui-areatype="toolbar"][status="active"] {
