@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="18"
+     height="18"
+     viewBox="0 0 18 18">
+  <style>
+    g:not([id$="-shape"]):not(:target),
+    use[id]:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+    g[id$="-bright"] use:first-of-type{
+      fill: none;
+      stroke: #000;
+      opacity: .2;
+      stroke-width: 2.03125;
+    }
+    g[id$="-bright"] use:last-of-type{
+      fill: none;
+      stroke: #FFF;
+      stroke-width: 1.03125;
+    }
+  </style>
+  <defs style="display: none;">
+    <g id="SyncTabs-shape">
+      <path d="M 2.5,15.5   h 14   v -10   a 2,2 0 0,0 -2,-2   h -10   a 2,2 0 0,0 -2,2   v 10   Z
+               M 9.5,9.5   m -1,3.873   a 4,4 0 0,1 0,-7.746   m -2.5,-.5   l 2.5,.5   l -.5,2.5   m .5,-2.5
+               m 2,0    a 4,4 0 0,1 0,7.746   m 2.5,.5   l -2.5,-.5   l .5,-2.5"/>
+    </g>
+    <g id="SyncTabs-outline-shape">
+      <path d="M 2.5,15.5   h 14   v -10   a 2,2 0 0,0 -2,-2   h -10   a 2,2 0 0,0 -2,2   v 10   Z
+               M 9.5,9.5   m -.5,3.969   a 4,4 0 0,1 -.5,-7.842   m -3,-.6   l 3,.6   l -.6,3   m .6,-3
+               m 1.5,-.096    a 4,4 0 0,1 .5,7.842   m 3,.6   l -3,-.6   l .6,-3"/>
+    </g>
+  </defs>
+  <use id="SyncTabs"   xlink:href="#SyncTabs-shape"/>
+  <g id="SyncTabs-bright">
+    <use xlink:href="#SyncTabs-outline-shape"/>
+    <use xlink:href="#SyncTabs-shape"/>
+  </g>
+</svg>
