@@ -792,6 +792,16 @@ toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarke
   -moz-image-region: rect(0, 270px, 18px, 252px);
 }
 
+#sync-button[cui-areatype="toolbar"][widget-type="view"] {
+  -moz-image-region: initial;
+  list-style-image: url(chrome://browser/skin/toolbar.svg#SyncTabs);
+}
+
+toolbar[brighttext] #sync-button[cui-areatype="toolbar"][widget-type="view"]:not([status="active"]) {
+  -moz-image-region: initial;
+  list-style-image: url(chrome://browser/skin/toolbar.svg#SyncTabs-bright);
+}
+
 #sync-button[cui-areatype="toolbar"][status="active"] {
   list-style-image: url("chrome://browser/skin/syncProgress-toolbar.png");
   -moz-image-region: rect(0, 18px, 18px, 0px);
@@ -1251,6 +1261,12 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   #sync-button[cui-areatype="menu-panel"],
   toolbarpaletteitem[place="palette"] > #sync-button {
     -moz-image-region: rect(0px, 384px, 32px, 352px);
+  }
+
+  #sync-button[cui-areatype="menu-panel"][widget-type="view"],
+  toolbarpaletteitem[place="palette"] > #sync-button[widget-type="view"] {
+    -moz-image-region: initial;
+    list-style-image: url(chrome://browser/skin/menuPanel.svg#SyncTabs);
   }
 
   #sync-button[cui-areatype="menu-panel"][status="active"] {
@@ -3563,6 +3579,10 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
   border: none;
 }
 
+#sidebar-header > .close-icon:-moz-lwtheme-brighttext {
+  filter: invert(1.0);
+}
+
 .browserContainer > findbar {
   background-color: #FFF; /*Louis*/
   color: -moz-DialogText;
@@ -5012,6 +5032,61 @@ notification[value="loop-sharing-notification"] .messageImage {
   font-size: 120%;
 }
 
+/***********  Full Screen Warning for Firefox 43.0+  ****************/
+
+html|*#fullscreen-warning {
+  align-items: center;
+  background: rgba(0,0,0,.3125);
+  border-width: 0;
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 9px 12px;
+  margin: 20px 0 0;
+  font: message-box;
+}
+
+html|*#fullscreen-warning::before {
+  margin: 0;
+  -moz-margin-end: -12px;
+  width: 18px; height: 18px;
+}
+
+html|*#fullscreen-warning.verifiedIdentity::before,
+html|*#fullscreen-warning.verifiedDomain::before {
+  content:"";
+  background-image: url("chrome://browser/skin/fullscreen/secure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
+  background-size: 100%, 100%;
+}
+
+html|*#fullscreen-warning.unknownIdentity::before {
+  content:"";
+  background-image: url("chrome://browser/skin/fullscreen/insecure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
+  background-size: 100%, 100%;
+}
+
+html|*#fullscreen-domain-text,
+html|*#fullscreen-generic-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: -1px -1px 4px rgba(0,0,0,.25), -1px 1px 4px rgba(0,0,0,.25), 1px -1px 4px rgba(0,0,0,.25), 1px 1px 4px rgba(0,0,0,.25);
+  margin: 0 16px;
+}
+
+html|*#fullscreen-domain {
+  font-weight: bolder;
+  margin: 0;
+}
+
+html|*#fullscreen-exit-button {
+  padding: 0 3px;
+  margin: 0;
+  box-sizing: content-box;
+  font: message-box;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+}
 
 /* Responsive Mode */
 
@@ -7496,12 +7571,17 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
   .sidebar-header,
   #sidebar-header {
     -moz-appearance: none;
-    color: black;
+    /*color: black; --Removed by johnGraciliano*/
     /*background-color: #EEF3FA; Louis*/
     border-bottom: none;
     text-shadow: none;
   }
-
+  .sidebar-header:not(:-moz-lwtheme),
+  #sidebar-header:not(:-moz-lwtheme) {
+    color: black; 
+    background-color: #F8F8F8;
+  }
+  
   /* Louis .sidebar-title,
   #sidebar-title {
     font-weight: bold;
