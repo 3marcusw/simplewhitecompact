@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="32"
+     height="32"
+     viewBox="0 0 32 32">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+    <g id="SyncTabs-shape">
+      <path d="M 1.5,27.5   h 28   v -20.5   a 3.5,3.5 0 0,0 -3.5,-3.5   h -21   a 3.5,3.5 0 0,0 -3.5,3.5   v 20.5   Z
+             M 15.5,15.5   m -2,7.746   a 8,8 0 0,1 0,-15.492   m -5,-1   l 5,1   l -1,5   m 1,-5
+             m 4,0   a 8,8 0 0,1 0,15.492   m 5,1   l -5,-1   l 1,-5"/>
+    </g>
+  </defs>
+  <use id="SyncTabs"   xlink:href="#SyncTabs-shape"/>
+</svg>
