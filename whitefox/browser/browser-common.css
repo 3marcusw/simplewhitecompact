@@ -5036,18 +5036,18 @@ notification[value="loop-sharing-notification"] .messageImage {
 
 html|*#fullscreen-warning {
   align-items: center;
-  background: rgba(0,0,0,.3125);
+  background: rgba(34,34,34,.625);
   border-width: 0;
   border-radius: 5px;
   box-shadow: none;
-  padding: 9px 12px;
-  margin: 20px 0 0;
+  padding: 8px 10px;
+  margin: 24px 0 0;
   font: message-box;
 }
 
 html|*#fullscreen-warning::before {
   margin: 0;
-  -moz-margin-end: -12px;
+  -moz-margin-end: -10px;
   width: 18px; height: 18px;
 }
 
@@ -5069,7 +5069,7 @@ html|*#fullscreen-generic-text {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  text-shadow: -1px -1px 4px rgba(0,0,0,.25), -1px 1px 4px rgba(0,0,0,.25), 1px -1px 4px rgba(0,0,0,.25), 1px 1px 4px rgba(0,0,0,.25);
+  text-shadow: 0 0 2px rgba(0,0,0,.5);
   margin: 0 16px;
 }
 
@@ -5081,6 +5081,7 @@ html|*#fullscreen-domain {
 html|*#fullscreen-exit-button {
   padding: 0 3px;
   margin: 0;
+  -moz-margin-start: -8px;
   box-sizing: content-box;
   font: message-box;
   font-size: 13px;
