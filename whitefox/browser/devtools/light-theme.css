@@ -272,7 +272,7 @@ body {
 .devtools-toolbar,
 .devtools-sidebar-tabs tabs,
 .devtools-sidebar-alltabs,
-.CodeMirror-dialog { /* General toolbar styling */
+.cm-s-mozilla .CodeMirror-dialog { /* General toolbar styling */
   color: var(--theme-body-color-alt);
   background-color: var(--theme-toolbar-background);
   border-color: var(--theme-splitter-color);
@@ -289,13 +289,15 @@ body {
  * Best effort to match the existing theme, some of the colors
  * are duplicated here to prevent weirdness in the main theme. */
 
-.CodeMirror { /* Inherit platform specific font sizing and styles */
+.CodeMirror, /* This weaker selector may be superfluous or incorrect (TO BE REMOVED!) --johnGraciliano */
+.CodeMirror.cm-s-mozilla { /* Inherit platform specific font sizing and styles */
   font-family: inherit;
   font-size: inherit;
   background: transparent;
 }
 
-.CodeMirror pre,
+.CodeMirror pre, /* This weaker selector may be superfluous or incorrect (TO BE REMOVED!) --johnGraciliano */
+.CodeMirror.cm-s-mozilla pre,
 .cm-s-mozilla .cm-variable-2,
 .cm-s-mozilla .cm-variable-3,
 .cm-s-mozilla .cm-operator,
@@ -436,6 +438,11 @@ div.CodeMirror span.eval-text {
 
 :root[platform="win"] .theme-tooltip-panel .panel-arrow {
   --arrow-margin: -7px;
+}
+@media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
+  :root .theme-tooltip-panel .panel-arrow {
+    --arrow-margin: -7px;
+  }
 }
 
 .theme-tooltip-panel .panel-arrow[side="top"] {

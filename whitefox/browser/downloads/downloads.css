@@ -50,6 +50,7 @@
 #downloadsPanel[hasdownloads] > #downloadsFooter {
   background: #efefef;
   border-top: 1px solid hsla(0,0%,0%,.1);
+  border-radius: 0 0 5px 5px;
 }
 
 /*** Downloads Summary and List items ***/

@@ -948,26 +948,81 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Platform overrides (copied in from the old platform specific files) */
-.requests-menu-header-button > .button-box {
+:root[platform="win"] .requests-menu-header-button > .button-box {
   padding: 0;
 }
 
-.requests-menu-timings-division {
+:root[platform="win"] .requests-menu-timings-division {
   padding-top: 1px;
   font-size: 90%;
 }
 
-.requests-menu-footer-button,
-.requests-menu-footer-label {
+:root[platform="win"] .requests-menu-footer-button,
+:root[platform="win"] .requests-menu-footer-label {
   padding-top: 0px;
   padding-bottom: 0px;
 }
 
 /* Responsive sidebar */
 @media (max-width: 700px) {
-  .requests-menu-footer-button,
-  .requests-menu-footer-label {
+  :root[platform="win"] .requests-menu-footer-button,
+  :root[platform="win"] .requests-menu-footer-label {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+}
+
+:root[platform="linux"] #headers-summary-resend {
+  padding: 4px;
+}
+
+:root[platform="linux"] #toggle-raw-headers {
+  padding: 4px;
+}
+
+/* Responsive sidebar */
+@media (max-width: 700px) {
+  :root[platform="linux"] .requests-menu-header-button {
+    font-size: 85%;
+  }
+}
+
+@media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
+  :root .requests-menu-header-button > .button-box {
+    padding: 0;
+  }
+  :root .requests-menu-timings-division {
+    padding-top: 1px;
+    font-size: 90%;
+  }
+  :root .requests-menu-footer-button,
+  :root .requests-menu-footer-label {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  /* Responsive sidebar */
+  @media (max-width: 700px) {
+    :root .requests-menu-footer-button,
+    :root .requests-menu-footer-label {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }
+}
+
+@media not all and (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this matches non-Windows OS */
+  @supports not (-moz-osx-font-smoothing: auto) { /* This matches any OS except mac OS X 10.6+, hence Linux */
+    :root #headers-summary-resend {
+      padding: 4px;
+    }
+    :root #toggle-raw-headers {
+      padding: 4px;
+    }
+    /* Responsive sidebar */
+    @media (max-width: 700px) {
+      :root .requests-menu-header-button {
+        font-size: 85%;
+      }
+    }
   }
 }

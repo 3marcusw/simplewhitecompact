@@ -1,5 +1,8 @@
 /**  Additional customizations for Firefox Extensions */
 
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+
 /* Tab Groups */
 :root #tabGroups-tabview-button {
   list-style-image: url("chrome://browser/skin/Toolbar.png");
@@ -18,4 +21,181 @@
 #tb-chatzilla-open[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #tb-chatzilla-open {
   list-style-image: url(chrome://chatzilla/skin/images/logo.png)
+}
+
+/* Force CTR buttons to use our icons instead */
+:-moz-any(#ctraddon_back-button, #ctraddon_forward-button, #ctraddon_go-button, #ctraddon_reload-button, #ctraddon_stop-button, #ctraddon_history-menu-toolbar-button, #ctraddon_history-button, #ctraddon_bookmarks-menu-toolbar-button) {
+  list-style-image: url("chrome://browser/skin/Toolbar.png") !important;
+}
+
+toolbar[brighttext] :-moz-any(#ctraddon_back-button, #ctraddon_forward-button, #ctraddon_go-button, #ctraddon_reload-button, #ctraddon_stop-button, #ctraddon_history-menu-toolbar-button, #ctraddon_history-button, #ctraddon_bookmarks-menu-toolbar-button) {
+  list-style-image: url("chrome://browser/skin/Toolbar-inverted.png") !important;
+}
+
+#ctraddon_puib_separator {
+  /* Make the PanelUI separator more theme-native */
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(200, 200, 200)) !important;
+  background-size: 1px 20px !important;
+}
+
+#ctraddon_back-button {
+  -moz-image-region: rect(0, 36px, 18px, 18px);
+}
+
+#ctraddon_forward-button,
+#ctraddon_go-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 72px, 18px, 54px);
+}
+
+#ctraddon_forward-button:-moz-locale-dir(rtl),
+#ctraddon_back-button:-moz-locale-dir(rtl) {
+  transform: scaleX(-1);
+}
+
+#ctraddon_reload-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 90px, 18px, 72px);
+}
+
+#ctraddon_stop-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 108px, 18px, 90px);
+}
+
+#ctraddon_bookmarks-menu-toolbar-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 630px, 18px, 612px);
+}
+
+#ctraddon_history-menu-toolbar-button[cui-areatype="toolbar"], 
+#ctraddon_history-button[cui-areatype="toolbar"] {
+  -moz-image-region: rect(0, 180px, 18px, 162px);
+}
+
+/* Persona Switcher */
+toolbarpaletteitem[place="palette"] > #personaswitcher-button,
+#personaswitcher-button[cui-areatype="menu-panel"]{
+  list-style-image: url("chrome://personaswitcher/skin/PersonaSwitcher32.png");
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"] {
+  margin-top: 6px;
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"] {
+  -moz-appearance: none;
+  -moz-box-orient: vertical;
+  width: calc((22.35em / 3 - 0.1px));
+  height: calc(51px + 2.2em);
+  
+  padding: 0 6px;
+}
+
+toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-text,
+toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-multiline-text,
+#personaswitcher-button[cui-areatype="menu-panel"] > .toolbarbutton-text,
+#personaswitcher-button[cui-areatype="menu-panel"] > .toolbarbutton-multiline-text {
+  text-align: center;
+  /* Need to override toolkit theming which sets margin: 0 !important; */
+  margin: 2px 0 0 !important;
+}
+
+toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-multiline-text,
+#personaswitcher-button[cui-areatype="menu-panel"] > .toolbarbutton-multiline-text {
+  line-height: 1.1;
+  max-height: 2.2em;
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"]:not(:-moz-any([disabled],[open],:active)):hover {
+  background-color: hsla(210,4%,10%,.08);
+  border-color: hsla(210,4%,10%,.11);
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"]:not([disabled]):-moz-any([open],:hover:active) {
+  background-color: hsla(210,4%,10%,.12);
+  border-color: hsla(210,4%,10%,.14);
+  box-shadow: 0 1px 0 hsla(210,4%,10%,.03) inset;
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"] > .toolbarbutton-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  margin: 4px calc((22.35em / 3 - 0.1px) / 2 - 23px);
+}
+
+toolbarpaletteitem[place="palette"] > #personaswitcher-button > .toolbarbutton-menu-dropmarker,
+#personaswitcher-button[cui-areatype="menu-panel"] > .toolbarbutton-menu-dropmarker {
+  display: none;
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"] {
+  background-image: url("chrome://browser/skin/toolbarbutton-dropdown-arrow.png");
+  background-position: right 12px top 22px;
+  background-repeat: no-repeat;
+}
+
+#personaswitcher-button[cui-areatype="menu-panel"]:-moz-locale-dir(rtl) {
+  background-position: left 12px top 22px;
+}
+
+
+#personaswitcher-button-popup{
+  max-height: 35vh;
+  min-height: 12ex;
+  min-width: 32ch;
+}
+
+
+:-moz-any(#nav-bar, #TabsToolbar) #personaswitcher-button{
+  -moz-appearance: none;
+  border: none;
+  background: none;
+  padding: var(--toolbarbutton-vertical-outer-padding) 2px;
+  -moz-box-pack: center;
+}
+
+#nav-bar #personaswitcher-button > .toolbarbutton-icon {
+  padding: calc(var(--toolbarbutton-vertical-inner-padding) + 1px) calc(6px + 1px);
+  -moz-padding-end: calc(6px + 1px + 6px);
+  border-radius: 2px;
+  border: 1px solid;
+  border-color: transparent;
+  transition-property: background-color, border-color;
+  transition-duration: 150ms;
+  -moz-margin-end: 0;
+}
+
+#personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
+  list-style-image: url("chrome://browser/skin/toolbarbutton-dropdown-arrow.png");
+}
+
+#nav-bar #personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
+  -moz-margin-start: -12px;
+  -moz-margin-end: 3px;
+}
+toolbar #personaswitcher-button:not(.toolbarbutton-1) > .toolbarbutton-menu-dropmarker {
+  -moz-margin-start: -3px;
+  -moz-margin-end: -1px;
+  padding-top: 2px;
+}
+
+#nav-bar #personaswitcher-button:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon {
+  background: var(--toolbarbutton-active-background);
+  border-color: var(--toolbarbutton-active-bordercolor);
+  box-shadow: var(--toolbarbutton-active-boxshadow);
+  text-shadow: none;
+  transition: none;
+}
+
+#TabsToolbar #personaswitcher-button:not(.toolbarbutton-1) {
+  -moz-appearance: none;
+  border-style: none;
+  padding: 0 calc(3px + 1px);
+}
+
+#TabsToolbar #personaswitcher-button:not([disabled=true]):hover,
+#TabsToolbar #personaswitcher-button[open] {
+  background-image: var(--TabsToolbar-toolbarbutton-active-background);
+  background-position: 1px 0, 0 0, 100% 0;
+  background-size: calc(100% - 2px) calc(100% - 1px), 1px calc(100% - 1px), 1px calc(100% - 1px);
+  background-repeat: no-repeat;
 }

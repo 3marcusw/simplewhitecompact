@@ -1,50 +1,64 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("splitters.css");
 
 :root {
   font: message-box;
+  --monospace-font-family: Menlo, Consolas, monospace; /* This fall-back is logically superfluous */
+}
+
+:root[platform="mac"] {
+  --monospace-font-family: Menlo, monospace;
+}
+@supports (-moz-osx-font-smoothing: auto) { /* For FF < 45 where the attribute platform is absent, this detects any mac OS X 10.6+ */
+  :root {
+    --monospace-font-family: Menlo, monospace;
+  }
+}
+
+:root[platform="win"] {
   --monospace-font-family: Consolas, monospace;
+}
+@media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
+  :root {
+    --monospace-font-family: Consolas, monospace;
+  }
+}
+
+:root[platform="linux"] {
+  --monospace-font-family: monospace;
+}
+@media not all and (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this matches non-Windows OS */
+  @supports not (-moz-osx-font-smoothing: auto) { /* This matches any OS except mac OS X 10.6+, hence Linux */
+    :root {
+      --monospace-font-family: monospace;
+    }
+  }
 }
 
 .devtools-monospace {
   font-family: var(--monospace-font-family);
 }
 
+:root[platform="linux"] .devtools-monospace {
+  font-size: 80%;
+}
+@media not all and (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this matches non-Windows OS */
+  @supports not (-moz-osx-font-smoothing: auto) { /* This matches any OS except mac OS X 10.6+, hence Linux */
+    :root .devtools-monospace {
+      font-size: 80%;
+    }
+  }
+}
+
 /* Bottom-docked toolbox minimize transition */
-.devtools-toolbox-bottom-iframe {
+.devtools-toolbox-bottom-iframe {  /* This is moved into devtools-browser.css in 46.0a1 */
   transition: margin-bottom .1s;
 }
 
-/* Splitters */
-.devtools-horizontal-splitter {
-  -moz-appearance: none;
-  background-image: none;
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(118, 121, 125, .5);
-  min-height: 3px;
-  height: 3px;
-  margin-top: -3px;
-  position: relative;
-}
-
-.devtools-side-splitter {
-  -moz-appearance: none;
-  background-image: none;
-  background-color: transparent;
-  border: 0;
-  -moz-border-end: 1px solid rgba(118, 121, 125, .5);
-  min-width: 3px;
-  width: 3px;
-  -moz-margin-start: -3px;
-  position: relative;
-  cursor: e-resize;
-}
-
-.devtools-horizontal-splitter.disabled,
-.devtools-side-splitter.disabled {
-  pointer-events: none;
-}
-
-.devtools-toolbox-side-iframe {
+.devtools-toolbox-side-iframe {  /* This is moved into devtools-browser.css in 46.0a1 */
   min-width: 465px;
 }
 
@@ -58,6 +72,17 @@
   border-radius: 3px;
   overflow-x: hidden;
   max-height: 40rem;
+}
+
+:root[platform="linux"] .devtools-autocomplete-popup {
+  max-height: 32rem;
+}
+@media not all and (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this matches non-Windows OS */
+  @supports not (-moz-osx-font-smoothing: auto) { /* This matches any OS except mac OS X 10.6+, hence Linux */
+    :root .devtools-autocomplete-popup {
+      max-height: 32rem;
+    }
+  }
 }
 
 .devtools-autocomplete-listbox {
@@ -232,7 +257,7 @@
 
 /* Eyedropper Widget */
 
-.devtools-eyedropper-panel {
+.devtools-eyedropper-panel { /* This is moved into devtools-browser.css in 46.0a1 */
   pointer-events: none;
   -moz-appearance: none;
   width: 156px;

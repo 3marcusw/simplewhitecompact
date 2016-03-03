@@ -27,6 +27,21 @@
   --time-graduation-border-color: rgba(128, 136, 144, .5);
 }
 
+.animation { /* FF 46.0 & FF < 46.0 */
+  --timeline-border-color: var(--theme-body-color);
+  --timeline-background-color: var(--theme-splitter-color);
+}
+
+.animation.cssanimation { /* FF 46.0 */
+  --timeline-border-color: var(--theme-highlight-lightorange);
+  --timeline-background-color: var(--theme-contrast-background);
+}
+
+.animation.csstransition { /* FF 46.0 */
+  --timeline-border-color: var(--theme-highlight-bluegrey);
+  --timeline-background-color: var(--theme-highlight-blue);
+}
+
 html {
   height: 100%;
 }
@@ -339,12 +354,8 @@ body {
 /* Animation iterations */
 
 .animation-timeline .animation .iterations {
-  position: relative;
   height: 100%;
   box-sizing: border-box;
-
-  --timeline-border-color: var(--theme-body-color);
-  --timeline-background-color: var(--theme-splitter-color);
 
   /* Iterations of the animation are displayed with a repeating linear-gradient
      which size is dynamically changed from JS. The gradient only draws 1px
@@ -364,12 +375,21 @@ body {
   background-color: var(--timeline-background-color);
 }
 
-.animation-timeline .animation .cssanimation {
+.animation-timeline .animation .iterations:only-child { /* FF < 46.0 */
+  position: relative;
+}
+.animation-timeline .animation .iterations:not(:only-child) { /* FF 46.0 */
+  position: absolute;
+  /* Border-right is already handled by the gradient */
+  border-width: 1px 0 1px 1px;
+}
+
+.animation-timeline .animation .cssanimation { /* FF < 46.0 */
   --timeline-border-color: var(--theme-highlight-lightorange);
   --timeline-background-color: var(--theme-contrast-background);
 }
 
-.animation-timeline .animation .csstransition {
+.animation-timeline .animation .csstransition { /* FF < 46.0 */
   --timeline-border-color: var(--theme-highlight-bluegrey);
   --timeline-background-color: var(--theme-highlight-blue);
 }
@@ -396,7 +416,7 @@ body {
   top: unset;
 }
 
-.animation-timeline .animation .name {
+.animation-timeline .animation .iterations > .name { /* FF < 46.0 */
   color: var(--theme-selection-color);
   height: 100%;
   width: 100%;
@@ -406,21 +426,57 @@ body {
   line-height: 150%;
   padding: 0 2px;
 }
+.animation-timeline .animation .iterations + .name { /* FF 46.0 */
+  position: absolute;
+  color: var(--theme-selection-color);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  box-sizing: border-box;
+  --fast-track-icon-width: 12px;
+}
 
-.animation-timeline .fast-track .name {
+.animation-timeline .animation .name div { /* FF 46.0 */
+  /* Flex items don't support text-overflow, so a child div is used */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.animation-timeline .fast-track .iterations > .name { /* FF < 46.0 */
   /* Animations running on the compositor have the fast-track background image*/
   background-image: url("images/animation-fast-track.svg");
   background-repeat: no-repeat;
   background-position: calc(100% - 5px) center;
 }
 
-.animation-timeline .animation .delay {
+.animation-timeline .fast-track .name div { /* FF 46.0 */
+  width: calc(100% - var(--fast-track-icon-width));
+}
+
+.animation-timeline .fast-track .iterations + .name::after { /* FF 46.0 */
+  /* Animations running on the compositor have the fast-track background image*/
+  content: "";
+  display: block;
   position: absolute;
   top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--fast-track-icon-width);
+
+  background-image: url("images/animation-fast-track.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.animation-timeline .animation .delay {
+  position: absolute;
+  /* top: 0; */
   /* Make sure the delay covers up the animation border */
-  transform: translate(-1px, -1px);
-  box-sizing: border-box;
-  height: calc(100% + 2px);
+  /* transform: translate(-1px, -1px); */
+    box-sizing: border-box;
+  /* height: calc(100% + 2px); */
 
   border: 1px solid var(--timeline-border-color);
   border-width: 1px 0 1px 1px;
@@ -430,6 +486,15 @@ body {
                                               var(--theme-selection-color) 1px,
                                               var(--theme-selection-color) 4px);
   background-color: var(--timeline-border-color);
+}
+.animation-timeline .animation .iterations > .delay { /* FF < 46.0 */
+  top: 0;
+  /* Make sure the delay covers up the animation border */
+  transform: translate(-1px, -1px);
+  height: calc(100% + 2px);
+}
+.animation-timeline .animation .iterations ~ .delay { /* FF 46.0 */
+  height: 100%;
 }
 
 .animation-timeline .animation .delay.negative {
