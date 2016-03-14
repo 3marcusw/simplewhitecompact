@@ -5,8 +5,17 @@
 
 /* Sources and breakpoints pane */
 
-#sources-pane[selectedIndex="0"] + #sources-and-editor-splitter {
-  border-color: transparent;
+
+@supports (writing-mode: horizontal-tb) { /* Only for Firefox >= 41 */
+/* I placed the conditional to avoid the following problem:         */
+/* The next rule hides the border between the sidebar and the main  */
+/* content in earlier versions of Firefox.  It appears this was     */
+/* useful in the default style on earlier versions of Firefox but   */
+/* it seems irrelevant in newer versions.  I left it in case there  */
+/* is a use for it now (but I doubt it).           --johnGraciliano */
+  #sources-pane[selectedIndex="0"] + #sources-and-editor-splitter {
+    border-color: transparent;
+  }
 }
 
 #sources-pane > tabs {
@@ -66,6 +75,12 @@
   -moz-image-region: rect(0,16px,16px,0);
 }
 
+@media (min-resolution: 1.1dppx) {
+  #sources-toolbar .devtools-toolbarbutton:not([label]) {
+    -moz-image-region: rect(0,32px,32px,0);
+  }
+}
+
 #black-box {
   list-style-image: url(images/debugger-blackbox.png);
 }
@@ -87,11 +102,12 @@
 }
 
 #toggle-breakpoints {
-  list-style-image: url(images/debugger-toggleBreakpoints.png);
+  list-style-image: url(images/debugger-toggleBreakpoints.svg);
+  -moz-image-region: rect(0,32px,16px,16px) !important;
 }
 
 #toggle-breakpoints[checked] {
-  -moz-image-region: rect(0,32px,16px,16px) !important;
+  -moz-image-region: rect(0,16px,16px,0) !important;
 }
 
 #toggle-breakpoints[checked] > image {
@@ -99,26 +115,12 @@
   filter: none;
 }
 
-@media (min-resolution: 1.1dppx) {
-  #sources-toolbar .devtools-toolbarbutton:not([label]) {
-    -moz-image-region: rect(0,32px,32px,0);
-  }
-
-  #toggle-breakpoints {
-    list-style-image: url(images/debugger-toggleBreakpoints@2x.png);
-  }
-
-  #toggle-breakpoints[checked] {
-    -moz-image-region: rect(0,64px,32px,32px) !important;
-  }
-}
-
 #toggle-promise-debugger {
   /* TODO Bug 1186119: Add a toggle promise debugger image */
 }
 
 #sources .black-boxed {
-  color: rgba(128,128,128,0.4);
+  color: rgba(102, 102, 102, 0.55); /* A bit darker for the light theme. --johnGraciliano */
 }
 
 #sources .selected .black-boxed {

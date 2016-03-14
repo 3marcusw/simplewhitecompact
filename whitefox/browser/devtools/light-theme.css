@@ -4,6 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 @import url(variables.css);
+@import url(common.css);
 @import url(toolbars.css);
 
 /*** What follows is a copy of "variables.css" for the Timeline tool in Firefox 39 and earlier. **/
@@ -25,19 +26,19 @@
  *%
 
 :root.theme-light {
-  --theme-body-background: #fcfcfc;
-  --theme-sidebar-background: #f7f7f7;
+  --theme-body-background: white;
+  --theme-sidebar-background: white;
   --theme-contrast-background: #e6b064;
 
-  --theme-tab-toolbar-background: #ebeced;
-  --theme-toolbar-background: #f0f1f2;
+  --theme-tab-toolbar-background: #fafafa;
+  --theme-toolbar-background: #fafafa;
   --theme-selection-background: #4c9ed9;
-  --theme-selection-background-semitransparent: rgba(76, 158, 217, .23);
+  --theme-selection-background-semitransparent: rgba(76, 158, 217, 0.15);
   --theme-selection-color: #f5f7fa;
-  --theme-splitter-color: #aaaaaa;
-  --theme-comment: #757873;
+  --theme-splitter-color: #c7c7c7;
+  --theme-comment: #696969;
 
-  --theme-body-color: #18191a;
+  --theme-body-color: #393f4c;
   --theme-body-color-alt: #585959;
   --theme-content-color1: #292e33;
   --theme-content-color2: #8fa1b2;
@@ -167,9 +168,9 @@ body {
 }
 
 .theme-gutter {
-  background-color: hsl(0,0%,90%);
+  background-color: var(--theme-tab-toolbar-background);
   color: var(--theme-content-color3);
-  border-color: hsl(0,0%,65%);
+  border-color: var(--theme-splitter-color);
 }
 
 .theme-separator { /* grey */
@@ -273,7 +274,7 @@ body {
 .devtools-sidebar-tabs tabs,
 .devtools-sidebar-alltabs,
 .cm-s-mozilla .CodeMirror-dialog { /* General toolbar styling */
-  color: var(--theme-body-color-alt);
+  color: var(--theme-body-color);
   background-color: var(--theme-toolbar-background);
   border-color: var(--theme-splitter-color);
 }
@@ -310,15 +311,15 @@ body {
 }
 
 .cm-s-mozilla.CodeMirror-focused .CodeMirror-selected { /* selected text (focused) */
-  background: rgb(185, 215, 253);
+  background: #b9d7fd;
 }
 
 .cm-s-mozilla .CodeMirror-selected { /* selected text (unfocused) */
-  background: rgb(176, 176, 176);
+  background: #d9dadb;
 }
 
 .cm-s-mozilla .CodeMirror-activeline-background { /* selected color with alpha */
-  background: rgba(185, 215, 253, .35);
+  background: rgba(185, 215, 253, .375);
 }
 
 div.cm-s-mozilla span.CodeMirror-matchingbracket { /* highlight brackets */
@@ -445,35 +446,47 @@ div.CodeMirror span.eval-text {
   }
 }
 
+.theme-tooltip-panel .panel-arrow[side="top"],
+.theme-tooltip-panel .panel-arrow[side="bottom"] {
+  list-style-image: url("tooltip/arrow-vertical-light.png");
+  /* !important is needed to override the popup.css rules in toolkit/themes */
+  width: 39px !important;
+  height: 16px !important;
+}
+
+.theme-tooltip-panel .panel-arrow[side="left"],
+.theme-tooltip-panel .panel-arrow[side="right"] {
+  list-style-image: url("tooltip/arrow-horizontal-light.png");
+  /* !important is needed to override the popup.css rules in toolkit/themes */
+  width: 16px !important;
+  height: 39px !important;
+}
+
 .theme-tooltip-panel .panel-arrow[side="top"] {
-  list-style-image: url("./tooltip/arrow-vertical-light.png");
   margin-bottom: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="bottom"] {
-  list-style-image: url("./tooltip/arrow-vertical-light.png");
   margin-top: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="left"] {
-  list-style-image: url("./tooltip/arrow-horizontal-light.png");
   margin-right: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="right"] {
-  list-style-image: url("./tooltip/arrow-horizontal-light.png");
   margin-left: var(--arrow-margin);
 }
 
 @media (min-resolution: 1.1dppx) {
   .theme-tooltip-panel .panel-arrow[side="top"],
   .theme-tooltip-panel .panel-arrow[side="bottom"] {
-    list-style-image: url("./tooltip/arrow-vertical-light@2x.png");
+    list-style-image: url("tooltip/arrow-vertical-light@2x.png");
   }
 
   .theme-tooltip-panel .panel-arrow[side="left"],
   .theme-tooltip-panel .panel-arrow[side="right"] {
-    list-style-image: url("./tooltip/arrow-horizontal-light@2x.png");
+    list-style-image: url("tooltip/arrow-horizontal-light@2x.png");
   }
 }
 
@@ -490,4 +503,13 @@ div.CodeMirror span.eval-text {
 .CodeMirror-Tern-tooltip {
   box-shadow: 0 0 4px rgba(128, 128, 128, .5);
   background-color: var(--theme-sidebar-background);
+}
+
+.CodeMirror-gutter-elt > .breakpoint { /* Firefox < 47 */
+  margin-left: 2px;
+  height: 8px;
+  width: 18px;
+  background-image:  url("images/breakpoint.svg#light");
+  background-position: -2.8px 50%;
+  background-size: 19.25px 7px;
 }

@@ -7,20 +7,11 @@
    We are copy/pasting variables from light-theme and dark-theme,
    since they aren't loaded in this context (within commandlineoutput.xhtml
    and commandlinetooltip.xhtml). */
-:root{ /* default for Firefox 39 and earlier */
-  --gcli-background-color: #f8f8f8;
-  --gcli-input-focused-background: #ebeced;
-  --gcli-input-color: #18191a;
-  --gcli-border-color: #aaa;
-
-  --gcli-menu-highlight-color: hsla(0,100%,0%,.125);
-}
-
-:root[devtoolstheme="light"] {
-  --gcli-background-color: #ebeced; /* --theme-tab-toolbar-background */
-  --gcli-input-focused-background: #f8f8f8 /* Was #f7f7f7 */; /* --theme-sidebar-background */
-  --gcli-input-color: #18191a; /* --theme-body-color */
-  --gcli-border-color: #aaaaaa; /* --theme-splitter-color */
+:root { /* [devtoolstheme="light"] and default for Firefox 39 and earlier */
+  --gcli-background-color: #fafafa; /* --theme-tab-toolbar-background */
+  --gcli-input-focused-background: #ffffff; /* --theme-sidebar-background */
+  --gcli-input-color: #393f4c; /* --theme-body-color */
+  --gcli-border-color: #c7c7c7; /* --theme-splitter-color */
 
   --gcli-menu-highlight-color: hsla(0,100%,0%,.125);
 }

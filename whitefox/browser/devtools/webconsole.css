@@ -112,6 +112,10 @@ a {
   flex: none;
 }
 
+.message-location > .frame-link {
+  width: 10em;
+}
+
 .message-flex-body {
   display: flex;
 }
@@ -185,6 +189,45 @@ a {
   margin-left: 5px;
   border-width: 1px;
   border-style: solid;
+}
+
+.theme-light .hud-console-filter-toolbar {
+  --table-splitter-color: rgba(190,190,190,.85);
+  --disc-shadow-color: #4c4c4c;
+}
+
+.theme-dark .hud-console-filter-toolbar {
+  --table-splitter-color: hsla(210,8%,5%,.6);
+  --disc-shadow-color: #1d1d1d;
+}
+
+[class][class].webconsole-filter-button{
+  margin: 0;
+  padding: 0 .35vw !important; /* Override rule in chrome://ostarget/skin/global/toolbarbutton.css */
+  -moz-border-end: 1px solid var(--table-splitter-color);
+  border-inline-end: 1px solid var(--table-splitter-color);
+  -moz-appearance: none;
+}
+
+[class][class][class][class].webconsole-filter-button:hover{
+  background: rgba(0,0,0,0.10);
+}
+
+[class][class][class][class].webconsole-filter-button:not([checked=true]):hover:active{
+  background-color: var(--theme-selection-background-semitransparent);
+}
+
+[class][class][class][class].webconsole-filter-button[checked=true]{
+  background-color: var(--theme-selection-background);
+  color: var(--theme-selection-color);
+}
+
+.webconsole-filter-button > .toolbarbutton-menubutton-button > .toolbarbutton-text{
+  padding: 0 .25vw;
+}
+
+.webconsole-filter-button[checked=true] > .toolbarbutton-menubutton-button:before {
+  box-shadow: .25px .75px 2.5px var(--disc-shadow-color);
 }
 
 /* Network styles */
