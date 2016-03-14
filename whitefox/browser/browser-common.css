@@ -729,12 +729,12 @@ menuitem.bookmark-item {
 
 /* Note that this file isn't used for HiDPI on OS X. */
 
-:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), :root #pocket-button,
+:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), toolbarbutton#pocket-button,
 #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
   list-style-image: url("chrome://browser/skin/Toolbar.png");
 }
 
-toolbar[brighttext] :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), :root toolbar[brighttext] #pocket-button,
+toolbar[brighttext] :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), toolbar[brighttext] toolbarbutton#pocket-button,
 toolbar[brighttext] #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
   list-style-image: url(chrome://browser/skin/Toolbar-inverted.png);
 }
@@ -923,45 +923,45 @@ toolbar[brighttext] #sync-button[status="active"] {
   -moz-image-region: rect(0, 720px, 18px, 702px);
 }
 
-:root #loop-button,
+toolbarbutton#loop-button,
 #loop-button > .toolbarbutton-badge-container {
   list-style-image: url(chrome://browser/skin/loop/toolbar.png);
   -moz-image-region: rect(0, 18px, 18px, 0);
 }
 
-:root toolbar[brighttext] #loop-button,
+toolbar[brighttext] toolbarbutton#loop-button,
 toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   list-style-image: url(chrome://browser/skin/loop/toolbar-inverted.png);
 }
 
-:root #loop-button[state="disabled"],
-:root #loop-button[disabled="true"],
+toolbarbutton#loop-button[state="disabled"],
+toolbarbutton#loop-button[disabled="true"],
 #loop-button[state="disabled"] > .toolbarbutton-badge-container,
 #loop-button[disabled="true"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 36px, 18px, 18px);
 }
 
-:root #loop-button:not([disabled="true"])[state="error"],
+toolbarbutton#loop-button:not([disabled="true"])[state="error"],
 #loop-button:not([disabled="true"])[state="error"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 54px, 18px, 36px);
 }
 
-:root #loop-button:not([disabled="true"])[state="action"],
+toolbarbutton#loop-button:not([disabled="true"])[state="action"],
 #loop-button:not([disabled="true"])[state="action"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 72px, 18px, 54px);
 }
 
-:root #loop-button:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
+toolbarbutton#loop-button:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
 #loop-button:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 90px, 18px, 72px);
 }
 
-:root #loop-button:not([disabled="true"])[state="active"],
+toolbarbutton#loop-button:not([disabled="true"])[state="active"],
 #loop-button:not([disabled="true"])[state="active"] > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 108px, 18px, 90px);
 }
 
-:root #loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
+toolbarbutton#loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
 #loop-button:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 126px, 18px, 108px);
 }
@@ -970,11 +970,11 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   -moz-image-region: rect(0, 738px, 18px, 720px);
 }
 
-:root #pocket-button[cui-areatype="toolbar"] {
+toolbarbutton#pocket-button[cui-areatype="toolbar"] {
   -moz-image-region: rect(0, 774px, 18px, 756px);
 }
 
-:root #pocket-button[cui-areatype="toolbar"][open] {
+toolbarbutton#pocket-button[cui-areatype="toolbar"][open] {
   -moz-image-region: rect(18px, 774px, 36px, 756px);
 }
 
@@ -1210,8 +1210,8 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
 /*@media not all and (min-resolution: 1.1dppx) { *** this is for all resolutions ****/
 
   toolbaritem[sdkstylewidget="true"] > toolbarbutton,
-  :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button)[cui-areatype="menu-panel"], :root #pocket-button[cui-areatype="menu-panel"],
-  toolbarpaletteitem[place="palette"] > :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), :root toolbarpaletteitem[place="palette"] > #pocket-button {
+  :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button)[cui-areatype="menu-panel"], toolbarbutton#pocket-button[cui-areatype="menu-panel"],
+  toolbarpaletteitem[place="palette"] > :-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button), toolbarpaletteitem[place="palette"] > toolbarbutton#pocket-button {
     list-style-image: var(--menupanel-list-style-image);
   }
 
@@ -1384,12 +1384,12 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
     -moz-image-region: rect(0px, 960px, 32px, 928px);
   }
 
-  :root #pocket-button[cui-areatype="menu-panel"],
-  :root toolbarpaletteitem[place="palette"] > #pocket-button {
+  toolbarbutton#pocket-button[cui-areatype="menu-panel"],
+  toolbarpaletteitem[place="palette"] > toolbarbutton#pocket-button {
     -moz-image-region: rect(0px, 992px, 32px, 960px);
   }
 
-  :root #pocket-button[cui-areatype="menu-panel"][panel-multiview-anchor=true] {
+  toolbarbutton#pocket-button[cui-areatype="menu-panel"][panel-multiview-anchor=true] {
     -moz-image-region: rect(32px, 992px, 64px, 960px);
   }
 
@@ -1397,8 +1397,8 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 832px, 32px, 800px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"],
-  :root toolbarpaletteitem[place="palette"] > #loop-button,
+  toolbarbutton#loop-button[cui-areatype="menu-panel"],
+  toolbarpaletteitem[place="palette"] > toolbarbutton#loop-button,
   #loop-button[cui-areatype="menu-panel"] > .toolbarbutton-badge-container,
   toolbarpaletteitem[place="palette"] > #loop-button > .toolbarbutton-badge-container {
     list-style-image: url(chrome://browser/skin/loop/menuPanel.png);
@@ -1406,39 +1406,39 @@ toolbar[brighttext] #loop-button > .toolbarbutton-badge-container {
   }
 
   /* Make sure that the state icons are not shown in the customization palette. */
-  :root toolbarpaletteitem[place="palette"] > #loop-button,
+  toolbarpaletteitem[place="palette"] > toolbarbutton#loop-button,
   toolbarpaletteitem[place="palette"] > #loop-button > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 32px, 32px, 0) !important;
   }
 
-  :root #loop-button[cui-areatype="menu-panel"][state="disabled"],
-  :root #loop-button[cui-areatype="menu-panel"][disabled="true"],
+  toolbarbutton#loop-button[cui-areatype="menu-panel"][state="disabled"],
+  toolbarbutton#loop-button[cui-areatype="menu-panel"][disabled="true"],
   #loop-button[cui-areatype="menu-panel"][state="disabled"] > .toolbarbutton-badge-container,
   #loop-button[cui-areatype="menu-panel"][disabled="true"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 64px, 32px, 32px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"],
+  toolbarbutton#loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="error"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 96px, 32px, 64px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"],
+  toolbarbutton#loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 128px, 32px, 96px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
+  toolbarbutton#loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]),
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="action"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 160px, 32px, 128px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"],
+  toolbarbutton#loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"],
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"] > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 192px, 32px, 160px);
   }
 
-  :root #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
+  toolbarbutton#loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]),
   #loop-button[cui-areatype="menu-panel"]:not([disabled="true"])[state="active"]:-moz-any(:hover,:hover:active,[open]) > .toolbarbutton-badge-container {
     -moz-image-region: rect(0, 224px, 32px, 192px);
   }
@@ -3579,7 +3579,7 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
   border: none;
 }
 
-#sidebar-header > .close-icon:-moz-lwtheme-brighttext {
+#sidebar-header > :-moz-lwtheme-brighttext.close-icon {
   filter: invert(1.0);
 }
 
@@ -4875,7 +4875,7 @@ notification[value="loop-sharing-notification"] .messageImage {
 #menu_pocket {
   list-style-image: url("chrome://browser/content/pocket/panels/img/pocketmenuitem16.png");
 }
-:root #BMB_pocket {
+menuitem#BMB_pocket {
 /*  list-style-image: url("chrome://browser/content/pocket/panels/img/pocketmenuitem16.png"); *** This image is the default **/
 /*  -moz-image-region: auto;  *** this line was never here because it was not needed */
   list-style-image: url("chrome://browser/skin/Toolbar.png");
@@ -5552,23 +5552,23 @@ svg|line.css-transform-line {
    We are copy/pasting variables from light-theme and dark-theme,
    since they aren't loaded in this context (within browser.css). */
 :root[devtoolstheme="light"] #developer-toolbar {
-  --gcli-background-color: #ebeced; /* --theme-tab-toolbar-background */
-  --gcli-input-background: #f0f1f2; /* --theme-toolbar-background */
-  --gcli-input-focused-background: #f8f8f8 /* Was #f7f7f7 */; /* --theme-sidebar-background */
-  --gcli-input-color: #18191a; /* --theme-body-color */
-  --gcli-border-color: #aaaaaa; /* --theme-splitter-color */
+  --gcli-input-background: #fafafa; /* --theme-toolbar-background */
+  --gcli-background-color: #fafafa; /* --theme-toolbar-background */
+  --gcli-input-focused-background: #ffffff; /* --theme-sidebar-background */
+  --gcli-input-color: #393f4c; /* --theme-body-color */
+  --gcli-border-color: #c7c7c7; /* --theme-splitter-color */
   --selection-background: #4c9ed9; /* --theme-selection-background */
   --selection-color: #f5f7fa; /* --theme-selection-color */
 }
 
 :root[devtoolstheme="dark"] #developer-toolbar {
-  --gcli-background-color: #252c33 /* Was #343c45 */; /* --theme-toolbar-background */ /* SW had #343C45 */
-  --gcli-input-background: #343c45 /* Was rgba(37, 44, 51, .6) */; /* --theme-tab-toolbar-background */ /* SW had #242b33 */
-  --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */ /* SW had #232e38 */
-  --gcli-input-color: #b6babf; /* --theme-body-color-alt */ /* SW had hsl(210,30%,85%) */
-  --gcli-border-color: black; /* --theme-splitter-color */ /* SW had #060a0d  and hsla(206,37%,4%,.2) for inset shadows */
-  --selection-background: #1d4f73; /* --theme-selection-background */ /* SW had hsl(210,30%,85%) */
-  --selection-color: #f5f7fa; /* --theme-selection-color */ /* SW had hsl(210,24%,16%) */
+  --gcli-input-background: #343c45; /* --theme-toolbar-background */
+  --gcli-background-color: #343c45; /* --theme-toolbar-background */
+  --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
+  --gcli-input-color: #b6babf; /* --theme-body-color-alt */
+  --gcli-border-color: black; /* --theme-splitter-color */
+  --selection-background: #1d4f73; /* --theme-selection-background */
+  --selection-color: #f5f7fa; /* --theme-selection-color */
 }
 
 #developer-toolbar {
@@ -7745,31 +7745,31 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#close-white);
         }
 
-        #titlebar-min:-moz-lwtheme {
+        :-moz-lwtheme-brighttext#titlebar-min {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#minimize-themes);
         }
-        #titlebar-max:-moz-lwtheme {
+        :-moz-lwtheme-brighttext#titlebar-max {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#maximize-themes);
         }
-        #main-window[sizemode="maximized"] #titlebar-max:-moz-lwtheme {
+        #main-window[sizemode="maximized"] :-moz-lwtheme-brighttext#titlebar-max {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#restore-themes);
         }
-        #titlebar-close:hover:-moz-lwtheme-darktext,
-        #titlebar-close:-moz-lwtheme {
+        :-moz-lwtheme#titlebar-close:hover,  /* Bright Close on Hover for both bright and dark text --johnGraciliano */
+        :-moz-lwtheme-brighttext#titlebar-close {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#close-themes);
         }
 
-        #titlebar-min:-moz-lwtheme-darktext {
+        :-moz-lwtheme-darktext#titlebar-min {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#minimize-darktext);
         }
-        #titlebar-max:-moz-lwtheme-darktext {
+        :-moz-lwtheme-darktext#titlebar-max {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#maximize-darktext);
         }
-        #main-window[sizemode="maximized"] #titlebar-max:-moz-lwtheme-darktext {
+        #main-window[sizemode="maximized"] :-moz-lwtheme-darktext#titlebar-max {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#restore-darktext);
         }
-        #titlebar-close:hover:-moz-lwtheme-brighttext,
-        #titlebar-close:-moz-lwtheme-darktext {
+        /* :-moz-lwtheme-brighttext#titlebar-close:hover, */
+        :-moz-lwtheme-darktext#titlebar-close {
           list-style-image: url(chrome://browser/skin/caption-buttons.svg#close-darktext);
         }
 
@@ -8334,15 +8334,16 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
 
 /* Aditional Code for Light Weight Themes (Personas) Needs to be Sorted */
 
-.tab-throbber:-moz-lwtheme-brighttext,
-.tabs-newtab-button image:-moz-lwtheme-brighttext ,
-.tab-close-button:-moz-lwtheme-brighttext ,
-.tab-icon-image[src^="chrome://browser/skin/preferences/in-content/favicon.ico"]:-moz-lwtheme-brighttext,
-.tab-icon-image[src="chrome://mozapps/skin/extensions/extensionGeneric-16.png"]:-moz-lwtheme-brighttext{
+:-moz-lwtheme-brighttext.tab-throbber,
+/*:-moz-lwtheme-brighttext.tabs-newtab-button image, */
+:-moz-lwtheme-brighttext.tabs-newtab-button > .toolbarbutton-icon,
+:-moz-lwtheme-brighttext.tab-close-button,
+:-moz-lwtheme-brighttext.tab-icon-image[src^="chrome://browser/skin/preferences/in-content/favicon.ico"],
+:-moz-lwtheme-brighttext.tab-icon-image[src="chrome://mozapps/skin/extensions/extensionGeneric-16.png"]{
   filter: invert(1.0);
 }
 
-#navigator-toolbox toolbarbutton:not(.toolbarbutton-1) dropmarker:-moz-lwtheme-brighttext {
+toolbar[brighttext] toolbarbutton:not(.toolbarbutton-1) > dropmarker {
   filter: invert(1.0);
 }
 
