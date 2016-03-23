@@ -4,6 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 @import url(variables.css);
+@import url(common.css);
 @import url(toolbars.css);
 
 /*** What follows is copied from "variables.css" for the Timeline tool in Firefox 39 and prior. **/
@@ -128,13 +129,13 @@ body {
 }
 
 .theme-gutter {
-  background-color: #0f171f;
+  background-color: var(--theme-tab-toolbar-background);
   color: var(--theme-content-color3);
-  border-color: #303b47;
+  border-color: var(--theme-splitter-color);
 }
 
-.theme-separator { /* grey */
-  border-color: #303b47;
+.theme-separator {
+  border-color: var(--theme-splitter-color);
 }
 
 .theme-fg-color1,
@@ -271,15 +272,15 @@ body {
 }
 
 .cm-s-mozilla.CodeMirror-focused .CodeMirror-selected { /* selected text (focused) */
-  background: rgb(185, 215, 253);
+  background: #193347;
 }
 
 .cm-s-mozilla .CodeMirror-selected { /* selected text (unfocused) */
-  background: rgb(176, 176, 176);
+  background: #303132;
 }
 
 .cm-s-mozilla .CodeMirror-activeline-background { /* selected color with alpha */
-  background: rgba(185, 215, 253, .15);
+  background: rgba(25, 51, 71, .375);
 }
 
 div.cm-s-mozilla span.CodeMirror-matchingbracket { /* highlight brackets */
@@ -396,35 +397,47 @@ div.CodeMirror span.eval-text {
   }
 }
 
+.theme-tooltip-panel .panel-arrow[side="top"],
+.theme-tooltip-panel .panel-arrow[side="bottom"] {
+  list-style-image: url("tooltip/arrow-vertical-dark.png");
+  /* !important is needed to override the popup.css rules in toolkit/themes */
+  width: 39px !important;
+  height: 16px !important;
+}
+
+.theme-tooltip-panel .panel-arrow[side="left"],
+.theme-tooltip-panel .panel-arrow[side="right"] {
+  list-style-image: url("tooltip/arrow-horizontal-dark.png");
+  /* !important is needed to override the popup.css rules in toolkit/themes */
+  width: 16px !important;
+  height: 39px !important;
+}
+
 .theme-tooltip-panel .panel-arrow[side="top"] {
-  list-style-image: url("./tooltip/arrow-vertical-dark.png");
   margin-bottom: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="bottom"] {
-  list-style-image: url("./tooltip/arrow-vertical-dark.png");
   margin-top: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="left"] {
-  list-style-image: url("./tooltip/arrow-horizontal-dark.png");
   margin-right: var(--arrow-margin);
 }
 
 .theme-tooltip-panel .panel-arrow[side="right"] {
-  list-style-image: url("./tooltip/arrow-horizontal-dark.png");
   margin-left: var(--arrow-margin);
 }
 
 @media (min-resolution: 1.1dppx) {
   .theme-tooltip-panel .panel-arrow[side="top"],
   .theme-tooltip-panel .panel-arrow[side="bottom"] {
-    list-style-image: url("./tooltip/arrow-vertical-dark@2x.png");
+    list-style-image: url("tooltip/arrow-vertical-dark@2x.png");
   }
 
   .theme-tooltip-panel .panel-arrow[side="left"],
   .theme-tooltip-panel .panel-arrow[side="right"] {
-    list-style-image: url("./tooltip/arrow-horizontal-dark@2x.png");
+    list-style-image: url("tooltip/arrow-horizontal-dark@2x.png");
   }
 }
 
@@ -452,4 +465,13 @@ div.CodeMirror span.eval-text {
   box-shadow: 0 0 4px rgba(255, 255, 255, .3);
   background-color: #0f171f;
   color: var(--theme-body-color);
+}
+
+.CodeMirror-gutter-elt > .breakpoint { /* Firefox < 47 */
+  margin-left: 2px;
+  height: 8px;
+  width: 18px;
+  background-image:  url("images/breakpoint.svg#dark");
+  background-position: -2.8px 50%;
+  background-size: 19.25px 7px;
 }

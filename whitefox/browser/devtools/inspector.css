@@ -57,6 +57,16 @@
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+@media (max-width: 700px) {
+  #inspector-pane-toggle {
+    list-style-image: url(images/pane-toggle.svg#v-collapse);
+  }
+
+  #inspector-pane-toggle[pane-collapsed] {
+    list-style-image: url(images/pane-toggle.svg#v-expand);
+  }
+}
+
 /* Tooltip: Events */
 
 #devtools-tooltip-events-container {

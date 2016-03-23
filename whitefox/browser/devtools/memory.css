@@ -98,7 +98,12 @@ html, body, #app, #memory-tool {
   margin-inline-end: 5px;
 }
 
-.devtools-toolbar > .toolbar-group > label.breakdown-by > span {
+.devtools-toolbar > .toolbar-group > label.breakdown-by > span, /* Firefox < 47 --johnGraciliano */
+.devtools-toolbar > .toolbar-group > label.display-by > span {
+  margin-inline-end: 5px;
+}
+
+.devtools-toolbar > .toolbar-group > label.label-by > span {
   margin-inline-end: 5px;
 }
 
@@ -114,6 +119,18 @@ html, body, #app, #memory-tool {
 #take-snapshot::before {
   background-image: url(images/command-screenshot.png);
 }
+
+#clear-snapshots::before {
+  background-image: url(chrome://devtools/skin/images/clear.svg);
+}
+
+#diff-snapshots::before {
+  background-image: url(chrome://devtools/skin/images/diff.svg);
+}
+#diff-snapshots{
+  font-size: 0; /* Hide the '+/-' text in Firefox 45 */
+}
+
 @media (min-resolution: 1.1dppx) {
   .devtools-button.take-snapshot::before, /* Firefox 44.0a2 --johnGraciliano */
   #take-snapshot::before {
@@ -189,11 +206,17 @@ html, body, #app, #memory-tool {
   color: var(--theme-body-color);
   border-bottom: 1px solid rgba(128,128,128,0.15);
   padding: 8px;
+  cursor: default;
 }
 
 .snapshot-list-item.selected {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
+}
+
+.snapshot-list-item.selected ::-moz-selection {
+  background-color: var(--theme-selection-color);
+  color: var(--theme-selection-background);
 }
 
 .snapshot-list-item .snapshot-info {
@@ -232,6 +255,26 @@ html, body, #app, #memory-tool {
  * Main panel
  */
 
+.vbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.vbox > * {
+  flex: 1;
+
+  /**
+   * By default, flex items have min-width: auto;
+   * (https://drafts.csswg.org/css-flexbox/#min-size-auto)
+   */
+  min-width: 0;
+}
+
 #heap-view {
   /**
    * Flex: contains a .heap-view-panel which needs to fill out all the
@@ -250,6 +293,13 @@ html, body, #app, #memory-tool {
    * (https://drafts.csswg.org/css-flexbox/#min-size-auto)
    */
   min-width: 0;
+  font-size: 90%;
+  overflow-x: auto; /* Allow a horizontal scrollbar that moves the heap-view-panel as a whole: header + tree */
+                    /* This addition needs the rule that follows to work properly --johnGraciliano */
+}
+
+#heap-view > :-moz-any([data-state="snapshot-state-saved-census"],[data-state="diffing-state-took-diff"]).heap-view-panel {
+  min-width: 100ch; /* Prevent a scrollbar just for the tree but require one for the whole panel if the area is narrow --johnGraciliano */
 }
 
 #heap-view > .heap-view-panel {
@@ -274,7 +324,8 @@ html, body, #app, #memory-tool {
 }
 
 #heap-view > .heap-view-panel > .snapshot-status,
-#heap-view > .heap-view-panel > .take-snapshot {
+#heap-view > .heap-view-panel > .take-snapshot,
+#shortest-paths-select-node-msg {
   margin: auto;
   margin-top: 65px;
   font-size: 120%;
@@ -312,19 +363,35 @@ html, body, #app, #memory-tool {
   color: var(--theme-body-color);
   background-color: var(--theme-tab-toolbar-background);
   border-bottom: 1px solid var(--cell-border-color);
+  flex: 0;
+}
+
+.header > span,
+#shortest-paths-header {
+  text-overflow: ellipsis;
+  line-height: var(--heap-tree-header-height);
+  justify-content: center;
+  justify-self: center;
+  white-space: nowrap;
 }
 
 .header > span {
   overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: var(--heap-tree-header-height);
-  justify-content: center;
-  font-size: 90%;
-  white-space: nowrap;
 }
 
 .header > .heap-tree-item-name {
   justify-content: flex-start;
+}
+
+#shortest-paths {
+  background-color: var(--theme-body-background);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#shortest-paths-select-node-msg {
+  justify-self: center;
 }
 
 /**
@@ -342,6 +409,12 @@ html, body, #app, #memory-tool {
 
 .tree-node {
   height: var(--heap-tree-row-height);
+  line-height: var(--heap-tree-row-height);
+  cursor: default;
+}
+
+.children-pointer {
+  padding-inline-end: 5px;
 }
 
 /**
@@ -357,7 +430,8 @@ html, body, #app, #memory-tool {
   display: flex;
 }
 
-.tree-node:nth-child(2n) {
+:not(.tree-node-odd) + :not(:hover):not(.tree-node-odd):nth-child(2n+1).tree-node, /* For Firefox < 47 */
+.tree-node-odd { /* For Firefox >= 47 */
   background-color: var(--row-alt-background-color);
 }
 
@@ -368,6 +442,11 @@ html, body, #app, #memory-tool {
 .heap-tree-item.focused {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
+}
+
+.heap-tree-item.focused ::-moz-selection {
+  background-color: var(--theme-selection-color);
+  color: var(--theme-selection-background);
 }
 
 .heap-tree-item-bytes,
@@ -387,7 +466,21 @@ html, body, #app, #memory-tool {
 .heap-tree-item-total-count,
 .heap-tree-item-bytes,
 .heap-tree-item-total-bytes {
-  width: 10%;
+  width: 19ch; /* Fixed width to avoid missaligned headers when this is 10% and the vertical scrollbar is shown. */
+  /*
+   * Provision for up to 19 characters:
+   *
+   *     GG_MMM_KKK_BBB_100%
+   *     |            |||  |
+   *     '------------'|'--'
+   *     14 ch for 10s | 4 ch for the largest % we will
+   *     of GB and     | normally see: "100%"
+   *     spaces every  |
+   *     3 digits      |
+   *                   |
+   *             A space between the number and percent
+   */
+  min-width: 19ch;
 }
 
 .heap-tree-item-name {
@@ -435,7 +528,7 @@ html, body, #app, #memory-tool {
 }
 
 .heap-tree-percent {
-  width: 2.5em;
+  width: 4ch;
 }
 
 .heap-tree-item.focused .heap-tree-number,
@@ -478,6 +571,19 @@ html, body, #app, #memory-tool {
   margin-right: .5em;
 }
 
+.no-allocation-stacks {
+  border-color: var(--theme-splitter-color);
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  text-align: center;
+  padding: 5px;
+}
+
+/* .frame-link-* rules are moved into components-frame.css starting with Firefox 47 */
+/* However those rules are more specific so the following are left here for Firefox 44-46 */
+/* There is a chance to simply @import(components-frame.css) at the begining of this file. */
+/* Otherwise, the rules may need to be synchronized. */
+
 .focused .frame-link-filename,
 .focused .frame-link-column,
 .focused .frame-link-line,
@@ -511,10 +617,49 @@ html, body, #app, #memory-tool {
   margin-inline-end: 5px;
 }
 
-.no-allocation-stacks {
-    border-color: var(--theme-splitter-color);
-    border-style: solid;
-    border-width: 0px 0px 1px 0px;
-    text-align: center;
-    padding: 5px;
+/**
+ * Dagre-D3 graphs
+ */
+
+.edgePath path {
+  stroke-width: 1px;
+  fill: none;
+}
+
+.theme-dark .edgePath path {
+  stroke: var(--theme-body-color-alt);
+}
+.theme-light .edgePath path {
+  stroke: var(--theme-splitter-color);
+}
+
+g.edgeLabel rect {
+  fill: var(--theme-body-background);
+}
+g.edgeLabel tspan {
+  fill: var(--theme-body-color-alt);
+}
+
+.nodes rect {
+  stroke-width: 1px;
+}
+
+.nodes rect {
+  stroke: var(--theme-tab-toolbar-background);
+}
+.theme-light rect {
+  fill: var(--theme-tab-toolbar-background);
+}
+.theme-dark rect {
+  fill: var(--theme-toolbar-background);
+}
+
+text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+
+text {
+  fill: var(--theme-body-color-alt);
 }

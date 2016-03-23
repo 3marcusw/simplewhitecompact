@@ -105,6 +105,11 @@
 
 /* Sidebar & recording items */
 
+#recordings-list {
+  -moz-border-end: 1px solid var(--theme-splitter-color);
+  border-inline-end: 1px solid var(--theme-splitter-color);
+}
+
 .recording-item {
   padding: 4px;
 }
@@ -267,6 +272,18 @@
 
 .call-tree-header {
   background-color: var(--theme-tab-toolbar-background);
+}
+
+.call-tree-item .call-tree-cell,
+.call-tree-item .call-tree-cell[type=function] description {
+  -moz-user-select: text;
+  /* so that optimizations view doesn't break the lines in call tree */
+  white-space: nowrap;
+}
+
+.call-tree-item .call-tree-cell::-moz-selection,
+.call-tree-item .call-tree-cell[type=function] description::-moz-selection {
+  background-color: var(--theme-highlight-orange);
 }
 
 .call-tree-item:last-child {
@@ -602,6 +619,8 @@ menuitem.marker-color-graphs-grey:before,
 /**
  * JIT View
  */
+/* Since Firefox 47 all this is in jit-optimizations.css   */
+/* Rules in that other file will superceed any rules here. */
 
 #jit-optimizations-view {
   width: 350px;
@@ -776,4 +795,33 @@ menuitem.experimental-option::before {
 #performance-options-menupopup:not(.experimental-enabled) .experimental-option,
 #performance-options-menupopup:not(.experimental-enabled) .experimental-option::before {
   display: none;
+}
+
+.opt-icon::before {
+  content: "";
+  background-image: url(./images/webconsole.svg);
+  background-repeat: no-repeat;
+  background-size: 72px 60px;
+  /* show grey "i" bubble by default */
+  background-position: -36px -36px;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+
+  max-height: 12px;
+}
+
+.theme-light .opt-icon::before {
+  background-image: url(./images/webconsole.svg#light-icons);
+}
+.opt-icon.warning::before {
+  background-position: -24px -24px;
+}
+
+/* for call tree */
+description.opt-icon {
+  margin: 0px 0px 0px 0px;
+}
+description.opt-icon::before {
+  margin: 1px 4px 0px 0px;
 }

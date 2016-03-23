@@ -20,6 +20,24 @@ body {
   height: 100%;
 }
 
+#sidebar-panel-computedview {
+  margin: 0;
+  display : flex;
+  flex-direction: column;
+  width: 100%;
+  /* Bug 1243598 - Reduce the container height by the tab height to make room
+     for the tabs above. */
+  height: calc(100% - 24px);
+  position: absolute;
+}
+
+#sidebar-panel-computedview > .devtools-toolbar {
+  display: flex;
+  height: 23px;
+  min-height: 23px;
+  box-sizing: content-box;
+}
+
 #browser-style-checkbox {
   /* Bug 1200073 - extra space before the browser styles checkbox so
      they aren't squished together in a small window. */
@@ -29,6 +47,9 @@ body {
 #propertyContainer {
   -moz-user-select: text;
   overflow: auto;
+  flex: auto;
+}
+body > #propertyContainer { /* Firefox < 47 */
   min-height: 0;
   flex: 1;
 }
@@ -42,19 +63,41 @@ body {
   display: none;
 }
 
-.property-view {
+body > #propertyContainer > .property-view {
   clear: both;
+}
+.property-view {
   padding: 2px 0 2px 17px;
 }
+#sidebar-panel-computedview > #propertyContainer > .property-view {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-.property-view > * {
+.property-name-container {
+  width: 202px;
+}
+
+.property-value-container {
+  width: 168px;
+}
+
+.property-name-container > *,
+.property-value-container > * {
   display: inline-block;
   vertical-align: middle;
 }
 
-.property-name {
+body > #propertyContainer > .property-view > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+:not(.property-name-container) > .property-name {
   /* -12px is so the expander triangle isn't pushed up above the property */
   width: calc(100% - 12px);
+}
+.property-name {
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -73,8 +116,10 @@ body {
   }
 }
 
-.property-value {
+:not(.property-value-container) > .property-value {
   width: 100%;
+}
+.property-value {
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -89,10 +134,10 @@ body {
 }
 
 @media (min-width: 400px) {
-  .property-name {
+  :not(.property-name-container) > .property-name {
     width: 200px;
   }
-  .property-value {
+  :not(.property-value-container) > .property-value {
     /* -212px is accounting for the 200px property-name and the 12px triangle */
     width: calc(100% - 212px);
   }
@@ -105,7 +150,7 @@ body {
 /* From skin */
 .expander {
   visibility: hidden;
-  margin-left: -12px!important;
+  margin-left: -12px !important;
 }
 
 .expandable {

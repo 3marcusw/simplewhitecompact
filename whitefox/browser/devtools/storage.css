@@ -26,20 +26,6 @@ label.table-widget-column-header{
   min-width: 4em;
 }
 
-label.table-widget-column-header:last-child{
-  border-bottom-width: 1px!important;
-  height: 25px; /* The value for .devtools-toolbar in toolbars.css, 24px, plus 1px for the extra bottom border */
-}
-label.table-widget-column-header:last-child:not([sorted]){
-  --border-img: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%, transparent  calc(100% - 1px), var(--theme-splitter-color) calc(100% - 1px)) 1 1;
-  border-image: var(--border-img);
-}
-
-.table-widget-wrapper:last-of-type > .table-widget-column > label.table-widget-column-header{
-  -moz-border-end-width: 0 !important;
-  border-inline-end-width: 0 !important;
-}
-
 /* Columns with date should have a min width so that date is visible */
 #expires, #lastAccessed, #creationTime {
   min-width: 150px;

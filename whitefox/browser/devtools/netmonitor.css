@@ -36,6 +36,7 @@
 #requests-menu-reload-notice-button {
   min-height: 26px;
   margin: 0;
+  background-color: var(--theme-toolbar-background);
 }
 
 /* Network requests table */
@@ -653,13 +654,24 @@ box.requests-menu-status[code^="5"] {
   width: 4.5em;
 }
 
-/* Footer */
+/* Main toolbar | Footer */
+
+.theme-light #netmonitor-toolbar,
+.theme-light #requests-menu-footer {
+  --table-splitter-color: rgba(190,190,190,.85);
+}
+
+.theme-dark #netmonitor-toolbar,
+.theme-dark #requests-menu-footer {
+  --table-splitter-color: hsla(210,8%,5%,.6);
+}
 
 #requests-menu-footer {
   background-color: var(--theme-toolbar-background);
   border-top: 1px solid var(--table-splitter-color);
 }
 
+.requests-menu-filter-button, /* FF47 et al. */
 .requests-menu-footer-button,
 .requests-menu-footer-label {
   min-width: 1em;
@@ -668,11 +680,13 @@ box.requests-menu-status[code^="5"] {
   padding: 2px 1vw;
 }
 
+.theme-dark .requests-menu-filter-button, /* FF47 et al. */
 .theme-dark .requests-menu-footer-button,
 .theme-dark .requests-menu-footer-label {
   color: var(--theme-selection-color);
 }
 
+.theme-light .requests-menu-filter-button, /* FF47 et al. */
 .theme-light .requests-menu-footer-button,
 .theme-light .requests-menu-footer-label {
   color: var(--theme-body-color);
@@ -682,29 +696,30 @@ box.requests-menu-status[code^="5"] {
   min-width: 2px;
 }
 
-.theme-dark .requests-menu-footer-spacer:not(:first-child),
-.theme-dark .requests-menu-footer-button:not(:first-child) {
+#requests-menu-filter-buttons > .requests-menu-filter-button, /* FF47 et al. */
+#requests-menu-filter-buttons + #requests-menu-spacer, /* FF47 et al. */
+.requests-menu-footer-spacer:not(:first-child),
+.requests-menu-footer-button:not(:first-child) {
   -moz-border-start: 1px solid var(--table-splitter-color);
 }
 
-.theme-light .requests-menu-footer-spacer:not(:first-child),
-.theme-light .requests-menu-footer-button:not(:first-child) {
-  -moz-border-start: 1px solid var(--table-splitter-color);
-}
-
+.requests-menu-filter-button, /* FF47 et al. */
 .requests-menu-footer-button {
   -moz-appearance: none;
-  background: rgba(0,0,0,0.025);
+  background: transparent;
 }
 
+.requests-menu-filter-button:hover, /* FF47 et al. */
 .requests-menu-footer-button:hover {
   background: rgba(0,0,0,0.10);
 }
 
+.requests-menu-filter-button:hover:active, /* FF47 et al. */
 .requests-menu-footer-button:hover:active {
   background-color: var(--theme-selection-background-semitransparent);
 }
 
+.requests-menu-filter-button:not(:active)[checked], /* FF47 et al. */
 .requests-menu-footer-button:not(:active)[checked] {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
@@ -746,6 +761,7 @@ box.requests-menu-status[code^="5"] {
   list-style-image: url(images/profiler-stopwatch.svg);
   -moz-padding-end: 0;
   cursor: pointer;
+  min-width: 12px;
 }
 
 #requests-menu-network-summary-label {
@@ -753,6 +769,7 @@ box.requests-menu-status[code^="5"] {
   cursor: pointer;
 }
 
+#requests-menu-network-summary-button:hover > label,
 #requests-menu-network-summary-label:hover {
   text-decoration: underline;
 }
@@ -867,6 +884,10 @@ box.requests-menu-status[code^="5"] {
     height: 22px;
   }
 
+  #requests-menu-clear-button{
+    min-width: 22px;
+  }
+
   .requests-menu-header-button {
     min-height: 22px;
     padding-left: 8px;
@@ -957,6 +978,7 @@ box.requests-menu-status[code^="5"] {
   font-size: 90%;
 }
 
+:root[platform="win"] .requests-menu-filter-button,
 :root[platform="win"] .requests-menu-footer-button,
 :root[platform="win"] .requests-menu-footer-label {
   padding-top: 0px;
@@ -965,6 +987,7 @@ box.requests-menu-status[code^="5"] {
 
 /* Responsive sidebar */
 @media (max-width: 700px) {
+  :root[platform="win"] .requests-menu-filter-button,
   :root[platform="win"] .requests-menu-footer-button,
   :root[platform="win"] .requests-menu-footer-label {
     padding-top: 0px;
@@ -995,6 +1018,7 @@ box.requests-menu-status[code^="5"] {
     padding-top: 1px;
     font-size: 90%;
   }
+  :root .requests-menu-filter-button,
   :root .requests-menu-footer-button,
   :root .requests-menu-footer-label {
     padding-top: 0px;
@@ -1002,6 +1026,7 @@ box.requests-menu-status[code^="5"] {
   }
   /* Responsive sidebar */
   @media (max-width: 700px) {
+    :root .requests-menu-filter-button,
     :root .requests-menu-footer-button,
     :root .requests-menu-footer-label {
       padding-top: 0px;

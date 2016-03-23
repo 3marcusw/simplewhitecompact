@@ -4,15 +4,15 @@
 
 
 /* Tab Groups */
-:root #tabGroups-tabview-button {
+toolbarbutton#tabGroups-tabview-button {
   list-style-image: url("chrome://browser/skin/Toolbar.png");
   -moz-image-region: rect(0, 648px, 18px, 630px);
 }
-:root toolbar[brighttext] #tabGroups-tabview-button {
+toolbar[brighttext] toolbarbutton#tabGroups-tabview-button {
   list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 }
-:root #tabGroups-tabview-button[cui-areatype="menu-panel"],
-:root toolbarpaletteitem[place="palette"] > #tabGroups-tabview-button {
+toolbarbutton#tabGroups-tabview-button[cui-areatype="menu-panel"],
+toolbarpaletteitem[place="palette"] > toolbarbutton#tabGroups-tabview-button {
   list-style-image: url(chrome://browser/skin/menuPanel.png);
   -moz-image-region: rect(0px, 608px, 32px, 576px);
 }

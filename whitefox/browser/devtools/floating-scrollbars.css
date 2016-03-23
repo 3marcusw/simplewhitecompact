@@ -7,10 +7,12 @@ scrollbar {
   background-image: none;
   z-index: 2147483647;
   padding: 2px;
+  border: none;
 }
 
 scrollbar[orient="vertical"] {
   -moz-margin-start: -10px;
+  margin-inline-start: -10px;
   min-width: 10px;
   max-width: 10px;
 }
@@ -21,13 +23,18 @@ scrollbar[orient="horizontal"] {
   max-height: 10px;
 }
 
+slider {
+  -moz-appearance: none !important;
+}
+
 scrollbar thumb {
   -moz-appearance: none !important;
-  border-width: 0px !important;
   background-color: rgba(170,170,170,0.2) !important;
+  border-width: 0px !important;
   border-radius: 3px !important;
 }
 
-scrollbar scrollbarbutton, scrollbar gripper {
+scrollbar scrollbarbutton,
+scrollbar gripper {
   display: none;
 }
