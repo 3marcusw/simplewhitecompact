@@ -5594,6 +5594,7 @@ svg|line.css-transform-line {
 }
 
 :root[devtoolstheme="light"] #developer-toolbar > toolbarbutton:not([checked=true]) > image,
+:root[devtoolstheme="light"] #developer-toolbar > #developer-toolbar-toolbox-button:hover:active > image,
 :root[devtoolstheme="light"] .gclitoolbar-input-node:not([focused=true])::before  {
   filter: invert(1);
 }
@@ -5625,6 +5626,13 @@ svg|line.css-transform-line {
   -moz-image-region: rect(0px, 64px, 16px, 48px);
 }
 
+:root[devtoolstheme="light"] #developer-toolbar-toolbox-button[checked=true]:hover > image {
+  filter: brightness(.75) saturate(1.25);
+}
+:root[devtoolstheme="dark"]  #developer-toolbar-toolbox-button[checked=true]:hover > image {
+  filter: brightness(1.1875) saturate(.875);
+}
+
 @media (min-resolution: 1.1dppx) {
   #developer-toolbar-toolbox-button {
     list-style-image: url("chrome://browser/skin/devtools/images/toggle-tools@2x.png");
@@ -5646,6 +5654,7 @@ svg|line.css-transform-line {
 
 #developer-toolbar-closebutton {
   list-style-image: url("chrome://browser/skin/devtools/images/close.png");
+  -moz-image-region: auto;
   -moz-appearance: none;
   border: none;
   margin: 0 4px;
@@ -6177,6 +6186,16 @@ toolbar[brighttext] #downloads-indicator-counter {
   background-image: linear-gradient(#B4211B, #8A1915);
   border-radius: 1px;
   -moz-margin-end: 5px;
+}
+
+#developer-toolbar-toolbox-button[error-count]:hover::before {
+  background-image: linear-gradient(#CA251E, #9B1C18);
+  color: #FFFFFA;
+}
+
+#developer-toolbar-toolbox-button[error-count]:hover:active::before {
+  background-image: linear-gradient(#FF261D, #C31D17);
+  color: #FFF;
 }
 
 /* Social toolbar item */
