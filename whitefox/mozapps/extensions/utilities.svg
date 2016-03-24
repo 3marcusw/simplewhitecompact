@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+    use[id$="-native"] {
+      stroke: GrayText;
+    }
+    use[id$="-grayscale"] {
+      stroke: #4d4d4d;
+    }
+    use[id$="-inverted"] {
+      stroke: #FFF;
+    }
+    use[id$="-blue"] {
+      stroke: #3BADE5;
+    }
+  </style>
+  <defs>
+    <g id="utilities-shape">
+      <circle cx="8" cy="8" r="2.5"/>
+      <path d="M 8,8   m 6.388,1.204
+               l -1.094,0.287   a 5.5,5.5 0 0,1 -0.496,1.198   l 0.570,0.977   a 6.5,6.5 0 0,1 -1.702,1.702
+               l -0.977,-0.570   a 5.5,5.5 0 0,1 -1.198,0.496   l -0.287,1.094   a 6.5,6.5 0 0,1 -2.408,0
+               l -0.287,-1.094   a 5.5,5.5 0 0,1 -1.198,-0.496   l -0.977,0.570   a 6.5,6.5 0 0,1 -1.702,-1.702
+               l 0.570,-0.977   a 5.5,5.5 0 0,1 -0.496,-1.198   l -1.094,-0.287   a 6.5,6.5 0 0,1 0,-2.408
+               l 1.094,-0.287   a 5.5,5.5 0 0,1 0.496,-1.198   l -0.570,-0.977   a 6.5,6.5 0 0,1 1.702,-1.702
+               l 0.977,0.570   a 5.5,5.5 0 0,1 1.198,-0.496   l 0.287,-1.094   a 6.5,6.5 0 0,1 2.408,0
+               l 0.287,1.094   a 5.5,5.5 0 0,1 1.198,0.496   l 0.977,-0.570   a 6.5,6.5 0 0,1 1.702,1.702
+               l -0.570,0.977   a 5.5,5.5 0 0,1 0.496,1.198   l 1.094,0.287   a 6.5,6.5 0 0,1 0,2.408
+               Z"/>
+    </g>
+  </defs>
+  <use id="utilities" xlink:href="#utilities-shape"/>
+  <use id="utilities-native" xlink:href="#utilities-shape"/>
+  <use id="utilities-grayscale" xlink:href="#utilities-shape"/>
+  <use id="utilities-inverted" xlink:href="#utilities-shape"/>
+  <use id="utilities-blue" xlink:href="#utilities-shape"/>
+</svg>
