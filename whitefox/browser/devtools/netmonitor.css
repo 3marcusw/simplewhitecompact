@@ -467,6 +467,7 @@ box.requests-menu-status[code^="5"] {
 #network-table .side-menu-widget-item {
   border-top-color: transparent;
   border-bottom-color: transparent;
+  border-bottom-width: 0; /* Added to avoid discontinuities in the timimgs section (waterfall) vertical lines --johnGraciliano */
 }
 
 .side-menu-widget-item-contents {
