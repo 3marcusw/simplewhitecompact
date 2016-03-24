@@ -107,7 +107,18 @@ html, body, #app, #memory-tool {
   margin-inline-end: 5px;
 }
 
+/* The next two rule sets are added to improve the gaps between toolbar elements. --johnGraciliano*/
+.devtools-toolbar > .toolbar-group:first-child{
+  margin-inline-end: 2px;
+}
+.devtools-toolbar > label > span:first-child,
+.devtools-toolbar > .toolbar-group > label > span:first-child{
+  margin-inline-start: 3px;
+}
+
 .devtools-toolbar > label {
+  display: flex;  /* --johnGraciliano */
+  align-items: center;  /* --johnGraciliano */
   margin-inline-end: 5px;
 }
 
@@ -127,8 +138,24 @@ html, body, #app, #memory-tool {
 #diff-snapshots::before {
   background-image: url(chrome://devtools/skin/images/diff.svg);
 }
+
+/* Hide the text labels to make image only buttons (some versions of Firefox). --johnGraciliano */
+#clear-snapshots,
 #diff-snapshots{
-  font-size: 0; /* Hide the '+/-' text in Firefox 45 */
+  font-size: 0;
+  background-color: transparent;
+}
+
+/* The next two rule sets help the buttons behave as image only --johnGraciliano */
+#clear-snapshots::before,
+#diff-snapshots:not([disabled])::before{
+  opacity: .8;
+}
+
+#diff-snapshots[disabled]::before, /* The opacity for the button is already .5 */
+#clear-snapshots:hover::before,
+#diff-snapshots:not([disabled]):hover::before{
+  opacity: 1;
 }
 
 @media (min-resolution: 1.1dppx) {
