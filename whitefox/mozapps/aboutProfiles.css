@@ -4,11 +4,22 @@
 
 html {
   --aboutProfiles-table-background: #ebebeb;
-  background-color: var(--in-content-page-background);
+  background-color: var(--in-content-frame-background); /* was var(--in-content-page-background) --johnGraciliano */
+  padding: 48px 48px;
 }
 
 body {
-  margin: 40px 48px;
+  margin: auto;
+}
+
+#body {
+  box-sizing: content-box;
+  max-width: 90em;
+  background-color: var(--in-content-page-background);
+  color: black;
+  border: 1px solid var(--in-content-main-border-color);
+  border-radius: 10px;
+  padding: 3em 30px;
 }
 
 .page-subtitle {
@@ -31,7 +42,8 @@ table {
 }
 
 th, td {
-  border: 1px solid var(--in-content-border-color);
+  border-width: 0;
+  border-style: solid;
   padding: 4px;
   text-align: start;
 }
@@ -39,6 +51,7 @@ th, td {
 th {
   background-color: var(--in-content-table-header-background);
   color: var(--in-content-selected-text);
+  border-color: var(--in-content-border-color);
 }
 
 th.column {
@@ -48,6 +61,28 @@ th.column {
 
 td {
   border-color: var(--in-content-table-border-dark-color);
+}
+
+th:not(:last-child),
+td:not(:last-child){
+  -moz-border-end-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+tr:not(:last-child) > th,
+tr:not(:last-child) > td{
+  border-bottom-width: 1px;
+}
+
+thead + tbody > tr:first-child > td{
+  border-top:  1px solid var(--in-content-border-color);
+}
+
+table button {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 1px;
+  height: auto;
 }
 
 #action-box {
