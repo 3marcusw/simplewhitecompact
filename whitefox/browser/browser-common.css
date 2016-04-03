@@ -120,7 +120,8 @@
 
   --navigator-toolbox-after-background-color: #383838;
 
-  --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted.svg) 4 3 0 / 4px 3px 0 repeat stretch;
+  /* --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted.svg) 4 3 0 / 4px 3px 0 repeat; */
+  --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted@3x.png) 12 9 0 / 4px 3px 0 stretch;
   --tabbrowser-tab-color: #ddd;
   --tabbrowser-tab-selected-color: #fff;
   --tabbrowser-tab-background-image: -moz-linear-gradient(rgba(23,23,23,.625), rgba(23,23,23,.875));
