@@ -303,6 +303,7 @@
   /* margin-bottom: 1em;  * Removed for v.42.0a2+ aesthetics. OK!  -johnGraciliano */
 }
 
+#identity-popup-securityView-footer,
 #identity-popup-securityView-body {
   -moz-padding-end: 1em;
 }
@@ -323,12 +324,14 @@
 description#identity-popup-content-verified-by,
 description#identity-popup-content-owner,
 description#identity-popup-content-verifier,
+#identity-popup-securityView-footer > button,
 #identity-popup-securityView-body > button,
 #identity-popup-content-owner,
 #identity-popup-securityView > #identity-popup-securityView-connection.identity-popup-text {
   margin-top: 1em;
 }
 
+#identity-popup-securityView-footer > button,
 #identity-popup-securityView-body > button {
   margin-inline-start: 0;
   margin-inline-end: 0;
