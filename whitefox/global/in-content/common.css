@@ -312,9 +312,9 @@ html|button {
 xul|colorpicker[type="button"],
 xul|menulist {
   -moz-appearance: none;
-  height: 30px;
+  min-height: 30px; /* Testing!  This was "height: 30px;" --johnGraciliano */
   color: var(--in-content-text-color);
-  line-height: 20px;
+  line-height: 20px; /* This keeps the single line text button height to 30px */
   border: 1px solid var(--in-content-box-border-color);
   -moz-border-top-colors: none !important;
   -moz-border-right-colors: none !important;
@@ -435,7 +435,8 @@ xul|*.help-button > xul|*.button-box > xul|*.button-text {
 script[src$="preferences.js"] ~ stack  *|button.help-button {
   position: relative;
   z-index: 1;
-  height: unset;
+  height: auto;
+  min-height: unset;
   margin: -1px;
   -moz-margin-end: 0;
 }
@@ -454,6 +455,7 @@ script[src$="preferences.js"] ~ stack  .main-content > hbox:last-child {
 }
 
 xul|*.spinbuttons-button {
+  min-height: initial;
   -moz-margin-start: 10px !important;
   -moz-margin-end: 2px !important;
 }
@@ -631,7 +633,10 @@ html|a:hover:active,
 html|input[type="checkbox"] {
   opacity: 0;
   width: 0;
+  /*visibility: hidden; */
+  pointer-events: none; /* It is really see thru! */
   position: absolute;
+  /* z-index: -1; /* This will prevent it from being top, even invisible*/
 }
 
 /* Create a box to style as the checkbox */
@@ -1031,6 +1036,26 @@ xul|treechildren::-moz-tree-cell-text(selected) {
     -moz-margin-end: 0;
   }
 
+  /* THE NEXT CODE REPLACES THE ONE THAT FOLLOWS ***********************/
+  /* Never draw a border for the focusring, use outline instead */
+  xul|*.button-box,
+  xul|*.menulist-label-box,
+  xul|*.radio-label-box,
+  xul|*.checkbox-label-box {
+    border-style: none;
+  }
+
+  xul|*.inline-link:-moz-focusring,
+  xul|button:-moz-focusring > xul|*.button-box,
+  xul|menulist:-moz-focusring > xul|*.menulist-label-box,
+  xul|radio[focused="true"] > xul|*.radio-label-box,
+  html|input[type="checkbox"]:-moz-focusring + html|label:before,
+  xul|checkbox:-moz-focusring > xul|*.checkbox-label-box {
+    outline: 1px dotted;
+  }
+
+  /* THIS IS THE CODE THAT IS BEING REPLACED ***************************%
+
   html|a:-moz-focusring,
   xul|*.text-link:-moz-focusring,
   xul|*.inline-link:-moz-focusring {
@@ -1038,7 +1063,7 @@ xul|treechildren::-moz-tree-cell-text(selected) {
   }
 
   /* Don't draw a transparent border for the focusring because when page
-     colors are disabled, the border is drawn in -moz-DialogText */
+     colors are disabled, the border is drawn in -moz-DialogText *%
   xul|*.text-link:not(:-moz-focusring),
   xul|button:not(:-moz-focusring) > xul|*.button-box,
   xul|menulist:not(:-moz-focusring) > xul|*.menulist-label-box,
@@ -1063,6 +1088,8 @@ xul|treechildren::-moz-tree-cell-text(selected) {
   xul|checkbox:not(:-moz-focusring) > xul|*.checkbox-label-box {
     -moz-margin-start: 0;
   }
+
+  %* END OF REPLACED CODE **********************************************/
 
   /* Use a 2px border so that selected row highlight is still visible behind
       an existing high-contrast border that uses the background color */
@@ -1250,6 +1277,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
   display: none;
 }
 
+#workers > .targets > .target-container::before,
 #workers > .targets > .target::before,
 #workers > div > .targets > .target::before{
   content: "";
@@ -1259,7 +1287,12 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
   width: 24px;
   margin-inline-end: 5px;
 }
+#workers > .targets > .target-container::before{
+  margin-top: 6px;
+  align-self: flex-start;
+}
 
+#tab-workers > #workers > .targets > .target-container > .target-icon,
 #tab-workers > #workers > .targets > .target > .target-icon,
 #tab-workers > #workers > div > .targets > .target > .target-icon{
   display: none;
@@ -1275,7 +1308,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
     background-image: url(chrome://devtools/skin/images/debugging-addons.svg);
     background-size: 100%;
     height: 32px;
-    width: 32px;
+    min-width: 32px;
     margin-inline-start: 6px;
   }
   .category[value="workers"]::before{
@@ -1283,7 +1316,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
     background-image: url(chrome://devtools/skin/images/debugging-workers.svg);
     background-size: 100%;
     height: 32px;
-    width: 32px;
+    min-width: 32px;
     margin-inline-start: 6px;
   }
 }
