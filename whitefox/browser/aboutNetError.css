@@ -33,36 +33,26 @@ ul {
   max-width: 512px;
 }
 
-/* #errorTitle {
-  background: url("aboutNetError_info.svg") left 0 no-repeat;
-  background-size: 3em;
+#errorTitle {
+  background: url("aboutNetError_info.svg") left 2px no-repeat;
+  background-size: 45px; /* it was 3em */
   -moz-margin-start: -5em;
   -moz-padding-start: 5em;
-} */
+}
 
 #errorTitleText {
-  background: url("aboutNetError_info.png") left 0 no-repeat;
-  background-size: 1.2em;
-  -moz-margin-start: -2em;
-  -moz-padding-start: 2em;
+  border-bottom: 1px solid #C1C1C1;
+  padding-bottom: 0.4em;
 }
 
-@media (min-resolution: 2dppx) {
-  #errorTitleText {
-    background-image: url("aboutNetError_info@2x.png");
-  }
+#errorTitle:-moz-dir(rtl) { /* It was #errorTitleText... (wrong!) --johnGraciliano */
+  background-position: right 2px;
 }
 
-/* #errorTitle[sslv3=true],
-#errorTitle[weakCrypto=true], */
-#errorTitle[sslv3=true] #errorTitleText,
-#errorTitle[weakCrypto=true] #errorTitleText,
-#errorTitleText[sslv3=true] {
-  background-image: url("aboutNetError_alert.svg");
-}
-
-#errorTitleText:-moz-dir(rtl) {
-  background-position: right 0;
+#errorTitleText[sslv3=true] #errorTitle, /* Firefox < 41 */
+#errorTitle[sslv3=true],
+#errorTitle[weakCrypto=true] {
+  background-image: url("cert-error.svg");
 }
 
 #errorTryAgain {
@@ -75,8 +65,10 @@ ul {
 }
 
 @media (max-width: 675px) {
-/*  #errorTitle, */
-  #errorTitleText {
+  #errorTitle,
+  #errorTitleText[sslv3=true] #errorTitle,
+  #errorTitle[sslv3=true],
+  #errorTitle[weakCrypto=true] {
     padding-top: 0;
     background-image: none;
     -moz-padding-start: 0;
@@ -90,6 +82,8 @@ ul {
 button:disabled {
   cursor: pointer;
 }
+
+@supports (word-spacing:100%) { /* Test Firefox >= 45 */
 
 #learnMoreContainer {
   display: none;
@@ -126,9 +120,11 @@ button:disabled {
 }
 
 #certificateErrorReporting,
-#reportCertificateError,
+#reportCertificateError, /* <- Firefox 45 needs this.  Not used in Firerox 46 and later. */
 #reportSentMessage {
   display: none;
+}
+
 }
 
 div#certificateErrorReporting,
@@ -136,8 +132,18 @@ div#weakCryptoAdvanced {
   display: none;
   float: right;
   /* Align with the "Try Again" button */
-  margin-top: 24px;
+  margin-top: 22px;
   -moz-margin-end: 24px;
+}
+div#certificateErrorReporting:-moz-dir(rtl),
+div#weakCryptoAdvanced:-moz-dir(rtl) {
+  float: left;                                /* --johnGraciliano */
+}
+@supports (word-spacing:100%) { /* Firefox >= 45 */
+div#certificateErrorReporting[id]{
+  float: none;
+  margin: 0;
+}
 }
 
 div#certificateErrorReporting a,
@@ -169,9 +175,33 @@ div#weakCryptoAdvancedPanel {
   padding: 0 12px 12px 12px;
   box-shadow: 0 0 4px #ddd;
   font-size: 0.9em;
-  position: absolute;
+/*  position: absolute;  REMOVED IN FIREFOX 46 DEFAULT THEME, BUT I EXCLUDE FIREFOX 45 TOO (may be wrong) */
+}
+@supports (not (text-emphasis:none)) { /* Firefox < 46 (This is a bad test checks layout.css.text-emphasis.enabled = true) --johnGraciliano */
+div#certificateErrorReportingPanel,
+div#weakCryptoAdvancedPanel {
+  REMOVED-position: absolute; /* This is still present in the default theme in Firefox 45 (not in 46 and later) but I am excluding 45 too */
+}
+}
+
+#errorStatePanel, /* FF >= 39 */
+#overrideWeakCryptoPanel { /* FF >= 44 */
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-start;
+  margin-top: 1em;
+}
+
+@supports (not (word-spacing:100%)) { /* Test Firefox < 45 */
+
+div#certificateErrorReportingPanel,
+div#weakCryptoAdvancedPanel {
   width: 75%;
   margin-top: 10px;
+  position: absolute; /* This present in the default theme until Firefox 45 (removed since 46) but I am excluding 45 too */
 }
 
 div#certificateErrorReportingPanel:-moz-dir(ltr),
@@ -181,17 +211,27 @@ div#weakCryptoAdvancedPanel:-moz-dir(ltr) {
 
 div#certificateErrorReportingPanel:-moz-dir(rtl),
 div#weakCryptoAdvancedPanel:-moz-dir(rtl) {
-  right: 0;
+  right: 34%;                               /* --johnGraciliano */
 }
 
-#errorStatePanel,
-#overrideWeakCryptoPanel {
+#errorStatePanel, /* FF >= 39 */
+#overrideWeakCryptoPanel { /* FF >= 44 */
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
-  align-items: flex-start;
+  align-items: baseline; /* it was flex-start --johnGraciliano */
+  margin-top: 0;
+}
+
+/* The following sets to correct alignment and spacing --johnGraciliano*/  
+#learnMoreLink {
+  line-height: 30px; /* As a button's height */
+}
+
+/* The following is to correct alignment and spacing --johnGraciliano*/  
+button#reportCertificateError,
+button#reportCertificateErrorRetry {
+  margin: 0; /* The button's margin makes problem */
+}
+
 }
 
 span#hostname {
@@ -202,12 +242,58 @@ span#hostname {
   cursor: pointer;
 }
 
+#errorCode { /* For Firefox >= 45 */
+  color: var(--in-content-page-color);
+  cursor: text;
+  text-decoration: none;
+}
+
+@supports (not (list-style:'-')) { /* Test Firefox < 39 */
+  
+#reportingState { /* FF < 39 */
+  NOT-padding-left: 150px;
+  -moz-padding-start: 150px;
+}
+
 #reportSendingMessage {
+  position: relative;  /* FF < 39 */
+  display: none;       /* FF < 39 */
   /* adjust the line-height to match the link */
-  line-height: 22px;
+  /* line-height: 22px; /* FF = 39 */
 }
 
 #reportSentMessage {
+  position: relative;  /* FF < 39 */
+  display: none;       /* FF < 39 */
   /* adjust the line-height to match the link */
-  line-height: 22px;
+  /* line-height: 22px; /* FF = 39 */
 }
+
+button#reportCertificateError {  /* FF < 39 */
+  position: relative;
+}
+
+button#reportCertificateErrorRetry {  /* FF < 39 */
+  position: relative;
+  display: none;
+}
+}
+
+
+
+button#errorTryAgain {
+  background-color: var(--in-content-primary-button-background);
+  border: none;
+  color: var(--in-content-selected-text);
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+button#errorTryAgain:hover {
+  background-color: var(--in-content-primary-button-background-hover) !important;
+}
+
+button#errorTryAgain:hover:active {
+  background-color: var(--in-content-primary-button-background-active) !important;
+}
+
