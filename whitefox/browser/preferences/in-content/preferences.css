@@ -284,6 +284,7 @@ treecol {
   margin-top: 0;
 }
 
+#trackingProtectionRadioGroup,
 #locationBarGroup .groupbox-body {
  -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
 }
@@ -420,6 +421,7 @@ description > html|a {
   height: 18px;
   padding: 0;
   min-width: 18px;
+  min-height: 18px;
 }
 
 #dialogBox > .groupbox-body {
