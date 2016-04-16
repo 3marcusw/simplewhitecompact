@@ -39,6 +39,12 @@ html, body, #app, #memory-tool {
   --heap-tree-row-height: 14px;
   --heap-tree-header-height: 17px;
 }
+@supports (line-height:calc(1px)){ /* Firefox >= 48 */
+  #memory-tool {
+    --heap-tree-row-height: 18px;
+    --heap-tree-header-height: 18px;
+  }
+}
 
 /**
  * Toolbar
@@ -83,7 +89,7 @@ html, body, #app, #memory-tool {
    * toolbar's start boundary. A .devtools-toolbar has a 3px start padding
    * and the preceeding .take-snapshot button is exactly 32px.
    */
-  margin-inline-start: calc(var(--sidebar-width) - 3px - 32px);
+  margin-inline-start: calc(var(--sidebar-width) - 3px - 32px - 2px);
   border-inline-start: 1px solid var(--theme-splitter-color);
   padding-inline-start: 5px;
 }
@@ -165,17 +171,18 @@ html, body, #app, #memory-tool {
   }
 }
 
-/**
- * Due to toolbar styles of `.devtools-toolbarbutton:not([label])` which overrides
- * .devtools-toolbarbutton's min-width of 78px, reset the min-width.
- */
+/* I am excluding this bars --johnGraciliano *%
+#record-allocation-stacks-label,
+#pop-view-button-label {
+  border-inline-end: 1px solid var(--theme-splitter-color);
+  padding-inline-end: 5px;
+}
+%*********************************************/
+
 #import-snapshot,
 #clear-snapshots {
   -moz-box-align: center;
   flex-grow: 1;
-  padding: 1px;
-  margin: 2px 1px;
-  min-width: unset;
 }
 
 .spacer {
@@ -313,7 +320,7 @@ html, body, #app, #memory-tool {
    * is the sidebar. @see #memory-tool-container.
    */
   flex: 1;
-  background-color: var(--theme-toolbar-background);
+  background-color: var(--theme-body-background);
 
   /**
    * By default, flex items have min-width: auto;
@@ -352,6 +359,7 @@ html, body, #app, #memory-tool {
 
 #heap-view > .heap-view-panel > .snapshot-status,
 #heap-view > .heap-view-panel > .take-snapshot,
+#heap-view .empty,
 #shortest-paths-select-node-msg {
   margin: auto;
   margin-top: 65px;
@@ -476,6 +484,7 @@ html, body, #app, #memory-tool {
   color: var(--theme-selection-background);
 }
 
+.heap-tree-item-individuals,
 .heap-tree-item-bytes,
 .heap-tree-item-count,
 .heap-tree-item-total-bytes,
@@ -532,7 +541,6 @@ html, body, #app, #memory-tool {
 .heap-tree-percent,
 .heap-tree-item-name {
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .heap-tree-number {
@@ -561,6 +569,31 @@ html, body, #app, #memory-tool {
 .heap-tree-item.focused .heap-tree-number,
 .heap-tree-item.focused .heap-tree-percent {
   color: inherit;
+}
+
+.heap-tree-item-individuals {
+  width: 38px;
+  min-width: 20px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.heap-tree-item-individuals > button {
+  height: 10px;
+  width: 32px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/**
+ * Tree map
+ */
+
+.tree-map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 /**
@@ -596,6 +629,10 @@ html, body, #app, #memory-tool {
   opacity: .5;
   margin-left: .5em;
   margin-right: .5em;
+}
+
+.heap-tree-item-address {
+  font-family: monospace;
 }
 
 .no-allocation-stacks {

@@ -355,6 +355,8 @@ body > #ruleview-container {
   width: 0.9em;
   height: 0.9em;
   vertical-align: middle;
+  /* align the swatch with its value */
+  margin-top: -1px; /* Make sure this applies beyond .ruleview-swatch */
   -moz-margin-end: 5px;
   display: inline-block;
   position: relative;
@@ -383,6 +385,11 @@ body > #ruleview-container {
 
 .ruleview-filterswatch {
   background: url("./images/filter-swatch.svg");
+  background-size: 1em;
+}
+
+.ruleview-angleswatch {
+  background: url("./images/angle-swatch.svg");
   background-size: 1em;
 }
 

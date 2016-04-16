@@ -3,9 +3,14 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* Reload and waiting notices */
+
+#properties-tabpanel-content-empty,
+#properties-empty {
+  color:  var(--theme-body-color); /* This was added for the Dark theme --johnGraciliano */
+}
+
 .notice-container {
   margin-top: -50vh;
-  background-color: var(--theme-toolbar-background);
   color: var(--theme-body-color-alt);
 }
 
@@ -62,13 +67,10 @@ g.edgeLabel tspan {
 .nodes rect {
   stroke-width: 1px;
   cursor: pointer;
-}
-
-.nodes rect {
   stroke: var(--theme-tab-toolbar-background);
 }
 .theme-light rect {
-  fill: var(--theme-tab-toolbar-background);
+  fill: #e4e4e4; /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
 }
 .theme-dark rect {
   fill: var(--theme-toolbar-background);
