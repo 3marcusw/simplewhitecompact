@@ -3150,8 +3150,7 @@ richlistitem[type~="action"][actiontype="searchengine"] > .ac-title-box > .ac-si
 }/*Is this supposed to be here??? (It was not in SimpleWhite) --johnGraciliano */
 
 richlistitem[type~="action"][actiontype="switchtab"] > .ac-url-box > .ac-action-icon {
-  list-style-image: url("chrome://browser/skin/actionicon-tab.png");
-  -moz-image-region: rect(0, 16px, 11px, 0);
+  list-style-image: url("chrome://browser/skin/switchTab.svg#any");
   padding: 0 3px;
 /*width: 22px;
   height: 11px; --this was not in SimpleWhite! ****/
@@ -3171,7 +3170,7 @@ richlistitem[type~="action"][actiontype="switchtab"] > .ac-url-box > .ac-action-
   @media not all and (-moz-os-version: windows-win7),
          not all and (-moz-windows-default-theme) {
     richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-box > .ac-action-icon {
-      -moz-image-region: rect(11px, 16px, 22px, 0);
+      list-style-image: url("chrome://browser/skin/switchTab.svg#this");
     }
 
     /** No actionicon-tab@2x.png, so the next is gone  ******%
