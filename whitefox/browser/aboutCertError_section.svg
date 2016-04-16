@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="16"
+     height="16"
+     viewBox="0 0 16 16">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+    use[id="security"] {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+	<g id="collapsed-shape">
+	  <path  d="M 4,3.5    l 7.7,4   l -7.7,4   z" fill="#5a5a5a"  stroke-width="0"/>
+	</g>
+	<g id="collapsed-RTL-shape">
+	  <path  d="M 12,3.5    l -7.7,4   l 7.7,4   z" fill="#5a5a5a"  stroke-width="0"/>
+	</g>
+	<g id="expanded-shape">
+	  <path  d="M 3.5,4    l 4,7.7   l 4,-7.7   z" fill="#5a5a5a"  stroke-width="0"/>
+	</g>
+  </defs>
+  <use id="collapsed"     xlink:href="#collapsed-shape"/>
+  <use id="collapsed-RTL" xlink:href="#collapsed-RTL-shape"/>
+  <use id="expanded"      xlink:href="#expanded-shape"/>
+</svg>
