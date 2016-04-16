@@ -62,9 +62,33 @@
     width: 100%;
     height: 100%;
     z-index: 10;
+    top: 0;
+    left: 0;
     position: fixed;
     background: var(--in-content-page-background);
-    margin: -18px;
+    overflow: hidden;
+  }
+
+  .warningBackground::before{
+    content: "";
+    flex: 1;
+  }
+  .warningBackground::after{
+    content: "";
+    flex: 2;
+  }
+  
+  .container{
+    min-width: calc(13em);
+    max-width: calc(52em);
+    padding: 18px 24px;
+    padding-inline-start: calc(86.25px);
+    overflow: auto;
+  }
+  @media (max-width: 480px) {
+    .container {
+      padding-inline-end: 5vw;
+    }
   }
 
   .title {
@@ -103,7 +127,7 @@
   }
 
   .tab table {
-    border: 1;
+    /* border: 1 *** This line was in the default theme, apparently by mistake because the "1" has no units. */;
     width: 100%;
   }
 
@@ -128,10 +152,43 @@
     min-width: 600px;
   }
 
+/* REMOVED because now there are category icons available
   @media (max-width: 800px) {
     *|*.category-name {
       display: block;
     }
+  }
+ ********************************************************/
+
+  .category[value]::before{
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    margin-inline-start: 6px;
+  }
+
+  .category[value="http"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#http);
+  }
+  .category[value="sockets"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#sockets);
+  }
+  .category[value="dns"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#dns);
+  }
+  .category[value="websockets"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#websockets);
+  }
+  .category[value="dnslookuptool"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#dnslookup);
   }
 
   .header{
@@ -144,7 +201,7 @@
   }
   #refreshDiv{
     font-size: 1.1rem;
-    margin: 9.9px 0;
+    margin: 0 0 13px;
     -moz-padding-end: 2px;
   }
   #refreshButton{
@@ -194,10 +251,10 @@
     background: -moz-Field;
   }
   button{
-    height: auto ; 
+    height: auto;
+    min-height: unset;
     padding: 0 6px ;
-    background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.8), rgba(240, 240, 240, 0.8));
+    background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(240, 240, 240, 0.8));
   }
   button:hover,
   button.selected{
@@ -210,11 +267,11 @@
     color:#000;
     background-color:#ddd;
   }
+  #warncheck,
   #autorefcheck{
     opacity: 1;
     position: static;
   }
-
 
   body {
     min-width: 330px;
