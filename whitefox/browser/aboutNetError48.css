@@ -1,0 +1,221 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://global/skin/in-content/common.css");
+
+body {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0 48px;
+  align-items: center;
+  justify-content: center;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  -moz-margin-start: 1em;
+}
+
+ul > li, ol > li {
+  margin-bottom: .5em;
+}
+
+ul {
+  list-style: disc;
+}
+
+#errorPageContainer {
+  position: relative;
+  min-width: 320px;
+  max-width: 512px;
+}
+
+#errorTitle {
+  background: url("aboutNetError_info.svg") left 2px no-repeat;
+  background-size: 45px; /* it was 3em */
+  -moz-margin-start: -5em;
+  -moz-padding-start: 5em;
+}
+
+body.certerror #errorTitle {
+  background-image: url("chrome://browser/skin/cert-error.svg");
+}
+
+#errorTitleText {
+  border-bottom: 1px solid #C1C1C1;
+  padding-bottom: 0.4em;
+}
+
+#errorTitle:-moz-dir(rtl) { /* It was #errorTitleText... (wrong!) --johnGraciliano */
+  background-position: right 2px;
+}
+
+#errorTitle[sslv3=true],
+#errorTitle[weakCrypto=true] {
+  background-image: url("cert-error.svg");
+}
+
+#errorTryAgain {
+  margin-top: 1.2em;
+  min-width: 150px
+}
+
+#errorContainer {
+  display: none;
+}
+
+@media (max-width: 675px) {
+  #errorTitle,
+  #errorTitle[sslv3=true],
+  #errorTitle[weakCrypto=true] {
+    padding-top: 0;
+    background-image: none;
+    -moz-padding-start: 0;
+    -moz-margin-start: 0;
+  }
+}
+
+/* Pressing the retry button will cause the cursor to flicker from a pointer to
+ * not-allowed. Override the disabled cursor behaviour since we will never show
+ * the button disabled as the initial state. */
+button:disabled {
+  cursor: pointer;
+}
+
+#learnMoreContainer {
+  display: none;
+}
+
+#buttonContainer {
+  display: none;
+  flex-flow: row wrap;
+}
+
+#buttonSpacer {
+  flex: 1;
+}
+
+#returnButton {
+  background-color: var(--in-content-primary-button-background);
+  border: none;
+  color: var(--in-content-selected-text);
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+#returnButton:hover {
+  background-color: var(--in-content-primary-button-background-hover) !important;
+}
+
+#returnButton:hover:active {
+  background-color: var(--in-content-primary-button-background-active) !important;
+}
+
+#advancedButton {
+  display: none;
+  min-width: 150px;
+}
+
+#certificateErrorReporting {
+  display: none;
+}
+
+#weakCryptoAdvancedPanel,
+#badCertAdvancedPanel {
+  /* Hidden until the link is clicked */
+  display: none;
+  background-color: white;
+  border: 1px lightgray solid;
+  /* Don't use top padding because the default p style has top padding, and it
+   * makes the overall div look uneven */
+  padding: 0 12px 12px 12px;
+  box-shadow: 0 0 4px #ddd;
+  font-size: 0.9em;
+  margin-top: 24px;
+}
+
+#badCertAdvancedPanel {
+  margin-top: 10px;
+}
+#badCertAdvancedPanel:not([style="display: block;"]){
+  display: block !important; /* Reserve the space for it. */
+  visibility: hidden; /* Just leave the space */
+  pointer-events: none; /* Make sure it behaves as if it is not there at all */
+}
+
+#overrideWeakCryptoPanel {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: flex-start;
+  margin-top: 1em;
+}
+
+span#hostname,
+span.hostname {
+  font-weight: bold;
+}
+
+#automaticallyReportInFuture {
+  cursor: pointer;
+}
+
+body:not(.certerror) #errorCode {
+  color: var(--in-content-page-color);
+  cursor: text;
+  text-decoration: none;
+}
+
+body.certerror #errorCode {
+  white-space: nowrap;
+}
+
+#badCertTechnicalInfo {
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+#certificateErrorReporting {
+  display: none;
+}
+
+#certificateErrorDebugInformation {
+  display: none;
+  background-color: var(--in-content-box-background-hover) !important;
+  border-top: 1px solid var(--in-content-border-color);
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  width: 65%;
+  padding: 1em 17.5%;
+}
+
+#certificateErrorText {
+  font-family: monospace;
+  white-space: pre-wrap;
+  padding: 1em 0;
+}
+
+
+
+button#errorTryAgain {
+  background-color: var(--in-content-primary-button-background);
+  border: none;
+  color: var(--in-content-selected-text);
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+button#errorTryAgain:hover {
+  background-color: var(--in-content-primary-button-background-hover) !important;
+}
+
+button#errorTryAgain:hover:active {
+  background-color: var(--in-content-primary-button-background-active) !important;
+}
+
