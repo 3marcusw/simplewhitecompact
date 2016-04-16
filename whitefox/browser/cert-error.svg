@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="45"
+     height="45"
+     viewBox="0 0 45 45">
+  <style>
+    use {
+      fill: none;
+      stroke: #5a5a5a;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+	<g id="certErr-shape">
+	  <rect  x="10.5"  y="19.5"  width="24"  height="16"  rx="2.5"  ry="2.5"/>
+	  <path  d="M 15.5,19.5   v -5.2   a 7.5,7.5 0 0,1 15,0   v 5.2"/>
+	  <circle cx="22.5" cy="22.5" r="22"/>
+	  <line  x1="6.944"  y1="6.944"  x2="38.056"  y2="38.056"/>
+	</g>
+  </defs>
+  <use xlink:href="#certErr-shape"/>
+</svg>
