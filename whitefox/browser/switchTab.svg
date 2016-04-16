@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="16"
+     height="11"
+     viewBox="0 0 16 11">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: none;
+      stroke: #000;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+	<g id="this-shape">
+	  <path  d="M 0.5,10.5   v -7.5   a 2.5,2.5 0 0,1 2.5,-2.5   h 7   a 2.5,2.5 0 0,1 2.5,2.5   v 7.5   h -12   z
+              M 16,5.5   h -8.3   m -0.35,0   m 2.75,-2.75   l -2.75,2.75   l 2.75,2.75"/>
+	</g>
+	<g id="any-shape">
+	  <path  d="M 0.5,10.5   v -7.5   a 2.5,2.5 0 0,1 2.5,-2.5   h 7   a 2.5,2.5 0 0,1 2.5,2.5   v 7.5   h -12   z   
+              M 16,5.5   h -7.3   m -.2,0   m 2.75,-2.75   l -2.75,2.75   l 2.75,2.75" stroke="#5a5a5a"/>
+	</g>
+  </defs>
+  <use id="this"  xlink:href="#this-shape"/>
+  <use id="any" xlink:href="#any-shape"/>
+</svg>
