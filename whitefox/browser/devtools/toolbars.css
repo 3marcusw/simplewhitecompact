@@ -73,13 +73,14 @@
   -moz-box-align: center;
   min-width: 78px;
   padding: 1px;
-  margin: 2px 3px;
+  margin: 2px 1px;
 }
 
 .devtools-menulist:-moz-focusring,
-.devtools-toolbarbutton:-moz-focusring {
+.devtools-toolbarbutton:-moz-focusring,
+.devtools-button:-moz-focusring {
   outline: 1px dotted hsla(210,30%,85%,0.7);
-  outline-offset: -4px;
+  outline-offset: -1px;
 }
 
 .devtools-toolbarbutton:not([label]) > .toolbarbutton-icon,
@@ -91,8 +92,8 @@
 
 /* HTML buttons */
 .devtools-button {
-  margin: 0;
-  padding: 0;
+  margin: 2px 1px;
+  padding: 1px;
   min-width: 32px;
   /* The icon is absolutely positioned in the button using ::before */
   position: relative;
@@ -327,13 +328,16 @@ hbox > label + button:hover:not([checked=true]),
   opacity: .8;
 }
 
-/* Toolbar button groups */
+/* This is removed as part of fixing Bug 1261049. ********%
+%* This should be deleted to make the code cleaner. ******%
+/* Toolbar button groups *%
 .devtools-toolbarbutton-group > .devtools-toolbarbutton {
   margin-left: 1px;
   margin-right: 1px;
   outline-offset: -3px;
   box-shadow: none;
 }
+%*********************************************************/
 
 .devtools-toolbarbutton-group > .devtools-toolbarbutton:last-child {
   -moz-margin-end: 0;
@@ -681,6 +685,7 @@ hbox > label + button:hover:not([checked=true]),
 #toolbox-controls > toolbarbutton,
 #toolbox-dock-buttons > toolbarbutton {
   -moz-appearance: none;
+  -moz-user-focus: normal;
   border: none;
   margin: 0 4px;
   min-width: 16px;
@@ -768,6 +773,7 @@ hbox > label + button:hover:not([checked=true]),
   margin: 0;
   width: 32px;
   position: relative;
+  -moz-user-focus: normal;
 }
 
 .command-button:hover {
@@ -912,6 +918,17 @@ hbox > label + button:hover:not([checked=true]),
   margin: 0;
 }
 
+/* The following rules for .toolbox-panel apply only when #toolbox-deck became a box (leaving 'deck' only in the id) --johnGraciliano */
+box#toolbox-deck > .toolbox-panel {
+  display: -moz-box;
+  -moz-box-flex: 1;
+  visibility: collapse;
+}
+
+box#toolbox-deck > .toolbox-panel[selected] {
+  visibility: visible;
+}
+
 .devtools-tab {
   -moz-appearance: none;
   -moz-binding: url("chrome://global/content/bindings/general.xml#control-item");
@@ -925,6 +942,7 @@ hbox > label + button:hover:not([checked=true]),
   border-width: 0;
   -moz-border-start-width: 1px;
   -moz-box-align: center;
+  -moz-user-focus: normal;
 }
 
 .theme-dark .devtools-tab {

@@ -51,4 +51,7 @@ override  chrome://devtools/skin/markup.css       chrome://devtools/skin/markup-
 override  chrome://devtools/skin/rules.css        chrome://devtools/skin/ruleview.css
 
 ## For Firefox 47.0a1
-override  chrome://devtools/floating-scrollbars-responsive-design.css        chrome://devtools/floating-scrollbars.css
+override  chrome://devtools/skin/floating-scrollbars-responsive-design.css        chrome://devtools/skin/floating-scrollbars.css
+
+## Temporary Fix for Firefox 48.0
+override  chrome://browser/skin/aboutNetError.css        chrome://browser/skin/aboutNetError48.css   appversion>=48.0a1

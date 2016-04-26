@@ -112,7 +112,8 @@ a {
   flex: none;
 }
 
-.message-location > .frame-link {
+.message-location > .frame-link, /* This selector may be obsolete (unneeded or problematic) --johnGraciliano */
+.message-location > .frame-link .frame-link-source {
   width: 10em;
 }
 
@@ -138,14 +139,19 @@ a {
 #output-wrapper {
   direction: ltr;
   overflow: auto;
+  -moz-user-select: text; /* Now inherited by #output-container */
 }
 
-#output-container {
-  -moz-user-select: text;
-  -moz-box-flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+@supports (not (line-height:calc(1px))) { /* Firefox < 48 */   /*  REMOVED IN 46!!!  FIX IT!!!   MAKE IT FIREFOX < 46 !!! */
+/* The next rule is removed in Firefox 46 due to:
+   The width on #output-container is set to a hardcoded px in webconsole.js
+   since it's way faster than using 100% with -moz-box-flex (see Bug 1237368) */
+  #output-container {
+    -moz-box-flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 #output-container.hideTimestamps > .message {
@@ -194,11 +200,18 @@ a {
 .theme-light .hud-console-filter-toolbar {
   --table-splitter-color: rgba(190,190,190,.85);
   --disc-shadow-color: #4c4c4c;
+  --disc-shadow-color: rgba(76,76,76,0.625);
+  --disc-shadow-color: rgba(76,76,76,0.5);
 }
 
 .theme-dark .hud-console-filter-toolbar {
   --table-splitter-color: hsla(210,8%,5%,.6);
   --disc-shadow-color: #1d1d1d;
+  --disc-shadow-color: rgba(29,29,29,0.75);
+}
+
+.devtools-toolbarbutton-group {
+  -moz-border-start: 1px solid var(--table-splitter-color);
 }
 
 [class][class].webconsole-filter-button{
@@ -232,8 +245,8 @@ a {
 
 /* Network styles */
 .webconsole-filter-button[category="net"] > .toolbarbutton-menubutton-button:before {
-  background-image: linear-gradient(#444444, #000000);
-  border-color: #777;
+  background-image: linear-gradient(#4c4c4c, #000000);
+  border-color: #181818;
 }
 
 .message:hover {
@@ -262,6 +275,9 @@ a {
 .message[category=network] > .indent {
   -moz-border-end: solid #000 6px;
 }
+:root.theme-dark .message[category=network] > .indent {
+  box-shadow: 1px 0 0 rgba(255,255,255,0.0225), -1px 0 0 rgba(255,255,255,0.0225); /* Highlight border to improve contrast */
+}
 
 .message[category=network][severity=error] > .icon::before {
   background-position: -12px 0;
@@ -269,6 +285,7 @@ a {
 
 .message[category=network] > .message-body {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .message[category=network] .method {
@@ -307,13 +324,16 @@ a {
   font-size: 10px;
   padding: 2px;
   line-height: 10px;
+  margin-inline-start: 1px; /* This is 3px in the default theme --johnGraciliano */
+  margin-inline-end: 1ex;
+  -moz-margin-start: 1px;
   -moz-margin-end: 1ex;
 }
 
 /* CSS styles */
 .webconsole-filter-button[category="css"] > .toolbarbutton-menubutton-button:before {
   background-image: linear-gradient(#2DC3F3, #00B6F0);
-  border-color: #1BA2CC;
+  border-color: #2DBA3E;
 }
 
 .message[category=cssparser] > .indent {
@@ -348,8 +368,8 @@ a {
 
 /* Web Developer styles */
 .webconsole-filter-button[category="logging"] > .toolbarbutton-menubutton-button:before {
-  background-image: linear-gradient(#B9B9B9, #AAAAAA);
-  border-color: #929292;
+  background-image: linear-gradient(#B4B4B4, #EAEAEA);
+  border-color: #A6A6A6;
 }
 
 .message[category=console] > .indent {
@@ -375,8 +395,8 @@ a {
 /* Server Logging Styles */
 
 .webconsole-filter-button[category="server"] > .toolbarbutton-menubutton-button:before {
-  background-image: linear-gradient(rgb(144, 176, 144), rgb(99, 151, 99));
-  border-color: rgb(76, 143, 76);
+  background-image: linear-gradient(#56B156, #87C987);
+  border-color: #64c864;
 }
 
 .message[category=server] > .indent {
@@ -561,6 +581,10 @@ a {
   text-decoration: underline;
 }
 
+a.learn-more-link.webconsole-learn-more-link {
+    font-style: normal;
+}
+
 /* Open DOMNode in inspector button */
 .open-inspector {
   background: url("./images/vview-open-inspector.png") no-repeat 0 0;
@@ -579,6 +603,39 @@ a {
   filter: url(images/filters.svg#checked-icon-state) brightness(0.9);
 }
 
+
+/* Force the icon only style for the clear button */
+
+.webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-icon{
+  list-style-image: var(--clear-icon-url);
+}
+/* Hide the text labels to make image only buttons (some versions of Firefox). --johnGraciliano */
+.webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-text,
+.webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-multiline-text{
+  display: none;
+}
+/* Eliminate background behavior */
+[class][class][class][class][class].webconsole-clear-console-button:not(.devtools-clear-icon){
+  background-color: transparent;
+}
+
+/* The next two rule sets help the buttons behave as image only --johnGraciliano */
+.webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-icon{
+  opacity: .8;
+}
+.webconsole-clear-console-button:not(.devtools-clear-icon):hover > .toolbarbutton-icon{
+  opacity: 1;
+}
+
+/**
+ * Due to toolbar styles of `.devtools-toolbarbutton:not([label])` which overrides
+ * .devtools-toolbarbutton's min-width of 78px, reset the min-width.
+ */
+.webconsole-clear-console-button:not(.devtools-clear-icon) {
+  min-width: 32px;
+}
+
+
 @media (max-width: 500px) {
   .message > .timestamp {
     display: none;
@@ -589,7 +646,7 @@ a {
   .hud-console-filter-toolbar .webconsole-filter-button {
     min-width: 40px;
   }
-  .hud-console-filter-toolbar .webconsole-clear-console-button {
+  .hud-console-filter-toolbar toolbarbutton.webconsole-clear-console-button {
     min-width: 25px;
   }
   .webconsole-filter-button > .toolbarbutton-menubutton-button:before {

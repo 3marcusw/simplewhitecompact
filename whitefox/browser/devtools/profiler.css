@@ -87,6 +87,11 @@
 
 /* Recording items */
 
+#recordings-list {
+  -moz-border-end: 1px solid var(--theme-splitter-color);
+  border-inline-end: 1px solid var(--theme-splitter-color);
+}
+
 .recording-item {
   padding: 4px;
 }

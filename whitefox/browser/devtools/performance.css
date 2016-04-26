@@ -105,9 +105,13 @@
 
 /* Sidebar & recording items */
 
-#recordings-list {
-  -moz-border-end: 1px solid var(--theme-splitter-color);
+#recordings-pane {
   border-inline-end: 1px solid var(--theme-splitter-color);
+  -moz-border-end: 1px solid var(--theme-splitter-color);
+}
+
+#recordings-list {
+  max-width: 300px;
 }
 
 .recording-item {
@@ -142,9 +146,18 @@
 
 .notice-container {
   font-size: 120%;
-  background-color: var(--theme-toolbar-background);
+  background-color: var(--theme-body-background);
   color: var(--theme-body-color);
   padding-bottom: 20vh;
+}
+
+.tool-disabled-message {
+  text-align: center;
+}
+
+.console-profile-recording-notice,
+.console-profile-stop-notice {
+  overflow: hidden;
 }
 
 .console-profile-command {
@@ -157,11 +170,7 @@
   display: none;
 }
 
-#performance-view[e10s="disabled"] .realtime-disabled-on-e10s-message {
-  display: initial;
-  opacity: 0.5;
-
-}
+#performance-view[e10s="disabled"] .realtime-disabled-on-e10s-message,
 #performance-view[e10s="unsupported"] .realtime-disabled-message {
   display: initial;
   opacity: 0.5;
@@ -208,6 +217,7 @@
 .call-tree-cell[type="duration"],
 .call-tree-header[type="self-duration"],
 .call-tree-cell[type="self-duration"] {
+  min-width: 6vw;
   width: 6vw;
 }
 
@@ -215,11 +225,13 @@
 .call-tree-cell[type="percentage"],
 .call-tree-header[type="self-percentage"],
 .call-tree-cell[type="self-percentage"] {
+  min-width: 5vw;
   width: 5vw;
 }
 
 .call-tree-header[type="samples"],
 .call-tree-cell[type="samples"] {
+  min-width: 4.5vw;
   width: 4.5vw;
 }
 
@@ -239,18 +251,23 @@
 .call-tree-cell[type="size-percentage"],
 .call-tree-header[type="self-size-percentage"],
 .call-tree-cell[type="self-size-percentage"] {
+  min-width: 6vw;
   width: 6vw;
 }
 
+/* Removed as part of fixing 'Bug 1232289,' along other changes done to this file */
+/* I am leaving the code commented in case there is any problem *******************%
 .call-tree-header[type="function"],
 .call-tree-cell[type="function"] {
   -moz-box-flex: 1;
 }
+%**********************************************************************************/
 
 .call-tree-header,
 .call-tree-cell {
   -moz-box-align: center;
   overflow: hidden;
+  text-overflow: ellipsis;
   padding: 1px 4px;
   color: var(--theme-body-color);
   -moz-border-end-color: var(--cell-border-color);
@@ -542,7 +559,8 @@
   border-radius: 1px;
 }
 
-.marker-details-labelname {
+.marker-details-labelname, /* This is probably an old name that was replaced by the next --johnGraciliano */
+.marker-details-name-label {
   -moz-padding-end: 4px;
 }
 
