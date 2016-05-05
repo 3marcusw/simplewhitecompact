@@ -22,9 +22,10 @@
   -moz-border-end: 1px solid;
 }
 
-#sources-pane .devtools-toolbar {
+#sources-pane .devtools-toolbar {   /* Added note: The may be the same as '#sources-toolbar.devtools-toolbar' --johnGraciliano */
   border: none; /* Remove the devtools-toolbar bottom border. */
   -moz-border-end: 1px solid;
+  border-top: 1px solid var(--theme-splitter-color);  /* ADDED --johnGraciliano */
 }
 
 #sources-pane > tabs,
