@@ -42,7 +42,8 @@ body {
   }
 }
 
-.title:-moz-dir(rtl) {
+.title:-moz-dir(rtl),
+.title:-moz-locale-dir(rtl) {
   background-position: right 0;
 }
 
