@@ -65,6 +65,7 @@ body {
 .client .item.tab > .item-title-container {
   padding-inline-start: 35px;
 }
+
 .item.tab > .item-title-container {
   padding-inline-start: 20px;
 }
@@ -229,7 +230,7 @@ html {
 .textbox-search-icon {
   width: 16px;
   height: 16px;
-  background-image: url(chrome://global/skin/icons/Search-glass.png);
+  background-image: url(chrome://global/skin/icons/Search-glass.svg);
   background-repeat: no-repeat;
   display: block;
 }
@@ -242,10 +243,23 @@ html {
   cursor: pointer;
 }
 
+.textbox-search-icon:not([disabled]):active {
+  opacity: .8;
+}
+
+.textbox-search-icon[disabled],
+.textbox-search-icon:not(:hover):not(:active) {
+  opacity: .7;
+}
+
+.textbox-search-icon:not([disabled]) {
+  cursor: text;
+}
+
 .textbox-search-clear {
   width: 16px;
   height: 16px;
-  background-image: url(chrome://global/skin/icons/Search-close.png);
+  background-image: url(chrome://global/skin/icons/close.svg#normal);
   background-repeat: no-repeat;
 }
 
@@ -253,18 +267,12 @@ html {
   cursor: default;
 }
 
-.textbox-search-icon:not([disabled]) {
-  cursor: text;
+.textbox-search-clear:not([disabled]):hover {
+  background-image: url(chrome://global/skin/icons/close.svg#hover);
 }
 
-.textbox-search-clear:not([disabled]):hover ,
-.textbox-search-icon:not([disabled]):hover {
-  background-position: -16px 0;
-}
-
-.textbox-search-clear:not([disabled]):hover:active ,
-.textbox-search-icon:not([disabled]):hover:active {
-  background-position: -32px 0;
+.textbox-search-clear:not([disabled]):hover:active {
+  background-image: url(chrome://global/skin/icons/close.svg#active);
 }
 
 .client .item.tab > .item-title-container {
