@@ -36,6 +36,8 @@ override  chrome://devtools/skin/images/tool-webaudio.svg         chrome://devto
 
 override  chrome://devtools/skin/images/tool-scratchpad.svg       chrome://devtools/skin/tool-scratchpad.svg
 
+override  chrome://devtools/skin/images/tool-dom.svg              chrome://devtools/skin/tool-dom.svg
+
 override  chrome://devtools/skin/images/tool-options.svg          chrome://devtools/skin/tool-options.svg
 
 ##  For Firefox 44.0a2 and similar only:
