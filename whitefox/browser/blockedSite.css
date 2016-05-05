@@ -2,14 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/*
- * This file may break from it's original intedned use!
- * It is now only designed to style blacklisted pages.
- * It has no rules appropriate for other error pages.
- * It is a modified version of a newer:
- *   chrome://browser/skin/blockedSite.css
- */
-
 @import url("chrome://global/skin/in-content/common.css");
 
 body {
@@ -43,25 +35,25 @@ ul {
   max-width: 512px;
 }
 
-#errorTitle {
+.title {
   background: url("chrome://global/skin/icons/blocked.svg") left 2px no-repeat;
   background-size: 45px; /* it was 3em */
   -moz-margin-start: -5em;
   -moz-padding-start: 5em;
 }
 
-#errorTitle h1 {
+.title-text {
   color: white;
   border-bottom: 1px solid white;
   padding-bottom: 0.4em;
 }
 
-#errorTitle:-moz-dir(rtl) {
+.title:-moz-dir(rtl) {
   background-position: right 2px;
 }
 
 @media (max-width: 675px) {
-  #errorTitle {
+  .title {
     padding-top: 0;
     background-image: none;
     -moz-padding-start: 0;
@@ -78,7 +70,6 @@ button:disabled {
 
 #buttons {
   display: flex;
-  justify-content: space-between;
 }
 
 .button-spacer {
@@ -101,40 +92,22 @@ p > span[id] {
   font-weight: bold;
 }
 
-
-#getMeOutButton {
-  background-color: var(--in-content-primary-button-background);
-  border: none;
-  color: var(--in-content-selected-text);
-  min-width: 250px;
-  margin-inline-start: 0;
-}
-
-#getMeOutButton:hover {
-  background-color: var(--in-content-primary-button-background-hover) !important;
-}
-
-#getMeOutButton:hover:active {
-  background-color: var(--in-content-primary-button-background-active) !important;
-}
-
-
-#reportButton {
+.button-container button:not(.primary) {
   background-color: transparent;
   color: white;
   border: 1px solid #9b2e2e;
   margin-inline-end: 0;
 }
 
-#reportButton:hover {
+.button-container button:not(.primary):hover {
   background-color: #a83232;
 }
 
-#reportButton:active {
+.button-container button:not(.primary):active {
   background-color: #9b2e2e;
 }
 
-#buttons button {
+.button-container button {
   margin-top: 1.2em;
 }
 
@@ -152,7 +125,6 @@ p > span[id] {
   padding: 0;
   font-size: smaller;
   min-width: 0;
-  position: static !important; /* Ignore top & left properties from elsewhere! */
 }
 
 #ignoreWarningButton:hover {
