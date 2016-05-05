@@ -25,7 +25,17 @@
 	  <path  d="M 0.5,10.5   v -7.5   a 2.5,2.5 0 0,1 2.5,-2.5   h 7   a 2.5,2.5 0 0,1 2.5,2.5   v 7.5   h -12   z   
               M 16,5.5   h -7.3   m -.2,0   m 2.75,-2.75   l -2.75,2.75   l 2.75,2.75" stroke="#5a5a5a"/>
 	</g>
+	<g id="this-rtl-shape">
+	  <path  d="M 3.5,10.5   v -7.5   a 2.5,2.5 0 0,1 2.5,-2.5   h 7   a 2.5,2.5 0 0,1 2.5,2.5   v 7.5   h -12   z
+              M 0,5.5   h 8.3   m 0.35,0   m -2.75,-2.75   l 2.75,2.75   l -2.75,2.75"/>
+	</g>
+	<g id="any-rtl-shape">
+	  <path  d="M 3.5,10.5   v -7.5   a 2.5,2.5 0 0,1 2.5,-2.5   h 7   a 2.5,2.5 0 0,1 2.5,2.5   v 7.5   h -12   z   
+              M 0,5.5   h 7.3   m .2,0   m -2.75,-2.75   l 2.75,2.75   l -2.75,2.75" stroke="#5a5a5a"/>
+	</g>
   </defs>
   <use id="this"  xlink:href="#this-shape"/>
   <use id="any" xlink:href="#any-shape"/>
+  <use id="this-rtl"  xlink:href="#this-rtl-shape"/>
+  <use id="any-rtl" xlink:href="#any-rtl-shape"/>
 </svg>

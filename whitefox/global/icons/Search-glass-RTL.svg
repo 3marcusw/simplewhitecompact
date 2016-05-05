@@ -6,6 +6,6 @@
      width="16"
      height="16"
      viewBox="0 0 16 16">
-  <circle cx="7.5" cy="7.5" r="7" stroke-width="1" stroke="#8c8c8c" fill="none"/>
-  <line x1="2.6" y1="2.6" x2="12.1" y2="12.1" stroke-width="1" stroke="#8c8c8c"/>
+  <circle cx="9" cy="7" r="4.5" stroke-width="1" stroke="#000" fill="none"/>
+  <line x1="5.8" y1="10.2" x2="2" y2="14" stroke-width="1" stroke="#000"/>
 </svg>
