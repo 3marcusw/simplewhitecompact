@@ -10,6 +10,21 @@ notification { /* warning et al. */
   text-shadow: none;
 }
 
+#high-priority-global-notificationbox > notification,
+notificationbox[notificationside="top"] > notification {
+  border-bottom: 1px solid #c7c7c7;
+}
+
+#browser-bottombox > notificationbox > notification,
+notificationbox[notificationside="bottom"] > notification {
+  border-top: 1px solid #c7c7c7;
+}
+
+#high-priority-global-notificationbox > notification > .notification-inner,
+#browser-bottombox > notificationbox > notification > .notification-inner {
+  border-width: 0 !important;     /* Force ignore any inner border style (use a flat style!) */
+}
+
 notification[type="info"] {
   color: -moz-DialogText;
   background-color: -moz-Dialog;
@@ -35,11 +50,11 @@ notification[type="critical"] {
 /* Default icons for notifications */
 
 .messageImage[type="info"] {
-  list-style-image: url("chrome://global/skin/icons/information-16.png");
+  list-style-image: url("chrome://global/skin/icons/information-16.svg");
 }
 
 .messageImage[type="warning"] {
-  list-style-image: url("chrome://global/skin/icons/warning-16.png");
+  list-style-image: url("chrome://global/skin/icons/warning-16.svg");
 }
 
 .messageImage[type="critical"] {
