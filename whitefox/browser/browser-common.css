@@ -67,7 +67,7 @@
 
   --tabbrowser-tab-color: #222;
   --tabbrowser-tab-selected-color: #000;
-  --tabbrowser-tab-border-image: url(tabbrowser/tab.png) 4 3 0 / 4px 3px 0 repeat stretch;
+/* --tabbrowser-tab-border-image: url(tabbrowser/tab.png) 4 3 0 / 4px 3px 0 repeat stretch;  %** This was problematic in Firefox 45 and 46 --johnGraciliano */
   --tabbrowser-tab-background-image: -moz-linear-gradient(rgba(233,233,233,.75), rgba(233,233,233,.75));
   --tabbrowser-tab-hover-background-image: -moz-linear-gradient(rgba(242,242,242,.85), rgba(242,242,242,.85));
   --tabbrowser-tab-selected-background-image: -moz-linear-gradient(rgba(250,250,250,1), rgba(250,250,250,1));
@@ -122,7 +122,7 @@
   --navigator-toolbox-after-background-color: #383838;
 
   /* --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted.svg) 4 3 0 / 4px 3px 0 repeat; */
-  --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted@3x.png) 12 9 0 / 4px 3px 0 stretch;
+/* --tabbrowser-tab-border-image: url(tabbrowser/tab-inverted@3x.png) 12 9 0 / 4px 3px 0 stretch;  %** ... problem in Firefox 45 and 46 --johnGraciliano */
   --tabbrowser-tab-color: #ddd;
   --tabbrowser-tab-selected-color: #fff;
   --tabbrowser-tab-background-image: -moz-linear-gradient(rgba(23,23,23,.625), rgba(23,23,23,.875));
@@ -3798,10 +3798,14 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
   padding: 2px 0 4px;
   border-width: 4px 3px 0;
   border-style: solid;
-  -moz-border-image: var(--tabbrowser-tab-border-image);
+  -moz-border-image: url(tabbrowser/tab.png) 4 3 0 / 4px 3px 0 repeat stretch; /* ~ var(--tabbrowser-tab-border-image)  --johnGraciliano */
   border-radius: 0;
   -moz-margin-start: -1px;
   min-height: 26px;
+}
+.tabbrowser-tab:-moz-lwtheme-brighttext,
+.tabs-newtab-button:-moz-lwtheme-brighttext {
+  -moz-border-image: url(tabbrowser/tab-inverted@3x.png) 12 9 0 / 4px 3px 0 stretch; /* = var(--tabbrowser-tab-border-image)  --johnGraciliano */
 }
 
 .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
