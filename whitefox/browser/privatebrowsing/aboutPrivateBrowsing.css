@@ -1,0 +1,211 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://global/skin/in-content/info-pages.css");
+
+:root {
+  --color-background-light: #fff;
+  --color-background-dark: #303033;
+  --color-background-dark-gray: #1e1c20;
+
+  --color-grey-lightest: #fbfbfb;
+  --color-pink: #d7a;
+
+  --color-blue: #0996f8;
+  --color-blue-dark: #0670cc;
+  --color-blue-darker: #005bab;
+
+  --color-darkTheme-light-gray-text: #c0c0c2;
+  --color-darkTheme-light-gray-text-strong: #ededf0;
+
+  --icon-margin: 64px;
+}
+
+html {
+  /* font-size: 1.5em; ** This can only cause trouble.  It has to be done for body.  --johnGraciliano */
+}
+
+html.private {
+  --in-content-page-color: var(--color-darkTheme-light-gray-text);
+  --in-content-text-color: var(--color-darkTheme-light-gray-text);
+  --in-content-page-background: var(--color-background-dark-gray);
+}
+
+body {
+  padding: 40px;
+  font-size: 1.5em;
+}
+
+html:not(.private) body {
+  background-color: var(--color-background-light);
+}
+
+html:not(.private) body.private {
+  color: var(--color-darkTheme-light-gray-text);
+  background-color: var(--color-background-dark-gray);
+}
+
+a:link {
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-blue-dark);
+  text-decoration: underline;
+}
+
+a:hover:active {
+  color: var(--color-blue-darker);
+}
+
+a:visited {
+  color: var(--color-blue-darker);
+}
+
+.about-content-container {
+  max-width: 780px;
+}
+
+section.section-main {
+  margin-bottom: 48px;
+  -moz-margin-start: var(--icon-margin);
+  -moz-padding-start: 24px;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.list-row {
+  overflow: auto;
+}
+
+.list-row > ul > li {
+  float: left;
+  width: 220px;
+  margin-left: 1em;
+  margin-bottom: 0;
+}
+
+.title {
+  background-image: url("chrome://browser/skin/privatebrowsing/private-browsing.svg");
+  background-size: 56px;
+  background-position: 14px 8px;
+  font-weight: lighter;
+  line-height: 1.5em;
+  color: var(--color-darkTheme-light-gray-text);
+  min-height: 64px;
+  -moz-margin-start: 0;
+  -moz-padding-start: calc(var(--icon-margin) + 24px);
+}
+.title:-moz-dir(rtl){
+  background-position: calc(100% - 14px) 8px;
+}
+
+.about-subheader {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: lighter;
+  min-height: 32px;
+  background-image: url("chrome://browser/skin/privatebrowsing/tracking-protection.svg");
+  background-repeat: no-repeat;
+  background-size: 32px;
+  -moz-margin-start: calc(var(--icon-margin) - 32px);
+  -moz-padding-start: 56px;
+}
+.about-subheader:-moz-dir(rtl) {
+  background-position: right 0;
+}
+
+.about-subheader.tp-off {
+  background-image: url("chrome://browser/skin/privatebrowsing/tracking-protection-off.svg");
+}
+
+.about-info {
+  font-size: .875em;
+}
+
+.tpTitle {
+  margin-inline-end: 12px;
+}
+
+.private strong {
+  color: var(--color-grey-lightest);
+  font-weight: normal;
+}
+
+a.button {
+  padding: 5px 40px;
+  background-color: #3b383c;
+  border: 1px solid #464547;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.toggle + .toggle-btn {
+  box-sizing: border-box;
+  cursor: pointer;
+  min-width: 60px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: var(--color-pink);
+  border: 1px var(--color-pink) solid;
+  padding: 2px;
+}
+
+.toggle + .toggle-btn::after,
+.toggle + .toggle-btn::before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 19px;
+  height: 100%;
+}
+
+.toggle + .toggle-btn::after {
+  left: 0;
+  box-shadow: 0 0 1px 1px hsla(0, 0%, 0%, .1),
+              0 1px 0 hsla(0, 0%, 0%, .2);
+  border-radius: 50%;
+  background: white;
+  transition: left .2s ease;
+}
+
+.toggle + .toggle-btn::before {
+  float: left;
+  left: 9px;
+  visibility: hidden;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url("chrome://browser/skin/privatebrowsing/check.svg");
+}
+#tpSubHeader:-moz-dir(rtl) .toggle + .toggle-btn::before {
+  left: 33px;
+}
+
+.toggle:checked + .toggle-btn {
+  background: #3fc455;
+  border: 1px solid #269939;
+}
+
+.toggle:checked + .toggle-btn::after {
+  left: 35px;
+}
+#tpSubHeader:-moz-dir(rtl) .toggle:checked + .toggle-btn::after {
+  left: -35px;
+}
+
+.toggle:checked + .toggle-btn::before {
+  visibility: visible;
+}
+
+.toggle:-moz-focusring + .toggle-btn {
+  outline: 2px solid rgba(0, 149, 221, 0.5);
+  outline-offset: 1px;
+  -moz-outline-radius: 2px;
+}
