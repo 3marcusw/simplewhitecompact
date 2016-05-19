@@ -57,16 +57,22 @@
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadConfirmBlock,
+richlistitem.download:hover > * > .downloadButton.downloadCancel,
 richlistitem.download:hover > .downloadButton.downloadConfirmBlock,
 richlistitem.download:hover > .downloadButton.downloadCancel {
    -moz-image-region: rect(0px, 32px, 16px, 16px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadConfirmBlock:hover,
+richlistitem.download:hover > * > .downloadButton.downloadCancel:hover,
 richlistitem.download:hover > .downloadButton.downloadConfirmBlock:hover,
 richlistitem.download:hover > .downloadButton.downloadCancel:hover {
   -moz-image-region: rect(0px, 48px, 16px, 32px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadConfirmBlock:active,
+richlistitem.download:hover > * > .downloadButton.downloadCancel:active,
 richlistitem.download:hover > .downloadButton.downloadConfirmBlock:active,
 richlistitem.download:hover > .downloadButton.downloadCancel:active {
   -moz-image-region: rect(0px, 64px, 16px, 48px);
@@ -76,14 +82,17 @@ richlistitem.download:hover > .downloadButton.downloadCancel:active {
   -moz-image-region: rect(16px, 16px, 32px, 0px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadShow,
 richlistitem.download:hover > .downloadButton.downloadShow {
    -moz-image-region: rect(16px, 32px, 32px, 16px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadShow:hover,
 richlistitem.download:hover > .downloadButton.downloadShow:hover {
   -moz-image-region: rect(16px, 48px, 32px, 32px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadShow:active,
 richlistitem.download:hover > .downloadButton.downloadShow:active {
   -moz-image-region: rect(16px, 64px, 32px, 48px);
 }
@@ -92,14 +101,17 @@ richlistitem.download:hover > .downloadButton.downloadShow:active {
   -moz-image-region: rect(32px, 16px, 48px, 0px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadRetry,
 richlistitem.download:hover > .downloadButton.downloadRetry {
    -moz-image-region: rect(32px, 32px, 48px, 16px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadRetry:hover,
 richlistitem.download:hover > .downloadButton.downloadRetry:hover {
   -moz-image-region: rect(32px, 48px, 48px, 32px);
 }
 
+richlistitem.download:hover > * > .downloadButton.downloadRetry:active,
 richlistitem.download:hover > .downloadButton.downloadRetry:active {
   -moz-image-region: rect(32px, 64px, 48px, 48px);
 }
