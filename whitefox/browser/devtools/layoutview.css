@@ -183,6 +183,27 @@ div#layout-borders{
   background-color: #87ceeb;
 }
 
+.theme-firebug #layout-main,
+.theme-firebug #layout-borders,
+.theme-firebug #layout-content {
+  border-style: solid;
+}
+
+.theme-firebug #layout-main,
+.theme-firebug #layout-header {
+  font-family: var(--proportional-font-family);
+}
+
+.theme-firebug #layout-main {
+  color: var(--theme-body-color);
+  font-size: var(--theme-toolbar-font-size);
+  top: 44px; /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
+}
+
+.theme-firebug #layout-header {
+  font-size: var(--theme-toolbar-font-size);
+}
+
 /* Editable region sizes are contained in absolutely positioned <p> */
 
 #main > p,
@@ -516,4 +537,18 @@ body.inactive > #main > p,
 
 #layout-geometry-editor::before {
   background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
+}
+
+/* What follows are special rules to avoid showing horizontal schrollbar at the bottom --johnGraciliano */
+
+p.layout-right.layout-rotate {
+  height: 18px;
+  line-height: initial;
+  top: 79px;
+}
+
+@media (max-height: 252px) {
+  p.layout-right.layout-rotate {
+    top: 66px;
+  }
 }

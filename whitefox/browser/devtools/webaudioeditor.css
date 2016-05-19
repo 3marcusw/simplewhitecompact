@@ -67,12 +67,11 @@ g.edgeLabel tspan {
 .nodes rect {
   stroke-width: 1px;
   cursor: pointer;
-  stroke: var(--theme-tab-toolbar-background);
-}
-.theme-light rect {
-  fill: #e4e4e4; /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
+  stroke: #ebeced; /* = var(--theme-tab-toolbar-background) for Firebug theme  --johnGraciliano */
+  fill: #f0f1f2; /* = var(--theme-toolbar-background) for Firebug theme  --johnGraciliano */
 }
 .theme-dark rect {
+  stroke: var(--theme-tab-toolbar-background);
   fill: var(--theme-toolbar-background);
 }
 
@@ -81,10 +80,10 @@ g.edgeLabel tspan {
  */
 
 .theme-light .nodes g.bypassed rect {
-  fill: url(./images/filters.svg#bypass-light);
+  fill: url(images/filters.svg#bypass-light);
 }
 .theme-dark .nodes g.bypassed rect {
-  fill: url(./images/filters.svg#bypass-dark);
+  fill: url(images/filters.svg#bypass-dark);
 }
 .nodes g.bypassed.selected rect {
   stroke: var(--theme-selection-background);
@@ -153,7 +152,6 @@ text {
   box-shadow: none;
   border: none;
   list-style-image: url(images/pane-toggle.svg#collapse);
-  -moz-image-region: auto;
 }
 
 #inspector-pane-toggle > .toolbarbutton-icon {
@@ -165,8 +163,12 @@ text {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
-#inspector-pane-toggle:active {
-  -moz-image-region: auto;
+:root.theme-firebug #inspector-pane-toggle {
+  list-style-image: url(images/firebug/pane-collapse.svg);
+}
+
+:root.theme-firebug #inspector-pane-toggle[pane-collapsed] {
+  list-style-image: url(images/firebug/pane-expand.svg);
 }
 
 /**

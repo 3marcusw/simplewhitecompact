@@ -8,7 +8,8 @@
   --devtools-splitter-color: #c7c7c7;
 }
 
-:root[devtoolstheme="dark"] {
+:root[devtoolstheme="dark"],
+:root[devtoolstheme="firebug"] {
   --devtools-splitter-color: #42484f;
 }
 
