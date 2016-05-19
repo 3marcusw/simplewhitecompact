@@ -2857,6 +2857,11 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   visibility: visible;
 }
 
+#urlbar[pageproxystate="valid"] > #identity-box.certUserOverridden > #connection-icon {
+  list-style-image: url(chrome://browser/skin/identity-mixed-passive-loaded.svg);
+  visibility: visible;
+}
+
 #urlbar[pageproxystate="valid"] > #identity-box.chromeUI > #connection-icon {
   list-style-image: url(chrome://branding/content/identity-icons-brand.svg);
   visibility: visible;
@@ -2872,6 +2877,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
 #identity-box[open=true] > #tracking-protection-icon[state],
 #identity-box[open=true] > #connection-icon{
   opacity: 1;
+  /*******************************************%
   filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
     <svg height="0" xmlns="http://www.w3.org/2000/svg">\
       <filter id="dimLights">\
@@ -2883,6 +2889,8 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
                    0  0  0  1 0" />\
       </filter>\
     </svg>#dimLights');
+  %*******************************************/
+  filter: brightness(.825) contrast(1.35);
 }
 
 /* page proxy icon (Before Firefox 45.0a1) */
@@ -2994,7 +3002,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   #identity-box:hover:active > #identity-icons > #page-proxy-favicon,
   #identity-box[open=true] > #identity-icons > #page-proxy-favicon{
     opacity: 1;
-    /* Changed filter -johnGraciliano */
+    /* Changed filter -johnGraciliano *%
     filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
       <svg height="0" xmlns="http://www.w3.org/2000/svg">\
         <filter id="dimLights">\
@@ -3006,6 +3014,8 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
                      0  0  0  1 0" />\
         </filter>\
       </svg>#dimLights');
+    %* and changed again -johnGraciliano */
+    filter: brightness(.825) contrast(1.35);
   }
 /*} ** for all resolutions ***/
 
@@ -4402,16 +4412,29 @@ toolbarbutton.bookmark-item[dragover="true"][open="true"] {
   list-style-image: url(chrome://browser/skin/Push-64.png);
 }
 
-.popup-notification-icon[popupid="xpinstall-disabled"],
 .popup-notification-icon[popupid="addon-progress"],
-.popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-failed"],
 .popup-notification-icon[popupid="addon-install-confirmation"],
 .popup-notification-icon[popupid="addon-install-complete"],
 .popup-notification-icon[popupid="addon-install-restart"] {
-  list-style-image: url(chrome://mozapps/skin/extensions/extensionGeneric.png);
+  list-style-image: url(chrome://mozapps/skin/extensions/extensionGeneric.svg);
   width: 32px;
   height: 32px;
+}
+#addon-install-confirmation-notification[warning] .popup-notification-icon[popupid="addon-install-confirmation"],
+.popup-notification-icon[popupid="addon-install-failed"] {
+  filter: grayscale(1.0);
+}
+.popup-notification-icon[popupid="addon-install-restart"] {
+  filter: hue-rotate(-113deg) saturate(0.60) brightness(1.25);  /* Make it green */
+}
+.popup-notification-icon[popupid="xpinstall-disabled"],
+.popup-notification-icon[popupid="addon-install-blocked"],
+.popup-notification-icon[popupid="addon-install-origin-blocked"] {
+  list-style-image: url(chrome://browser/skin/addons/addon-install-blocked.svg);
+  width: 45px;
+  height: 45px;
+  -moz-margin-end: 3px;
 }
 
 .popup-notification-description[popupid="addon-progress"],
