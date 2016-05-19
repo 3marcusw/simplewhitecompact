@@ -1270,6 +1270,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
 
 /* Rules for about:debugging */
 
+#body > .app > .main-content > div[role=tabpanel] > .header,
 #body > .app > .main-content > #tab-addons > .header,
 #body > .app > .main-content > #tab-workers > .header,
 #body > .main-content > #tab-addons > .header,
@@ -1294,7 +1295,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
   align-self: flex-start;
 }
 
-#tab-workers > #workers > .targets > .target-list > .target-container > .target-icon,
+#workers > .targets > .target-list > .target-container > .target-icon,
 #tab-workers > #workers > .targets > .target-container > .target-icon,
 #tab-workers > #workers > .targets > .target > .target-icon,
 #tab-workers > #workers > div > .targets > .target > .target-icon{
