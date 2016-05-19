@@ -187,24 +187,6 @@ toolbarbutton.bookmark-item > menupopup {
 }
 
 @media (min-resolution: 2dppx) {
-  .tab-close-button {
-	-moz-image-region: rect(0, 128px, 32px, 96px);
-    list-style-image: url("chrome://global/skin/icons/close@2x.png");
-  }
-
-  .tab-close-button:hover,
-  .tab-close-button:hover[selected="true"] {
-    -moz-image-region: rect(0, 64px, 32px, 32px);
-  }
-
-  .tab-close-button:hover:active,
-  .tab-close-button:hover:active[selected="true"] {
-    -moz-image-region: rect(0, 96px, 32px, 64px);
-  }
-
-  .tab-close-button[selected="true"] {
-    -moz-image-region: rect(0, 32px, 32px, 0);
-  }
   .panel-promo-closebutton > .toolbarbutton-icon,
   .tab-close-button > .toolbarbutton-icon,
   .tabs-closebutton > .toolbarbutton-icon, /*sidebar*/
