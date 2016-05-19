@@ -261,9 +261,16 @@ panelmultiview[nosubviews=true] > .panel-viewcontainer > .panel-viewstack > .pan
   max-width: 30em;
 }
 
+/* The following gets moved into chrome://pocket-shared/skin/pocket.css in Firefox 46. */
 /* Bug 1164419 - increase Pocket panel size to accomidate wider Russian text. */
 panelmultiview[mainViewId=PanelUI-pocketView] > .panel-viewcontainer > .panel-viewstack > .panel-mainview:not([panelid="PanelUI-popup"]) {
   max-width: 33em; /* standaloneSubviewWidth + 3 */
+}
+
+/* The next is added in Firefox 46. --johnGraciliano */
+/* Give WebExtension stand-alone panels extra width for Chrome compatibility */
+.cui-widget-panel[viewId^=PanelUI-webext-] .panel-mainview {
+  max-width: 800px;
 }
 
 panelview:not([mainview]) .toolbarbutton-text,
@@ -276,6 +283,7 @@ panelview:not([mainview]) .toolbarbutton-text,
   padding: 4px 0;
 }
 
+/* The following gets moved into chrome://pocket-shared/skin/pocket.css in Firefox 46. */
 .cui-widget-panel[viewId="PanelUI-pocketView"] > .panel-arrowcontainer > .panel-arrowcontent {
   padding-top: 0;
   padding-bottom: 0;
