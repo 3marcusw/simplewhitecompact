@@ -38,6 +38,10 @@ body {
   box-sizing: content-box;
 }
 
+.theme-firebug #sidebar-panel-computedview > .devtools-toolbar {
+  height: 23px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
+}
+
 #browser-style-checkbox {
   /* Bug 1200073 - extra space before the browser styles checkbox so
      they aren't squished together in a small window. */
@@ -145,6 +149,15 @@ body > #propertyContainer > .property-view > * {
 
 .property-content {
   padding-left: 17px;
+}
+
+.theme-firebug .property-view,
+.theme-firebug .property-content {
+  font-family: var(--proportional-font-family);
+}
+
+.theme-firebug .property-view {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* From skin */

@@ -124,7 +124,7 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
       linear-gradient(to left, rgba(255,255,255,0.5) 3px, rgba(255,255,255,0) 3px),
       linear-gradient(to top, rgba(255,255,255,0.4) 3px, rgba(255,255,255,0) 3px),
       linear-gradient(to bottom, rgba(163,196,247,0.3), rgba(122,180,246,0.3));
-    background-clip: content-box;
+    background-clip: padding-box;
     border-radius: 6px;
     outline: 1px solid rgb(124,163,206);
     -moz-outline-radius: 3px;
@@ -159,7 +159,7 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 }
 
 .ac-site-icon {
-  width: 16px; 
+  width: 16px;
   height: 16px;
   margin: 0 5px -2px;
 }
@@ -183,7 +183,7 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 }
 
 .ac-extra > .ac-comment {
-  padding-right: 4px;
+  -moz-padding-end: 4px;
 }
 
 .ac-ellipsis-after {
@@ -203,16 +203,12 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 }
 
 html|span.ac-emphasize-text {
-  box-shadow: inset 0 0 1px 1px rgba(208,208,208,0.5);
-  background-color: rgba(208,208,208,0.3);
-  border-radius: 2px;
-  text-shadow: 0 0 currentColor;
+  text-shadow: 0 0 currentColor, 0 0 0 currentColor;
 }
 
-@media (-moz-windows-default-theme) {
+@media (min-resolution: 1.3dppx) {
   html|span.ac-emphasize-text {
-    box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.1);
-    background-color: rgba(0,0,0,0.05);
+    text-shadow: 0 0 currentColor, 0 0 0.33px currentColor;
   }
 }
 

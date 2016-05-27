@@ -27,7 +27,7 @@ body {
 
 /* Typography */
 .title {
-  background-image: url("chrome://browser/skin/aboutNetError_info.png");
+  background-image: url("chrome://browser/skin/aboutNetError_info.svg");
   background-position: left 0;
   background-repeat: no-repeat;
   background-size: 1.6em;
@@ -36,13 +36,8 @@ body {
   font-size: 2.5em;
 }
 
-@media (min-resolution: 2dppx) {
-  .title {
-    background-image: url("chrome://browser/skin/aboutNetError_info@2x.png");
-  }
-}
-
-.title:-moz-dir(rtl) {
+.title:-moz-dir(rtl),
+.title:-moz-locale-dir(rtl) {
   background-position: right 0;
 }
 

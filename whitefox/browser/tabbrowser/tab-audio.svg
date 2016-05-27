@@ -45,7 +45,7 @@
     .icon.backgroundTab,
     .icon.backgroundTab.hover,
     .icon.backgroundTab.pressed {
-      fill: -moz-MenuBarText;
+      fill: #282828;
     }
   </style>
 

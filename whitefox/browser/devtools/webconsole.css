@@ -42,9 +42,23 @@ a {
   align-self: flex-start;
 }
 
+.theme-firebug .message > .icon {
+  margin: 0;
+  margin-inline-end: 6px;
+}
+
+.theme-firebug .message[severity="error"] {
+  color: #FF0000; /* var(--error-color) */
+  background-color: #FFEBEB; /* var(--error-background-color) */
+}
+
+.theme-firebug .message[severity="warn"] {
+  background-color: #FFFFC8; /* var(--warning-background-color) */
+}
+
 .message > .icon::before {
   content: "";
-  background-image: url(./images/webconsole.svg);
+  background-image: url(images/webconsole.svg);
   background-position: 12px 12px;
   background-repeat: no-repeat;
   background-size: 72px 60px;
@@ -54,7 +68,7 @@ a {
 }
 
 .theme-light .message > .icon::before {
-  background-image: url(./images/webconsole.svg#light-icons);
+  background-image: url(images/webconsole.svg#light-icons);
 }
 
 .message > .message-body-wrapper {
@@ -95,6 +109,11 @@ a {
   color: -moz-nativehyperlinktext;
   text-decoration: none;
   white-space: nowrap;
+}
+
+/* More space for the location data for location URL */
+.theme-firebug .message-location {
+  width: 13em;
 }
 
 .message-location:hover,
@@ -430,6 +449,10 @@ a {
   border-top-color: #e0e0e0;
 }
 
+.theme-firebug .jsterm-input-container {
+  border-top: 1px solid #ccc;
+}
+
 .jsterm-input-node,
 .jsterm-complete-node {
   border: none;
@@ -446,7 +469,7 @@ a {
   /* Always allow scrolling on input - it auto expands in js by setting height,
      but don't want it to get bigger than the window. 24px = toolbar height. */
   max-height: calc(90vh - 24px);
-  background-image: -moz-image-rect(url("./images/commandline-icon.png"), 0, 32, 16, 16);
+  background-image: -moz-image-rect(url(images/commandline-icon.png), 0, 32, 16, 16);
   background-repeat: no-repeat;
   background-size: 16px 16px;
   color: var(--theme-content-color1);
@@ -454,8 +477,12 @@ a {
 
 @media (min-resolution: 1.1dppx) {
   .jsterm-input-node {
-    background-image: -moz-image-rect(url('./images/commandline-icon@2x.png'), 0, 64, 32, 32);
+    background-image: -moz-image-rect(url(images/commandline-icon@2x.png), 0, 64, 32, 32);
   }
+}
+
+.theme-firebug .jsterm-input-node {
+  background-image: url(images/firebug/commandline-icon.svg);
 }
 
 :-moz-any(.jsterm-input-node,
@@ -483,6 +510,11 @@ a {
 #webconsole-sidebar > tabs {
   height: 0;
   border: none;
+}
+
+/* Firebug theme has the tabs visible. */
+.theme-firebug #webconsole-sidebar > tabs {
+  height: 28px;
 }
 
 .devtools-side-splitter ~ #webconsole-sidebar[hidden] {
@@ -587,7 +619,7 @@ a.learn-more-link.webconsole-learn-more-link {
 
 /* Open DOMNode in inspector button */
 .open-inspector {
-  background: url("./images/vview-open-inspector.png") no-repeat 0 0;
+  background: url(images/vview-open-inspector.png) no-repeat 0 0;
   padding-left: 16px;
   margin-left: 5px;
   cursor: pointer;
@@ -607,7 +639,7 @@ a.learn-more-link.webconsole-learn-more-link {
 /* Force the icon only style for the clear button */
 
 .webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-icon{
-  list-style-image: var(--clear-icon-url);
+  list-style-image: url(images/clear.svg);
 }
 /* Hide the text labels to make image only buttons (some versions of Firefox). --johnGraciliano */
 .webconsole-clear-console-button:not(.devtools-clear-icon) > .toolbarbutton-text,
@@ -687,4 +719,14 @@ a.learn-more-link.webconsole-learn-more-link {
   :root .hud-filter-box {
     width: 200px;
   }
+}
+
+/* Firebug theme support for console.table() */
+
+.theme-firebug .consoletable .theme-body {
+  width: 100%;
+  border-top: 1px solid #D7D7D7;
+  border-bottom: 2px solid #D7D7D7;
+  border-left: 1px solid #D7D7D7;
+  border-right: 1px solid #D7D7D7;
 }

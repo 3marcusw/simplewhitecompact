@@ -1,0 +1,137 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url("chrome://global/skin/in-content/common.css");
+
+body {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0 48px;
+  align-items: center;
+  justify-content: center;
+  background-color: #b14646;
+  color: white;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  -moz-margin-start: 1em;
+}
+
+ul > li, ol > li {
+  margin-bottom: .5em;
+}
+
+ul {
+  list-style: disc;
+}
+
+#errorPageContainer {
+  position: relative;
+  min-width: 320px;
+  max-width: 512px;
+}
+
+.title {
+  background: url("chrome://global/skin/icons/blocked.svg") left 2px no-repeat;
+  background-size: 45px; /* it was 3em */
+  -moz-margin-start: -5em;
+  -moz-padding-start: 5em;
+}
+
+.title-text {
+  color: white;
+  border-bottom: 1px solid white;
+  padding-bottom: 0.4em;
+}
+
+.title:-moz-dir(rtl) {
+  background-position: right 2px;
+}
+
+@media (max-width: 675px) {
+  .title {
+    padding-top: 0;
+    background-image: none;
+    -moz-padding-start: 0;
+    -moz-margin-start: 0;
+  }
+}
+
+/* Pressing the retry button will cause the cursor to flicker from a pointer to
+ * not-allowed. Override the disabled cursor behaviour since we will never show
+ * the button disabled as the initial state. */
+button:disabled {
+  cursor: pointer;
+}
+
+#buttons {
+  display: flex;
+}
+
+.button-spacer {
+  flex: 1;
+}
+
+#getMeOutButton {
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+#reportButton {
+  display: block;
+  min-width: 150px;
+}
+
+/*span#phishing_sitename,
+span#malware_sitename */ 
+p > span[id] {
+  font-weight: bold;
+}
+
+.button-container button:not(.primary) {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #9b2e2e;
+  margin-inline-end: 0;
+}
+
+.button-container button:not(.primary):hover {
+  background-color: #a83232;
+}
+
+.button-container button:not(.primary):active {
+  background-color: #9b2e2e;
+}
+
+.button-container button {
+  margin-top: 1.2em;
+}
+
+/* Style warning button to look like a small text link in the
+   bottom right. This is preferable to just using a text link
+   since there is already a mechanism in browser.js for trapping
+   oncommand events from unprivileged chrome pages (BrowserOnCommand).*/
+#ignoreWarningButton {
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  margin: 4px 0 0 0;
+  padding: 0;
+  font-size: smaller;
+  min-width: 0;
+}
+
+#ignoreWarningButton:hover {
+  cursor: pointer;
+}
+
+#ignoreWarning {
+  margin-top: 1.2em;
+  text-align: end;
+}

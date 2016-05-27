@@ -7,7 +7,13 @@
   --table-splitter-color: rgba(255,255,255,0.15);
   --table-zebra-background: rgba(255,255,255,0.05);
 }
+
 :root.theme-light {
+  --table-splitter-color: rgba(0,0,0,0.15);
+  --table-zebra-background: rgba(0,0,0,0.05);
+}
+
+:root.theme-firebug {
   --table-splitter-color: rgba(0,0,0,0.15);
   --table-zebra-background: rgba(0,0,0,0.05);
 }
@@ -45,6 +51,10 @@
   padding: 0;
 }
 
+.theme-firebug #requests-menu-toolbar {
+  height: 16px !important;
+}
+
 .requests-menu-subitem {
   padding: 3px;
 }
@@ -52,7 +62,10 @@
 .requests-menu-header-button {
   -moz-appearance: none;
   background-color: transparent;
-  --border-img: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%) 1 1;
+  --border-img: linear-gradient(transparent 15%,
+                                var(--theme-splitter-color) 15%,
+                                var(--theme-splitter-color) 85%,
+                                transparent 85%) 1 1;
   border-image: var(--border-img);
   border-style: solid;
   border-width: 0;
@@ -110,20 +123,30 @@
 
 .requests-menu-header-button[sorted=ascending] > .button-box > .button-icon,
 .requests-menu-header-button[sorted=ascending] #requests-menu-waterfall-image {
-  list-style-image: url("./images/sort-arrows.svg#ascending");
+  list-style-image: url(images/sort-arrows.svg#ascending);
 }
 
 .requests-menu-header-button[sorted=descending] > .button-box > .button-icon,
 .requests-menu-header-button[sorted=descending] #requests-menu-waterfall-image {
-  list-style-image: url("./images/sort-arrows.svg#descending");
+  list-style-image: url(images/sort-arrows.svg#descending);
 }
 
 /* To provide for the missing #requests-menu-waterfall-image in Firefox versions prior to 46 */
-.requests-menu-header-button[sorted=ascending] hbox::after {
-  background-image: url("./images/sort-arrows.svg#ascending");
+:root:not(.theme-firebug) .requests-menu-header-button[sorted=ascending] hbox::after {
+  background-image: url(images/sort-arrows.svg#ascending);
 }
-.requests-menu-header-button[sorted=descending] hbox::after {
-  background-image: url("./images/sort-arrows.svg#descending");
+:root:not(.theme-firebug) .requests-menu-header-button[sorted=descending] hbox::after {
+  background-image: url(images/sort-arrows.svg#descending);
+}
+
+:root.theme-firebug .requests-menu-header-button[sorted=ascending] > .button-box > .button-icon,
+:root.theme-firebug .requests-menu-header-button[sorted=ascending] #requests-menu-waterfall-image {
+  list-style-image: url(images/firebug/arrow-up.svg);
+}
+
+:root.theme-firebug .requests-menu-header-button[sorted=descending] > .button-box > .button-icon,
+:root.theme-firebug .requests-menu-header-button[sorted=descending] #requests-menu-waterfall-image {
+  list-style-image: url(images/firebug/arrow-down.svg);
 }
 
 .requests-menu-header-button > .button-box > .button-text,
@@ -148,6 +171,30 @@
 .requests-menu-header-button[sorted]:-moz-dir(rtl) {
   box-shadow: -0.5px 0px 0px 0.5px var(--theme-splitter-color);
 }
+
+/* Firebug theme support for Network panel header */
+
+.theme-firebug .requests-menu-header {
+  padding: 0 !important;
+  font-weight: bold;
+  background: linear-gradient(rgba(255, 255, 255, 0.05),
+                              rgba(0, 0, 0, 0.05)),
+                              #C8D2DC;
+}
+
+.theme-firebug .requests-menu-header-button {
+  min-height: 17px;
+}
+
+.theme-firebug .requests-header-menu-button[sorted] {
+  background-color: #AAC3DC;
+}
+
+.theme-firebug .requests-header-menu:hover:active {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1),
+                                    transparent);
+}
+
 
 /* Network requests table: specific column dimensions */
 
@@ -421,6 +468,11 @@ box.requests-menu-status[code^="5"] {
   height: 9px;
 }
 
+.theme-firebug .requests-menu-timings-box {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+  height: 16px;
+}
+
 .requests-menu-timings-box.blocked {
   background-color: rgba(235, 83, 104, 0.8); /* red */
 }
@@ -434,27 +486,28 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Use custom colors for dark and light theme on remaining timing types. */
-.theme-dark .requests-menu-timings-box.send {
+/* The dark and firebug themes share default colors on the remaining.    */
+.requests-menu-timings-box.send {
   background-color: rgba(70, 175, 227, 0.8); /* light blue */
 }
 
-.theme-light .requests-menu-timings-box.send {
+:root.theme-light:not(.theme-firebug) .requests-menu-timings-box.send {
   background-color: rgba(0, 136, 204, 0.8); /* blue */
 }
 
-.theme-dark .requests-menu-timings-box.wait {
+.requests-menu-timings-box.wait {
   background-color: rgba(94, 136, 176, 0.8); /* blue grey */
 }
 
-.theme-light .requests-menu-timings-box.wait {
+:root.theme-light:not(.theme-firebug) .requests-menu-timings-box.wait {
   background-color: rgba(95, 136, 176, 0.8); /* blue grey */
 }
 
-.theme-dark .requests-menu-timings-box.receive {
+.requests-menu-timings-box.receive {
   background-color: rgba(112, 191, 83, 0.8); /* green */
 }
 
-.theme-light .requests-menu-timings-box.receive {
+:root.theme-light:not(.theme-firebug) .requests-menu-timings-box.receive {
   background-color: rgba(44, 187, 15, 0.8); /* green */
 }
 
@@ -482,6 +535,30 @@ box.requests-menu-status[code^="5"] {
   background-color: var(--theme-selection-background-semitransparent);
 }
 
+.theme-firebug .side-menu-widget-item:not(.selected):hover {
+  background: #EFEFEF;
+}
+
+.theme-firebug .requests-menu-subitem {
+  padding: 1px;
+}
+
+/* HTTP Status Column */
+.theme-firebug .requests-menu-subitem.requests-menu-status {
+  font-weight: bold;
+}
+
+/* Method Column */
+.theme-firebug .requests-menu-subitem.requests-menu-method-box {
+  color: rgb(128, 128, 128);
+}
+
+/* Size Column */
+.theme-firebug .requests-menu-subitem.requests-menu-size {
+  text-align: end;
+  padding-inline-end: 4px;
+}
+
 /* Adjustments to make some columns in a selected row clearer --johnGraciliano */
 .theme-light .side-menu-widget-item.selected .requests-menu-status ,
 .theme-light .side-menu-widget-item.selected .requests-security-state-icon {
@@ -502,6 +579,14 @@ box.requests-menu-status[code^="5"] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+:root.theme-firebug #details-pane-toggle {
+  list-style-image: url(images/firebug/pane-collapse.svg);
+}
+
+:root.theme-firebug #details-pane-toggle[pane-collapsed] {
+  list-style-image: url(images/firebug/pane-expand.svg);
+}
+
 /* Network request details tabpanels */
 
 .tabpanel-content {
@@ -514,6 +599,12 @@ box.requests-menu-status[code^="5"] {
 
 #headers-tabpanel {
   background-color: var(--theme-toolbar-background);
+}
+
+/* Headers separators are toolbars, but they have different height
+  in Firebug theme */
+.theme-firebug .tabpanel-content .variables-view-container .title.devtools-toolbar {
+  height: 20px !important;
 }
 
 /* Summary tabpanel */
@@ -607,6 +698,10 @@ box.requests-menu-status[code^="5"] {
 
 #timings-tabpanel .requests-menu-timings-total {
   transition: transform 0.2s ease-out;
+}
+
+.theme-firebug #timings-tabpanel .requests-menu-timings-total {
+  color: var(--theme-body-color);
 }
 
 /* Security tabpanel */
@@ -877,6 +972,48 @@ box.requests-menu-status[code^="5"] {
 
 .table-chart-row-label[name=time] {
   width: 7em;
+}
+
+/* Firebug theme support for network charts */
+
+.theme-firebug .chart-colored-blob[name=html] {
+  fill: rgba(94, 136, 176, 0.8); /* Blue-Grey highlight */
+  background: rgba(94, 136, 176, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=css] {
+  fill: rgba(70, 175, 227, 0.8); /* light blue */
+  background: rgba(70, 175, 227, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=js] {
+  fill: rgba(235, 83, 104, 0.8); /* red */
+  background: rgba(235, 83, 104, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=xhr] {
+  fill: rgba(217, 102, 41, 0.8); /* orange  */
+  background: rgba(217, 102, 41, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=fonts] {
+  fill: rgba(223, 128, 255, 0.8); /* pink */
+  background: rgba(223, 128, 255, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=images] {
+  fill: rgba(112, 191, 83, 0.8); /* pink */
+  background: rgba(112, 191, 83, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=media] {
+  fill: rgba(235, 235, 84, 0.8); /* yellow */
+  background: rgba(235, 235, 84, 0.8);
+}
+
+.theme-firebug .chart-colored-blob[name=flash] {
+  fill: rgba(84, 235, 159, 0.8); /* cyan */
+  background: rgba(84, 235, 159, 0.8);
 }
 
 /* Responsive sidebar */

@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 /*
  *  This defines the look-and-feel styling of the error pages.
  *  (see: netError.xhtml)
@@ -5,23 +9,33 @@
  *  Original styling by William Price <bugzilla@mob.rice.edu>
  *  Updated by: Steven Garrity <steven@silverorange.com>
  *              Henrik Skupin  <mozilla@hskupin.info>
+ *
+ *  This file changed to accomodate a new style for the 'blacklist'
+ *  class.  --johnGraciliano
  */
 
-html {
+@import url("chrome://global/skin/in-content/common.css");
+
+
+html  {
   background: #f0f0f0;
 }
 
-body {
+:root:not(.blacklist) body {
   margin: 0;
   padding: 0 1em;
   color: -moz-FieldText;
   font: message-box;
+
+  background-color: transparent; /** --johnGraciliano **/
 }
 
-h1 {
+:root:not(.blacklist) h1 {
   margin: 0 0 .6em 0;
   border-bottom: 1px solid #e3e3e3;
   font-size: 160%;
+
+  font-weight: bold; /** --johnGraciliano **/
 }
 
 ul, ol {
@@ -38,7 +52,7 @@ ul {
   list-style: square;
 }
 
-#errorPageContainer {
+:root:not(.blacklist) #errorPageContainer {
   position: relative;
   min-width: 13em;
   max-width: 52em;
@@ -47,6 +61,8 @@ ul {
   border-radius: 10px;
   padding: 3em;
   -moz-padding-start: 30px;
+}
+#errorPageContainer {
   background: url("chrome://global/skin/icons/warning-large.png") left 0 no-repeat -moz-Field;
   background-origin: content-box;
 }
@@ -55,6 +71,7 @@ ul {
   background-image: url("chrome://global/skin/icons/sslWarning.png");
 }
 
+#errorPageContainer:-moz-dir(rtl),
 body[dir="rtl"] #errorPageContainer {
   background-position: right 0;
 }
@@ -63,11 +80,11 @@ body[dir="rtl"] #errorPageContainer {
   -moz-margin-start: 80px;
 }
 
-#errorLongContent {
+:root:not(.blacklist) #errorLongContent {
   -moz-margin-start: 80px;
 }
 
-#errorShortDesc > p {
+:root:not(.blacklist) #errorShortDesc > p {
   overflow: auto;
   border-bottom: 1px solid #e3e3e3;
   padding-bottom: 1em;
@@ -75,12 +92,9 @@ body[dir="rtl"] #errorPageContainer {
   white-space: pre-wrap;
 }
 
-#errorLongDesc {
+:root:not(.blacklist) #errorLongDesc {
   -moz-padding-end: 3em;
   font-size: 110%;
-}
-
-#errorLongDesc > p {
 }
 
 #errorTryAgain {
@@ -121,22 +135,162 @@ body[dir="rtl"] #errorPageContainer {
 }
 
 /* Custom styling for 'blacklist' error class */
-:root.blacklist #errorTitle, :root.blacklist #errorLongContent,
-:root.blacklist #errorShortDesc, :root.blacklist #errorLongDesc,
-:root.blacklist a {
-  background-color: #722; /* Dark red */
-  color: white;
-}
-
-:root.blacklist #errorPageContainer {
-  background-image: url("chrome://global/skin/icons/blacklist_large.png");
-  background-color: #722;
-}
-
-:root.blacklist {
-  background: #333;
-}
 
 :root.blacklist #errorTryAgain {
   display: none;
+}
+
+/* 
+ * The 'blacklist' class has a new design.
+ * All what follows is a modified version of:
+ *   chrome://browser/skin/blockedSite.css
+ */
+
+:root.blacklist body {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 0 48px;
+  align-items: center;
+  justify-content: center;
+  background-color: #b14646;
+  color: white;
+}
+
+:root.blacklist ul,
+:root.blacklist ol {
+  -moz-margin-start: 1em;
+}
+
+:root.blacklist ul {
+  list-style: disc;
+}
+
+:root.blacklist #errorPageContainer {
+  position: relative;
+  min-width: 320px;
+  max-width: 512px;
+
+  background: transparent; /** --johnGraciliano **/
+}
+
+:root.blacklist #errorTitle {
+  background: url("chrome://global/skin/icons/blocked.svg") left 2px no-repeat;
+  background-size: 45px; /* it was 3em */
+  -moz-margin-start: -5em;
+  -moz-padding-start: 5em;
+}
+
+:root.blacklist #errorTitle h1 {
+  color: white;
+  border-bottom: 1px solid white;
+  padding-bottom: 0.4em;
+}
+
+:root.blacklist #errorTitle:-moz-dir(rtl) {
+  background-position: right 2px;
+}
+
+@media (max-width: 675px) {
+  :root.blacklist #errorTitle {
+    padding-top: 0;
+    background-image: none;
+    -moz-padding-start: 0;
+    -moz-margin-start: 0;
+  }
+}
+
+/* Pressing the retry button will cause the cursor to flicker from a pointer to
+ * not-allowed. Override the disabled cursor behaviour since we will never show
+ * the button disabled as the initial state. */
+:root.blacklist button:disabled {
+  cursor: pointer;
+}
+
+:root.blacklist #buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+:root.blacklist .button-spacer {
+  flex: 1;
+}
+
+:root.blacklist #getMeOutButton {
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+:root.blacklist #reportButton {
+  display: block;
+  min-width: 150px;
+}
+
+/*span#phishing_sitename,
+span#malware_sitename */ 
+:root.blacklist p > span[id] {
+  font-weight: bold;
+}
+
+
+:root.blacklist #getMeOutButton {
+  background-color: var(--in-content-primary-button-background);
+  border: none;
+  color: var(--in-content-selected-text);
+  min-width: 250px;
+  margin-inline-start: 0;
+}
+
+:root.blacklist #getMeOutButton:hover {
+  background-color: var(--in-content-primary-button-background-hover) !important;
+}
+
+:root.blacklist #getMeOutButton:hover:active {
+  background-color: var(--in-content-primary-button-background-active) !important;
+}
+
+
+:root.blacklist #reportButton {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #9b2e2e;
+  margin-inline-end: 0;
+}
+
+:root.blacklist #reportButton:hover {
+  background-color: #a83232;
+}
+
+:root.blacklist #reportButton:active {
+  background-color: #9b2e2e;
+}
+
+:root.blacklist #buttons button {
+  margin-top: 1.2em;
+}
+
+/* Style warning button to look like a small text link in the
+   bottom right. This is preferable to just using a text link
+   since there is already a mechanism in browser.js for trapping
+   oncommand events from unprivileged chrome pages (BrowserOnCommand).*/
+:root.blacklist #ignoreWarningButton {
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  margin: 4px 0 0 0;
+  padding: 0;
+  font-size: smaller;
+  min-width: 0;
+  position: static !important; /* Ignore top & left properties from elsewhere! */
+}
+
+:root.blacklist #ignoreWarningButton:hover {
+  cursor: pointer;
+}
+
+:root.blacklist #ignoreWarning {
+  margin-top: 1.2em;
+  text-align: end;
 }

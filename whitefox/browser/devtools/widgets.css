@@ -10,6 +10,7 @@
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-dark-rtl.svg);
   --sidemenu-selected-other-background: #193347;
 }
+
 .theme-light {
   --table-splitter-color: rgba(0,0,0,0.15);
   --table-zebra-background: rgba(0,0,0,0.05);
@@ -17,6 +18,15 @@
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-rtl.svg);
   --sidemenu-selected-other-background: #b9d7fd;
 }
+
+.theme-firebug {
+  --table-splitter-color: rgba(0,0,0,0.15);
+  --table-zebra-background: rgba(0,0,0,0.05);
+  --sidemenu-selected-arrow: url(images/itemArrow-ltr.svg);
+  --sidemenu-selected-arrow-rtl: url(images/itemArrow-rtl.svg);
+  --sidemenu-selected-other-background: var(--theme-sidebar-background);
+}
+
 
 /* Generic pane helpers */
 
@@ -329,6 +339,102 @@
   color: black;
 }
 
+/* Firebug theme support for breadcrumbs widget. */
+
+.theme-firebug .breadcrumbs-widget-item {
+  margin-inline-start: 10px;
+  margin-inline-end: 1px;
+  border: 1px solid transparent;
+  color: #141414;
+  border-radius: 2px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  font-size: var(--theme-toolbar-font-size);
+}
+
+.theme-firebug .breadcrumbs-widget-item:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: transparent linear-gradient(
+              rgba(255, 255, 255, 0.4),
+              rgba(255, 255, 255, 0.2)) no-repeat;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset,
+              0 0 1px rgba(255, 255, 255, 0.6) inset,
+              0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.theme-firebug .breadcrumbs-widget-item > .button-box {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.theme-firebug .breadcrumbs-widget-item:first-child {
+  margin: 0;
+}
+
+.theme-firebug .breadcrumbs-widget-item:not(:first-child)::before {
+  content: url(chrome://devtools/skin/images/firebug/breadcrumbs-divider.svg);
+  position: relative;
+  left: -3px;
+  margin: 0 0 0 -5px;
+  padding: 0;
+  width: 5px;
+}
+
+/* Breadcrumbs Separators (reset selection styles) */
+.theme-firebug .breadcrumbs-widget-item[checked],
+.theme-firebug .breadcrumbs-widget-item[checked] .breadcrumbs-widget-item-id,
+.theme-firebug .breadcrumbs-widget-item[checked] .breadcrumbs-widget-item-tag,
+.theme-firebug .breadcrumbs-widget-item[checked] .breadcrumbs-widget-item-pseudo-classes,
+.theme-firebug .breadcrumbs-widget-item[checked] .breadcrumbs-widget-item-classes {
+  background: none;
+  font-weight: bold;
+  color: inherit;
+}
+
+/* The first rule is there only to make sure the default rule from
+widgets.css is overwritten. */
+.theme-firebug .breadcrumbs-widget-item[checked] + .breadcrumbs-widget-item {
+  background: none;
+}
+
+.theme-firebug .breadcrumbs-widget-item .breadcrumbs-widget-item-tag {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* Breadcrumbs Scrolling Buttons */
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-up,
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-down {
+  padding: 0;
+  box-shadow: none;
+}
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-up:hover,
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-down:hover {
+  border: 1px transparent solid !important;
+  box-shadow: none !important;
+}
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-up:active,
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-down:active {
+  background: none !important;
+}
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-up > .toolbarbutton-icon {
+  background-image: url(chrome://global/skin/arrow/arrow-lft-sharp.gif);
+}
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-down > .toolbarbutton-icon {
+  background-image: url(chrome://global/skin/arrow/arrow-lft-sharp.gif);
+}
+
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-up:not([disabled]):active:hover > .toolbarbutton-icon,
+.theme-firebug .breadcrumbs-widget-container .scrollbutton-down:not([disabled]):active:hover > .toolbarbutton-icon {
+  background-position: 0 center;
+}
+
 /* SimpleListWidget */
 
 .simple-list-widget-container {
@@ -523,10 +629,23 @@
   margin-top: -1px;
 }
 
+.theme-firebug .variables-view-scope > .title {
+  height: auto;
+  border: none;
+}
+
+.theme-firebug .variables-view-scope > .title > .theme-twisty {
+  display: none;
+}
+
 /* Generic variables traits */
 
 .variables-view-variable:not(:last-child) {
   border-bottom: 1px solid rgba(128, 128, 128, .15);
+}
+
+.theme-firebug .variables-view-variable {
+  border-bottom: 1px solid transparent;
 }
 
 .variables-view-variable > .title > .name {
@@ -593,7 +712,7 @@
 }
 
 .variable-or-property-non-writable-icon {
-  background: url("./images/vview-lock.png") no-repeat;
+  background: url(images/vview-lock.png) no-repeat;
   background-size: cover;
   width: 16px;
   height: 16px;
@@ -601,7 +720,7 @@
 
 @media (min-resolution: 1.1dppx) {
   .variable-or-property-non-writable-icon {
-    background-image: url("./images/vview-lock@2x.png");
+    background-image: url(images/vview-lock@2x.png);
   }
 }
 
@@ -719,35 +838,38 @@
 }
 
 .variables-view-delete {
-  background-image: url("./images/vview-delete.png");
+  background-image: url(images/vview-delete.png);
 }
 
 @media (min-resolution: 1.1dppx) {
   .variables-view-delete {
-    background-image: url("./images/vview-delete@2x.png");
+    background-image: url(images/vview-delete@2x.png);
   }
 }
 
+.theme-firebug .variables-view-delete {
+  background-image: url(images/firebug/close.svg);
+}
+
 .variables-view-edit {
-  background-image: url("./images/vview-edit.png");
+  background-image: url(images/vview-edit.png);
 }
 
 @media (min-resolution: 1.1dppx) {
   .variables-view-edit {
-    background-image: url("./images/vview-edit@2x.png");
+    background-image: url(images/vview-edit@2x.png);
   }
 }
 
 .variables-view-open-inspector {
-  background-image: url("./images/vview-open-inspector.png");
+  background-image: url(images/vview-open-inspector.png);
 }
 
 @media (min-resolution: 1.1dppx) {
   .variables-view-open-inspector {
-    background-image: url("./images/vview-open-inspector@2x.png");
+    background-image: url(images/vview-open-inspector@2x.png);
   }
 }
-
 
 /* Variables and properties input boxes */
 
@@ -1205,11 +1327,11 @@
 }
 
 .table-widget-column-header[sorted=ascending] {
-  background-image: url("./images/sort-arrows.svg#ascending");
+  background-image: url(images/sort-arrows.svg#ascending);
 }
 
 .table-widget-column-header[sorted=descending] {
-  background-image: url("./images/sort-arrows.svg#descending");
+  background-image: url(images/sort-arrows.svg#descending);
 }
 
 .theme-dark .table-widget-column[readonly] {
@@ -1219,6 +1341,61 @@
 .theme-light .table-widget-column[readonly] {
   background-color: rgba(0,0,0,0.1);
 }
+
+/* Firebug theme support for table widget */
+
+.theme-firebug .devtools-toolbar.table-widget-column-header {
+  font-family: var(--proportional-font-family);
+  color: var(--theme-body-color);
+
+  /* Make sure to override the default Firebug devtools-toolbar height */
+  height: 19px !important;
+
+  /* Make sure to override the dafault .table-widget-column-header font-weight and background */
+  font-weight: bold !important;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+  background-color: #C8D2DC !important;
+
+  /* Vertically center header label */
+  padding-top: 2px !important;
+}
+
+.theme-firebug .devtools-toolbar.table-widget-column-header[sorted] {
+  background-color: #AAC3DC !important;
+}
+
+.theme-firebug .devtools-toolbar.table-widget-column-header:hover:active {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1),
+                                    transparent);
+}
+
+.theme-firebug .devtools-toolbar.table-widget-column-header[sorted=descending]:not(:active) {
+  background-image: url(chrome://devtools/skin/images/firebug/arrow-down.svg);
+}
+
+.theme-firebug .devtools-toolbar.table-widget-column-header[sorted=ascending]:not(:active) {
+  background-image: url(chrome://devtools/skin/images/firebug/arrow-up.svg);
+}
+
+/********************************   PROBLEMATIC - REMOVED LATER --johnGraciliano *************%
+.theme-firebug .table-widget-body .devtools-side-splitter {
+  background: linear-gradient(#CBD4DE,#656A6E,#CBD4DE 18px, transparent 18px),
+              linear-gradient(rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05) 10px, transparent 18px),
+              linear-gradient(transparent, rgba(0, 0, 0, 0.5) 10px, transparent 18px)
+              repeat-x transparent !important;
+  min-width: 1px;
+  width: 1px;
+  position: absolute;
+}
+
+.theme-firebug .table-widget-column .table-widget-cell:not(.even) {
+  background: #EFEFEF;
+}
+
+.theme-firebug .table-widget-column .table-widget-cell.even {
+  background: #FFFFFF;
+}
+%*********************************************************************************************/
 
 /* Cells */
 
@@ -1321,7 +1498,7 @@
   float: left;
   margin: 3px 2px -3px;
   background-repeat: no-repeat;
-  background-image: url("./images/controls.png");
+  background-image: url(images/controls.png);
   background-size: 56px 28px;
   cursor: pointer;
   background-position: -28px -14px;
@@ -1379,7 +1556,7 @@
 
 @media (min-resolution: 1.1dppx) {
   .tree-widget-item:before {
-    background-image: url("./images/controls@2x.png");
+    background-image: url(images/controls@2x.png);
   }
 }
 
@@ -1449,18 +1626,18 @@
 }
 
 .tree-widget-item[type="dir"]::after {
-  background-image: url(./images/filetypes/dir-close.svg);
+  background-image: url(images/filetypes/dir-close.svg);
   background-position: 2px 0;
   background-size: auto 16px;
   width: 20px;
 }
 
 .tree-widget-item[type="dir"][expanded]:not([empty])::after {
-  background-image: url(./images/filetypes/dir-open.svg);
+  background-image: url(images/filetypes/dir-open.svg);
 }
 
 .tree-widget-item[type="url"]::after {
-  background-image: url(./images/filetypes/globe.svg);
+  background-image: url(images/filetypes/globe.svg);
   background-size: auto 18px;
   width: 18px;
 }

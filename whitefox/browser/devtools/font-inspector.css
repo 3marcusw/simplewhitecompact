@@ -38,6 +38,11 @@ body {
   display: flex;
 }
 
+.theme-firebug #sidebar-panel-fontinspector > .devtools-toolbar {
+  height: 23px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
+  box-sizing: content-box;
+}
+
 #font-container {
   overflow: auto;
   flex: auto;

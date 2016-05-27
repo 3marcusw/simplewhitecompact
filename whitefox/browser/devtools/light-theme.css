@@ -108,6 +108,15 @@
 }
 /*** What preceeds is a copy of "variables.css" for the Timeline tool in Firefox 39 and earlier. */
 
+
+/* Special Rules for notifications in DevTools:    --johnGraciliano */
+#toolbox-notificationbox /* > .notificationbox-stack:first-child --this is hidden! --johnGraciliano */ > notification {
+  border-bottom: 1px solid #c7c7c7; /* = --devtools-splitter-color in splitters.css (= --devtools-splitter-color for Simple White X's light theme) */;
+}
+#toolbox-notificationbox /* > .notificationbox-stack:first-child --this is hidden! --johnGraciliano */ > notification .notification-inner {
+  border-width: 0; /* Ignore any inner border (use a flat style!) */
+}
+
 body {
   margin: 0;
 }

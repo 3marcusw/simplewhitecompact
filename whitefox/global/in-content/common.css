@@ -1270,6 +1270,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
 
 /* Rules for about:debugging */
 
+#body > .app > .main-content > div[role=tabpanel] > .header,
 #body > .app > .main-content > #tab-addons > .header,
 #body > .app > .main-content > #tab-workers > .header,
 #body > .main-content > #tab-addons > .header,
@@ -1277,6 +1278,7 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
   display: none;
 }
 
+#workers > .targets > .target-list > .target-container::before,
 #workers > .targets > .target-container::before,
 #workers > .targets > .target::before,
 #workers > div > .targets > .target::before{
@@ -1287,11 +1289,13 @@ page:-moz-any(#tabGroups-preferences,#theFoxOnlyBetter-preferences,#omnisidebar-
   width: 24px;
   margin-inline-end: 5px;
 }
+#workers > .targets > .target-list > .target-container::before,
 #workers > .targets > .target-container::before{
   margin-top: 6px;
   align-self: flex-start;
 }
 
+#workers > .targets > .target-list > .target-container > .target-icon,
 #tab-workers > #workers > .targets > .target-container > .target-icon,
 #tab-workers > #workers > .targets > .target > .target-icon,
 #tab-workers > #workers > div > .targets > .target > .target-icon{
