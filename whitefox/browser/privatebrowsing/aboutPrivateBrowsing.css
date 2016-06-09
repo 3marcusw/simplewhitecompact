@@ -91,8 +91,8 @@ p {
 
 .title {
   background-image: url("chrome://browser/skin/privatebrowsing/private-browsing.svg");
-  background-size: 56px;
-  background-position: 14px 8px;
+  background-size: 54px;
+  background-position: 16px 10px;
   font-weight: lighter;
   line-height: 1.5em;
   color: var(--color-darkTheme-light-gray-text);
