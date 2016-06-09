@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="9"
+     height="9"
+     viewBox="0 0 9 9"
+     shape-rendering="geometricPrecision">
+  <style>
+    .t:not(:target){
+      display: none;
+    }
+    use {
+      stroke-width: 1;
+      stroke: #73737a;
+      stroke-opacity: 0.856;
+      fill: none;
+    }
+    use[id^=open] {
+      stroke: #232425;
+      stroke-opacity: 1;
+      fill: #696969;
+    }
+    use[id*=hover] {
+      stroke: #1CC4F7;
+      stroke-opacity: 1;
+      fill: #C7E9F9;
+    }
+    use[id*=gray] {
+      stroke: #808080;
+      stroke-opacity: 1;
+      fill-opacity:.3;
+    }
+    use[id*=hlite] {
+      stroke: HighlightText;
+      stroke-opacity: .6;
+      fill-opacity:.3;
+    }
+  </style>
+  <defs style="display: none;">
+    <g id="Closed-shape">
+      <polygon  points="2.5,8.4  2.5,0.6  6.6 4.5"/>
+    </g>
+    <g id="Closed-RTL-shape">
+      <polygon  points="6.5,0.6  6.5,8.4  2.4 4.5"/>
+    </g>
+    <g id="Open-shape">
+      <polygon  points="7.5,7.5  2.5,7.5  7.5 2.5"/>
+    </g>
+    <g id="Open-RTL-shape">
+      <polygon  points="1.5,7.5  6.5,7.5  1.5 2.5"/>
+    </g>
+  </defs>
+  <use id="clsd"              class="t" xlink:href="#Closed-shape"/>
+  <use id="open"              class="t" xlink:href="#Open-shape"/>
+  <use id="clsd-hover"        class="t" xlink:href="#Closed-shape"/>
+  <use id="open-hover"        class="t" xlink:href="#Open-shape"/>
+  <g   id="clsd-focus"       class="t">
+    <use id="clsd-gray"                 xlink:href="#Closed-shape"/>
+    <use id="clsd-hlite"                xlink:href="#Closed-shape"/>
+  </g>
+  <g   id="open-focus"       class="t">
+    <use id="open-gray"                 xlink:href="#Open-shape"/>
+    <use id="open-hlite"                xlink:href="#Open-shape"/>
+  </g>
+  <use id="clsd-rtl"          class="t" xlink:href="#Closed-RTL-shape"/>
+  <use id="open-rtl"          class="t" xlink:href="#Open-RTL-shape"/>
+  <use id="clsd-hover-rtl"    class="t" xlink:href="#Closed-RTL-shape"/>
+  <use id="open-hover-rtl"    class="t" xlink:href="#Open-RTL-shape"/>
+  <g   id="clsd-focus-rtl"   class="t">
+    <use id="clsd-gray-rtl"             xlink:href="#Closed-RTL-shape"/>
+    <use id="clsd-hlite-rtl"            xlink:href="#Closed-RTL-shape"/>
+  </g>
+  <g   id="open-focus-rtl"   class="t">
+    <use id="open-gray-rtl"             xlink:href="#Open-RTL-shape"/>
+    <use id="open-hlite-rtl"            xlink:href="#Open-RTL-shape"/>
+  </g>
+</svg>
