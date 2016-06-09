@@ -5,17 +5,14 @@
 /* CSS Variables specific to this panel that aren't defined by the themes */
 .theme-light {
   --rule-highlight-background-color: #ffee99;
-  --rule-filter-icon: url(images/magnifying-glass-light.png);
 }
 
 .theme-dark {
   --rule-highlight-background-color: #594724;
-  --rule-filter-icon: url(images/magnifying-glass.png);
 }
 
 .theme-firebug {
   --rule-highlight-background-color: #ffee99;
-  --rule-filter-icon: url(images/magnifying-glass-light.png);
   --rule-property-name: darkgreen;
   --rule-property-value: darkblue;
 }
@@ -179,7 +176,12 @@ body > #ruleview-container {
   cursor: pointer;
 }
 
-.ruleview-computedlist,
+@supports (not (-moz-text-decoration-style:inherit)) {  /* Firefox 40 and later only! --johnGraciliano */
+  .ruleview-computedlist { /* This rule is separate from the next rule because the selector makes a problem in Firefox 39 and earlier. */
+    display: none;
+  }
+}
+
 .ruleview-overridden-rule-filter[hidden],
 .ruleview-warning[hidden] {
   display: none;
@@ -276,6 +278,10 @@ body > #ruleview-container {
   background: var(--theme-tab-toolbar-background);
 }
 
+.ruleview-rule[unmatched=true] {
+  opacity: 0.5;
+}
+
 .ruleview-rule[uneditable=true] :focus {
   outline: none;
 }
@@ -298,15 +304,23 @@ body > #ruleview-container {
   border-bottom-color: transparent;
 }
 
+.theme-firebug span.ruleview-selectorcontainer {  /* Added rule --johnGraciliano */
+  color: inherit;
+}
+
 .theme-firebug .ruleview-namecontainer > .ruleview-propertyname,
+.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD THAT OF THE NEXT LINE --johnGraciliano ***********/
 .theme-firebug .ruleview-propertycontainer > .ruleview-propertyvalue {
   border-bottom: none;
 }
 
+.theme-firebug .ruleview-computed > .ruleview-propertyname, /* Added selector --johnGraciliano */
 .theme-firebug .ruleview-namecontainer > .ruleview-propertyname {
   color: var(--rule-property-name);
 }
 
+.theme-firebug .ruleview-computed > .ruleview-propertyvalue, /* Added selector --johnGraciliano */
+.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD THAT OF THE NEXT LINE --johnGraciliano ***********/
 .theme-firebug .ruleview-propertycontainer > .ruleview-propertyvalue {
   color: var(--rule-property-value);
 }
@@ -317,13 +331,31 @@ body > #ruleview-container {
 }
 
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-namecontainer,
-.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-namecontainer *,
-.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertycontainer,
-.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertycontainer * {
+.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-namecontainer > .ruleview-propertyname, /* I replaced '*' with ' > .ruleview-propertyname' --johnGraciliano*/
+.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer,   /* .ruleview-propertyvaluecontainer replaces .ruleview-propertycontainer  --johnGraciliano */
+.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer > .ruleview-propertyvalue {/* I replaced '*' with ' > .ruleview-propertyvalue' --johnGraciliano */
   color: #CCCCCC;
 }
 
+/* The following rule cannot be applied.
+ * The nodes with classes '.ruleview-enableproperty' '.ruleview-computedlist' are not sibblings since Firefox 40.
+ * I removed it.  --johnGraciliano ******%
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-computedlist * {
+  color: #CCCCCC;
+}  
+%**/
+
+/* The next rule is an attempt to do what the previous failed rule would do. --johnGraciliano */
+/* This colors gray the computed properties of shorthand properties that are disabled through a checkbox in the rule inspector.
+ * HOWEVER, for overriden properties (crossed out properties due to other rules), if they are disabled by this checkbox
+ * they will only turn gray after selecting to inspect another node (returning to the node is ok).
+ */
+/* .theme-firebug .ruleview-property.ruleview-overridden > .ruleview-computedlist > .ruleview-computed:not(.ruleview-overridden),
+ * .theme-firebug .ruleview-property.ruleview-overridden > .ruleview-computedlist > .ruleview-computed:not(.ruleview-overridden) > .ruleview-propertyname,
+ * .theme-firebug .ruleview-overridden > .ruleview-computedlist > .ruleview-computed:not(.ruleview-overridden) > .ruleview-propertyvalue */
+.theme-firebug .ruleview-overridden > * > .ruleview-computed:not(.ruleview-overridden), /* These are faster versions of the selectors in the comment. */
+.theme-firebug .ruleview-overridden > * > .ruleview-computed:not(.ruleview-overridden) > .ruleview-propertyname,
+.theme-firebug .ruleview-overridden > * > .ruleview-computed:not(.ruleview-overridden) > .ruleview-propertyvalue {
   color: #CCCCCC;
 }
 
@@ -357,12 +389,15 @@ body > #ruleview-container {
 }
 
 .ruleview-overridden-rule-filter {
-  background-image: var(--rule-filter-icon);
+  background-image: url(images/magnifying-glass-light.png);  /* This was in var(--rule-filter-icon) .theme-light and .theme-firebug --johnGraciliano */
   background-size: 11px 11px;
   -moz-margin-start: 5px;
   display: inline-block;
   width: 11px;
   height: 11px;
+}
+:root.theme-dark .ruleview-overridden-rule-filter {
+  background-image: url(images/magnifying-glass.png);  /* To avoid using var(--rule-filter-icon) --johnGraciliano */
 }
 
 .ruleview-ruleopen {
@@ -514,7 +549,8 @@ body > #ruleview-container {
   cursor: text;
 }
 
-.ruleview-selector-separator, .ruleview-selector-unmatched {
+.ruleview-selector-separator,
+.ruleview-selector-unmatched {
   color: #888;
 }
 
