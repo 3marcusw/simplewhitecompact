@@ -177,11 +177,16 @@ div#weakCryptoAdvancedPanel {
   font-size: 0.9em;
 /*  position: absolute;  REMOVED IN FIREFOX 46 DEFAULT THEME, BUT I EXCLUDE FIREFOX 45 TOO (may be wrong) */
 }
-@supports (not (text-emphasis:none)) { /* Firefox < 46 (This is a bad test checks layout.css.text-emphasis.enabled = true) --johnGraciliano */
-div#certificateErrorReportingPanel,
-div#weakCryptoAdvancedPanel {
-  REMOVED-position: absolute; /* This is still present in the default theme in Firefox 45 (not in 46 and later) but I am excluding 45 too */
+
+#errorTitle[weakCrypto=true] ~ div > #weakCryptoAdvancedPanel,
+#errorTitle[weakCrypto=true] ~ #weakCryptoAdvancedPanel {
+  margin-top: 10px;
 }
+#errorTitle[weakCrypto=true] ~ div > #weakCryptoAdvancedPanel:not([style="display: block;"]),
+#errorTitle[weakCrypto=true] ~ #weakCryptoAdvancedPanel:not([style="display: block;"]) {
+  display: block !important; /* Reserve the space for it. */
+  visibility: hidden; /* Just leave the space */
+  pointer-events: none; /* Make sure it behaves as if it is not there at all */
 }
 
 #errorStatePanel, /* FF >= 39 */
