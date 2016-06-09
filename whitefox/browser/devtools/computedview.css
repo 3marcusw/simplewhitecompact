@@ -71,7 +71,9 @@ body > #propertyContainer > .property-view {
   clear: both;
 }
 .property-view {
-  padding: 2px 0 2px 17px;
+  padding: 2px 0;
+  padding-inline-start: 17px;
+  -moz-padding-start: 17px;
 }
 #sidebar-panel-computedview > #propertyContainer > .property-view {
   display: flex;
@@ -163,7 +165,9 @@ body > #propertyContainer > .property-view > * {
 /* From skin */
 .expander {
   visibility: hidden;
-  margin-left: -12px !important;
+  /* margin-left: -12px !important; */
+  margin-inline-start: -12px !important;
+  -moz-margin-start: -12px !important;
 }
 
 .expandable {
