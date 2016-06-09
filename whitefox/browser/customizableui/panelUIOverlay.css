@@ -1154,7 +1154,9 @@ menuitem.panel-subview-footer:not([disabled])[_moz-menuactive]:active,
 
 #PanelUI-remotetabs-tabslist > toolbarbutton,
 #PanelUI-historyItems > toolbarbutton {
-  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+/*  list-style-image: url(chrome://browser/skin/places/placesList.svg);
+  -moz-image-region: rect(2px, 18px, 18px, 2px);  / * defaultFavicon */
+  list-style-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
 }
 
 #PanelUI-remotetabs-tabslist > toolbarbutton > .toolbarbutton-icon,
