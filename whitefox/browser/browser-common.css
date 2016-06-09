@@ -577,7 +577,8 @@
 }
 
 #bookmarks-toolbar-placeholder {
-  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.png") !important;
+  list-style-image: url(chrome://browser/skin/places/places.svg) !important;
+  -moz-image-region: rect(2px, 138px, 18px, 122px) !important;  /* bookmarksToolbar */
 }
 
 toolbarpaletteitem[place="palette"] > #personal-bookmarks > #bookmarks-toolbar-placeholder,
@@ -666,55 +667,48 @@ menuitem.bookmark-item {
 /* ::::: bookmark items ::::: */
 
 .bookmark-item  {
-  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+  list-style-image: url(chrome://browser/skin/places/places.svg);
+  -moz-image-region: rect(2px, 18px, 18px, 2px);  /* defaultFavicon */
 }
 
 .bookmark-item[container] {
-  list-style-image: url("chrome://global/skin/icons/folder-item.png");
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
+  -moz-image-region: rect(2px, 198px, 18px, 182px);  /* folderItem */
 }
 
 .bookmark-item[container][open] {
-  -moz-image-region: rect(16px, 32px, 32px, 16px);
+  -moz-image-region: rect(2px, 198px, 18px, 182px);  /* folderItem */
 }
 
 .bookmark-item[container][livemark] {
-  list-style-image: url("chrome://browser/skin/livemark-folder.png");
-  -moz-image-region: auto;
+  -moz-image-region: rect(2px, 238px, 18px, 222px);  /* livemarkFolder */
 }
 
 .bookmark-item[container][livemark] .bookmark-item {
-  list-style-image: url("chrome://browser/skin/places/livemark-item.png");
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  -moz-image-region: rect(2px, 258px, 18px, 242px);  /* livemarkItem */
 }
 
 .bookmark-item[container][livemark] .bookmark-item[visited] {
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
+  -moz-image-region: rect(2px, 278px, 18px, 262px);  /* livemarkItem-visited */
 }
 
 .bookmark-item[container][query] {
-  list-style-image: url("chrome://browser/skin/places/query.png");
-  -moz-image-region: auto;
+  -moz-image-region: rect(2px, 218px, 18px, 202px);  /* query */
 }
 
 .bookmark-item[query][tagContainer] {
-  list-style-image: url("chrome://browser/skin/places/tag.png");
-  -moz-image-region: auto;
+  -moz-image-region: rect(2px, 98px, 18px, 82px);  /* tag */
 }
 
 .bookmark-item[query][dayContainer] {
-  list-style-image: url("chrome://browser/skin/places/calendar.png");
-  -moz-image-region: auto;
+  -moz-image-region: rect(2px, 58px, 18px, 42px);  /* calendar */
 }
 
 .bookmark-item[query][hostContainer] {
-  list-style-image: url("chrome://global/skin/icons/folder-item.png");
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
+  -moz-image-region: rect(2px, 198px, 18px, 182px);  /* folderItem */
 }
 
 .bookmark-item[query][hostContainer][open] {
-  list-style-image: url("chrome://global/skin/icons/folder-item.png");
-  -moz-image-region: rect(16px, 32px, 32px, 16px);
+  -moz-image-region: rect(2px, 198px, 18px, 182px);  /* folderItem */
 }
 
 .bookmark-item[cutting] > .toolbarbutton-icon,
@@ -3155,7 +3149,7 @@ richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box >
 
 .ac-result-type-tag,
 .autocomplete-treebody::-moz-tree-image(tag, treecolAutoCompleteImage) {
-  list-style-image: url("chrome://browser/skin/places/tag.png");
+  list-style-image: url(chrome://browser/skin/places/place.svg#tag);
   width: 16px;
   height: 16px;
 }
@@ -3293,7 +3287,7 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
     max-height: 16px; /* This belongs in autocomplete.css, but it has a weird side effect on Firefox < 48 */
     margin-bottom: 0;  /* Undo a setting in chrome://global/skin/autocomplete.css */
     margin-inline-end: 6px;  /* Override a setting in chrome://global/skin/autocomplete.css */
-    list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+    list-style-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
   }
 
 
@@ -3372,7 +3366,7 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
 
   /* Insert a tag icon before the tags */
   .ac-tags-text {
-    background: url("chrome://browser/skin/places/tag.png") no-repeat left center;
+    background: url(chrome://browser/skin/places/place.svg#tag) no-repeat left center;
     padding-inline-start: 18px;
   }
   .ac-tags-text:-moz-locale-dir(rtl) {
@@ -3862,8 +3856,8 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 .tab-icon-image {
   width: 16px;
   height: 16px;
-  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  list-style-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
+  -moz-image-region: rect(0, 16px, 16px, 0);
   -moz-margin-start: -6px; /*-6+8 = 2*/
   -moz-margin-end: 3px;
 }
@@ -3900,6 +3894,10 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 .tab-label {
   -moz-margin-start: 0;
   -moz-margin-end: 0;
+}
+
+.tab-text.tab-label:not([selected]):-moz-lwtheme-brighttext {
+  opacity: .8125
 }
 
 /* Tab sound indicator */
@@ -4092,16 +4090,30 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 
 .tabbrowser-arrowscrollbox > .scrollbutton-up,
 .tabbrowser-arrowscrollbox > .scrollbutton-down {
-  list-style-image: url("chrome://browser/skin/tabbrowser/tab-arrow-left.png");
   margin: 0;
   padding-right: 2px;
   border-right: 2px solid transparent;
   background-origin: border-box;
 }
 
-#TabsToolbar[brighttext] > #tabbrowser-tabs > .tabbrowser-arrowscrollbox > .scrollbutton-up,
-#TabsToolbar[brighttext] > #tabbrowser-tabs > .tabbrowser-arrowscrollbox > .scrollbutton-down {
-  list-style-image: url(chrome://browser/skin/tabbrowser/tab-arrow-left-inverted.png);
+.tabbrowser-arrowscrollbox > .scrollbutton-up:-moz-locale-dir(ltr),
+.tabbrowser-arrowscrollbox > .scrollbutton-down:-moz-locale-dir(rtl) {
+  list-style-image: url("chrome://browser/skin/tabbrowser/tab-arrow.svg#left");
+}
+
+.tabbrowser-arrowscrollbox > .scrollbutton-up:-moz-locale-dir(rtl),
+.tabbrowser-arrowscrollbox > .scrollbutton-down:-moz-locale-dir(ltr) {
+  list-style-image: url("chrome://browser/skin/tabbrowser/tab-arrow.svg#right");
+}
+
+.tabbrowser-arrowscrollbox > .scrollbutton-up:-moz-locale-dir(ltr):-moz-lwtheme-brighttext,
+.tabbrowser-arrowscrollbox > .scrollbutton-down:-moz-locale-dir(rtl):-moz-lwtheme-brighttext {
+  list-style-image: url(chrome://browser/skin/tabbrowser/tab-arrow.svg#left-inverted);
+}
+
+.tabbrowser-arrowscrollbox > .scrollbutton-up:-moz-locale-dir(rtl):-moz-lwtheme-brighttext,
+.tabbrowser-arrowscrollbox > .scrollbutton-down:-moz-locale-dir(ltr):-moz-lwtheme-brighttext {
+  list-style-image: url(chrome://browser/skin/tabbrowser/tab-arrow.svg#right-inverted);
 }
 
 /**  No tab-arrow-left*@2x.png, so removed form here until gone **********%
@@ -4126,11 +4138,6 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 .tabbrowser-arrowscrollbox > .scrollbutton-up[disabled],
 .tabbrowser-arrowscrollbox > .scrollbutton-down[disabled] {
   opacity: .4;
-}
-
-.tabbrowser-arrowscrollbox > .scrollbutton-up:-moz-locale-dir(rtl),
-.tabbrowser-arrowscrollbox > .scrollbutton-down:-moz-locale-dir(ltr) {
-  transform: scaleX(-1);
 }
 
 .tabbrowser-arrowscrollbox > .scrollbutton-down {
@@ -4203,7 +4210,7 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 
 /* All tabs menupopup */
 .alltabs-item > .menu-iconic-left > .menu-iconic-icon {
-  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+  list-style-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
 }
 
 .alltabs-item[selected="true"] {
@@ -5043,14 +5050,14 @@ notification[value="loop-sharing-notification"] .messageImage {
 #bookmarksToolbarFolderMenu,
 #BMB_bookmarksToolbar,
 #panelMenu_bookmarksToolbar {
-  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.png");
-  -moz-image-region: auto;
+  list-style-image: url("chrome://browser/skin/places/places.svg");
+  -moz-image-region: rect(2px, 138px, 18px, 122px);  /* bookmarksToolbar */
 }
 
 #BMB_unsortedBookmarks,
 #panelMenu_unsortedBookmarks {
-  list-style-image: url("chrome://browser/skin/places/unsortedBookmarks.png");
-  -moz-image-region: auto;
+  list-style-image: url("chrome://browser/skin/places/places.svg");
+  -moz-image-region: rect(2px, 178px, 18px, 162px);  /* unsortedBookmarks */
 }
 
 #menu_readingList,
@@ -7311,7 +7318,7 @@ toolbarpaletteitem[place="toolbar"] {
 }
 
 #TabsToolbar > .private-browsing-indicator {
-  background: url("chrome://browser/skin/privatebrowsing-mask-tabstrip.png") no-repeat center -3px;
+  background: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#tabstrip") no-repeat center -3px;
   -moz-margin-start: 4px;
   width: 48px;
 }
@@ -7322,7 +7329,7 @@ toolbarpaletteitem[place="toolbar"] {
  */
 #private-browsing-indicator-titlebar > .private-browsing-indicator,
 #main-window[inFullscreen] #TabsToolbar > .private-browsing-indicator {
-  background: url("chrome://browser/skin/privatebrowsing-mask-titlebar.png") no-repeat center 0px;
+  background: url("chrome://browser/skin/privatebrowsing-mask-40x20.svg#titlebar") no-repeat center 0px;
   -moz-margin-end: 4px;
   width: 40px;
   height: 20px;
@@ -7333,7 +7340,7 @@ toolbarpaletteitem[place="toolbar"] {
        (-moz-os-version: windows-vista),
        (-moz-os-version: windows-win7) {
   #TabsToolbar > .private-browsing-indicator {
-    background-image: url("chrome://browser/skin/privatebrowsing-mask-tabstrip-XPVista7.png");
+    background-image: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#tabstrip-XPVista7");
   }
 
   /* We're intentionally using the titlebar asset here for fullscreen mode.
@@ -7341,14 +7348,14 @@ toolbarpaletteitem[place="toolbar"] {
    */
   #private-browsing-indicator-titlebar > .private-browsing-indicator,
   #main-window[inFullscreen] #TabsToolbar > .private-browsing-indicator {
-    background-image: url("chrome://browser/skin/privatebrowsing-mask-titlebar-XPVista7.png");
+    background-image: url("chrome://browser/skin/privatebrowsing-mask-40x20.svg#titlebar-XPVista7");
   }
 }
 
 @media (-moz-os-version: windows-xp) {
   @media not all and (-moz-windows-classic) {
     #private-browsing-indicator-titlebar > .private-browsing-indicator {
-      background-image: url("chrome://browser/skin/privatebrowsing-mask-titlebar-XPVista7-tall.png");
+      background-image: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#titlebar-XPVista7-tall");
       height: 28px;
     }
 
@@ -7390,7 +7397,7 @@ toolbarpaletteitem[place="toolbar"] {
   @media (-moz-windows-default-theme) {
     @media not all and (-moz-windows-compositor) {
       #main-window[sizemode="normal"] > #titlebar > #titlebar-content > #titlebar-buttonbox-container > #private-browsing-indicator-titlebar > .private-browsing-indicator {
-        background-image: url("chrome://browser/skin/privatebrowsing-mask-titlebar-XPVista7-tall.png");
+        background-image: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#titlebar-XPVista7-tall");
         height: 28px;
       }
     }
@@ -8364,7 +8371,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
 @media (-moz-os-version: windows-vista),
        (-moz-os-version: windows-win7) {
   #TabsToolbar > .private-browsing-indicator {
-    background-image: url("chrome://browser/skin/privatebrowsing-mask-tabstrip-XPVista7.png");
+    background-image: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#tabstrip-XPVista7");
   }
 
   /* We're intentionally using the titlebar asset here for fullscreen mode.
@@ -8372,7 +8379,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
    */
   #private-browsing-indicator-titlebar > .private-browsing-indicator,
   #main-window[inFullscreen] #TabsToolbar > .private-browsing-indicator {
-    background-image: url("chrome://browser/skin/privatebrowsing-mask-titlebar-XPVista7.png");
+    background-image: url("chrome://browser/skin/privatebrowsing-mask-40x20.svg#titlebar-XPVista7");
   }
 }
 
@@ -8392,7 +8399,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
 @media (-moz-windows-default-theme) {
   @media not all and (-moz-windows-compositor) {
     #main-window[sizemode="normal"] > #titlebar > #titlebar-content > #titlebar-buttonbox-container > #private-browsing-indicator-titlebar > .private-browsing-indicator {
-      background-image: url("chrome://browser/skin/privatebrowsing-mask-titlebar-XPVista7-tall.png");
+      background-image: url("chrome://browser/skin/privatebrowsing-mask-48x32.svg#titlebar-XPVista7-tall");
       height: 28px;
     }
 	#navigator-toolbox > toolbar:not(:-moz-lwtheme) {/*Louis*/
