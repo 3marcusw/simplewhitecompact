@@ -14,11 +14,14 @@
 
 /* Remove filters on firebug specific images */
 
+.theme-firebug .devtools-tabbar .devtools-button::before,
 .theme-firebug #toolbox-dock-buttons > toolbarbutton > image,
 .theme-firebug .devtools-closebutton > image,
 .theme-firebug .devtools-option-toolbarbutton > image,
+.theme-firebug .command-button-invertable::before,
 .theme-firebug .command-button-invertable > image,
 .theme-firebug #sources-toolbar image,
+.theme-firebug [id$="pane-toggle"]::before,
 .theme-firebug [id$="pane-toggle"] > image,
 .theme-firebug #global-toolbar .devtools-button::before,
 .theme-firebug #element-picker::before,
@@ -52,6 +55,24 @@
 .theme-firebug .cm-quote {color: #090;}
 .theme-firebug .cm-hr {color: #999;}
 .theme-firebug .cm-link {color: #00c;}
+
+/* Custom Changes --johnGraciliano *****************/
+.theme-firebug .cm-property {color: darkgreen;}
+
+.theme-firebug .cm-variable-2 {color: #066;}
+
+.theme-firebug .cm-variable {color: #0000c4;} /* Instead of darkblue */
+.theme-firebug .cm-operator {color: #0000c4;} /* Instead of darkblue */
+
+.theme-firebug .cm-tag {color: black;}
+.theme-firebug .cm-builtin {color: black;}
+.theme-firebug .cm-qualifier {color: black;}
+.theme-firebug .cm-variable-3 {color: black;}
+.theme-firebug .cm-def {color: black;}
+
+.theme-firebug .cm-number {color: #04c;} /* Instead of darkblue */
+.theme-firebug .cm-string {color: #ed2655;} /* --theme-highlight-red */
+/* End of Custom Changes ***************************/
 
 .theme-firebug .theme-fg-color3,
 .theme-firebug .cm-s-mozilla .kind-Object .cm-variable{ /* dark blue */
@@ -244,7 +265,32 @@
   min-width: 24px;
 }
 
+.theme-firebug #command-button-frames {
+  min-width: 32px;
+}
+
 /* Move the Inspector button a bit down (looks better) */
 .theme-firebug #command-button-pick > image {
   margin-bottom: -4px;
 }
+
+/* Firebug twisties (Overrides vs. light-theme.css unless noted) --johnGraciliano */
+:root.theme-firebug .treeTable .treeRow.hasChildren > .treeLabelCell > .treeIcon, /* vs. resource://devtools/client/shared/components/tree/tree-view.css */
+.theme-firebug .theme-twisty {
+  background-image: url("chrome://devtools/skin/images/firebug/twisty-closed-firebug.svg");
+  background-size: auto;
+  background-position: 1px center;
+}
+
+:root.theme-firebug .treeTable .treeRow.hasChildren.opened > .treeLabelCell > .treeIcon, /* vs. resource://devtools/client/shared/components/tree/tree-view.css */
+.theme-firebug .theme-twisty[open], .theme-twisty.open {
+  background-image: url("chrome://devtools/skin/images/firebug/twisty-open-firebug.svg");
+  background-size: auto; /* needed only vs. resource://.../tree-view.css */
+  background-position: 1px center;
+}
+
+.theme-firebug .theme-selected ~ .theme-twisty,
+.theme-firebug .theme-selected ~ .theme-twisty[open] {
+  background-position: 1px center;
+}
+
