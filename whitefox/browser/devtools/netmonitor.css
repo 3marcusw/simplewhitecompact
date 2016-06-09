@@ -549,7 +549,7 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Method Column */
-.theme-firebug .requests-menu-subitem.requests-menu-method-box {
+.theme-firebug :not(.selected) > .requests-menu-subitem.requests-menu-method-box {
   color: rgb(128, 128, 128);
 }
 
@@ -565,8 +565,8 @@ box.requests-menu-status[code^="5"] {
   filter: brightness(1.3125) saturate(1.25);
 }
 
-.theme-light .side-menu-widget-item.selected .theme-comment{
-  color: #c4c4f8;
+.side-menu-widget-item.selected > .theme-comment{
+  color: var(--theme-selection-color);
 }
 
 /* Network request details */
@@ -786,6 +786,10 @@ box.requests-menu-status[code^="5"] {
 .theme-light .requests-menu-footer-button,
 .theme-light .requests-menu-footer-label {
   color: var(--theme-body-color);
+}
+
+.theme-firebug .requests-menu-filter-button {
+  border-radius: 2px;
 }
 
 .requests-menu-footer-spacer {
