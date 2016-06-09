@@ -185,7 +185,7 @@ ul.children + .tag-line::before {
   z-index: 1;
 }
 
-.child.collapsed .child {
+.child.collapsed .child, .child.collapsed .children {
   display: none;
 }
 
