@@ -76,7 +76,7 @@
 
 #placesMenu > menu > .menubar-text {
   -moz-padding-end: 8px;
-  background: url(chrome://global/skin/arrow/arrow-dn.gif) right center no-repeat;
+  background: url(chrome://global/skin/arrow/arrow-v.svg#dn) right center no-repeat;
 }
 
 #placesMenu > menu > .menubar-text:-moz-locale-dir(rtl) {
@@ -84,37 +84,25 @@
 }
 
 /* organize, view and maintenance buttons icons */
-#organizeButton, 
-#viewMenu, 
-#maintenanceButton {
-  list-style-image: url("chrome://browser/skin/places/libraryToolbar.png");
-}
 
 /* organize button */
 #organizeButton {
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
-}
-#organizeButton:hover,
-#organizeButton[open="true"] {
-  -moz-image-region: rect(16px, 16px, 32px, 0px);
+  list-style-image: url("chrome://browser/skin/places/libraryToolbar.svg#organizeButton");
 }
 
 /* view button */
 #viewMenu {
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
-}
-#viewMenu:hover,
-#viewMenu[open="true"] {
-  -moz-image-region: rect(16px, 32px, 32px, 16px);
+  list-style-image: url("chrome://browser/skin/places/libraryToolbar.svg#viewMenu");
 }
 
 /* maintenance button */
 #maintenanceButton {
-  -moz-image-region: rect(0px, 48px, 16px, 32px);
+  list-style-image: url("chrome://browser/skin/places/libraryToolbar.svg#maintenanceButton");
 }
-#maintenanceButton:hover,
-#maintenanceButton[open="true"] {
-  -moz-image-region: rect(16px, 48px, 32px, 32px);
+
+
+#clearDownloadsButton {
+  list-style-image: url("chrome://browser/skin/places/libraryToolbar.svg#clearDownloadsButton");
 }
 
 /* Root View */
@@ -140,13 +128,32 @@
  * Downloads pane
  */
 
-#clearDownloadsButton > .toolbarbutton-icon {
-  display: none;
+#clearDownloadsButton {
+  -moz-padding-start: 4px;
+  -moz-padding-end: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  -moz-appearance: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
 }
 
-#clearDownloadsButton {
-  -moz-padding-start: 9px;
-  -moz-padding-end: 9px;
+#clearDownloadsButton[_moz-menuactive="true"] {
+  background-color: transparent;
+}
+
+#clearDownloadsButton:not([disabled]):hover {
+  border: 1px solid rgba(0,0,0,.2);
+  background-image: linear-gradient(rgba(255,255,255,.8), rgba(240,240,240,.8));
+}
+
+#clearDownloadsButton:not([disabled]):active {
+  border: 1px solid rgba(0,0,0,.2);
+  background-image: linear-gradient(rgba(218,218,218,.8), rgba(225,225,225,.8));
+}
+
+#clearDownloadsButton > .toolbarbutton-text {
+  margin: 1px 0 2px !important;
 }
 
 
