@@ -539,16 +539,21 @@ body.inactive > #main > p,
   background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
 }
 
-/* What follows are special rules to avoid showing horizontal schrollbar at the bottom --johnGraciliano */
+/* What follows are special rules to avoid showing horizontal scrollbar at the bottom --johnGraciliano */
 
-p.layout-right.layout-rotate {
+p.rotate.right,
+p.layout-rotate.layout-right {
   height: 18px;
   line-height: initial;
   top: 79px;
 }
-
+@media (max-height: 228px) {
+  p.rotate.right {
+    top: 66px;
+  }
+}
 @media (max-height: 252px) {
-  p.layout-right.layout-rotate {
+  p.layout-rotate.layout-right {
     top: 66px;
   }
 }
