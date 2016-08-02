@@ -1,0 +1,72 @@
+/* vim:set ts=2 sw=2 sts=2 et: */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@supports not (overflow-wrap: normal) { /* Firefox < 49 */
+  /* Special Rules for notifications in DevTools:    --johnGraciliano */
+  #toolbox-notificationbox > notification {
+    border-bottom: 1px solid #c7c7c7; /* = --devtools-splitter-color in splitters.css (= --devtools-splitter-color for Simple White X's light theme) */;
+  }
+  :root.theme-dark  #toolbox-notificationbox > notification {
+    border-bottom-color: #42484f; /* = --devtools-splitter-color in splitters.css (= --devtools-splitter-color for Simple White X's dark theme) */;
+  }
+  #toolbox-notificationbox > notification .notification-inner {
+    border-width: 0; /* Ignore any inner border (use a flat style!) */
+  }
+}
+
+@supports (overflow-wrap: normal) { /* Firefox >= 49 */
+  /* These are overrides for "resource://devtools/client/shared/components/notification-box.css" */
+  /* Layout */
+
+  /* Style */
+
+  .notificationbox .notification {
+    border-top: 0px solid Transparent;
+    border-bottom: 1px solid #c7c7c7; /* = --devtools-splitter-color in splitters.css (= --devtools-splitter-color for Simple White X's light theme) */;
+  }
+  :root.theme-dark .notificationbox .notification {
+    border-bottom-color: #42484f; /* = --devtools-splitter-color in splitters.css (= --devtools-splitter-color for Simple White X's dark theme) */;
+  }
+
+  .notificationbox .notification[data-type="critical"] {
+    color: -moz-DialogText;
+    background-color: #ffe5e5;
+    background-image: none;
+  }
+
+  /* Default icons for notifications */
+
+  .notificationbox .messageImage[data-type="info"] {
+    background-image: url("chrome://global/skin/icons/information-16.svg");
+  }
+
+  .notificationbox .messageImage[data-type="warning"] {
+    background-image: url("chrome://global/skin/icons/warning-16.svg");
+  }
+
+  .notificationbox .messageImage[data-type="critical"] {
+    background-image: url("chrome://global/skin/icons/error-16.svg");
+  }
+
+  /* Close button */
+
+  .notificationbox .messageCloseButton {
+    background-image: url("chrome://global/skin/icons/close.svg#normal");
+    border-radius: 0;
+    filter: none;
+  }
+
+  .notificationbox .messageCloseButton:hover {
+    background-color: transparent;
+    filter: none;
+    background-image: url("chrome://global/skin/icons/close.svg#hover");
+  }
+
+  .notificationbox .messageCloseButton:active {
+    background-color: transparent;
+    filter: none;
+    background-image: url("chrome://global/skin/icons/close.svg#active");
+  }
+}
