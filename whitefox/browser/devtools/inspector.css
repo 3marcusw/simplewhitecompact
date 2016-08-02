@@ -3,6 +3,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+ /******   TEMPORARY RULE TO OVERRIDE MIN-WIDTH SET IN FIREFOX NIGHTLY 50.0a1  ********************************************/
+ #inspector-sidebar-container {
+   min-width: 320px !important;  /* This overrides the 450px value in the setting related to bug 1281789 --johnGraciliano */
+ }
+ /******   TEMPORARY RULE TO OVERRIDE MIN-WIDTH SET IN FIREFOX NIGHTLY 50.0a1  ********************************************/
+ 
+ 
 @supports (not (line-height:calc(1px))) { /* Firefox < 48 */
   :root[platform="mac"] #inspector-toolbar:-moz-locale-dir(ltr) {
     padding-left: 2px;
@@ -134,13 +141,16 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
 
 /* Expand/collapse panel toolbar button */
 
-#inspector-pane-toggle::before {
+
+button.devtools-button.sidebar-toggle::before, /* This needs to override 'resource://devtools/client/shared/components/sidebar-toggle.css' */
+#inspector-pane-toggle::before { /* Firefox 49 */
   background-image: url(images/pane-toggle.svg#collapse);
 }
-#inspector-pane-toggle {
+#inspector-pane-toggle { /* Firefox <= 48 */
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
+button.devtools-button.sidebar-toggle.pane-collapsed::before,
 #inspector-pane-toggle[pane-collapsed]::before {
   background-image: url(images/pane-toggle.svg#expand);
 }
@@ -148,14 +158,24 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+@media not all and (max-width: 700px) {
+  .sidebar-toggle:-moz-locale-dir(rtl)::before,
+  #inspector-pane-toggle:-moz-locale-dir(rtl) {
+    transform: scaleX(-1);
+  }
+}
+
 @media (max-width: 700px) {
+  button.devtools-button.sidebar-toggle::before,
   #inspector-pane-toggle::before {
     background-image: url(images/pane-toggle.svg#v-collapse);
+    transform: none;
   }
   #inspector-pane-toggle {
     list-style-image: url(images/pane-toggle.svg#v-collapse);
   }
 
+  button.devtools-button.sidebar-toggle.pane-collapsed::before,
   #inspector-pane-toggle[pane-collapsed]::before {
     background-image: url(images/pane-toggle.svg#v-expand);
   }
@@ -164,6 +184,7 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
   }
 }
 
+:root.theme-firebug button.sidebar-toggle::before,
 :root.theme-firebug #inspector-pane-toggle::before {
   background-image: url(images/firebug/pane-collapse.svg);
 }
@@ -171,6 +192,7 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+:root.theme-firebug button.sidebar-toggle.pane-collapsed::before,
 :root.theme-firebug #inspector-pane-toggle[pane-collapsed]::before {
   background-image: url(images/firebug/pane-expand.svg);
 }
@@ -179,10 +201,32 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
 }
 
 @media (max-width: 700px) {
+  :root.theme-firebug button.sidebar-toggle::before,
   :root.theme-firebug #inspector-pane-toggle::before,
   :root.theme-firebug #inspector-pane-toggle > .toolbarbutton-icon {
     transform: rotate(90deg);
   }
+}
+
+/* Eyedropper toolbar button */
+
+#inspector-eyedropper-toggle {
+  /* hidden by default, until we can check that the required highlighter exists */
+  display: none;
+}
+
+#inspector-eyedropper-toggle::before {
+  background-image: url(images/command-eyedropper.png);
+}
+
+@media (min-resolution: 1.1dppx) {
+  #inspector-eyedropper-toggle::before {
+    background-image: url(images/command-eyedropper@2x.png);
+  }
+}
+
+.theme-firebug #inspector-eyedropper-toggle::before {
+  background-image: url(images/firebug/command-eyedropper.svg);
 }
 
 /* Add element toolbar button */
@@ -194,107 +238,26 @@ div#inspector-breadcrumbs .breadcrumbs-widget-item {
   list-style-image: url(images/add.svg);
 }
 
-/* Tooltip: Events */
+/* "no results" warning message displayed in the ruleview and in the computed view */
 
-#devtools-tooltip-events-container {
-  margin: -4px; /* Compensate for the .panel-arrowcontent padding. */
-  max-width: 590px;
-  overflow-y: auto;
+#ruleview-no-results,
+#computedview-no-results {
+  color: var(--theme-body-color-inactive);
+  text-align: center;
+  margin: 5px;
+  font: message-box;
 }
 
-.event-header {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+
+/* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
+/* Make sure panel content takes entire vertical space.
+  (minus the height of the tab bar) */
+.theme-firebug .tabs .panels {
+  height: calc(100% - 28px);
 }
 
-.event-header:first-child {
-  border-width: 0;
-}
-
-.event-header:not(:first-child) {
-  border-width: 1px 0 0 0;
-}
-
-.event-tooltip-event-type,
-.event-tooltip-filename,
-.event-tooltip-attributes {
-  -moz-margin-start: 0;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.event-tooltip-event-type {
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.event-tooltip-filename {
-  -moz-margin-end: 0;
-  font-size: 100%;
-  flex-shrink: 1;
-}
-
-.event-tooltip-debugger-icon {
-  width: 16px;
-  height: 16px;
-  -moz-margin-end: 4px;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.event-tooltip-debugger-icon:hover {
-  opacity: 1;
-}
-
-.event-tooltip-content-box {
-  display: none;
-  height: 100px;
-  overflow: hidden;
-  -moz-margin-end: 0;
-  border: 1px solid var(--theme-splitter-color);
-  border-width: 1px 0 0 0;
-}
-
-.event-toolbox-content-box iframe {
-  height: 100%;
-}
-
-.event-tooltip-content-box[open] {
-  display: block;
-}
-
-.event-tooltip-source-container {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  -moz-margin-start: 5px;
-  -moz-margin-end: 0;
-}
-
-.event-tooltip-source {
-  margin-bottom: 0;
-}
-
-.event-tooltip-attributes-container {
-  display: flex;
-  flex-shrink: 0;
-  flex-grow: 1;
-  justify-content: flex-end;
-}
-
-.event-tooltip-attributes-box {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  border-radius: 3px;
-  padding: 2px;
-  -moz-margin-start: 5px;
-  background-color: var(--theme-body-color-alt);
-  color: var(--theme-toolbar-background);
-}
-
-.event-tooltip-attributes {
-  margin: 0;
-  font-size: 9px;
-  padding-top: 2px;
+/* This is in deference to a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
+/* The rule should be in firebug-theme.css, but I placed it here because it only affects the inspector's tabs */
+.theme-firebug .tabs > * > .tabs-menu > .tabs-menu-item > a {  /* To superceed selector '.theme-firebug .tabs .tabs-menu-item a'*/
+  color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
 }

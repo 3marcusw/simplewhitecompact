@@ -17,7 +17,6 @@ a {
 
 .message {
   display: flex;
-  flex: none;
   padding: 0 7px;
   width: 100%;
   box-sizing: border-box;
@@ -72,7 +71,8 @@ a {
 }
 
 .message > .message-body-wrapper {
-  flex: 1 1 100%;
+  flex: auto;
+  min-width: 0px;
   margin: 3px;
 }
 
@@ -84,56 +84,85 @@ a {
 .message-repeats {
   -moz-user-select: none;
   flex: none;
-  margin: 2px 6px;
-  padding: 0 6px;
-  height: 1.25em;
+  margin: 0 6px; /* 2px 6px; --johnGraciliano */
+  padding: 0 4px; /* 0 6px; --johnGraciliano */
+  height: 1.2em; /* 1.25em; --johnGraciliano */
   color: white;
   background-color: red;
-  border-radius: 40px;
+  border-radius: .6em; /* 40px; --johnGraciliano */
   font: message-box;
   font-size: 0.9em;
   font-weight: 600;
+  line-height: 1.2 /* --johnGraciliano */
+}
+.message > .message-repeats { /* Firefox <= 49 */
+  margin-top: 4px;
 }
 
 .message-repeats[value="1"] {
   display: none;
 }
 
-.message-location {
+a.message-location { /* Firefox <= 49 */
   display: flex;
   flex: none;
   align-self: flex-start;
   justify-content: flex-end;
-  width: 10em;
+  /* width: 10em; */
   margin-top: 3px;
-  color: -moz-nativehyperlinktext;
+  color:  var(--theme-highlight-blue); /* -moz-nativehyperlinktext; --johnGraciliano */
   text-decoration: none;
   white-space: nowrap;
 }
+.message-location {
+  max-width: 40%;
+}
 
 /* More space for the location data for location URL */
+/****
 .theme-firebug .message-location {
   width: 13em;
 }
+ ****/
 
 .message-location:hover,
 .message-location:focus {
   text-decoration: underline;
 }
 
-.message-location > .filename {
+.message-location > .filename { /* Firefox <= 47*/
+  direction: rtl;
   text-overflow: ellipsis;
   text-align: end;
   overflow: hidden;
 }
 
-.message-location > .line-number {
+.message-location > .line-number { /* Firefox <= 47*/
+  color: var(--theme-highlight-orange);
   flex: none;
 }
 
-.message-location > .frame-link, /* This selector may be obsolete (unneeded or problematic) --johnGraciliano */
-.message-location > .frame-link .frame-link-source {
-  width: 10em;
+.stack-trace .frame-link-source,
+.message-location .frame-link-source {
+  /* Makes the file name truncated (and ellipsis shown) on the left side */
+  direction: rtl;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stack-trace .frame-link-source-inner,
+.message-location .frame-link-source-inner {
+  /* Enforce LTR direction for the file name - fixes bug 1290056 */
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+.stack-trace .frame-link-function-display-name {
+  max-width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .message-flex-body {
@@ -147,12 +176,7 @@ a {
 
 .message-flex-body > .message-body {
   display: block;
-  flex: 1 1 auto;
-  vertical-align: middle;
-}
-
-.message-flex-body > .message-location {
-  margin-top: 0;
+  flex: auto;
 }
 
 #output-wrapper {
@@ -176,6 +200,8 @@ a {
 #output-container.hideTimestamps > .message {
   -moz-padding-start: 0;
   -moz-margin-start: 7px;
+  padding-inline-start: 0;
+  margin-inline-start: 7px;
   width: calc(100% - 7px);
 }
 
@@ -229,7 +255,7 @@ a {
   --disc-shadow-color: rgba(29,29,29,0.75);
 }
 
-.devtools-toolbarbutton-group {
+:root:not(.theme-firebug) .devtools-toolbarbutton-group {
   -moz-border-start: 1px solid var(--table-splitter-color);
 }
 
@@ -241,17 +267,53 @@ a {
   -moz-appearance: none;
 }
 
-[class][class][class][class].webconsole-filter-button:hover{
+:root:not(.theme-firebug) [class][class].webconsole-filter-button:hover{
   background: rgba(0,0,0,0.10);
 }
 
-[class][class][class][class].webconsole-filter-button:not([checked=true]):hover:active{
+:root:not(.theme-firebug) [class][class].webconsole-filter-button:not([checked=true]):hover:active{
   background-color: var(--theme-selection-background-semitransparent);
 }
 
-[class][class][class][class].webconsole-filter-button[checked=true]{
+:root:not(.theme-firebug) [class][class].webconsole-filter-button[checked=true]{
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
+}
+
+:root.theme-firebug .webconsole-filter-button {
+  border: 1px solid transparent;
+  margin-inline-end: 1px;
+}
+
+:root.theme-firebug .webconsole-filter-button:not(:hover):not([checked=true]):first-child,
+:root.theme-firebug .webconsole-filter-button:not(:hover):not([checked=true]) + .webconsole-filter-button:not(:hover):not([checked=true]) {
+  border-inline-start-color: rgba(0,0,0,0.125);
+}
+
+:root.theme-firebug [class][class].devtools-toolbarbutton.webconsole-filter-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: transparent linear-gradient(rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.2)) no-repeat;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+:root.theme-firebug [class][class].webconsole-filter-button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+:root.theme-firebug [class][class].webconsole-filter-button:not(:active)[checked=true] {
+  background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+:root.theme-firebug .toolbarbutton-menubutton-dropmarker {
+  filter: brightness(.375);
 }
 
 .webconsole-filter-button > .toolbarbutton-menubutton-button > .toolbarbutton-text{
@@ -456,9 +518,17 @@ a {
 .jsterm-input-node,
 .jsterm-complete-node {
   border: none;
-  padding: 0 0 0 16px;
+  padding: 0;
+  -moz-padding-start: 18px;
+  padding-inline-start: 18px;
+  margin: 0;
   -moz-appearance: none;
   background-color: transparent;
+}
+
+.jsterm-input-node[focused="true"] {
+  background-image: url(images/commandline-icon.svg#light-theme-focus);
+  box-shadow: none;
 }
 
 .jsterm-complete-node {
@@ -469,25 +539,33 @@ a {
   /* Always allow scrolling on input - it auto expands in js by setting height,
      but don't want it to get bigger than the window. 24px = toolbar height. */
   max-height: calc(90vh - 24px);
-  background-image: -moz-image-rect(url(images/commandline-icon.png), 0, 32, 16, 16);
+  background-image: url(images/commandline-icon.svg#light-theme);
   background-repeat: no-repeat;
   background-size: 16px 16px;
+  background-position: 2px center;   /* --johnGraciliano */
   color: var(--theme-content-color1);
 }
 
-@media (min-resolution: 1.1dppx) {
-  .jsterm-input-node {
-    background-image: -moz-image-rect(url(images/commandline-icon@2x.png), 0, 64, 32, 32);
-  }
+.theme-dark .jsterm-input-node:not([focused="true"]) {
+  background-image: url(images/commandline-icon.svg#dark-theme);
+}
+
+.theme-firebug .jsterm-input-node[focused="true"] {
+  background-image: url(images/firebug/commandline-icon.svg#focus);
 }
 
 .theme-firebug .jsterm-input-node {
   background-image: url(images/firebug/commandline-icon.svg);
+  background-position: 4px center;   /* --johnGraciliano */
 }
 
 :-moz-any(.jsterm-input-node,
           .jsterm-complete-node) > .textbox-input-box > .textbox-textarea {
   overflow-x: hidden;
+  /* Set padding for console input on textbox to make sure it is inlcuded in
+     scrollHeight that is used when resizing JSTerminal's input. Note: textbox
+     default style has important already */
+  padding: 4px 0 !important;
 }
 
 .inlined-variables-view .message-body {
@@ -503,6 +581,7 @@ a {
   margin-top: 5px;
   margin-bottom: 15px;
   -moz-margin-end: 15px;
+  margin-inline-end: 15px;
   border: 1px solid var(--theme-splitter-color);
   border-radius: 3px;
 }
@@ -525,6 +604,7 @@ a {
 
 .message[category=security] > .indent {
   -moz-border-end: solid red 6px;
+  border-inline-end: solid red 6px;
 }
 
 .webconsole-filter-button[category="security"] > .toolbarbutton-menubutton-button:before {
@@ -551,6 +631,7 @@ a {
 
 .navigation-marker .url {
   -moz-padding-end: 9px;
+  padding-inline-end: 9px;
   text-decoration: none;
   background: var(--theme-body-background);
 }
@@ -561,10 +642,8 @@ a {
 
 .stacktrace {
   display: none;
-  list-style: none;
-  padding: 0 1em 0 1.5em;
+  padding: 5px 10px;
   margin: 5px 0 0 0;
-  max-height: 10em;
   overflow-y: auto;
   border: 1px solid var(--theme-splitter-color);
   border-radius: 3px;
@@ -572,6 +651,16 @@ a {
 
 .consoletable {
   margin: 5px 0 0 0;
+}
+
+/* Force cells to only show one row of contents.  Getting normal ellipses
+   behavior has proven impossible so far, so this is better than letting
+   rows get out of vertical alignment when one cell has a lot of content. */
+.consoletable .table-widget-cell > span {
+  overflow: hidden;
+  display: flex;
+  height: 1.25em;
+  line-height: 1.25em;
 }
 
 .theme-light .message[severity=error] .stacktrace {
@@ -593,15 +682,22 @@ a {
   flex-shrink: 0;
 }
 
-.stacktrace li {
+/**********  For Firefox <=49 ****************************************/
+.stacktrace > li {
   display: flex;
-  margin: 0;
+  margin: 0 -3px;
+  padding: 0 3px;
 }
 
-.stacktrace .function {
+.stacktrace > li:nth-child(2n+0) {
+  background-color: rgba(128,128,128,.08);
+}
+
+.stacktrace > * > .function {
   display: block;
   flex: 1 1 auto;
 }
+/**********  For Firefox <=49 ****************************************/
 
 .cm-s-mozilla a[class] {
   font-style: italic;
@@ -668,7 +764,7 @@ a.learn-more-link.webconsole-learn-more-link {
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 555px) { /* This was 500px --johnGraciliano */
   .message > .timestamp {
     display: none;
   }
@@ -684,10 +780,40 @@ a.learn-more-link.webconsole-learn-more-link {
   .webconsole-filter-button > .toolbarbutton-menubutton-button:before {
     width: 12px;
     height: 12px;
-    margin-left: 1px;
+    -moz-margin-start: 1px;
+    margin-inline-start: 1px;
   }
   .toolbarbutton-menubutton-dropmarker {
     margin: 0px;
+  }
+}
+
+@supports (hyphens:none) { /* Firefox version >= 43 */
+  @media not all and (max-width: 555px) {  /* Only beyond (max-width: 555px) */
+    @media (max-width: 640px) { /* Up to (max-width: 640px) */
+      /* Replicate the rules from the preceeding block '@media (max-width: 555px)' --johnGraciliano */
+      .message > .timestamp {
+        display: none;
+      }
+      .hud-console-filter-toolbar .webconsole-filter-button .toolbarbutton-text {
+        display: none;
+      }
+      .hud-console-filter-toolbar .webconsole-filter-button {
+        min-width: 40px;
+      }
+      .hud-console-filter-toolbar toolbarbutton.webconsole-clear-console-button {
+        min-width: 25px;
+      }
+      .webconsole-filter-button > .toolbarbutton-menubutton-button:before {
+        width: 12px;
+        height: 12px;
+        -moz-margin-start: 1px;
+        margin-inline-start: 1px;
+      }
+      .toolbarbutton-menubutton-dropmarker {
+        margin: 0px;
+      }
+    }
   }
 }
 
@@ -713,11 +839,15 @@ a.learn-more-link.webconsole-learn-more-link {
  */
 
 :root[platform="win"] .hud-filter-box {
-  width: 200px;
+  -moz-box-flex: 1;  /* Let the box shrink */
+  max-width: 200px;  /* This used to be width --johnGraciliano */
+  min-width: 16ch;
 }
 @media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
   :root .hud-filter-box {
-    width: 200px;
+    -moz-box-flex: 1;  /* Let the box shrink */
+    max-width: 200px;  /* This used to be width --johnGraciliano */
+    min-width: 16ch;
   }
 }
 

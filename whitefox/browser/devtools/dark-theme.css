@@ -6,6 +6,7 @@
 @import url(variables.css);
 @import url(common.css);
 @import url(toolbars.css);
+@import url(tooltips.css);
 
 /*** What follows is copied from "variables.css" for the Timeline tool in Firefox 39 and prior. **/
 /*** The :root.theme-light rules were removed, or they would override :root.theme-dark rules. ****/
@@ -68,14 +69,6 @@
 }
 /*** What preceeds is copied from "variables.css" for the Timeline tool in Firefox 39 and prior. */
 
-
-/* Special Rules for notifications in DevTools:    --johnGraciliano */
-#toolbox-notificationbox /* > .notificationbox-stack:first-child --this is hidden! --johnGraciliano */ > notification {
-  border-bottom: 1px solid #42484f; /* = --devtools-splitter-color in splitters.css */
-}
-#toolbox-notificationbox /* > .notificationbox-stack:first-child --this is hidden! --johnGraciliano */ > notification .notification-inner {
-  border-width: 0; /* Ignore any inner border (use a flat style!) */
-}
 
 body {
   margin: 0;
@@ -460,7 +453,8 @@ div.CodeMirror span.eval-text {
 }
 
 .devtools-textinput,
-.devtools-searchinput {
+.devtools-searchinput,
+.devtools-filterinput {
   background-color: rgba(24, 29, 32, 1);
   color: rgba(184, 200, 217, 1);
 }

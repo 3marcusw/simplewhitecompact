@@ -180,7 +180,7 @@ button#toolbox-dock-bottom-minimize, /* button#toolbox-dock-bottom-minimize shou
 }
 
 /* Invert toolbox button icons in Firebug theme. */
-.theme-firebug #toolbox-buttons toolbarbutton image {
+.theme-firebug #toolbox-buttons > toolbarbutton > image {
   filter: invert(1);
 }
 
@@ -386,7 +386,8 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 /* Text input */
 
 .devtools-textinput,
-.devtools-searchinput {
+.devtools-searchinput,
+.devtools-filterinput {
   -moz-appearance: none;
   margin: 1px 3px;
   border: 1px solid;
@@ -396,17 +397,20 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 }
 
 :root[platform="mac"] .devtools-textinput,
-:root[platform="mac"] .devtools-searchinput {
+:root[platform="mac"] .devtools-searchinput,
+:root[platform="mac"] .devtools-filterinput {
   border-radius: 20px;
 }
 @supports (-moz-osx-font-smoothing: auto) { /* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
   :root .devtools-textinput,
-  :root .devtools-searchinput {
+  :root .devtools-searchinput,
+  :root .devtools-filterinput {
     border-radius: 20px;
   }
 }
 
-.devtools-searchinput {
+.devtools-searchinput,
+.devtools-filterinput {
   padding: 0;
   -moz-padding-start: 22px;
   -moz-padding-end: 4px;
@@ -417,34 +421,42 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   font: message-box;
 }
 
-.theme-dark .devtools-searchinput {
+.theme-dark .devtools-searchinput,
+.theme-dark .devtools-filterinput {
   background-image: url(images/magnifying-glass.png);
 }
 
-.theme-light .devtools-searchinput {
+.theme-light .devtools-searchinput,
+.theme-light .devtools-filterinput {
   background-image: url(images/magnifying-glass-light.png);
 }
 
 @media (min-resolution: 1.1dppx) {
-  .theme-dark .devtools-searchinput {
+  .theme-dark .devtools-searchinput,
+  .theme-dark .devtools-filterinput {
     background-image: url(images/magnifying-glass@2x.png);
   }
 
-  .theme-light .devtools-searchinput {
+  .theme-light .devtools-searchinput,
+  .theme-light .devtools-filterinput {
     background-image: url(images/magnifying-glass-light@2x.png);
   }
 }
 
-.theme-firebug .devtools-searchinput {
+.theme-firebug .devtools-searchinput,
+.theme-firebug .devtools-filterinput {
   background-image: url(images/firebug/filter.svg);
 }
 
 .devtools-searchinput:-moz-locale-dir(rtl),
-.devtools-searchinput:-moz-dir(rtl) {
+.devtools-searchinput:-moz-dir(rtl),
+.devtools-filterinput:-moz-locale-dir(rtl),
+.devtools-filterinput:-moz-dir(rtl) {
   background-position: calc(100% - 8px) center;
 }
 
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-icon {
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-icon,
+.devtools-filterinput > .textbox-input-box > .textbox-search-icons > .textbox-search-icon {
   visibility: hidden;
 }
 
@@ -458,7 +470,8 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 
 /* The spacing is accomplished with a padding on the searchbox */
 .devtools-searchbox > .devtools-textinput,
-.devtools-searchbox > .devtools-searchinput {
+.devtools-searchbox > .devtools-searchinput,
+.devtools-searchbox > .devtools-filterinput {
   margin-left: 0;
   margin-right: 0;
 }
@@ -466,11 +479,13 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 /* Don't add 'double spacing' for inputs that are at beginning / end
    of a toolbar (since the toolbar has it's own spacing). */
 .devtools-toolbar > .devtools-textinput:first-child,
-.devtools-toolbar > .devtools-searchinput:first-child {
+.devtools-toolbar > .devtools-searchinput:first-child,
+.devtools-toolbar > .devtools-filterinput:first-child {
   -moz-margin-start: 0;
 }
 .devtools-toolbar > .devtools-textinput:last-child,
-.devtools-toolbar > .devtools-searchinput:last-child {
+.devtools-toolbar > .devtools-searchinput:last-child,
+.devtools-toolbar > .devtools-filterinput:last-child {
   -moz-margin-end: 0;
 }
 .devtools-toolbar > .devtools-searchbox:first-child {
@@ -487,7 +502,8 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 }
 
 #preview-text-input.devtools-textinput::-moz-placeholder,
-.devtools-searchinput.devtools-rule-searchbox::-moz-placeholder {
+.devtools-searchinput.devtools-rule-searchbox::-moz-placeholder,
+.devtools-filterinput.devtools-rule-searchbox::-moz-placeholder {
   font-style: italic;
 }
 
@@ -540,20 +556,24 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   background-image: url(chrome://global/skin/icons/close.svg#active);
 }
 
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear,
+.devtools-filterinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
   list-style-image: url(chrome://global/skin/icons/close.svg#normal); /* This goes with the theme --johnGraciliano */
   margin-bottom: 0;
 }
 
-.theme-dark .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
+.theme-dark .devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear,
+.theme-dark .devtools-filterinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear {
   filter: invert(1);
 }
 
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover {
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover,
+.devtools-filterinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover {
     list-style-image: url(chrome://global/skin/icons/close.svg#hover);
 }
 
-.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover:active {
+.devtools-searchinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover:active,
+.devtools-filterinput > .textbox-input-box > .textbox-search-icons > .textbox-search-clear:hover:active {
     list-style-image: url(chrome://global/skin/icons/close.svg#active);
 }
 
@@ -608,6 +628,7 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 .devtools-sidebar-tabs {
   -moz-appearance: none;
   margin: 0;
+  height: 100%; /* Introduced (needed) in Firefox 50 *************************************************************************/
 }
 
 .devtools-sidebar-tabs > tabpanels {
@@ -891,6 +912,61 @@ button.command-button{ /* For FF49 */
   filter: url(images/filters.svg#checked-icon-state) !important;
 }
 
+:root.theme-firebug .command-button {
+  border: 1px solid transparent;
+  padding-right: 4px;
+  padding-left: 3px;
+  margin: 2px 1px;
+}
+
+:root.theme-firebug .command-button:not(#command-button-frames) {
+  width: auto;
+  min-width: 25px;
+}
+
+:root.theme-firebug .command-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: transparent linear-gradient(rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.2)) no-repeat;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+:root.theme-firebug .command-button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+:root.theme-firebug .command-button:not(:active)[open],
+:root.theme-firebug .command-button:not(:active)[checked] {
+  background: rgba(255,255,255,.5) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+:root.theme-firebug button#command-button-frames:hover {
+  background-image: url("images/dropmarkerLight.svg"), linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat:  no-repeat, no-repeat;
+  background-position:  calc(50% + 8px) calc(50% + 1px), 0 0;
+}
+
+:root.theme-firebug button#command-button-frames:hover:active {
+  background-image: url("images/dropmarkerLight.svg"), linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+:root.theme-firebug button#command-button-frames[open] {
+  background-image: url("images/dropmarkerLight.svg"), linear-gradient(rgba(0, 0, 0, 0.1), transparent);
+  background-repeat:  no-repeat, no-repeat;
+  background-position:  calc(50% + 8px) calc(50% + 1px), 0 0;
+}
+
+:root.theme-firebug button#command-button-frames:hover:-moz-dir(rtl),
+:root.theme-firebug button#command-button-frames[open]:-moz-dir(rtl) {
+  background-position: calc(50% - 8px) calc(50% + 1px), 0 0;
+}
+
 /* Toolbox buttons images */
 
 #command-button-paintflashing::before,
@@ -953,11 +1029,9 @@ button.command-button{ /* For FF49 */
 }
 
 button#command-button-frames {
-  background: url("images/dropmarker.svg") no-repeat calc(50% + 8px) calc(50% + 1px);
-
-  /* Override background-size from the command-button.
-    The drop down arrow is smaller */
-  background-size: 8px 4px !important;
+  background-image: url("images/dropmarker.svg");
+  background-repeat:  no-repeat;
+  background-position:  calc(50% + 8px) calc(50% + 1px);
 }
 
 button#command-button-frames:-moz-dir(rtl) {
@@ -1114,6 +1188,22 @@ button#command-button-frames:-moz-dir(rtl)::before {
   margin: 0;
 }
 
+.theme-firebug #toolbox-tabs {
+  display: flex;  /* This allows the .devtools-tab(s) to shrink (without this setting the value is -moz-box) --johnGraciliano */
+}
+
+.theme-firebug #toolbox-tabs > .devtools-tab {
+  box-sizing: content-box;
+  text-align: center;
+  min-width: 38px;  /* Allow a tiny bit more text to be seen (two characters or more plus ellipsis from each label). --johnGraciliano */
+  min-height: 22px;  /* Needed to limit this after setting 'box-sizing: content-box' (24px is too large) --johnGraciliano */
+}
+
+.theme-firebug #toolbox-tabs > #toolbox-tab-dom { /* The DOM tab will remain keep a fixed size, smaller than the other labels. --johnGraciliano */
+  flex-shrink: 0; /* There is a chance for the tab to overlow the #toolbox-tabs box... */
+  min-width: 34px;  /* ...if the label is larger than this value. */
+}
+
 /* The following rules for .toolbox-panel apply only when #toolbox-deck became a box (leaving 'deck' only in the id) --johnGraciliano */
 box#toolbox-deck > .toolbox-panel {
   display: -moz-box;
@@ -1123,6 +1213,25 @@ box#toolbox-deck > .toolbox-panel {
 
 box#toolbox-deck > .toolbox-panel[selected] {
   visibility: visible;
+}
+
+/**
+ * When panels are collapsed or hidden, making sure that they are also
+ * inaccessible by keyboard. This is not the case by default because the are
+ * predominantly hidden using visibility: collapse; style or collapsed
+ * attribute.
+ */
+box#toolbox-deck > .toolbox-panel *,
+box#toolbox-deck > #toolbox-panel-webconsole[collapsed] * {
+  -moz-user-focus: ignore;
+}
+
+/**
+ * Ensure that selected toolbox panel's contents are keyboard accessible as they
+ * are explicitly made not to be when hidden (default).
+ */
+box#toolbox-deck > .toolbox-panel[selected] * {
+  -moz-user-focus: normal;
 }
 
 .devtools-tab {

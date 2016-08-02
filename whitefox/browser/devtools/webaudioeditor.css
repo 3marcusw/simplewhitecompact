@@ -159,6 +159,7 @@ text {
   height: 16px;
 }
 
+#inspector-pane-toggle.pane-collapsed,
 #inspector-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
@@ -167,6 +168,7 @@ text {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+:root.theme-firebug #inspector-pane-toggle.pane-collapsed,
 :root.theme-firebug #inspector-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
 }

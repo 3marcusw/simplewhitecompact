@@ -11,63 +11,70 @@
   overflow: auto;
 }
 
+#computedview-container-focusable > #layout-wrapper { /* Firefox >= 50 */
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: var(--theme-splitter-color);
+}
+
 body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rules elsewhere */
 #layout-container {
-  /* The view will grow bigger as the window gets resized, until 375px (400px elsewhere) */
-  max-width: 375px;
+  /* The view will grow bigger as the window gets resized, until 375px. */
+  max-width: 375px; /* This is 400px in the default/classic theme --johnGraciliano */
   margin: 0px auto;
   padding: 0;
   /* "Contain" the absolutely positioned #layout-main element */
   position: relative;
 }
 
-/* Header: contains the position and size of the element */
+/* Header */
 
-#header,
-#layout-header {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 4px 14px;
-  display: -moz-box;
-  vertical-align: top;
+#header, /* Firefox <= 45 */
+#layout-header,
+#layout-info {
+  display: flex;
+  align-items: center;
+  padding: 4px 13px; /* This was 4px 17px; --johnGraciliano */
 }
 
-#header:-moz-dir(rtl),
-#layout-header:-moz-dir(rtl) {
-  -moz-box-direction: reverse;
+p#header:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/devtools/layoutview/view.css'. The tag 'p' is to give this rule priority. --johnGraciliano */
+  -moz-box-direction: normal;
+}
+span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/devtools/layoutview/view.css'. The tag 'span' is to give this rule priority. --johnGraciliano */
+  -moz-box-pack: start;
 }
 
-#header > span,
-#layout-header > span {
-  display: -moz-box;
-}
-
-#element-size,
-#layout-element-size {
-  -moz-box-flex: 1;
-}
-
-#element-size:-moz-dir(rtl),
-#layout-element-size:-moz-dir(rtl) {
-  -moz-box-pack: end;
+/* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
+.theme-firebug #sidebar-panel-layoutview > * > * > #layout-header {
+  padding: 1px 14px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 @media (max-height: 228px) {
   #header {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 10px;
-    margin-bottom: 8px;
+    margin-top: 6px;
+    margin-bottom: 4px;
   }
 }
 
 @media (max-height: 252px) {
-  #layout-header {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 10px;
-    margin-bottom: 8px;
+  #sidebar-panel-layoutview > * > * > #layout-header {
+    margin-top: 6px;
+    margin-bottom: 4px;
   }
+  .theme-firebug #sidebar-panel-layoutview > * > * > #layout-header {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+}
+
+#layout-geometry-editor {
+  visibility: hidden;
+}
+
+#layout-geometry-editor::before {
+  background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
 }
 
 /* Main: contains the box-model regions */
@@ -83,6 +90,9 @@ body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rul
   /* Make sure there is some space between the window's edges and the regions */
   margin: 0 14px 10px 14px;
   width: calc(100% - 2 * 14px);
+}
+#computedview-container #layout-main{ /* Firefox >= 50*/
+  position: relative;
 }
 
 .margin,
@@ -197,7 +207,6 @@ div#layout-borders{
 .theme-firebug #layout-main {
   color: var(--theme-body-color);
   font-size: var(--theme-toolbar-font-size);
-  top: 44px; /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
 }
 
 .theme-firebug #layout-header {
@@ -526,20 +535,21 @@ body.inactive > #main > p,
    visibility: hidden;
 }
 
+/* Layout info: contains the position and size of the element */
+/* This section should be in the header section --johnGraciliano */
+
+#element-size, /* Firefox <= 45 */
+#layout-element-size {
+  flex: 1;
+}
+
 #layout-position-group {
   display: flex;
   align-items: center;
 }
 
-#layout-geometry-editor {
-  visibility: hidden;
-}
-
-#layout-geometry-editor::before {
-  background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
-}
-
 /* What follows are special rules to avoid showing horizontal scrollbar at the bottom --johnGraciliano */
+/* This correction only works on LTR locales.  It needs to be done for RTL locales.                    */
 
 p.rotate.right,
 p.layout-rotate.layout-right {

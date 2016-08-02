@@ -76,10 +76,10 @@
 }
 
 .theme-dark .opt-icon::before {
-  background-image: url(./images/webconsole.svg);
+  background-image: url(images/webconsole.svg);
 }
 .theme-light .opt-icon::before {
-  background-image: url(./images/webconsole.svg#light-icons);
+  background-image: url(images/webconsole.svg#light-icons);
 }
 
 .opt-icon::before {

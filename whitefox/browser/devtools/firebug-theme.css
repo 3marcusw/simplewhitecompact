@@ -3,8 +3,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@import url(variables.css);
-@import url(common.css);
+/* These two lines are already in light-theme.css:
+ *   @import url(variables.css);
+ *   @import url(common.css);
+ */
 @import url(light-theme.css);
 
 :root {
@@ -21,6 +23,7 @@
 .theme-firebug .command-button-invertable::before,
 .theme-firebug .command-button-invertable > image,
 .theme-firebug #sources-toolbar image,
+.theme-firebug .sidebar-toggle::before,
 .theme-firebug [id$="pane-toggle"]::before,
 .theme-firebug [id$="pane-toggle"] > image,
 .theme-firebug #global-toolbar .devtools-button::before,
@@ -121,7 +124,7 @@
   border: 1px solid transparent !important;
   border-radius: 4px 4px 0 0;
   font-weight: bold;
-  color: var(--theme-body-color);
+  color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
   -moz-box-flex: initial;
   min-width: 0;
 }
@@ -152,22 +155,24 @@
   color: inherit;
 }
 
-.theme-firebug .devtools-tab spacer,
-.theme-firebug .devtools-tab image {
+.theme-firebug .devtools-tab > spacer, /* Added '>' --johnGraciliano */
+.theme-firebug .devtools-tab > image { /* Added '>' --johnGraciliano */
   display: none;
 }
 
+/** I cannot find any match to '.toolbox-tab' so this rule is removed.  --johnGraciliano *%
 .theme-firebug .toolbox-tab label {
   margin: 0;
 }
+%*****************************************************************************************/
 
-.theme-firebug .devtools-sidebar-tabs tab label {
+.theme-firebug .devtools-sidebar-tabs tab > * > label.tab-text {  /* Added '> * >' and '.tab-text' --johnGraciliano */
   margin: 2px 0 0 0;
 }
 
 /* Use different padding for labels inside tabs on Win platform.
   Make sure this overrides the default in global.css */
-:root[platform="win"].theme-firebug .devtools-sidebar-tabs tab label {
+:root[platform="win"].theme-firebug .devtools-sidebar-tabs tab > * > label.tab-text {  /* Added '> * >' and '.tab-text' --johnGraciliano */
   margin: 0 4px !important;
 }
 
@@ -188,10 +193,14 @@
   background-color: white;
 }
 
+.theme-firebug #toolbox-tab-options[selected] {
+  padding-bottom: 1px; /* To keep the toolbar's height. --johnGraciliano */
+}
+
 .theme-firebug #toolbox-tab-options::before {
   content: url(images/firebug/tool-options.svg);
   display: block;
-  margin: 4px 7px 0;
+  margin: 3px 7px 1px; /* Raise the icon one pixel --johnGraciliano */
 }
 
 .theme-firebug #toolbox-tab-options:not([selected]):hover::before {
