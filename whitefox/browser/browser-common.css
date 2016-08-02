@@ -163,9 +163,11 @@
 }
 /**/ } /* Change reversal #1 --johnGraciliano */
 
+/**** The following is removed from the classic theme in Firefox 47. --johnGraciliano *******************/
 #toolbar-menubar:not([autohide="true"]) {
   -moz-binding: url("chrome://browser/content/customizableui/toolbar.xml#toolbar-drag");
 }
+/**** End of section removed from Firefox 47.  **********************************************************/
 
 #main-window[customize-entered][tabsintitlebar]:not([inFullscreen]) #toolbar-menubar[customizing-dragovertarget].customization-target::before,
 #main-window[customize-entered][tabsintitlebar]:not([inFullscreen]) #TabsToolbar[customizing-dragovertarget].customization-target::before,
@@ -1933,6 +1935,11 @@ toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-ba
 #nav-bar toolbarbutton[constrain-size="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
   /* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
   width: 32px;
+}
+
+/* Special rule to undo one in some versions that constrains the #pocket-button icon max-width to 18px making it tiny --johnGraciliano */
+#nav-bar #pocket-button[cui-areatype="toolbar"] > .toolbarbutton-icon { /* This override is only for the button in the #nav-bar */
+  max-width: none;
 }
 
 #nav-bar .toolbarbutton-1[type=menu]:not(#back-button):not(#forward-button):not(#feed-button):not(#PanelUI-menu-button) > .toolbarbutton-icon,
@@ -4552,6 +4559,16 @@ toolbarbutton.bookmark-item[dragover="true"][open="true"] {
   margin-bottom: -2px;
 }
 
+#identity-box > #notification-popup-box { /* For Firefox 50 (and later?), where the nofification box was moved into the identity box, only --johnGraciliano */
+  margin: -4px 2px;
+  height: 24px; /* This should be enough to fill the box --johnGraciliano */
+}
+
+/*******************  FAILED IDEA!!!!!  --johnGraciliano  *****************************%
+#identity-box > #notification-popup-box:not([hidden=true]) #identity-popup{
+}
+%**************************************************************************************/
+
 window:not([chromehidden~="toolbar"]) #urlbar-wrapper > #forward-button[disabled] + #urlbar > #notification-popup-box {
   padding-left: 7px;
 }
@@ -5998,6 +6015,7 @@ html|*#gcli-output-frame {
 .gcli-in-closebrace {
   color: hsl(0,0%,80%);
 }
+
 #notification-popup[popupid="click-to-play-plugins"] > .panel-arrowcontainer > .panel-arrowcontent {
   padding: 0px;
 }
@@ -8201,12 +8219,14 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
     padding-right: 1px;
   }
 
+/**** The following is removed from the classic theme in Firefox 47. --johnGraciliano *******************/
   /* Make the window draggable by glassed toolbars (bug 555081) */
   #toolbar-menubar:not([autohide="true"]),
   #TabsToolbar,
   #navigator-toolbox > toolbar:not(#toolbar-menubar):not(#addon-bar):-moz-lwtheme {
     -moz-binding: url("chrome://browser/content/customizableui/toolbar.xml#toolbar-drag");
   }
+/**** End of section removed from Firefox 47.  **********************************************************/
 
   #appcontent:not(:-moz-lwtheme) {
     background-color: -moz-dialog;
@@ -8299,10 +8319,12 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
       background-color: rgb(215,228,242);
     }Louis*/
 
+/**** The following is removed from the classic theme in Firefox 47. --johnGraciliano *******************/
     #toolbar-menubar:not([autohide=true]):not(:-moz-lwtheme),
     #TabsToolbar:not(:-moz-lwtheme) {
       -moz-binding: url("chrome://browser/content/customizableui/toolbar.xml#toolbar-drag");
     }
+/**** End of section removed from Firefox 47.  **********************************************************/
 
     /* Render a window top border for lwthemes: 
     #main-window[tabsintitlebar][sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme {
