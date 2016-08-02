@@ -33,6 +33,14 @@ ul {
   max-width: 512px;
 }
 
+/*************  NEEDS TESTING *****************************************/
+#advancedPanelContainer {
+  position: absolute;
+  padding-bottom: 24px;
+  width: 100%;
+}
+/*************  END NEEDS TESTING *************************************/
+
 #errorTitle {
   background: url("aboutNetError_info.svg") left 2px no-repeat;
   background-size: 45px; /* it was 3em */
