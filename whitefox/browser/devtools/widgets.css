@@ -5,7 +5,7 @@
 
 .theme-dark {
   --table-splitter-color: rgba(255,255,255,0.15);
-  --table-zebra-background: rgba(255,255,255,0.05);
+  --table-zebra-background: rgba(255,255,255,0.0375); /* This was rgba(255,255,255,0.05) */
   --sidemenu-selected-arrow: url(images/itemArrow-dark-ltr.svg);
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-dark-rtl.svg);
   --sidemenu-selected-other-background: #193347;
@@ -13,7 +13,7 @@
 
 .theme-light {
   --table-splitter-color: rgba(0,0,0,0.15);
-  --table-zebra-background: rgba(0,0,0,0.05);
+  --table-zebra-background: rgba(0,0,0,0.0425); /* This was rgba(0,0,0,0.05) */
   --sidemenu-selected-arrow: url(images/itemArrow-ltr.svg);
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-rtl.svg);
   --sidemenu-selected-other-background: #b9d7fd;
