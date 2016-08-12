@@ -142,10 +142,13 @@
   flex-direction: column-reverse;
 }
 
-.tooltip-panel{
+.tooltip-panel {
   background-color: var(--theme-tooltip-background);
   pointer-events: all;
   flex-grow: 1;
+}
+.theme-dark .tooltip-panel {
+  color: #ffffff; /* This was added to make the "Could not load the image" messages clear.  --johnGraciliano */
 }
 
 .tooltip-visible {
@@ -530,28 +533,31 @@ button#eyedropper-button::before {
 /*********************************************************************************************************/
 
 .spectrum-dragger,
-.spectrum-slider.spectrum-slider-control{
+.spectrum-slider-control {
   background-color: transparent !important;
   border: 1px solid white !important;
   box-shadow: 0 0 2px rgba(0,0,0,.6) !important;
   opacity: 1 !important;
 }
-.spectrum-slider.spectrum-slider-control{
+
+.spectrum-slider-control {
   border-radius: 3.5px !important;
+}
+
+.spectrum-slider.spectrum-slider-control {
   margin-top: -1px;
 }
 
-.spectrum-alpha-handle.spectrum-slider-control {
-  background-color: rgba(255,255,255,.4) !important;
-  border: 1px solid white !important;
-  box-shadow: 0 0 2px rgba(0,0,0,.98) !important;
-  opacity: 1 !important;
-  border-radius: 3.5px !important;
+:root.theme-dark .spectrum-dagger,
+:root.theme-dark .spectrum-slidder-control {
+  border-color: rgba(255,255,255,.8) !important;
 }
 
-:root.theme-dark .spectrum-alpha-handle.spectrum-slider-control {
-  background-color: transparent !important;
+:root.theme-light .spectrum-slider-control {
+  box-shadow: 0 0 2px rgba(0,0,0,.662), 0 0 2.5px rgb(255,255,255) inset !important;
 }
+
+/********************************************/
 
 .filter-value input {
   min-width: 8ch; /* This avoid a problem in Firefox 43 --johnGraciliano */
@@ -594,14 +600,10 @@ button#eyedropper-button::before {
   opacity: .8;
 }
 
+
 @supports (box-sizing: padding-box) { /* Firefox < 50 */
   /* Hacks to correct the font sample 'dialog.'  --johnGraciliano */
   .theme-firebug .devtools-tooltip /* > .panel-arrowcontainer > .panel-arrowcontent */ > vbox > image:only-child { /* For Firefox 48 */
     filter: invert(0.9375);
   }
-  /* This was needed in early alpha state of Firefox 49-50 ****************************************************\
-  .theme-firebug .tooltip-container > .tooltip-panel > div:only-child > div:only-child > img:only-child {
-    filter: invert(0.9375);
-  }
-  \************************************************************************************************************/
 }
