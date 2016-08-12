@@ -46,7 +46,7 @@
   --toolbarbutton-combined-boxshadow: none; /*0 0 0 1px hsla(0,0%,100%,.2)*/
   --toolbarbutton-combined-backgroundimage: linear-gradient(hsla(0,0%,0%,.2) 0, hsla(0,0%,0%,.2) 16px);
 
-  --toolbarbutton-combo-separator-background-image: 
+  --toolbarbutton-combo-separator-background-image:
       linear-gradient(to bottom, transparent, hsla(0,0%,100%,.3) 40%, hsla(0,0%,100%,.3) 60%, transparent),
       linear-gradient(to bottom, transparent, hsla(210,54%,20%,.15) 40%, hsla(210,54%,20%,.15) 60%, transparent),
       linear-gradient(to bottom, transparent, hsla(0,0%,100%,.3) 40%, hsla(0,0%,100%,.3) 60%, transparent);
@@ -90,6 +90,7 @@
 
   --tabbrowser-tab-background-image: -moz-linear-gradient(rgba(232,232,232,.625), rgba(232,232,232,.875));
   --tabbrowser-tab-hover-background-image: -moz-linear-gradient(rgba(240,240,240,.75), rgba(240,240,240,.875));
+  --tabbrowser-tab-selected-background-image: -moz-linear-gradient(rgba(250,250,250,.875), rgba(250,250,250,.875)); /*****/
   --nav-bar-background-image: -moz-linear-gradient(rgba(250,250,250,.875), rgba(250,250,250,.5));
   --toolbar-background-image: -moz-linear-gradient(rgba(250,250,250,.5), rgba(250,250,250,.5));
 }
@@ -114,7 +115,7 @@
 
   --toolbarbutton-combined-backgroundimage: linear-gradient(hsla(0,0%,100%,.2) 0, hsla(0,0%,100%,.2) 16px);
 
-  --toolbarbutton-combo-separator-background-image: 
+  --toolbarbutton-combo-separator-background-image:
       linear-gradient(to bottom, transparent, hsla(0,0%,0%,.3) 40%, hsla(0,0%,0%,.3) 60%, transparent),
       linear-gradient(to bottom, transparent, hsla(210,54%,80%,.15) 40%, hsla(210,54%,80%,.15) 60%, transparent),
       linear-gradient(to bottom, transparent, hsla(0,0%,0%,.3) 40%, hsla(0,0%,0%,.3) 60%, transparent);
@@ -127,6 +128,7 @@
   --tabbrowser-tab-selected-color: #fff;
   --tabbrowser-tab-background-image: -moz-linear-gradient(rgba(23,23,23,.625), rgba(23,23,23,.875));
   --tabbrowser-tab-hover-background-image: -moz-linear-gradient(rgba(15,15,15,.75), rgba(15,15,15,.875));
+  --tabbrowser-tab-selected-background-image: -moz-linear-gradient(rgba(5,5,5,.875), rgba(5,5,5,.875)); /*****/
   --nav-bar-border-top-color: hsla(0,0%,88%,0.25);
   --nav-bar-background-image: -moz-linear-gradient(rgba(5,5,5,.875), rgba(5,5,5,.5));
   --toolbar-background-image: -moz-linear-gradient(rgba(5,5,5,.5), rgba(5,5,5,.5));
@@ -1839,7 +1841,7 @@ toolbar[brighttext] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
 #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
 window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-any([disabled],:not([open]):not([disabled]):not(:active)) > .toolbarbutton-icon {
-  padding: var(--toolbarbutton-vertical-inner-padding) 6px;
+  padding: var(--toolbarbutton-vertical-inner-padding) 6px;  /* This is for the 18px × 18px buttons! The padding for 16×16 buttons is the next rule */
   border-radius: 2px;
   border: 1px solid;
   border-color: transparent;
@@ -1847,11 +1849,11 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-an
   transition-duration: 150ms;
 }
 
-#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-icon,
-#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano */
-#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-badge-container,
-#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-  padding: 3px 7px;
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-icon,
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano */
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-container,
+#nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
+  padding: 3px 7px;  /* This is for 16px × 16px icon buttons!  It may be best also add: 'max-height: 16px; max-width 16px;'  --johnGraciliano */
 }
 
 /*****  All this taken from default theme shall be gone --johnGraciliano *******%
@@ -3820,7 +3822,7 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
 }
 
 .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
-  -moz-padding-start: 1px; 
+  -moz-padding-start: 1px;
 }
 
 .tabbrowser-tab:hover,
@@ -7811,10 +7813,10 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
   }
   .sidebar-header:not(:-moz-lwtheme),
   #sidebar-header:not(:-moz-lwtheme) {
-    color: black; 
+    color: black;
     background-color: #F8F8F8;
   }
-  
+
   /* Louis .sidebar-title,
   #sidebar-title {
     font-weight: bold;
@@ -8326,7 +8328,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
     }
 /**** End of section removed from Firefox 47.  **********************************************************/
 
-    /* Render a window top border for lwthemes: 
+    /* Render a window top border for lwthemes:
     #main-window[tabsintitlebar][sizemode="normal"] > #tab-view-deck > #browser-panel:-moz-lwtheme {
       background-image: linear-gradient(to bottom,
             rgb(37, 44, 51) 0, rgb(37, 44, 51) 1px,
@@ -8351,7 +8353,7 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
 /* Win8 and beyond. */
 /*@media not all and (-moz-os-version: windows-vista) {
   @media not all and (-moz-os-version: windows-win7) {
-    /* Introducing an additional hover state for the Bookmark button 
+    /* Introducing an additional hover state for the Bookmark button
     #nav-bar .toolbarbutton-1[buttonover] > .toolbarbutton-menubutton-button:hover > .toolbarbutton-icon {
       background-color: hsla(210,4%,10%,.08);
       border-color: hsla(210,4%,10%,.1);
@@ -8513,56 +8515,152 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
   list-style-image: url("chrome://browser/skin/usercontext/shopping.svg");
 }
 
+
+/**************************************************************************************************************************************/
+/***  START TAB STYLES FOR CONTAINER TABS (this goes at a different location!) *******************************************************/
+/**************************************************************************************************************************************/
+tab.tabbrowser-tab[usercontextid="1"] {
+  --container-gradient: linear-gradient(to right, transparent 20%, rgb(0, 167, 224) 30%, rgb(0, 167, 224) 70%, transparent 80%);
+}
+tab.tabbrowser-tab[usercontextid="2"] {
+  --container-gradient: linear-gradient(to right, transparent 20%, rgb(248, 156, 36) 30%, rgb(248, 156, 36) 70%, transparent 80%);
+}
+tab.tabbrowser-tab[usercontextid="3"] {
+  --container-gradient: linear-gradient(to right, transparent 20%, rgb(125, 193, 76) 30%, rgb(125, 193, 76) 70%, transparent 80%);
+}
+tab.tabbrowser-tab[usercontextid="4"] {
+  --container-gradient: linear-gradient(to right, transparent 20%, rgb(238, 81, 149) 30%, rgb(238, 81, 149) 70%, transparent 80%);
+}
+
+.tabbrowser-tab[usercontextid] {
+  --container-gradient: linear-gradient(to right, transparent 20%, #909090 30%, #909090 70%, transparent 80%);
+  background-image: var(--container-gradient), var(--tabbrowser-tab-background-image) !important;
+  background-size: auto 2px, -moz-calc(100% - 2px) -moz-calc(100% - 2px) !important;
+}
+.tabbrowser-tab[usercontextid]:hover {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-hover-background-image) !important;
+}
+.tabbrowser-tab[usercontextid][selected="true"] {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-selected-background-image) !important;
+}
+
+.tabbrowser-tab[usercontextid][selected="true"]:-moz-lwtheme {
+  background-attachment: scroll !important;
+  background-position:  1px 2px !important;
+  background-origin: border-box !important;
+}
+/***  END TAB STYLES FOR CONTAINER TABS ***********************************************************************************************/
+
+
+/**************************************************************************************************************************************/
+/***  START BUTTON STYLES FOR CONTAINER TABS (this goes at a different location!) *****************************************************/
+/**************************************************************************************************************************************/
+#containers-panelmenu[cui-areatype="toolbar"][widget-type="view"] {
+  -moz-image-region: initial;
+  list-style-image: url(chrome://browser/skin/Toolbar.svg#ContainerTabs);
+}
+
+toolbar[brighttext] #containers-panelmenu[cui-areatype="toolbar"][widget-type="view"]:not([status="active"]) {
+  -moz-image-region: initial;
+  list-style-image: url(chrome://browser/skin/Toolbar.svg#ContainerTabs-bright);
+}
+
+#containers-panelmenu[cui-areatype="menu-panel"][widget-type="view"],
+toolbarpaletteitem[place="palette"] > #containers-panelmenu[widget-type="view"] {
+  -moz-image-region: initial;
+  list-style-image: url(chrome://browser/skin/menuPanel.svg#ContainerTabs);
+}
+/***  END BUTTON STYLES FOR CONTAINER TABS ********************************************************************************************/
+
+
 /* URL Bar Decoration */
 
-#userContext-indicator {
-  height: 16px;
-  width: 16px;
+@supports not (background-position-x: left) { /* Firefox < 49 */
+  #userContext-icons:not([usercontextid]) {
+    display: none;
+  }
+
+  #userContext-indicator {
+    height: 16px;
+    width: 16px;
+  }
+
+  #userContext-label {
+    color: #909090;
+    -moz-box-align: end;
+    margin-inline-start: 2px;
+    margin-inline-end: 4px;
+  }
+
+  #userContext-icons {
+    -moz-box-align: center;
+  }
+
+  /* Personal User Context */
+  #userContext-icons[usercontextid="1"] > #userContext-label {
+    color: #00a7e0;
+  }
+  #userContext-icons[usercontextid="1"] > #userContext-indicator {
+    list-style-image: url("chrome://browser/skin/usercontext/personal.svg");
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Work User Context */
+  #userContext-icons[usercontextid="2"] > #userContext-label {
+    color: #f89c24;
+  }
+  #userContext-icons[usercontextid="2"] > #userContext-indicator {
+    list-style-image: url("chrome://browser/skin/usercontext/work.svg");
+    margin-left: 1px;
+    margin-right: 2px;
+  }
+
+  /* Banking User Context */
+  #userContext-icons[usercontextid="3"] > #userContext-label {
+    color: #7dc14c;
+  }
+  #userContext-icons[usercontextid="3"] > #userContext-indicator {
+    list-style-image: url("chrome://browser/skin/usercontext/banking.svg");
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+
+  /* Shopping User Context */
+  #userContext-icons[usercontextid="4"] > #userContext-label {
+    color: #ee5195;
+  }
+  #userContext-icons[usercontextid="4"] > #userContext-indicator {
+    list-style-image: url("chrome://browser/skin/usercontext/shopping.svg");
+    margin-left: 0px;
+    margin-right: 2px;
+  }
 }
 
-#userContext-label {
-  margin-inline-end: 3px;
-  color: #909090;
-}
 
-#userContext-icons:not([usercontextid]) {
-  display: none;
-}
+@supports (background-position-x: left) { /* Firefox >= 49 */
+  #userContext-label {
+    -moz-box-align: end;
+    margin-inline-start: 2px;
+    margin-inline-end: 4px;
+  }
 
-#userContext-icons {
-  -moz-box-align: center;
-}
-
-/* Personal User Context */
-#userContext-icons[usercontextid="1"] > #userContext-label {
-  color: #00a7e0;
-}
-#userContext-icons[usercontextid="1"] > #userContext-indicator {
-  list-style-image: url("chrome://browser/skin/usercontext/personal.svg");
-}
-
-/* Work User Context */
-#userContext-icons[usercontextid="2"] > #userContext-label {
-  color: #f89c24;
-}
-#userContext-icons[usercontextid="2"] > #userContext-indicator {
-  list-style-image: url("chrome://browser/skin/usercontext/work.svg");
-}
-
-/* Banking User Context */
-#userContext-icons[usercontextid="3"] > #userContext-label {
-  color: #7dc14c;
-}
-#userContext-icons[usercontextid="3"] > #userContext-indicator {
-  list-style-image: url("chrome://browser/skin/usercontext/banking.svg");
-}
-
-/* Shopping User Context */
-#userContext-icons[usercontextid="4"] > #userContext-label {
-  color: #ee5195;
-}
-#userContext-icons[usercontextid="4"] > #userContext-indicator {
-  list-style-image: url("chrome://browser/skin/usercontext/shopping.svg");
+  #userContext-indicator[style*=personal] {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #userContext-indicator[style*=work] {
+    margin-left: 1px;
+    margin-right: 2px;
+  }
+  #userContext-indicator[style*=banking] {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+  #userContext-indicator[style*=shopping] {
+    margin-left: 0px;
+    margin-right: 2px;
+  }
 }
 /************************************************************************************************************************************/
 
