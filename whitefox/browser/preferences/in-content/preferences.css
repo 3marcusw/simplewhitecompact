@@ -277,6 +277,7 @@ treecol {
 
 /* Privacy pane */
 
+#browserContainersLearnMore,
 .doNotTrackLearnMore,
 #doNotTrackInfo,
 #trackingProtectionPBMLearnMore,
@@ -286,6 +287,8 @@ treecol {
   font-weight: normal;
 }
 
+/* #browserContainersGroup .groupbox-body, */
+#browserContainersbox,
 #trackingProtectionRadioGroup,
 #locationBarGroup .groupbox-body {
  -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
