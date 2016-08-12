@@ -223,7 +223,7 @@ body > #propertyContainer > .property-view > * {
   position: relative; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
   z-index: 0; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
 }
-.other-property-value:dir(rtl) {
+.other-property-value:dir(rtl) { /* :dir(rtl) may be wrong! --johnGraciliano */
   background-position: right center;
 }
 
@@ -268,7 +268,7 @@ body > #propertyContainer > .property-view > * {
 /* From skin */
 .expander {
   visibility: hidden;
-  -moz-margin-start: -12px !important;  /* margin-left: -12px !important;  --johnGraciliano */
+  -moz-margin-start: -12px !important;
   margin-inline-start: -12px !important;
 }
 :root:not(.theme-firebug) .expander:not([open]):-moz-locale-dir(rtl) {
