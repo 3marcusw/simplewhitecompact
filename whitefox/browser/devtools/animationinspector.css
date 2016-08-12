@@ -16,6 +16,17 @@
   --even-animation-timeline-background-color: rgba(128,128,128,0.03);
 }
 
+/* To match markup-view.css --johnGraciliano */
+.theme-firebug .theme-fg-color3 {
+  color: var(--theme-graphs-full-blue);
+}
+
+.theme-firebug .theme-fg-color6 {
+  color: var(--theme-highlight-red);
+}
+/*********************************************/
+
+
 :root {
   /* How high should toolbars be */
   --toolbar-height: 20px; /* Toolbar height for content-box */
@@ -229,18 +240,19 @@ body {
   background-image: url(images/firebug/command-pick.svg);
 }
 
-.theme-firebug #toggle-all::before,
 .theme-firebug .pause-button::before {
   background-image: url(images/firebug/pause.svg);
+  filter: none;
 }
 
 .theme-firebug #rewind-timeline::before {
   background-image: url(images/firebug/rewind.svg);
+  filter: none;
 }
 
-.theme-firebug #toggle-all.paused::before,
 .theme-firebug .pause-button.paused::before {
   background-image: url(images/firebug/play.svg);
+  filter: none;
 }
 
 #timeline-rate select.devtools-button {
@@ -264,6 +276,83 @@ body {
   position: relative;
   width: 4.5em;
 }
+
+
+/* Corrections for the Firebug theme --johnGraciliano */
+
+.theme-firebug #timeline-rate {
+  border-width: 0 !important;
+  background-color: transparent;
+}
+
+.theme-firebug #global-toolbar > button,
+.theme-firebug #timeline-toolbar > button,
+.theme-firebug #timeline-rate > .devtools-button {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.theme-firebug #element-picker {
+  border: 1px solid transparent;
+  background-color: transparent;
+  min-height: 24px;
+}
+.theme-firebug #timeline-rate > .devtools-button {
+  border-color: transparent rgba(0,0,0,0.125);
+}
+.theme-firebug button:hover + #timeline-rate > .devtools-button {
+  border-inline-start-color: transparent;
+}
+.theme-firebug #timeline-toolbar > .label {
+  border-inline-end-width: 0;
+}
+.theme-firebug #global-toolbar > .label {
+  border-inline-start-width: 0;
+}
+
+.theme-firebug #element-picker:hover,
+.theme-firebug #global-toolbar > button:hover,
+.theme-firebug #timeline-toolbar > button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+.theme-firebug #element-picker:hover:active,
+.theme-firebug #global-toolbar > button:hover:active,
+.theme-firebug #timeline-toolbar > button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+.theme-firebug #element-picker:not(:active)[checked=true] {
+  background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.theme-firebug #timeline-rate > .devtools-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: url(images/dropmarker.svg), linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat: no-repeat;
+  background-position: calc(100% - 4px) center, 0 0;
+}
+
+.theme-firebug #timeline-rate > .devtools-button[checked],
+.theme-firebug #timeline-rate > .devtools-button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: url(images/dropmarker.svg), linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
 
 /* Animation timeline component (Firefox 43 and later) */
 
@@ -797,7 +886,7 @@ body {
 .keyframes > .frame::before {
   content: "";
   display: block;
-  transform: translateX(-5px) translateY(-5px); /* 
+  transform: translateX(-5px) translateY(-5px); /*
     translateX(calc(var(--keyframes-marker-size) * -.5))
     translateY(calc((var(--timeline-animation-height) - var(--keyframes-marker-size)) * -.5)); %* --johnGraciliano */
   width: 10px /*var(--keyframes-marker-size)*/ ;
@@ -807,7 +896,7 @@ body {
 }
 
 /* All that follows is for Firefox 42 and earlier */
-@supports not (hyphens:none) { 
+@supports not (hyphens:none) {
 
 /* Animation title gutter, contains the name, duration, iteration */
 
