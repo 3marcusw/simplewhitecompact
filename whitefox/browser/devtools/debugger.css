@@ -643,6 +643,20 @@
   opacity: 0.5;
 }
 
+/* This cancels a rule in toolbars.css (selector '.devtools-toolbarbutton:not([label])[checked=true] > image')
+ * That rule is not needed because the icon is different so the filter has no purpose.        --johnGraciliano  */
+#resume[checked] > image {
+  filter: none;
+}
+.theme-light:not(.theme-firebug) #resume[checked] > image { /* If the 'checked' filter is absent this is needed! */
+  filter: invert(1);
+}
+
+/* This is to cancel a rule in toolbars.css (selector '.devtools-toolbarbutton:not([label])[checked=true] > image') --johnGraciliano */
+#resume[checked=true]:not([disabled]):not(:hover):not(:active) > image {
+  opacity: .8;
+}
+
 #step-over {
   list-style-image: url(images/debugger-step-over.png);
 }
