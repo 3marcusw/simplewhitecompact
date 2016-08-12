@@ -79,7 +79,7 @@
   to { transform: perspective(5000px) rotateY(360deg); }
 }
 
-#PanelUI-button {
+/*#PanelUI-button {
   margin-inline-start: 2px;
   border-inline-start: 1px solid;
   border-image: linear-gradient(transparent, rgba(0,0,0,.1) 20%, rgba(0,0,0,.1) 80%, transparent);
@@ -88,7 +88,7 @@
 
 #nav-bar[brighttext] > #PanelUI-button {
   border-image-source: linear-gradient(transparent, rgba(100%,100%,100%,.2) 20%, rgba(100%,100%,100%,.2) 80%, transparent);
-}
+}*/
 
 #PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   display: -moz-box;
@@ -854,7 +854,7 @@ toolbarpaletteitem[place="palette"] > toolbaritem > toolbarbutton {
 }
 
 #PanelUI-footer-fxa[fxaprofileimage="enabled"] > #PanelUI-fxa-status > #PanelUI-fxa-avatar {
-  list-style-image: url(chrome://browser/skin/fxa/default-avatar.svg);
+  list-style-image: url(chrome://browser/skin/fxa/default-profile-image.svg);
 }
 
 #PanelUI-customize:hover,
