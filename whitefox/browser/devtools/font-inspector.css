@@ -71,11 +71,23 @@ div#sidebar-panel-fontinspector {  /* Firefox >= 50 */
   bottom: 0;
   right: 16px; /* Make space for the scroll-bar.  It was 0 --johnGraciliano */
   /* offset-inline-end: 16px;   /* Introduced in Firefox 50, this would be more effective. */
+  border-color: var(--theme-splitter-color);
+  background-color: var(--theme-toolbar-background);
+  color: var(--theme-body-color);
+  padding: 0 6px;
+  font: -moz-button;
 }
 #showall:-moz-locale-dir(rtl),
 #font-showall:-moz-locale-dir(rtl) {
   right: auto;
   left: 16px;
+}
+.theme-firebug #font-showall {
+  background-color: rgb(219, 234, 249);
+}
+#font-showall:hover:active {
+  padding-inline-start: 7px;
+  padding-inline-end: 5px;
 }
 
 .dim > #root,
