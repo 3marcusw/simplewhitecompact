@@ -5,12 +5,12 @@
 
 :root.theme-dark {
   --table-splitter-color: rgba(255,255,255,0.15);
-  --table-zebra-background: rgba(255,255,255,0.05);
+  --table-zebra-background: rgba(255,255,255,0.0375); /* This was rgba(255,255,255,0.05) */
 }
 
 :root.theme-light {
   --table-splitter-color: rgba(0,0,0,0.15);
-  --table-zebra-background: rgba(0,0,0,0.05);
+  --table-zebra-background: rgba(0,0,0,0.0425); /* This was rgba(0,0,0,0.05) */
 }
 
 :root.theme-firebug {
@@ -494,6 +494,11 @@ box.requests-menu-status[code^="5"] {
 
 .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
   background-position: right center;
+  -moz-border-start-color: rgba(137,145,152,.4); /* This border needs to be visible on the RTL --johnGraciliano */
+}
+
+.theme-dark .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
+  -moz-border-start-color: rgba(143,152,116,.333);
 }
 
 .requests-menu-timings:-moz-locale-dir(ltr) {
@@ -571,6 +576,10 @@ box.requests-menu-status[code^="5"] {
   background-color: var(--theme-body-background);
 }
 
+.side-menu-widget-container > .box-inherit.scrollbox-innerbox { /* This solves a problem for RTL locales */
+  overflow-x: hidden;
+}
+
 #network-table .side-menu-widget-item {
   border-top-color: transparent;
   border-bottom-color: transparent;
@@ -590,7 +599,7 @@ box.requests-menu-status[code^="5"] {
 }
 
 .theme-firebug .side-menu-widget-item:not(.selected):hover {
-  background: #EFEFEF;
+  background: #E3E3E3;  /* This was #EFEFEF --johnGraciliano */
 }
 
 .theme-firebug .requests-menu-subitem {
@@ -609,8 +618,8 @@ box.requests-menu-status[code^="5"] {
 
 /* Size Column */
 .theme-firebug .requests-menu-subitem.requests-menu-size {
-  text-align: end;
-  padding-inline-end: 4px;
+  text-align: right;
+  padding-right: 4px;
 }
 
 /* Adjustments to make some columns in a selected row clearer --johnGraciliano */
@@ -625,19 +634,25 @@ box.requests-menu-status[code^="5"] {
 
 /* Network request details */
 
+#details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
+#details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 #details-pane-toggle {
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
+#details-pane-toggle:-moz-locale-dir(rtl),
 #details-pane-toggle.pane-collapsed,
 #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+:root.theme-firebug #details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
+:root.theme-firebug #details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 :root.theme-firebug #details-pane-toggle {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+:root.theme-firebug #details-pane-toggle:-moz-locale-dir(rtl),
 :root.theme-firebug #details-pane-toggle.pane-collapsed,
 :root.theme-firebug #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
@@ -1003,6 +1018,36 @@ box.requests-menu-status[code^="5"] {
 #requests-menu-network-summary-button:hover > label,
 #requests-menu-network-summary-label:hover {
   text-decoration: underline;
+}
+
+/* Special rules to transform the clear button into an icon only button.  Adapted from toolbars.css */
+
+#requests-menu-clear-button {
+  list-style-image: url(images/clear.svg);
+  background-color: transparent;
+  min-width: 32px;
+  padding: 0;
+  opacity: 1;
+}
+.theme-light #requests-menu-clear-button > .button-box  > .button-icon {
+  filter: invert(1);
+}
+
+.theme-firebug #requests-menu-clear-button {
+  min-width: 24px !important;
+}
+
+#requests-menu-clear-button > .button-box > .button-text {
+  display: none;
+}
+
+/* Icon-only buttons */
+#requests-menu-clear-button:not([disabled]) > .button-box > .button-icon {
+  opacity: 0.8 !important;
+}
+
+#requests-menu-clear-button:hover > .button-box > .button-icon {
+  opacity: 1 !important;
 }
 
 /* Performance analysis view */
