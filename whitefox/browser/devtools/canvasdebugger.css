@@ -52,11 +52,51 @@
   list-style-image: url("images/profiler-stopwatch.svg");
 }
 
-@supports not (box-sizing: padding-box) { /* Firerox >= 50 */
-  #import-snapshot {
-    list-style-image: url("images/import.svg");
-  }
+#import-snapshot {
+  list-style-image: url("images/import.svg");
 }
+
+
+#clear-snapshots[label] { /* This will be transformed into an icon only button! --johnGraciliano */
+  list-style-image: url(images/clear.svg);
+}
+
+@supports (box-sizing: padding-box) {  /* Firefox < 50 */
+  /* Special rules to transform the import and clear buttons into icon only buttons.  Adapted from toolbars.css */
+
+  #import-snapshot,
+  #clear-snapshots[label] {
+    background-color: transparent !important;
+    min-width: 32px !important;
+  }
+
+  .theme-firebug #import-snapshot,
+  .theme-firebug #clear-snapshots[label] {
+    min-width: 24px !important; 
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label]) > .toolbarbutton-text {
+    display: none;
+  }
+
+  /* Icon-only buttons */
+  :-moz-any(#import-snapshot, #clear-snapshots[label]):not([disabled]) > image {
+    opacity: 0.8;
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label]):hover > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[checked=true] > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[open=true] > image {
+    opacity: 1;
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[checked=true] > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[open=true] > image {
+    filter: url(images/filters.svg#checked-icon-state);
+  }
+
+}
+
 
 /* Snapshots items */
 

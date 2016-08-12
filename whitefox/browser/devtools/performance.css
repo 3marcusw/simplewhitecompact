@@ -110,11 +110,50 @@
   list-style-image: url(images/profiler-stopwatch.svg);
 }
 
-@supports not (box-sizing: padding-box) {  /* Firefox >= 50  (temporarily) --johnGraciliano */
-  #import-button {
-    list-style-image: url(images/import.svg);
-  }
+#import-button {
+  list-style-image: url(images/import.svg);
 }
+
+#clear-button[label] { /* This will be transformed into an icon only button! --johnGraciliano */
+  list-style-image: url(images/clear.svg);
+}
+
+@supports (box-sizing: padding-box) {  /* Firefox < 50 */
+  /* Special rules to transform the import and clear buttons into icon only buttons.  Adapted from toolbars.css */
+
+  #import-button,
+  #clear-button[label] {
+    background-color: transparent !important;
+    min-width: 32px !important;
+  }
+
+  .theme-firebug #import-button,
+  .theme-firebug #clear-button[label] {
+    min-width: 24px !important; 
+  }
+
+  :-moz-any(#import-button, #clear-button[label]) > .toolbarbutton-text {
+    display: none;
+  }
+
+  /* Icon-only buttons */
+  :-moz-any(#import-button, #clear-button[label]):not([disabled]) > image {
+    opacity: 0.8;
+  }
+
+  :-moz-any(#import-button, #clear-button[label]):hover > image,
+  :-moz-any(#import-button, #clear-button[label])[checked=true] > image,
+  :-moz-any(#import-button, #clear-button[label])[open=true] > image {
+    opacity: 1;
+  }
+
+  :-moz-any(#import-button, #clear-button[label])[checked=true] > image,
+  :-moz-any(#import-button, #clear-button[label])[open=true] > image {
+    filter: url(images/filters.svg#checked-icon-state);
+  }
+
+}
+
 
 #main-record-button .button-icon, #import-button .button-icon {
   margin: 0;

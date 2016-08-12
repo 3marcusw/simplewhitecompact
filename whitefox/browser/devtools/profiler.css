@@ -85,6 +85,49 @@
   pointer-events: none;
 }
 
+
+/* Special rules to transform the import and clear buttons into icon only buttons.  Adapted from toolbars.css */
+
+#import-button {
+  list-style-image: url(images/import.svg);
+}
+
+#clear-button {
+  list-style-image: url(images/clear.svg);
+}
+
+#import-button,
+#clear-button {
+  background-color: transparent !important;
+  min-width: 32px !important;
+}
+
+.theme-firebug #import-button,
+.theme-firebug #clear-button {
+  min-width: 24px !important; 
+}
+
+:-moz-any(#import-button, #clear-button) > .toolbarbutton-text {
+  display: none;
+}
+
+/* Icon-only buttons */
+:-moz-any(#import-button, #clear-button):not([disabled]) > image {
+  opacity: 0.8;
+}
+
+:-moz-any(#import-button, #clear-button):hover > image,
+:-moz-any(#import-button, #clear-button)[checked=true] > image,
+:-moz-any(#import-button, #clear-button)[open=true] > image {
+  opacity: 1;
+}
+
+:-moz-any(#import-button, #clear-button)[checked=true] > image,
+:-moz-any(#import-button, #clear-button)[open=true] > image {
+  filter: url(images/filters.svg#checked-icon-state);
+}
+
+
 /* Recording items */
 
 #recordings-list {

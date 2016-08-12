@@ -3,15 +3,52 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@supports not (box-sizing: padding-box) {  /* Firefox >= 50  (temporarily) --johnGraciliano */
-  .style-editor-newButton {
-    list-style-image: url(images/add.svg);
+.style-editor-newButton {
+  list-style-image: url(images/add.svg);
+}
+
+.style-editor-importButton {
+  list-style-image: url(images/import.svg);
+}
+
+
+@supports (box-sizing: padding-box) {  /* Firefox < 50 */
+  /* Special rules to transform the two buttons above into icon only buttons.  Adapted from toolbars.css */
+
+  .style-editor-newButton,
+  .style-editor-importButton {
+    background-color: transparent !important;
+    min-width: 32px !important;
   }
 
-  .style-editor-importButton {
-    list-style-image: url(images/import.svg);
+  .theme-firebug .style-editor-newButton,
+  .theme-firebug .style-editor-importButton {
+    min-width: 24px !important; 
   }
+
+  :-moz-any(.style-editor-newButton, .style-editor-importButton) > .toolbarbutton-text {
+    display: none;
+  }
+
+  /* Icon-only buttons */
+  :-moz-any(.style-editor-newButton, .style-editor-importButton):not([disabled]) > image {
+    opacity: 0.8;
+  }
+
+  :-moz-any(.style-editor-newButton, .style-editor-importButton):hover > image,
+  :-moz-any(.style-editor-newButton, .style-editor-importButton)[checked=true] > image,
+  :-moz-any(.style-editor-newButton, .style-editor-importButton)[open=true] > image {
+    opacity: 1;
+  }
+
+  :-moz-any(.style-editor-newButton, .style-editor-importButton)[checked=true] > image,
+  :-moz-any(.style-editor-newButton, .style-editor-importButton)[open=true] > image {
+    filter: url(images/filters.svg#checked-icon-state);
+  }
+
 }
+
+
 
 .stylesheet-title,
 .stylesheet-name {
