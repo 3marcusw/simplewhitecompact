@@ -26,7 +26,8 @@
 .theme-firebug .sidebar-toggle::before,
 .theme-firebug [id$="pane-toggle"]::before,
 .theme-firebug [id$="pane-toggle"] > image,
-.theme-firebug #global-toolbar .devtools-button::before,
+/**.theme-firebug #global-toolbar .devtools-button::before, ** This line shall be deleted --johnGraciliano **/
+/**.theme-firebug .devtools-button.pause-button:not(.paused)::before,  ** This line shall be deleted.  It was only an experiment. --johnGraciliano **/
 .theme-firebug #element-picker::before,
 .theme-firebug #debugger-controls .toolbarbutton-icon,
 .theme-firebug #filter-button .toolbarbutton-icon {
