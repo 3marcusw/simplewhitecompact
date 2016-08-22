@@ -18,11 +18,8 @@
   color: inherit;
 }
 
-#downloadsPanel:not([hasdownloads]) > #downloadsListBox {
-  display: none;
-}
-
-#downloadsPanel[hasdownloads] > #emptyDownloads {
+#downloadsPanel:not([hasdownloads]) #downloadsListBox,
+#downloadsPanel[hasdownloads] #emptyDownloads {
   display: none;
 }
 
@@ -37,8 +34,13 @@
   cursor: pointer;
 }
 
-#downloadsPanel[keyfocus] > #downloadsFooter > #downloadsHistory:focus {
+#downloadsPanel[keyfocus] #downloadsFooter > #downloadsHistory:focus {
   outline: 1px -moz-dialogtext dotted;
+  outline-offset: -1px;
+}
+
+#downloadsPanel:not([keyfocus])[hasdownloads] #downloadsFooter > #downloadsHistory:focus {
+  outline: 1px hsl(0,0%,30%) dotted;
   outline-offset: -1px;
 }
 
@@ -47,10 +49,34 @@
   margin: 1em;
 }
 
-#downloadsPanel[hasdownloads] > #downloadsFooter {
-  background: #efefef;
-  border-top: 1px solid hsla(0,0%,0%,.1);
-  border-radius: 0 0 5px 5px;
+#downloadsFooter {
+  border-top: 1px solid transparent;
+}
+
+#downloadsPanel[hasdownloads] #downloadsFooter {
+  background-color: hsla(210,4%,10%,.07);
+  border-top-color: hsla(210,4%,10%,.12);
+  border-radius: 0 0 4px 4px;
+}
+
+#downloadsPanel[hasdownloads] #downloadsFooter:hover {
+  background-color: hsla(210,4%,10%,.15);
+  border-top-color: hsla(210,4%,10%,.14);
+}
+
+#downloadsPanel[hasdownloads] #downloadsFooter:hover:active {
+  background-color: hsla(210,4%,10%,.19);
+  box-shadow: 0 1px 0 hsla(210,4%,10%,.05) inset;
+}
+
+#downloadsPanel:not([hasdownloads]) #downloadsFooter:hover {
+  background-color: hsla(210,4%,10%,.03);
+  border-top-color: hsla(210,4%,10%,.07);
+  border-radius: 0 0 4px 4px;
+}
+
+#downloadsPanel:not([hasdownloads]) #downloadsFooter:hover:active{
+  background-color: hsla(210,4%,10%,.05);
 }
 
 /*** Downloads Summary and List items ***/
@@ -59,6 +85,7 @@
 richlistitem[type="download"] {
   height: 7em;
   -moz-padding-end: 0;
+  padding-inline-end: 0;
   color: inherit;
 }
 
@@ -68,7 +95,7 @@ richlistitem[type="download"] {
   -moz-user-focus: normal;
 }
 
-#downloadsPanel[keyfocus] > #downloadsFooter > #downloadsSummary:focus {
+#downloadsPanel[keyfocus] #downloadsFooter > #downloadsSummary:focus {
   outline: 1px -moz-dialogtext dotted;
   outline-offset: -5px;
 }
@@ -83,29 +110,38 @@ richlistitem[type="download"] {
 
 richlistitem[type="download"] {
   margin: 0;
-  border-top: 1px solid hsla(0,0%,100%,.07);
-  border-bottom: 1px solid hsla(0,0%,0%,.2);
+  border: 1px solid transparent;
+  border-top-color: hsla(0,0%,100%,.07);
+  border-bottom-color: hsla(0,0%,0%,.2);
   background: transparent;
   padding: 8px;
+  --limit-border-top-color: transparent;
+  --limit-border-bottom-color: transparent;
 }
 
 richlistitem[type="download"]:first-child {
-  border-top: 1px solid transparent;
+  border-top-color: var(--limit-border-top-color);
 }
 
-@media (-moz-windows-default-theme) {
-  richlistitem[type="download"]:last-child {
-    border-bottom: 1px solid transparent;
-  }
+richlistitem[type="download"]:last-child {
+  border-bottom-color: var(--limit-border-bottom-color);
 }
 
-#downloadsPanel[keyfocus] > #downloadsListBox:focus > richlistitem[type="download"][selected] {
+#downloadsPanel[keyfocus] #downloadsListBox:focus > richlistitem[type="download"][selected] {
   outline: 1px -moz-dialogtext dotted;
+  outline-offset: -1px;
+}
+
+#downloadsPanel:not([keyfocus]) #downloadsListBox:focus > richlistitem[type="download"][selected]:not([state="1"]):hover,
+#downloadsPanel:not([keyfocus]) #downloadsListBox:focus > richlistitem[type="download"][selected]:not([exists]):hover,
+#downloadsPanel:not([keyfocus]) #downloadsListBox:focus > richlistitem[type="download"][selected]:not(:hover) {
+  outline: 1px rgba(139,153,182,.8) dotted;
   outline-offset: -1px;
 }
 
 .downloadTypeIcon {
   -moz-margin-end: 8px;
+  margin-inline-end: 8px;
   /* Prevent flickering when changing states. */
   height: 32px;
   width: 32px;
@@ -172,12 +208,13 @@ richlistitem[type="download"]:first-child {
 
 /*** Highlighted list items ***/
 
-#downloadsPanel:not([keyfocus]) > #downloadsListBox > richlistitem[type="download"][state="1"][exists]:hover {
-  border-radius: 3px;
-  border-top: 1px solid hsla(0,0%,100%,.2);
-  border-bottom: 1px solid hsla(0,0%,0%,.2);
-  background-color: Highlight;
-  color: HighlightText;
+#downloadsPanel:not([keyfocus]) #downloadsListBox > richlistitem[type="download"][state="1"][exists]:hover {
+  --limit-border-top-color: hsla(0,0%,0%,.08); /* Instead of this line, there was 'border-radius: 3px; border-top: 1px solid hsla(0,0%,100%,.2)' --johnGraciliano */
+  --limit-border-bottom-color: hsla(0,0%,0%,.2); /* Instead of this line, there was 'border-radius: 3px; border-top: 1px solid hsla(0,0%,100%,.2)' --johnGraciliano */
+  border-left-color: hsla(0,0%,0%,.08);
+  border-right-color: hsla(0,0%,0%,.08);
+  background-color: -moz-cellhighlight; /* This was Highlight --johnGraciliano */
+  color: -moz-cellhighlighttext; /* This was HighlightText --johnGraciliano */
   cursor: pointer;
 }
 
@@ -224,6 +261,7 @@ richlistitem[type="download"]:hover > stack > .downloadButton.downloadShow:activ
 .downloadButton.downloadIconRetry,
 .downloadButton.downloadRetry {
   -moz-image-region: rect(42px, 18px, 58px, 2px);
+  cursor: pointer;
 }
 richlistitem[type="download"]:hover > stack > .downloadButton.downloadIconRetry,
 richlistitem[type="download"]:hover > stack > .downloadButton.downloadRetry {
@@ -244,7 +282,11 @@ richlistitem[type="download"]:hover > stack > .downloadButton.downloadRetry:acti
     border-bottom: 1px solid hsl(213,40%,90%);
   }
 
-  #downloadsPanel:not([keyfocus]) > #downloadsListBox > richlistitem[type="download"][state="1"][exists]:hover {
+  /* States:  -1. Starting (initial)  0. Downloading  1. Finished  2. Failed  3. Canceled  4. Paused
+               5. Starting (queued)  6. Blocked (parental)  7. Scanning  8. Blocked (dirty)  9. Blocked (policy)    */
+
+  #downloadsPanel:not([keyfocus]) #downloadsListBox > richlistitem[type="download"][state="1"][exists]:hover {
+    border-radius: 3px;
     border: 1px solid hsl(213,45%,65%);
     box-shadow: 0 0 0 1px hsla(0,0%,100%,.5) inset,
                 0 1px 0 hsla(0,0%,100%,.3) inset;
