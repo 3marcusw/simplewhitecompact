@@ -19,6 +19,8 @@
 .downloadTypeIcon {
   -moz-margin-end: 8px;
   -moz-margin-start: 8px;
+  margin-inline-end: 8px;
+  margin-inline-start: 8px;
   /* explicitly size the icon, so size doesn't vary on hidpi systems */
   height: 32px;
   width: 32px;
@@ -48,6 +50,14 @@
   border: none;
   padding: 5px;
   list-style-image: url("chrome://browser/skin/downloads/buttons.svg");
+}
+
+@supports (ruby-position:over) { /* Firefox >= 38 --johnGraciliano */
+  /* Hide 'Open Containing Folder' button if the item is missing (e.g., after being removed by the user) --johnGraciliano */
+  /* Modified from chrome://browser/content/downloads/download.css */
+  richlistitem.download.download-state[state="1"]:not([exists]) .downloadShow {
+    display: none;
+  }
 }
 
 /*** Button icons ***/
@@ -128,6 +138,15 @@ richlistitem.download:hover > .downloadButton.downloadRetry:active {
   -moz-image-region: rect(42px, 78px, 58px, 62px);
 }
 
+#downloadsRichListBox > richlistitem.download[selected] {
+  background-color: -moz-cellhighlight;
+  color: -moz-cellhighlighttext;
+  outline: none;
+}
+
+#downloadsRichListBox:focus > richlistitem.download[selected] {
+  background-color: #eaeaea; /* as in places.css by Louis */
+}
 
 @media (-moz-windows-default-theme) {
   /*
@@ -139,11 +158,12 @@ richlistitem.download:hover > .downloadButton.downloadRetry:active {
 
   This styling should be kept in sync with the style from the above file.
   */
+  #downloadsRichListBox:focus > richlistitem.download[selected],
   #downloadsRichListBox > richlistitem.download[selected] {
     color: inherit;
     background-color: transparent;
     /* four gradients for the bevel highlights on each edge, one for blue background */
-    /*background-image:
+    background-image:
       linear-gradient(to bottom, rgba(255,255,255,0.9) 3px, rgba(255,255,255,0) 3px),
       linear-gradient(to right, rgba(255,255,255,0.5) 3px, rgba(255,255,255,0) 3px),
       linear-gradient(to left, rgba(255,255,255,0.5) 3px, rgba(255,255,255,0) 3px),
@@ -153,7 +173,23 @@ richlistitem.download:hover > .downloadButton.downloadRetry:active {
     border-radius: 6px;
     outline: 1px solid rgb(124,163,206);
     -moz-outline-radius: 3px;
-    outline-offset: -2px;*/
+    outline-offset: -2px;
+  }
+  #downloadsRichListBox > richlistitem.download:not([selected]):hover {
+    color: inherit;
+    background-color: transparent;
+    /* four gradients for the bevel highlights on each edge, one for blue background */
+    background-image:
+      linear-gradient(to bottom, rgba(255,255,255,0.45) 3px, rgba(255,255,255,0) 3px),
+      linear-gradient(to right, rgba(255,255,255,0.25) 3px, rgba(255,255,255,0) 3px),
+      linear-gradient(to left, rgba(255,255,255,0.25) 3px, rgba(255,255,255,0) 3px),
+      linear-gradient(to top, rgba(255,255,255,0.2) 3px, rgba(255,255,255,0) 3px),
+      linear-gradient(to bottom, rgba(163,196,247,0.07), rgba(122,180,246,0.07));
+    background-clip: content-box;
+    border-radius: 6px;
+    outline: 1px solid rgba(124,163,206,.5);
+    -moz-outline-radius: 3px;
+    outline-offset: -2px;
   }
 }
 
@@ -162,7 +198,7 @@ richlistitem.download:hover > .downloadButton.downloadRetry:active {
  * Added by Louis */
 #downloadsRichListBox > richlistitem.download {
   color: inherit;
-  background-color: transparent;   
+  background-color: transparent;
   border-bottom: 1px solid rgb(230,230,230);
   outline: none;
 }
