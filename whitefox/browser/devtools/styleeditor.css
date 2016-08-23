@@ -3,6 +3,23 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+#style-editor-chrome {
+  -moz-box-flex: 1;
+}
+
+.splitview-nav > li,
+.stylesheet-info,
+.stylesheet-more,
+.stylesheet-rule-count,
+li.splitview-active > hgroup > .stylesheet-more > h3 > .stylesheet-saveButton,
+li:hover > hgroup > .stylesheet-more > h3 > .stylesheet-saveButton {
+  display: -moz-box;
+}
+
+.devtools-toolbar > spacer {
+  -moz-box-flex: 1;
+}
+
 .style-editor-newButton {
   list-style-image: url(images/add.svg);
 }
@@ -10,7 +27,6 @@
 .style-editor-importButton {
   list-style-image: url(images/import.svg);
 }
-
 
 @supports (box-sizing: padding-box) {  /* Firefox < 50 */
   /* Special rules to transform the two buttons above into icon only buttons.  Adapted from toolbars.css */
@@ -23,7 +39,7 @@
 
   .theme-firebug .style-editor-newButton,
   .theme-firebug .style-editor-importButton {
-    min-width: 24px !important; 
+    min-width: 24px !important;
   }
 
   :-moz-any(.style-editor-newButton, .style-editor-importButton) > .toolbarbutton-text {
@@ -48,7 +64,21 @@
 
 }
 
+.stylesheet-details-container {
+  -moz-box-flex: 1;
+}
 
+.stylesheet-media-container {
+  overflow-y: auto;
+}
+
+.stylesheet-error-message {
+  display: none;
+}
+
+li.error > .stylesheet-info > .stylesheet-more  > .stylesheet-error-message {
+  display: block;
+}
 
 .stylesheet-title,
 .stylesheet-name {
@@ -57,6 +87,24 @@
 
 .stylesheet-name {
   font-size: 13px;
+  white-space: nowrap;
+}
+
+.stylesheet-name > label {
+  display: inline;
+  cursor: pointer;
+}
+
+.stylesheet-info > h1 {
+  -moz-box-flex: 1;
+}
+
+.splitview-nav > li > hgroup.stylesheet-info {
+  -moz-box-pack: center;
+}
+
+.stylesheet-more > spacer {
+  -moz-box-flex: 1;
 }
 
 .theme-dark .stylesheet-title,
@@ -82,6 +130,9 @@
 }
 
 .stylesheet-saveButton {
+  display: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -96,6 +147,16 @@
 
 .splitview-nav:focus {
   outline: 0; /* focus ring is on the stylesheet name */
+}
+
+.splitview-nav > li {
+  -moz-box-orient: horizontal;
+}
+
+.splitview-nav > li > hgroup {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
 }
 
 .splitview-nav > li.unsaved > hgroup .stylesheet-name {
@@ -126,6 +187,7 @@
 }
 
 .media-rule-label {
+  display: flex;
   padding: 4px;
   cursor: pointer;
   border-bottom: 1px solid;
@@ -145,7 +207,14 @@
   opacity: 0.4;
 }
 
+.media-rule-condition {
+  flex: 1;
+  overflow: hidden;
+}
+
 .stylesheet-enabled {
+  display: -moz-box;
+  cursor: pointer;
   padding: 8px 0;
   margin: 0 8px;
   background-image: url(images/itemToggle.png);
@@ -185,10 +254,24 @@
 .stylesheet-linked-file:not(:empty):before {
   -moz-margin-start: 0.4em;
   margin-inline-start: 0.4em;
+  content: " ↳ ";
+}
+
+li.unsaved > hgroup > h1 > .stylesheet-name:before {
+  content: "*";
+}
+
+li.linked-file-error .stylesheet-linked-file {
+  text-decoration: line-through;
 }
 
 li.linked-file-error .stylesheet-linked-file:after {
   font-size: 110%;
+  content: " ✘";
+}
+
+li.linked-file-error .stylesheet-rule-count {
+  visibility: hidden;
 }
 
 .stylesheet-more > h3 {
@@ -224,6 +307,11 @@ h3 {
 
 /* portrait mode */
 @media (max-width: 550px) {
+  li.splitview-active > hgroup > .stylesheet-more > .stylesheet-rule-count,
+  li:hover > hgroup > .stylesheet-more > .stylesheet-rule-count {
+    display: none;
+  }
+
   .splitview-nav {
     box-shadow: none;
   }
@@ -244,10 +332,21 @@ h3 {
 
   .splitview-nav > li > hgroup.stylesheet-info {
     -moz-box-align: baseline;
+    -moz-box-orient: horizontal;
+    -moz-box-flex: 1;
   }
 
   .stylesheet-sidebar {
     width: 180px;
+  }
+
+  .stylesheet-more {
+    -moz-box-flex: 1;
+    -moz-box-pack: end;
+  }
+
+  .stylesheet-more > spacer {
+    -moz-box-flex: 0;
   }
 }
 
