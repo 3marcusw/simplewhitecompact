@@ -528,6 +528,7 @@ toolbarpaletteitem[place="palette"] > toolbaritem > toolbarbutton {
   display: none;
 }
 
+/* The following is from the default theme.  I prefer to hide it for being unnecessary.  --johnGraciliano ****************************\
 #PanelUI-footer-fxa[fxastatus="error"] > #PanelUI-fxa-status::after {
   content: url(chrome://browser/skin/warning.svg);
   filter: drop-shadow(0 1px 0 hsla(206, 50%, 10%, .15));
@@ -559,6 +560,7 @@ toolbarpaletteitem[place="palette"] > toolbaritem > toolbarbutton {
   background-image: url(chrome://browser/skin/update-badge-failed.svg);
   background-color: #D90000;
 }
+\*************************************************************************************************************************************/
 
 #PanelUI-fxa-status {
   display: flex;
