@@ -343,6 +343,11 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   background-image: url(images/clear.svg);
 }
 
+.theme-firebug .devtools-button.devtools-clear-icon::before {
+  background-image: url(images/firebug/clear.svg);
+  filter: none;
+}
+
 .devtools-button.devtools-filter-icon::before {
   background-image: url(images/timeline-filter.svg);
 }
@@ -353,6 +358,13 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 
 .devtools-toolbarbutton.devtools-clear-icon {
   list-style-image: url(images/clear.svg);
+}
+
+.theme-firebug .devtools-toolbarbutton.devtools-clear-icon {
+  list-style-image: url(images/firebug/clear.svg);
+}
+.theme-firebug .devtools-toolbarbutton.devtools-clear-icon > .toolbarbutton-icon {
+  filter: none;
 }
 
 .devtools-option-toolbarbutton {
@@ -553,7 +565,12 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   background-color: transparent;
 }
 
+.devtools-searchinput-clear:-moz-locale-dir(rtl) ,
 .devtools-searchinput-clear:-moz-dir(rtl) {
+  right: unset;
+  left: 7px;
+}
+.devtools-searchinput-clear:dir(rtl) {
   right: unset;
   left: 7px;
 }
@@ -709,11 +726,15 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   text-shadow: none;
 }
 
+.tabs-menu-item,
 .devtools-sidebar-tabs tabs > tab {
   --border-img: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%) 1 1;
   border-image: var(--border-img);
 }
 
+.tabs-menu-item.is-active,
+.tabs-menu-item.is-active + .tabs-menu-item,
+.devtools-sidebar-tabs tabs > tab[selected] + [hidden="true"] + tab,
 .devtools-sidebar-tabs tabs > tab[selected],
 .devtools-sidebar-tabs tabs > tab[selected] + tab {
   --border-img: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color)) 1 1;
