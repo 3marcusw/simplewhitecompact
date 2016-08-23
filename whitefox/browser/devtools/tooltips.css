@@ -144,11 +144,9 @@
 
 .tooltip-panel {
   background-color: var(--theme-tooltip-background);
+  color: var(--theme-body-color); /* This was added to make the "Could not load the image" messages clear.  --johnGraciliano */
   pointer-events: all;
   flex-grow: 1;
-}
-.theme-dark .tooltip-panel {
-  color: #ffffff; /* This was added to make the "Could not load the image" messages clear.  --johnGraciliano */
 }
 
 .tooltip-visible {
@@ -277,6 +275,7 @@
   margin: -4px; /* Compensate for the .panel-arrowcontent padding. */
   max-width: 586px; /* 600px (bubble width) - 2*4px (padding) - 2*3px (border) --johnGraciliano */
   overflow-y: auto;
+  -moz-box-flex: 1; /* This makes the content stretch horizontally inserting space before the buttons if needed to fill the dialog box in Firefox 49 and earlier. --johnGraciliano. */
 }
 :root.theme-dark #devtools-tooltip-events-container {
   max-width: 584px; /* 600px (bubble width) - 2*5px (padding) - 2*3px (border) --johnGraciliano */
@@ -287,6 +286,23 @@
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+}
+
+/* The class .devtools-toolbar adds a padding of 3px on each side but this can lead to show and unecessary elipsis --johnGraciliano */
+.event-header.devtools-toolbar {
+  -moz-padding-start: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  -moz-padding-end: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  padding-inline-start: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  padding-inline-end: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+}
+/* The following rules restore the space from the padding canceled in the previous rule --johnGraciliano */ 
+.event-header.devtools-toolbar > .event-tooltip-debugger-icon { /* Faster than the more correct '.event-header.devtools-toolbar > :first-child' --johnGraciliano */
+  -moz-margin-start: 3px;
+  margin-inline-start: 3px;
+}
+.event-header.devtools-toolbar > .event-tooltip-attributes-container { /* Faster than the more correct '.event-header.devtools-toolbar > :last-child' --johnGraciliano */
+  -moz-margin-end: 3px;
+  margin-inline-end: 3px;
 }
 
 .event-header:first-child {
@@ -333,6 +349,9 @@
   /* Force ellipsis to be displayed on the left */
   direction: rtl;
   margin-top: 2px;   /* Added --johnGraciliano */
+}
+.event-tooltip-filename[crop=left] {
+  direction: ltr; /* For Firefox <= 49! Otherwise the elipsis is incorrectly place on the right.  --johnGraciliano */
 }
 
 .event-tooltip-debugger-icon {
