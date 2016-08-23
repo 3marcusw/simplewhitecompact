@@ -341,6 +341,7 @@ label + .requests-menu-method {
   width: 8vw;
 }
 
+.requests-menu-transferred[value="cached"],
 .requests-menu-transferred[value="—"] {
   text-align: center;
 }
@@ -1022,31 +1023,31 @@ box.requests-menu-status[code^="5"] {
 
 /* Special rules to transform the clear button into an icon only button.  Adapted from toolbars.css */
 
-#requests-menu-clear-button {
+#requests-menu-clear-button[label] {
   list-style-image: url(images/clear.svg);
   background-color: transparent;
   min-width: 32px;
   padding: 0;
   opacity: 1;
 }
-.theme-light #requests-menu-clear-button > .button-box  > .button-icon {
+.theme-light #requests-menu-clear-button[label] > .button-box  > .button-icon {
   filter: invert(1);
 }
 
-.theme-firebug #requests-menu-clear-button {
+.theme-firebug #requests-menu-clear-button[label] {
   min-width: 24px !important;
 }
 
-#requests-menu-clear-button > .button-box > .button-text {
+#requests-menu-clear-button[label] > .button-box > .button-text {
   display: none;
 }
 
 /* Icon-only buttons */
-#requests-menu-clear-button:not([disabled]) > .button-box > .button-icon {
+#requests-menu-clear-button[label]:not([disabled]) > .button-box > .button-icon {
   opacity: 0.8 !important;
 }
 
-#requests-menu-clear-button:hover > .button-box > .button-icon {
+#requests-menu-clear-button[label]:hover > .button-box > .button-icon {
   opacity: 1 !important;
 }
 
