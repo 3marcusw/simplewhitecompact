@@ -3,13 +3,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
- /******   TEMPORARY RULE TO OVERRIDE MIN-WIDTH SET IN FIREFOX NIGHTLY 50.0a1  ********************************************/
- #inspector-sidebar-container {
-   min-width: 320px !important;  /* This overrides the 450px value in the setting related to bug 1281789 --johnGraciliano */
- }
- /******   TEMPORARY RULE TO OVERRIDE MIN-WIDTH SET IN FIREFOX NIGHTLY 50.0a1  ********************************************/
- 
- 
 @supports (not (line-height:calc(1px))) { /* Firefox < 48 */
   :root[platform="mac"] #inspector-toolbar:-moz-locale-dir(ltr) {
     padding-left: 2px;
@@ -49,6 +42,27 @@ div#inspector-toolbar.devtools-toolbar .devtools-toolbar-spacer {
 
 #inspector-searchlabel {
   overflow: hidden;
+  margin-inline-end: 2px;
+}
+
+#inspector-search {
+  flex: unset;
+}
+
+/* TODO: bug 1265759: should apply to .devtools-searchinput once all searchbox
+   is converted to html*/
+#inspector-search > #inspector-searchbox {  /* The prefix '#inspector-search > ' is for this to apply in Firefox >= 51. --johnGraciliano */
+  flex: 1; /* This was added in the default theme of 51.0a1 and removed a few days later.  It may be removed here too. --johnGraciliano */
+  width: 100%;
+  padding-inline-end: 22px; /* Added. Make room for '#inspector-searchinput-clear' --johnGraciliano */
+}
+
+.theme-firebug #inspector-search > #inspector-searchinput-clear {
+  top: 2.5px; /* Added.  To better center the button. --johnGraciliano */
+}
+
+#inspector-search > #inspector-searchbox::-moz-placeholder {
+  font-style: italic;
 }
 
 /* Make sure the text is vertically centered in Inspector's
@@ -238,14 +252,43 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
   list-style-image: url(images/add.svg);
 }
 
+/* Set the minimum width for the side bar so, all tabs are
+  properly visible. The value can be decreased when bug 1281789
+  is fixed and the all-tabs-menu is available again. */
+[id]#inspector-sidebar-container { /* Added '[id]' to override 'chrome://devtools/content/inspector/inspector.css' of Firefox 50 --johnGraciliano */
+  overflow: hidden;
+  min-width: 320px; /* This is 300px in the default theme of Firefox 51.  It is 400px in Firefox 50.  --johnGraciliano */
+  position: relative;
+}
+
+div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
+                         * Otherwise it needs ':not(tabbox)' or ':not(.devtools-sidebar-tabs)' or '#inspector-sidebar-container > ' --johnGraciliano */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Override `-moz-user-focus:ignore;` from toolkit/content/minimal-xul.css */
+.inspector-tabpanel > * {
+  -moz-user-focus: normal;
+}
+
 /* "no results" warning message displayed in the ruleview and in the computed view */
 
 #ruleview-no-results,
 #computedview-no-results {
   color: var(--theme-body-color-inactive);
   text-align: center;
-  margin: 5px;
+  padding: 5px; /* The property was originally 'margin: 5px', but that generated a superfluous sidabar --johnGraciliano. */
   font: message-box;
+}
+
+/* The following could be belong in toolbars.css but I only know it is needed for the inspector module --johnGraciliano */
+.theme-dark .tabs nav.tabs-navigation,
+.theme-light .tabs nav.tabs-navigation {
+  background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
 
 
@@ -260,4 +303,16 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 /* The rule should be in firebug-theme.css, but I placed it here because it only affects the inspector's tabs */
 .theme-firebug .tabs > * > .tabs-menu > .tabs-menu-item > a {  /* To superceed selector '.theme-firebug .tabs .tabs-menu-item a'*/
   color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
+}
+
+/* A rule in 'firebug-theme.css' makes the tabs overflow visible (so the bottom margin can be covered).
+ * But that allows the 'Box Model' layout to be as wide as the tabs toolbar and end up with a horizontal overflow.
+ * The next rule binds the tabs within the available space to avoid that problem in the layout.   --johnGraciliano
+ */
+.theme-firebug #inspector-sidebar > stack {
+  overflow: hidden;
+}
+
+.theme-firebug #inspector-sidebar .devtools-sidebar-alltabs {
+  margin: 0; /* Added.  However this button is always hidden because the tabs overflow is visible. --johnGraciliano */
 }
