@@ -318,9 +318,14 @@ body > #propertyContainer > .property-view > * {
   text-align: center;
 }
 
-#computedview-no-results { /* Used in Firefox 50 */
+/* The next rule either needs height: 'calc(100% - 10px)' due to 5px top and bottom padding
+ * (the padding is declared in inspector.css and it used to be marked as margin) or insert
+ * 'box-sizing: border-box'.  Otherwise it makes a superfluous margin to be created.
+ * However, I am removing the rule because I find no purpose for it.       --johnGraciliano *|
+#computedview-no-results { /* Firefox >= 50 *|
   height: 100%;
 }
+ */
 
 .onlyuserstyles {
   cursor: pointer;
