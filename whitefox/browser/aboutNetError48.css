@@ -90,6 +90,10 @@ button:disabled {
   cursor: pointer;
 }
 
+#prefChangeContainer {
+  display: none;
+}
+
 #learnMoreContainer {
   display: none;
 }
@@ -154,9 +158,11 @@ body.certerror #advancedButton {
   margin-top: 24px;
 }
 
+body.certerror > div > div >  #badCertAdvancedPanel,
 body.certerror > div > #badCertAdvancedPanel {
   margin-top: 10px;
 }
+body.certerror > div > div > #badCertAdvancedPanel:not([style="display: block;"]),
 body.certerror > div > #badCertAdvancedPanel:not([style="display: block;"]){
   display: block !important; /* Reserve the space for it. */
   visibility: hidden; /* Just leave the space */

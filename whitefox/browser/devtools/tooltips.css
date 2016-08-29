@@ -1,0 +1,628 @@
+/* vim:set ts=2 sw=2 sts=2 et: */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* Tooltip specific theme variables */
+
+.theme-dark {
+  --bezier-diagonal-color: #eee;
+  --bezier-grid-color: rgba(0, 0, 0, 0.2);
+}
+
+.theme-light {
+  --bezier-diagonal-color: rgba(0, 0, 0, 0.2);
+  --bezier-grid-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Tooltip widget (see devtools/client/shared/widgets/Tooltip.js) */
+
+.devtools-tooltip .panel-arrowcontent {
+  padding: 4px;
+}
+
+.devtools-tooltip .panel-arrowcontainer {
+  /* Reseting the transition used when panels are shown */
+  transition: none;
+  /* Panels slide up/down/left/right when they appear using a transform.
+  Since we want to remove the transition, we don't need to transform anymore
+  plus it can interfeer by causing mouseleave events on the underlying nodes */
+  transform: none;
+}
+
+.devtools-tooltip[clamped-dimensions] {
+  min-height: 100px;
+  max-height: 400px;
+  min-width: 100px;
+  max-width: 400px;
+}
+.devtools-tooltip[clamped-dimensions-no-min-height] {
+  min-height: 0;
+  max-height: 400px;
+  min-width: 100px;
+  max-width: 400px;
+}
+.devtools-tooltip[clamped-dimensions-no-max-or-min-height] {
+  min-width: 400px;
+  max-width: 400px;
+}
+.devtools-tooltip[clamped-dimensions] .panel-arrowcontent,
+.devtools-tooltip[clamped-dimensions-no-min-height] .panel-arrowcontent,
+.devtools-tooltip[clamped-dimensions-no-max-or-min-height] .panel-arrowcontent {
+  overflow: hidden;
+}
+.devtools-tooltip[wide] {
+  max-width: 600px;
+}
+
+/* Tooltip: Simple Text */
+
+.devtools-tooltip-simple-text {
+  max-width: 400px;
+  margin: 0 -4px; /* Compensate for the .panel-arrowcontent padding. */
+  padding: 8px 12px;
+  white-space: pre-wrap;
+}
+
+.devtools-tooltip-simple-text:first-child {
+  margin-top: -4px;
+}
+
+.devtools-tooltip-simple-text:last-child {
+  margin-bottom: -4px;
+}
+
+/* Tooltip: Alert Icon */
+
+.devtools-tooltip-alert-icon {
+  width: 32px;
+  height: 32px;
+  margin: 6px;
+  -moz-margin-end: 20px;
+  margin-inline-end: 20px;
+}
+
+.devtools-tooltip-alert-icon {
+  list-style-image: url("chrome://global/skin/icons/warning-32.png");
+}
+
+/* Tooltip: Variables View */
+
+.devtools-tooltip-variables-view-box {
+  margin: -4px; /* Compensate for the .panel-arrowcontent padding. */
+}
+
+.devtools-tooltip-variables-view-box .variable-or-property > .title {
+  -moz-padding-end: 6px;
+  padding-inline-end: 6px;
+}
+
+/* Tooltip: Tiles */
+
+.devtools-tooltip-tiles {
+  background-color: #eee;
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+    linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.devtools-tooltip-iframe {
+  border: none;
+  background: transparent;
+}
+
+.tooltip-container {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  background: transparent;
+  pointer-events: none;
+  overflow: hidden;
+  filter: drop-shadow(0 3px 4px var(--theme-tooltip-shadow));
+}
+
+.tooltip-xul-wrapper {
+  -moz-appearance: none;
+  background: transparent;
+  overflow: visible;
+  border-style: none;
+}
+
+.tooltip-xul-wrapper .tooltip-container {
+  position: absolute;
+}
+
+.tooltip-top {
+  flex-direction: column;
+}
+
+.tooltip-bottom {
+  flex-direction: column-reverse;
+}
+
+.tooltip-panel {
+  background-color: var(--theme-tooltip-background);
+  color: var(--theme-body-color); /* This was added to make the "Could not load the image" messages clear.  --johnGraciliano */
+  pointer-events: all;
+  flex-grow: 1;
+}
+
+.tooltip-visible {
+  display: flex;
+}
+
+.tooltip-hidden {
+  display: flex;
+  visibility: hidden;
+}
+
+/* Tooltip : flexible height styles */
+
+.tooltip-flexible-height .tooltip-panel {
+  /* In flexible mode the tooltip panel should only grow according to its content. */
+  flex-grow: 0;
+}
+
+.tooltip-flexible-height .tooltip-filler {
+  /* In flexible mode the filler should grow as much as possible. */
+  flex-grow: 1;
+}
+
+/* type="arrow" overrides: remove arrow decorations for the xul <panel> wrapper */
+
+.tooltip-xul-wrapper[type="arrow"] {
+  margin: 0;
+}
+
+/* The arrow image is hidden because the panel is opened using openPopupAtScreen(). */
+
+/* Remove all decorations on .panel-arrowcontent is the tooltip content container. */
+.tooltip-xul-wrapper[type="arrow"] .panel-arrowcontent {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Tooltip : arrow style */
+
+.tooltip-xul-wrapper .tooltip-container {
+  /* When displayed in a XUL panel the drop shadow would be abruptly cut by the panel */
+  filter: none;
+}
+
+/*********************************************************************%
+%***  The next rule could substitute the previous rule.           ****%
+%***  It allows the shadow to work properly with the XUP panels.  ****%
+%***  However, it makes the 'font sample' panel flicker.          ****%
+%***  So the substitution can not be done until that is solved.   ****%
+.tooltip-xul-wrapper,
+.tooltip-xul-wrapper[type="arrow"] {
+  padding: 5px 8px 12px;
+  margin: -5px -8px -12px;
+}
+%*********************************************************************/
+
+.tooltip-container[type="arrow"] > .tooltip-panel {
+  position: relative;
+  min-height: 10px;
+  box-sizing: border-box;
+  width: 100%;
+
+  border: 3px solid var(--theme-tooltip-border);
+  border-radius: 5px;
+}
+
+.tooltip-top[type="arrow"] .tooltip-panel {
+  top: 0;
+}
+
+.tooltip-bottom[type="arrow"] .tooltip-panel {
+  bottom: 0;
+}
+
+.tooltip-arrow {
+  position: relative;
+  height: 16px;
+  width: 32px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.tooltip-arrow:-moz-locale-dir(rtl) {
+  align-self: flex-end;
+}
+
+.tooltip-top .tooltip-arrow {
+  margin-top: -3px;
+}
+
+.tooltip-bottom .tooltip-arrow {
+  margin-bottom: -3px;
+}
+
+.tooltip-arrow:before {
+  content: "";
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  margin-left: 4px;
+  background: linear-gradient(-45deg,
+    var(--theme-tooltip-background) 50%, transparent 50%);
+  border-color: var(--theme-tooltip-border);
+  border-style: solid;
+  border-width: 0px 3px 3px 0px;
+  border-radius: 3px;
+  pointer-events: all;
+}
+
+.tooltip-bottom .tooltip-arrow:before {
+  margin-top: 4px;
+  transform: rotate(225deg);
+}
+
+.tooltip-top .tooltip-arrow:before {
+  margin-top: -12px;
+  transform: rotate(45deg);
+}
+
+/* Tooltip: Events */
+
+#devtools-tooltip-events-container {
+  margin: -4px; /* Compensate for the .panel-arrowcontent padding. */
+  max-width: 586px; /* 600px (bubble width) - 2*4px (padding) - 2*3px (border) --johnGraciliano */
+  overflow-y: auto;
+  -moz-box-flex: 1; /* This makes the content stretch horizontally inserting space before the buttons if needed to fill the dialog box in Firefox 49 and earlier. --johnGraciliano. */
+}
+:root.theme-dark #devtools-tooltip-events-container {
+  max-width: 584px; /* 600px (bubble width) - 2*5px (padding) - 2*3px (border) --johnGraciliano */
+}
+
+.event-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* The class .devtools-toolbar adds a padding of 3px on each side but this can lead to show and unecessary elipsis --johnGraciliano */
+.event-header.devtools-toolbar {
+  -moz-padding-start: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  -moz-padding-end: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  padding-inline-start: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+  padding-inline-end: 0;  /* This cancels the 3px padding from the devtools-toolbar class. --johnGraciliano */
+}
+/* The following rules restore the space from the padding canceled in the previous rule --johnGraciliano */ 
+.event-header.devtools-toolbar > .event-tooltip-debugger-icon { /* Faster than the more correct '.event-header.devtools-toolbar > :first-child' --johnGraciliano */
+  -moz-margin-start: 3px;
+  margin-inline-start: 3px;
+}
+.event-header.devtools-toolbar > .event-tooltip-attributes-container { /* Faster than the more correct '.event-header.devtools-toolbar > :last-child' --johnGraciliano */
+  -moz-margin-end: 3px;
+  margin-inline-end: 3px;
+}
+
+.event-header:first-child {
+  border-width: 0;
+}
+
+.event-header:not(:first-child) {
+  border-width: 1px 0 0 0;
+}
+
+.theme-firebug .event-header.devtools-toolbar {
+  border-bottom-width: 0 !important; /* To override a rule in firebug-theme.css --johnGraciliano */
+}
+
+.devtools-tooltip-events-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.event-tooltip-event-type,
+.event-tooltip-filename,
+.event-tooltip-attributes {
+  -moz-margin-start: 0;
+  margin-inline-start: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.event-tooltip-event-type {
+  font-weight: bold;
+  font-size: 13px;
+}
+:root.theme-firebug .event-tooltip-event-type { /* Added --johnGraciliano */
+  font-size: 12px;
+}
+
+.event-tooltip-filename {
+  margin: 0 5px;
+  font-size: 100%;
+  flex-shrink: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Force ellipsis to be displayed on the left */
+  direction: rtl;
+  margin-top: 2px;   /* Added --johnGraciliano */
+}
+.event-tooltip-filename[crop=left] {
+  direction: ltr; /* For Firefox <= 49! Otherwise the elipsis is incorrectly place on the right.  --johnGraciliano */
+}
+
+.event-tooltip-debugger-icon {
+  width: 16px;
+  height: 16px;
+  -moz-margin-end: 4px;
+  margin-inline-end: 4px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.event-tooltip-debugger-icon:hover {
+  opacity: 1;
+}
+
+.event-tooltip-content-box {
+  display: none;
+  height: 100px;
+  overflow: hidden;
+  -moz-margin-end: 0;
+  margin-inline-end: 0;
+  border: 1px solid var(--theme-splitter-color);
+  border-width: 1px 0 0 0;
+}
+
+.event-toolbox-content-box iframe {
+  height: 100%;
+  border-style: none;
+}
+
+.event-tooltip-content-box[open] {
+  display: block;
+}
+
+.event-tooltip-source-container {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  -moz-margin-start: 5px;
+  -moz-margin-end: 0;
+  margin-inline-start: 5px;
+  margin-inline-end: 0;
+}
+
+.event-tooltip-source {
+  margin-bottom: 0;
+}
+
+.event-tooltip-attributes-container {
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.event-tooltip-attributes-box {
+  box-sizing: content-box; /* For Firefox <= 50  --johnGraciliano */
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 15px; /* This was 14px. --johnGraciliano */
+  border-radius: 3px;
+  padding: 2px;
+  -moz-margin-start: 5px;
+  margin-inline-start: 5px;
+  background-color: var(--theme-body-color-alt);
+  color: var(--theme-toolbar-background);
+}
+
+.event-tooltip-attributes {
+  margin: 0;
+  font-size: 9px;
+  padding-top: 2px;
+}
+
+:root.theme-firebug .event-tooltip-attributes {
+  padding-top: 1px;
+}
+
+/*
+ * Tooltip: JS stack traces
+ */
+
+.stack-trace-tooltip {
+  direction: ltr;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.stack-trace-tooltip > .stack-frame {
+  margin-left: 3px; /* This was 5px but 2px are now used for padding. --johnGraciliano */
+  margin-right: 3px;
+  padding-left: 2px; /* These 2px are to extend the selection background when hover. --johnGraciliano */
+  padding-right: 2px;
+}
+
+.stack-trace-tooltip > .stack-frame:first-child {
+  margin-top: 5px;
+}
+
+.stack-trace-tooltip > .stack-frame:last-child {
+  margin-bottom: 5px;
+}
+
+.stack-frame-call {
+  color: var(--theme-body-color-alt);
+  cursor: pointer;
+  display: flex;
+}
+
+.stack-frame-call:hover {
+  background-color: var(--theme-selection-background-semitransparent);
+}
+
+.stack-frame-async {
+  color: var(--theme-body-color-inactive);
+}
+
+.stack-frame-function-name {
+  /* color: var(--theme-highlight-blue);  * Use the same inherited color --johnGraciliano */
+  max-width: 50%;
+  -moz-margin-end: 1em;
+  margin-inline-end: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stack-frame-source-name {
+  color: var(--theme-highlight-blue); /* This color was taken from '.stack-frame-function-name', which now implicitly uses 'inherit' --johnGraciliano */
+  flex: 1 1;
+  /* Makes the file name truncated (and ellipsis shown) on the left side */
+  direction: rtl;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Enforce LTR direction for the file name - fixes bug 1290056 */
+.stack-frame-source-name-inner {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+.stack-frame-line {
+  color: var(--theme-highlight-orange);
+}
+
+/* Tooltip: HTML Search */
+
+#searchbox-panel-listbox {
+  width: 250px;
+  max-width: 250px;
+  overflow-x: hidden;
+}
+
+#searchbox-panel-listbox .autocomplete-item,
+#searchbox-panel-listbox .autocomplete-item[selected] {
+  overflow-x: hidden;
+}
+
+#searchbox-panel-listbox .autocomplete-item > .initial-value {
+  max-width: 130px;
+  margin-left: 15px;
+}
+
+#searchbox-panel-listbox .autocomplete-item > .autocomplete-value {
+  max-width: 150px;
+}
+
+/*** From spectrum.css and/or common.css ***************************************************************/
+/* The properties need !important otherwise they are overriden by chrome://devtools/content/shared/widgets/spectrum.css in Firefox 50 */
+div#eyedropper-button,
+button#eyedropper-button::before {
+  background-image: url("images/command-eyedropper.png") !important;
+}
+
+@media (min-resolution: 1.1dppx) {
+  div#eyedropper-button,
+  button#eyedropper-button::before {
+    background-image: url("images/command-eyedropper@2x.png") !important;
+  }
+}
+
+:root.theme-firebug button#eyedropper-button::before {
+  background-image: url("images/firebug/command-eyedropper.svg") !important;
+  filter: none;
+}
+
+.spectrum-checker {
+  background-color: transparent !important;
+  background-image: linear-gradient(to right, #fff 50%, #000 50%),
+                    linear-gradient(to right, #000 50%, #fff 50%) !important;
+  background-size: 12px 6px !important;
+  background-position: 0 0, 0 6px !important;
+  background-repeat: repeat-x, repeat-x !important;
+}
+/*********************************************************************************************************/
+
+.spectrum-dragger,
+.spectrum-slider-control {
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  box-shadow: 0 0 2px rgba(0,0,0,.6) !important;
+  opacity: 1 !important;
+}
+
+.spectrum-slider-control {
+  border-radius: 3.5px !important;
+}
+
+.spectrum-slider.spectrum-slider-control {
+  margin-top: -1px;
+}
+
+:root.theme-dark .spectrum-dagger,
+:root.theme-dark .spectrum-slidder-control {
+  border-color: rgba(255,255,255,.8) !important;
+}
+
+:root.theme-light .spectrum-slider-control {
+  box-shadow: 0 0 2px rgba(0,0,0,.662), 0 0 2.5px rgb(255,255,255) inset !important;
+}
+
+/********************************************/
+
+.filter-value input {
+  min-width: 8ch; /* This avoid a problem in Firefox 43 --johnGraciliano */
+}
+
+#add-filter,
+.add{
+  background-image: url("images/add.svg");
+}
+
+.remove-button {
+  background-image: url(images/close.png) !important;
+}
+@media (min-resolution: 1.1dppx) {
+  .remove-button {
+    background-image: url(images/close@2x.png) !important;
+  }
+}
+
+#toggle-presets {
+  background-image: url(images/pseudo-class.svg);
+}
+
+.show-presets #toggle-presets {
+  background-image: url(images/pseudo-class.svg);
+  filter: url(images/filters.svg#checked-icon-state);
+}
+
+.theme-light #add-filter,
+.theme-light .add,
+.theme-light .remove-button,
+.theme-light :not(.show-presets) > * > * > #toggle-presets {
+  filter: invert(1) !important;
+}
+
+#add-filter:not(:hover),
+.add:not(:hover),
+.remove-button:not(:hover),
+#toggle-presets:not(:hover) {
+  opacity: .8;
+}
+
+
+@supports (box-sizing: padding-box) { /* Firefox < 50 */
+  /* Hacks to correct the font sample 'dialog.'  --johnGraciliano */
+  .theme-firebug .devtools-tooltip /* > .panel-arrowcontainer > .panel-arrowcontent */ > vbox > image:only-child { /* For Firefox 48 */
+    filter: invert(0.9375);
+  }
+}

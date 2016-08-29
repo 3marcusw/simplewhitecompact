@@ -44,13 +44,59 @@
 /* Snapshots pane */
 
 #snapshots-pane {
-  border-inline-end: 1px solid var(--theme-splitter-color);
   -moz-border-end: 1px solid var(--theme-splitter-color);
+  border-inline-end: 1px solid var(--theme-splitter-color);
 }
 
 #record-snapshot {
-  list-style-image: url("./images/profiler-stopwatch.svg");
+  list-style-image: url("images/profiler-stopwatch.svg");
 }
+
+#import-snapshot {
+  list-style-image: url("images/import.svg");
+}
+
+
+#clear-snapshots[label] { /* This will be transformed into an icon only button! --johnGraciliano */
+  list-style-image: url(images/clear.svg);
+}
+
+@supports (box-sizing: padding-box) {  /* Firefox < 50 */
+  /* Special rules to transform the import and clear buttons into icon only buttons.  Adapted from toolbars.css */
+
+  #import-snapshot,
+  #clear-snapshots[label] {
+    background-color: transparent !important;
+    min-width: 32px !important;
+  }
+
+  .theme-firebug #import-snapshot,
+  .theme-firebug #clear-snapshots[label] {
+    min-width: 24px !important; 
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label]) > .toolbarbutton-text {
+    display: none;
+  }
+
+  /* Icon-only buttons */
+  :-moz-any(#import-snapshot, #clear-snapshots[label]):not([disabled]) > image {
+    opacity: 0.8;
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label]):hover > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[checked=true] > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[open=true] > image {
+    opacity: 1;
+  }
+
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[checked=true] > image,
+  :-moz-any(#import-snapshot, #clear-snapshots[label])[open=true] > image {
+    filter: url(images/filters.svg#checked-icon-state);
+  }
+
+}
+
 
 /* Snapshots items */
 
@@ -71,8 +117,8 @@
 }
 
 .snapshot-item-details {
-  padding-inline-start: 6px;
   -moz-padding-start: 6px;
+  padding-inline-start: 6px;
 }
 
 .snapshot-item-calls {
@@ -145,8 +191,8 @@
 }
 
 #calls-slider {
-  padding-inline-end: 24px;
   -moz-padding-end: 24px;
+  padding-inline-end: 24px;
 }
 
 #calls-slider .scale-slider {
@@ -188,16 +234,16 @@
 
 .call-item-gutter {
   width: calc(var(--gutter-width) + var(--gutter-padding-start));
-  padding-inline-start: var(--gutter-padding-start);
-  padding-inline-end: 4px;
   -moz-padding-start: var(--gutter-padding-start);
   -moz-padding-end: 4px;
+  padding-inline-start: var(--gutter-padding-start);
+  padding-inline-end: 4px;
   padding-top: 2px;
   padding-bottom: 2px;
-  border-inline-end: 1px solid var(--theme-splitter-color);
-  margin-inline-end: 6px;
   -moz-border-end: 1px solid var(--theme-splitter-color);
   -moz-margin-end: 6px;
+  border-inline-end: 1px solid var(--theme-splitter-color);
+  margin-inline-end: 6px;
   background-color: var(--theme-sidebar-background);
   color: var(--theme-content-color3);
 }
@@ -228,10 +274,10 @@
 }
 
 .call-item-location {
-  padding-inline-start: 2px;
-  padding-inline-end: 6px;
   -moz-padding-start: 2px;
   -moz-padding-end: 6px;
+  padding-inline-start: 2px;
+  padding-inline-end: 6px;
   text-align: end;
   cursor: pointer;
   color: var(--theme-highlight-bluegrey);
@@ -248,8 +294,8 @@
 }
 
 .call-item-stack {
-  padding-inline-start: calc(var(--gutter-width) + var(--gutter-padding-start));
   -moz-padding-start: calc(var(--gutter-width) + var(--gutter-padding-start));
+  padding-inline-start: calc(var(--gutter-width) + var(--gutter-padding-start));
   padding-bottom: 10px;
 }
 
@@ -267,10 +313,10 @@
 }
 
 .call-item-stack-fn-location {
-  padding-inline-start: 2px;
-  padding-inline-end: 6px;
   -moz-padding-start: 2px;
   -moz-padding-end: 6px;
+  padding-inline-start: 2px;
+  padding-inline-end: 6px;
   text-align: end;
   cursor: pointer;
   text-decoration: underline;
@@ -370,8 +416,8 @@
   cursor: pointer;
   padding-top: 1px;
   padding-bottom: 1px;
-  border-inline-end: 1px solid var(--theme-splitter-color);
   -moz-border-end: 1px solid var(--theme-splitter-color);
+  border-inline-end: 1px solid var(--theme-splitter-color);
   transition: opacity 0.1s ease-in-out;
 }
 

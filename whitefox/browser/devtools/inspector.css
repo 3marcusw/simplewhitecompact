@@ -20,8 +20,61 @@
   }
 }
 
+/* The following rules for #inspector-toolbar are for late FF49.
+ * The tag 'div' prevent the rules from applying in distinct from earlier versions.
+ * The corresponding tag is 'toolbar' in earlier versions.
+ * This is part for the change from xul to xhtml but the namespace is not stated.
+ */
+/* Use flex layout for the Inspector toolbar. For now, it's done
+   specifically for the Inspector toolbar since general rule applied
+   on .devtools-toolbar breaks breadcrubs and also toolbars in other
+   panels (e.g. webconsole, debugger), these are not ready for HTML
+   layout yet. */
+
+div#inspector-toolbar.devtools-toolbar {
+  display: flex;
+}
+
+div#inspector-toolbar.devtools-toolbar .devtools-toolbar-spacer {
+  flex-grow: 1;
+  display: inline-block;
+}
+
 #inspector-searchlabel {
   overflow: hidden;
+  margin-inline-end: 2px;
+}
+
+#inspector-search {
+  flex: unset;
+}
+
+/* TODO: bug 1265759: should apply to .devtools-searchinput once all searchbox
+   is converted to html*/
+#inspector-search > #inspector-searchbox {  /* The prefix '#inspector-search > ' is for this to apply in Firefox >= 51. --johnGraciliano */
+  flex: 1; /* This was added in the default theme of 51.0a1 and removed a few days later.  It may be removed here too. --johnGraciliano */
+  width: 100%;
+  padding-inline-end: 22px; /* Added. Make room for '#inspector-searchinput-clear' --johnGraciliano */
+}
+
+.theme-firebug #inspector-search > #inspector-searchinput-clear {
+  top: 2.5px; /* Added.  To better center the button. --johnGraciliano */
+}
+
+#inspector-search > #inspector-searchbox::-moz-placeholder {
+  font-style: italic;
+}
+
+/* Make sure the text is vertically centered in Inspector's
+   search box. This can be removed when the search box is
+   switched to HTML.
+   See also: https://bugzilla.mozilla.org/show_bug.cgi?id=1265759 */
+.theme-dark #inspector-searchbox,
+.theme-light #inspector-searchbox {
+  line-height: 19px;
+}
+.theme-firebug #inspector-searchbox {
+  line-height: 17px;
 }
 
 #inspector-breadcrumbs ~ #inspector-searchbox {
@@ -52,147 +105,214 @@
   border-top-width: 1px;
 }
 
+/* The following rules for #inspector-breadcrumbs* are for late FF49.
+ * The tag 'div' prevent the rules from applying in distinct from earlier versions.
+ * DOM node div#inspector-breadcrumbs-toolbar replace toolbar#inspector-breadcrumbs-toolbar
+ * DOM node div#inspector-breadcrumbs replace arrowscrollbox#inspector-breadcrumbs
+ * This is part for the change from xul to xhtml but the namespace is not stated.
+ */
+div#inspector-breadcrumbs-toolbar {
+  display: block;
+  position: relative;
+}
+
+div#inspector-breadcrumbs-toolbar,
+div#inspector-breadcrumbs-toolbar * {
+  box-sizing: border-box;
+}
+
+div#inspector-breadcrumbs { /* For late FF49.  The tag 'div' makes it distinct from earlier versions, where it was 'toolbar'. */
+  display: flex;
+
+  /* Break out of the XUL flexbox, so the splitter can still shrink the
+     markup view even if the contents of the breadcrumbs are wider than
+     the new width. */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+div#inspector-breadcrumbs .scrollbutton-up,
+div#inspector-breadcrumbs .scrollbutton-down {
+  flex: 0;
+  display: flex;
+  align-items: center;
+}
+
+div#inspector-breadcrumbs .html-arrowscrollbox-inner {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+div#inspector-breadcrumbs .breadcrumbs-widget-item {
+  white-space: nowrap;
+  flex-shrink: 0;
+  font: message-box;
+}
+
 /* Expand/collapse panel toolbar button */
 
-#inspector-pane-toggle {
+
+button.devtools-button.sidebar-toggle::before, /* This needs to override 'resource://devtools/client/shared/components/sidebar-toggle.css' */
+#inspector-pane-toggle::before { /* Firefox 49 */
+  background-image: url(images/pane-toggle.svg#collapse);
+}
+#inspector-pane-toggle { /* Firefox <= 48 */
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
+button.devtools-button.sidebar-toggle.pane-collapsed::before,
+#inspector-pane-toggle[pane-collapsed]::before {
+  background-image: url(images/pane-toggle.svg#expand);
+}
 #inspector-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+@media not all and (max-width: 700px) {
+  .sidebar-toggle:-moz-locale-dir(rtl)::before,
+  #inspector-pane-toggle:-moz-locale-dir(rtl) {
+    transform: scaleX(-1);
+  }
+}
+
 @media (max-width: 700px) {
+  button.devtools-button.sidebar-toggle::before,
+  #inspector-pane-toggle::before {
+    background-image: url(images/pane-toggle.svg#v-collapse);
+    transform: none;
+  }
   #inspector-pane-toggle {
     list-style-image: url(images/pane-toggle.svg#v-collapse);
   }
 
+  button.devtools-button.sidebar-toggle.pane-collapsed::before,
+  #inspector-pane-toggle[pane-collapsed]::before {
+    background-image: url(images/pane-toggle.svg#v-expand);
+  }
   #inspector-pane-toggle[pane-collapsed] {
     list-style-image: url(images/pane-toggle.svg#v-expand);
   }
 }
 
+:root.theme-firebug button.sidebar-toggle::before,
+:root.theme-firebug #inspector-pane-toggle::before {
+  background-image: url(images/firebug/pane-collapse.svg);
+}
 :root.theme-firebug #inspector-pane-toggle {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+:root.theme-firebug button.sidebar-toggle.pane-collapsed::before,
+:root.theme-firebug #inspector-pane-toggle[pane-collapsed]::before {
+  background-image: url(images/firebug/pane-expand.svg);
+}
 :root.theme-firebug #inspector-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
 }
 
 @media (max-width: 700px) {
+  :root.theme-firebug button.sidebar-toggle::before,
+  :root.theme-firebug #inspector-pane-toggle::before,
   :root.theme-firebug #inspector-pane-toggle > .toolbarbutton-icon {
     transform: rotate(90deg);
   }
 }
 
+/* Eyedropper toolbar button */
+
+#inspector-eyedropper-toggle {
+  /* hidden by default, until we can check that the required highlighter exists */
+  display: none;
+}
+
+#inspector-eyedropper-toggle::before {
+  background-image: url(images/command-eyedropper.png);
+}
+
+@media (min-resolution: 1.1dppx) {
+  #inspector-eyedropper-toggle::before {
+    background-image: url(images/command-eyedropper@2x.png);
+  }
+}
+
+.theme-firebug #inspector-eyedropper-toggle::before {
+  background-image: url(images/firebug/command-eyedropper.svg);
+}
+
 /* Add element toolbar button */
 
+#inspector-element-add-button::before {
+  background-image: url(images/add.svg);
+}
 #inspector-element-add-button {
   list-style-image: url(images/add.svg);
 }
 
-/* Tooltip: Events */
-
-#devtools-tooltip-events-container {
-  margin: -4px; /* Compensate for the .panel-arrowcontent padding. */
-  max-width: 590px;
-  overflow-y: auto;
-}
-
-.event-header {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.event-header:first-child {
-  border-width: 0;
-}
-
-.event-header:not(:first-child) {
-  border-width: 1px 0 0 0;
-}
-
-.event-tooltip-event-type,
-.event-tooltip-filename,
-.event-tooltip-attributes {
-  -moz-margin-start: 0;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.event-tooltip-event-type {
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.event-tooltip-filename {
-  -moz-margin-end: 0;
-  font-size: 100%;
-  flex-shrink: 1;
-}
-
-.event-tooltip-debugger-icon {
-  width: 16px;
-  height: 16px;
-  -moz-margin-end: 4px;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.event-tooltip-debugger-icon:hover {
-  opacity: 1;
-}
-
-.event-tooltip-content-box {
-  display: none;
-  height: 100px;
+/* Set the minimum width for the side bar so, all tabs are
+  properly visible. The value can be decreased when bug 1281789
+  is fixed and the all-tabs-menu is available again. */
+[id]#inspector-sidebar-container { /* Added '[id]' to override 'chrome://devtools/content/inspector/inspector.css' of Firefox 50 --johnGraciliano */
   overflow: hidden;
-  -moz-margin-end: 0;
-  border: 1px solid var(--theme-splitter-color);
-  border-width: 1px 0 0 0;
+  min-width: 320px; /* This is 300px in the default theme of Firefox 51.  It is 400px in Firefox 50.  --johnGraciliano */
+  position: relative;
 }
 
-.event-toolbox-content-box iframe {
-  height: 100%;
+div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
+                         * Otherwise it needs ':not(tabbox)' or ':not(.devtools-sidebar-tabs)' or '#inspector-sidebar-container > ' --johnGraciliano */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.event-tooltip-content-box[open] {
-  display: block;
+/* Override `-moz-user-focus:ignore;` from toolkit/content/minimal-xul.css */
+.inspector-tabpanel > * {
+  -moz-user-focus: normal;
 }
 
-.event-tooltip-source-container {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  -moz-margin-start: 5px;
-  -moz-margin-end: 0;
+/* "no results" warning message displayed in the ruleview and in the computed view */
+
+#ruleview-no-results,
+#computedview-no-results {
+  color: var(--theme-body-color-inactive);
+  text-align: center;
+  padding: 5px; /* The property was originally 'margin: 5px', but that generated a superfluous sidabar --johnGraciliano. */
+  font: message-box;
 }
 
-.event-tooltip-source {
-  margin-bottom: 0;
+/* The following could be belong in toolbars.css but I only know it is needed for the inspector module --johnGraciliano */
+.theme-dark .tabs nav.tabs-navigation,
+.theme-light .tabs nav.tabs-navigation {
+  background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
 
-.event-tooltip-attributes-container {
-  display: flex;
-  flex-shrink: 0;
-  flex-grow: 1;
-  justify-content: flex-end;
+
+/* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
+/* Make sure panel content takes entire vertical space.
+  (minus the height of the tab bar) */
+.theme-firebug .tabs .panels {
+  height: calc(100% - 28px);
 }
 
-.event-tooltip-attributes-box {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  border-radius: 3px;
-  padding: 2px;
-  -moz-margin-start: 5px;
-  background-color: var(--theme-body-color-alt);
-  color: var(--theme-toolbar-background);
+/* This is in deference to a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
+/* The rule should be in firebug-theme.css, but I placed it here because it only affects the inspector's tabs */
+.theme-firebug .tabs > * > .tabs-menu > .tabs-menu-item > a {  /* To superceed selector '.theme-firebug .tabs .tabs-menu-item a'*/
+  color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
 }
 
-.event-tooltip-attributes {
-  margin: 0;
-  font-size: 9px;
-  padding-top: 2px;
+/* A rule in 'firebug-theme.css' makes the tabs overflow visible (so the bottom margin can be covered).
+ * But that allows the 'Box Model' layout to be as wide as the tabs toolbar and end up with a horizontal overflow.
+ * The next rule binds the tabs within the available space to avoid that problem in the layout.   --johnGraciliano
+ */
+.theme-firebug #inspector-sidebar > stack {
+  overflow: hidden;
+}
+
+.theme-firebug #inspector-sidebar .devtools-sidebar-alltabs {
+  margin: 0; /* Added.  However this button is always hidden because the tabs overflow is visible. --johnGraciliano */
 }

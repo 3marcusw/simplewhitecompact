@@ -5,12 +5,12 @@
 
 :root.theme-dark {
   --table-splitter-color: rgba(255,255,255,0.15);
-  --table-zebra-background: rgba(255,255,255,0.05);
+  --table-zebra-background: rgba(255,255,255,0.0375); /* This was rgba(255,255,255,0.05) */
 }
 
 :root.theme-light {
   --table-splitter-color: rgba(0,0,0,0.15);
-  --table-zebra-background: rgba(0,0,0,0.05);
+  --table-zebra-background: rgba(0,0,0,0.0425); /* This was rgba(0,0,0,0.05) */
 }
 
 :root.theme-firebug {
@@ -33,6 +33,13 @@
   min-height: 26px;
   margin: 0;
   list-style-image: url(images/profiler-stopwatch.svg);
+}
+
+/* Make sure the icon is visible on Linux (to overwrite a rule
+  in xul.css that hides the icon if there is no label.
+  See also bug 1278050. */
+#requests-menu-perf-notice-button .button-icon {
+  display: block;
 }
 
 #requests-menu-perf-notice-button .button-text {
@@ -121,6 +128,11 @@
   width: 7px;
 }
 
+:root.theme-firebug .requests-menu-header-button > .button-box > .button-icon,
+:root.theme-firebug #requests-menu-waterfall-image {
+  height: 7px;
+}
+
 .requests-menu-header-button[sorted=ascending] > .button-box > .button-icon,
 .requests-menu-header-button[sorted=ascending] #requests-menu-waterfall-image {
   list-style-image: url(images/sort-arrows.svg#ascending);
@@ -158,6 +170,12 @@
 .requests-menu-header-button[sorted]:hover {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
+}
+
+:root.theme-firebug .requests-menu-header-button[sorted],
+:root.theme-firebug .requests-menu-header-button[sorted]:hover {
+  background-color: #aac3dc;
+  color: inherit;
 }
 
 .requests-menu-header-button[sorted] {
@@ -227,7 +245,7 @@ label + .requests-menu-method {
 }
 
 .requests-menu-icon-and-file {
-  width: 20vw;
+  width: 18vw;
 }
 
 .requests-menu-icon {
@@ -247,15 +265,14 @@ label + .requests-menu-method {
 }
 
 .requests-menu-security-and-domain {
-  width: 14vw;
-  min-width: 10em;
+  width: 12vw;
+  min-width: 9em;
 }
 
 .requests-security-state-icon {
   width: 16px;
   height: 16px;
   -moz-margin-end: 4px;
-  cursor: pointer;
 }
 
 .security-state-insecure {
@@ -278,6 +295,39 @@ label + .requests-menu-method {
   list-style-image: url(./images/security-state-local.svg);
 }
 
+.requests-menu-cause {
+  max-width: 8em;
+  text-align: center;
+  width: 8vw;
+}
+
+.requests-menu-subitem.requests-menu-cause{
+  display: block; /* This prevents the label box from stretching, so the content can be centered as a whole. --johnGraciliano */
+  white-space: nowrap; /* This will prevent the stack and the label be split in two lines when the column is narrow */
+  /* If the content does not fit the overflow will go into the next column (it is not hidden). */
+}
+
+.requests-menu-cause-stack {
+  background-color: var(--theme-body-color-alt);
+  color: var(--theme-body-background);
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 10px;
+  border-radius: 3px;
+  padding: 0 2px;
+  margin: 0;
+  margin-inline-end: 3px;
+  -moz-user-select: none;
+}
+
+.requests-menu-cause-label{
+}
+
+.requests-menu-cause-stack:not([hidden="true"]) + .requests-menu-cause-label{
+  max-width: calc(100% - 15px);
+  text-align: justify;
+}
+
 .requests-menu-type {
   max-width: 6em;
   text-align: center;
@@ -287,8 +337,13 @@ label + .requests-menu-method {
 .requests-menu-transferred,
 .requests-menu-size {
   max-width: 8em;
-  text-align: center;
+  text-align: right;
   width: 8vw;
+}
+
+.requests-menu-transferred[value="cached"],
+.requests-menu-transferred[value="—"] {
+  text-align: center;
 }
 
 /* Network requests table: status codes */
@@ -440,6 +495,11 @@ box.requests-menu-status[code^="5"] {
 
 .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
   background-position: right center;
+  -moz-border-start-color: rgba(137,145,152,.4); /* This border needs to be visible on the RTL --johnGraciliano */
+}
+
+.theme-dark .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
+  -moz-border-start-color: rgba(143,152,116,.333);
 }
 
 .requests-menu-timings:-moz-locale-dir(ltr) {
@@ -517,6 +577,10 @@ box.requests-menu-status[code^="5"] {
   background-color: var(--theme-body-background);
 }
 
+.side-menu-widget-container > .box-inherit.scrollbox-innerbox { /* This solves a problem for RTL locales */
+  overflow-x: hidden;
+}
+
 #network-table .side-menu-widget-item {
   border-top-color: transparent;
   border-bottom-color: transparent;
@@ -536,7 +600,7 @@ box.requests-menu-status[code^="5"] {
 }
 
 .theme-firebug .side-menu-widget-item:not(.selected):hover {
-  background: #EFEFEF;
+  background: #E3E3E3;  /* This was #EFEFEF --johnGraciliano */
 }
 
 .theme-firebug .requests-menu-subitem {
@@ -549,14 +613,14 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Method Column */
-.theme-firebug .requests-menu-subitem.requests-menu-method-box {
+.theme-firebug :not(.selected) > .requests-menu-subitem.requests-menu-method-box {
   color: rgb(128, 128, 128);
 }
 
 /* Size Column */
 .theme-firebug .requests-menu-subitem.requests-menu-size {
-  text-align: end;
-  padding-inline-end: 4px;
+  text-align: right;
+  padding-right: 4px;
 }
 
 /* Adjustments to make some columns in a selected row clearer --johnGraciliano */
@@ -565,24 +629,32 @@ box.requests-menu-status[code^="5"] {
   filter: brightness(1.3125) saturate(1.25);
 }
 
-.theme-light .side-menu-widget-item.selected .theme-comment{
-  color: #c4c4f8;
+.side-menu-widget-item.selected > .theme-comment{
+  color: var(--theme-selection-color);
 }
 
 /* Network request details */
 
+#details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
+#details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 #details-pane-toggle {
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
+#details-pane-toggle:-moz-locale-dir(rtl),
+#details-pane-toggle.pane-collapsed,
 #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
 
+:root.theme-firebug #details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
+:root.theme-firebug #details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 :root.theme-firebug #details-pane-toggle {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+:root.theme-firebug #details-pane-toggle:-moz-locale-dir(rtl),
+:root.theme-firebug #details-pane-toggle.pane-collapsed,
 :root.theme-firebug #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
 }
@@ -773,7 +845,14 @@ box.requests-menu-status[code^="5"] {
   min-width: 1em;
   margin: 0;
   border: none;
-  padding: 2px 1vw;
+  padding: 2px 0.878477vw;
+}
+
+.theme-firebug .requests-menu-filter-button, /* FF47 et al. */
+.theme-firebug .requests-menu-footer-button,
+.theme-firebug .requests-menu-footer-label {
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .theme-dark .requests-menu-filter-button, /* FF47 et al. */
@@ -788,15 +867,20 @@ box.requests-menu-status[code^="5"] {
   color: var(--theme-body-color);
 }
 
+.theme-firebug .requests-menu-filter-button {
+  border-radius: 2px;
+}
+
 .requests-menu-footer-spacer {
   min-width: 2px;
 }
 
-#requests-menu-filter-buttons > .requests-menu-filter-button, /* FF47 et al. */
-#requests-menu-filter-buttons + #requests-menu-spacer, /* FF47 et al. */
+:root:not(.theme-firebug) #requests-menu-filter-buttons > .requests-menu-filter-button, /* FF47 et al. */
+:root:not(.theme-firebug) #requests-menu-filter-buttons + #requests-menu-spacer, /* FF47 et al. */
 .requests-menu-footer-spacer:not(:first-child),
 .requests-menu-footer-button:not(:first-child) {
   -moz-border-start: 1px solid var(--table-splitter-color);
+  border-inline-start: 1px solid var(--table-splitter-color);
 }
 
 .requests-menu-filter-button, /* FF47 et al. */
@@ -819,6 +903,33 @@ box.requests-menu-status[code^="5"] {
 .requests-menu-footer-button:not(:active)[checked] {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
+}
+
+:root.theme-firebug .requests-menu-filter-button {
+  border: 1px solid transparent;
+  margin-inline-end: 1px;
+}
+
+:root.theme-firebug .requests-menu-filter-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: transparent linear-gradient(rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.2)) no-repeat;
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+:root.theme-firebug .requests-menu-filter-button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+:root.theme-firebug .requests-menu-filter-button:not(:active)[checked] {
+  background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
 }
 
 .requests-menu-footer-label {
@@ -846,7 +957,47 @@ box.requests-menu-status[code^="5"] {
 #requests-menu-filter-freetext-text[focused],
 #requests-menu-filter-freetext-text[filled] {
   max-width: 200px !important;
+  min-width: 16ch;
+  -moz-box-flex: 1;
 }
+
+/*** THE FOLLOWING SECTION IS ONLY USED IN FIREFOX 49 !!!!! *******************************************************/
+/*** Classes .requests-menu-stack-* change to .stack-frame-* in Firefox 50 with new style rules in tooltips.css ***/
+/* Requests menu stacktrace tooltip */
+.requests-menu-stack-trace {
+  max-height: 400px;
+  width: 582px; /* It was 586px but that did not fit in Firefox 49.0a2 (2016-07-29) --johnGraciliano */
+  overflow-y: auto;
+}
+
+.requests-menu-stack-frame {
+  color: var(--theme-body-color-alt);
+  cursor: pointer;
+  display: flex;
+}
+
+.requests-menu-stack-frame:hover {
+  background-color: var(--theme-selection-background-semitransparent);
+}
+
+.requests-menu-stack-frame-function-name {
+  /* color: var(--theme-highlight-blue);  * Use the same inherited color --johnGraciliano */
+  cursor: inherit;
+  flex-grow: 1;
+}
+
+.requests-menu-stack-frame-file-name {
+  color: var(--theme-highlight-blue); /* This color was taken from '.requests-menu-stack-frame-function-name', which now implicitly uses 'inherit' --johnGraciliano */
+  cursor: inherit;
+  margin-inline-end: 0;
+}
+
+.requests-menu-stack-frame-line {
+  color: var(--theme-highlight-orange);
+  cursor: inherit;
+  margin-inline-start: 0;
+}
+/*** THE PRECEEDING SECTION IS ONLY USED IN FIREFOX 49 !!!!! ******************************************************/
 
 /* Performance analysis buttons */
 
@@ -868,6 +1019,36 @@ box.requests-menu-status[code^="5"] {
 #requests-menu-network-summary-button:hover > label,
 #requests-menu-network-summary-label:hover {
   text-decoration: underline;
+}
+
+/* Special rules to transform the clear button into an icon only button.  Adapted from toolbars.css */
+
+#requests-menu-clear-button[label] {
+  list-style-image: url(images/clear.svg);
+  background-color: transparent;
+  min-width: 32px;
+  padding: 0;
+  opacity: 1;
+}
+.theme-light #requests-menu-clear-button[label] > .button-box  > .button-icon {
+  filter: invert(1);
+}
+
+.theme-firebug #requests-menu-clear-button[label] {
+  min-width: 24px !important;
+}
+
+#requests-menu-clear-button[label] > .button-box > .button-text {
+  display: none;
+}
+
+/* Icon-only buttons */
+#requests-menu-clear-button[label]:not([disabled]) > .button-box > .button-icon {
+  opacity: 0.8 !important;
+}
+
+#requests-menu-clear-button[label]:hover > .button-box > .button-icon {
+  opacity: 1 !important;
 }
 
 /* Performance analysis view */
@@ -1017,7 +1198,30 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Responsive sidebar */
+@media (max-width: 1366px) {
+  .requests-menu-filter-button, /* FF47 et al. */
+  .requests-menu-footer-button,
+  .requests-menu-footer-label {
+    padding-left: calc(1.651651vw - 10.561561px);
+    padding-right: calc(1.651651vw - 10.561561px);
+  }
+  .theme-firebug .requests-menu-filter-button, /* FF47 et al. */
+  .theme-firebug .requests-menu-footer-button,
+  .theme-firebug .requests-menu-footer-label {
+    padding-left: calc(0.750751vw - 4.255255px);
+    padding-right: calc(0.750751vw - 4.255255px);
+  }
+}
+
+/* Responsive sidebar */
 @media (max-width: 700px) {
+  .requests-menu-filter-button, /* FF47 et al. */
+  .requests-menu-footer-button,
+  .requests-menu-footer-label {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+
   #requests-menu-toolbar {
     height: 22px;
   }
@@ -1081,19 +1285,20 @@ box.requests-menu-status[code^="5"] {
   }
 
   .requests-menu-icon-and-file {
-    width: 24vw;
-  }
-
-  .requests-menu-security-and-domain {
     width: 20vw;
   }
 
+  .requests-menu-security-and-domain {
+    width: 22vw;
+    min-width: unset;
+  }
+
   .requests-menu-status-and-method ~ .requests-menu-icon-and-file {
-    width: 25vw;
+    width: 24vw;
   }
 
   .requests-menu-status-and-method ~ .requests-menu-security-and-domain {
-    width: 25vw;
+    width: 24vw;
   }
 
   .requests-menu-type {
@@ -1103,6 +1308,55 @@ box.requests-menu-status[code^="5"] {
   .requests-menu-transferred,
   .requests-menu-size {
     width: 12vw;
+  }
+
+  @supports not (ruby-position: over) { /* Firefox < 38 */
+    .requests-menu-status-and-method ~ .requests-menu-icon-and-file,
+    .requests-menu-status-and-method ~ .requests-menu-security-and-domain {
+      width: 30vw;
+    }
+  }
+
+  @supports (overflow-wrap: normal) { /* Firefox >= 39 */
+
+    .requests-menu-header-button {
+      padding-left: 2px;
+    }
+
+    .requests-menu-header-button > .button-box > .button-icon{
+      margin-inline-end: 2px;
+    }
+
+    .requests-menu-header-button > .button-box > .button-text{
+      min-width: unset;
+    }
+
+    .requests-menu-method,
+    .requests-menu-method-box {
+      max-width: none;
+      width: 7.5vw;
+    }
+
+    .requests-menu-icon-and-file {
+      width: 19vw;
+    }
+
+    .requests-menu-security-and-domain {
+      width: 21vw;
+    }
+
+    .requests-menu-cause {
+      width: 9vw;
+    }
+
+    .requests-menu-type {
+      width: 7.5vw;
+    }
+
+    .requests-menu-transferred,
+    .requests-menu-size {
+      width: 12vw;
+    }
   }
 }
 

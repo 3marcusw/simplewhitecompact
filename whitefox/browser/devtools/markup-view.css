@@ -37,6 +37,10 @@ body {
   background: none;
 }
 
+html.dragging { /* Used in Firefox 50 */
+  overflow-x: hidden;
+}
+
 body.dragging .tag-line {
   cursor: grabbing;
 }
@@ -185,7 +189,7 @@ ul.children + .tag-line::before {
   z-index: 1;
 }
 
-.child.collapsed .child {
+.child.collapsed .child, .child.collapsed .children {
   display: none;
 }
 

@@ -3,8 +3,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@import url(variables.css);
-@import url(common.css);
+/* These two lines are already in light-theme.css:
+ *   @import url(variables.css);
+ *   @import url(common.css);
+ */
 @import url(light-theme.css);
 
 :root {
@@ -14,13 +16,18 @@
 
 /* Remove filters on firebug specific images */
 
+.theme-firebug .devtools-tabbar .devtools-button::before,
 .theme-firebug #toolbox-dock-buttons > toolbarbutton > image,
 .theme-firebug .devtools-closebutton > image,
 .theme-firebug .devtools-option-toolbarbutton > image,
+.theme-firebug .command-button-invertable::before,
 .theme-firebug .command-button-invertable > image,
 .theme-firebug #sources-toolbar image,
+.theme-firebug .sidebar-toggle::before,
+.theme-firebug [id$="pane-toggle"]::before,
 .theme-firebug [id$="pane-toggle"] > image,
-.theme-firebug #global-toolbar .devtools-button::before,
+/**.theme-firebug #global-toolbar .devtools-button::before, ** This line shall be deleted --johnGraciliano **/
+/**.theme-firebug .devtools-button.pause-button:not(.paused)::before,  ** This line shall be deleted.  It was only an experiment. --johnGraciliano **/
 .theme-firebug #element-picker::before,
 .theme-firebug #debugger-controls .toolbarbutton-icon,
 .theme-firebug #filter-button .toolbarbutton-icon {
@@ -52,6 +59,24 @@
 .theme-firebug .cm-quote {color: #090;}
 .theme-firebug .cm-hr {color: #999;}
 .theme-firebug .cm-link {color: #00c;}
+
+/* Custom Changes --johnGraciliano *****************/
+.theme-firebug .cm-property {color: darkgreen;}
+
+.theme-firebug .cm-variable-2 {color: #066;}
+
+.theme-firebug .cm-variable {color: #0000c4;} /* Instead of darkblue */
+.theme-firebug .cm-operator {color: #0000c4;} /* Instead of darkblue */
+
+.theme-firebug .cm-tag {color: black;}
+.theme-firebug .cm-builtin {color: black;}
+.theme-firebug .cm-qualifier {color: black;}
+.theme-firebug .cm-variable-3 {color: black;}
+.theme-firebug .cm-def {color: black;}
+
+.theme-firebug .cm-number {color: #04c;} /* Instead of darkblue */
+.theme-firebug .cm-string {color: #ed2655;} /* --theme-highlight-red */
+/* End of Custom Changes ***************************/
 
 .theme-firebug .theme-fg-color3,
 .theme-firebug .cm-s-mozilla .kind-Object .cm-variable{ /* dark blue */
@@ -100,7 +125,7 @@
   border: 1px solid transparent !important;
   border-radius: 4px 4px 0 0;
   font-weight: bold;
-  color: var(--theme-body-color);
+  color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
   -moz-box-flex: initial;
   min-width: 0;
 }
@@ -131,22 +156,24 @@
   color: inherit;
 }
 
-.theme-firebug .devtools-tab spacer,
-.theme-firebug .devtools-tab image {
+.theme-firebug .devtools-tab > spacer, /* Added '>' --johnGraciliano */
+.theme-firebug .devtools-tab > image { /* Added '>' --johnGraciliano */
   display: none;
 }
 
+/** I cannot find any match to '.toolbox-tab' so this rule is removed.  --johnGraciliano *%
 .theme-firebug .toolbox-tab label {
   margin: 0;
 }
+%*****************************************************************************************/
 
-.theme-firebug .devtools-sidebar-tabs tab label {
+.theme-firebug .devtools-sidebar-tabs tab > * > label.tab-text {  /* Added '> * >' and '.tab-text' --johnGraciliano */
   margin: 2px 0 0 0;
 }
 
 /* Use different padding for labels inside tabs on Win platform.
   Make sure this overrides the default in global.css */
-:root[platform="win"].theme-firebug .devtools-sidebar-tabs tab label {
+:root[platform="win"].theme-firebug .devtools-sidebar-tabs tab > * > label.tab-text {  /* Added '> * >' and '.tab-text' --johnGraciliano */
   margin: 0 4px !important;
 }
 
@@ -167,10 +194,14 @@
   background-color: white;
 }
 
+.theme-firebug #toolbox-tab-options[selected] {
+  padding-bottom: 1px; /* To keep the toolbar's height. --johnGraciliano */
+}
+
 .theme-firebug #toolbox-tab-options::before {
   content: url(images/firebug/tool-options.svg);
   display: block;
-  margin: 4px 7px 0;
+  margin: 3px 7px 1px; /* Raise the icon one pixel --johnGraciliano */
 }
 
 .theme-firebug #toolbox-tab-options:not([selected]):hover::before {
@@ -244,7 +275,32 @@
   min-width: 24px;
 }
 
+.theme-firebug #command-button-frames {
+  min-width: 32px;
+}
+
 /* Move the Inspector button a bit down (looks better) */
 .theme-firebug #command-button-pick > image {
   margin-bottom: -4px;
 }
+
+/* Firebug twisties (Overrides vs. light-theme.css unless noted) --johnGraciliano */
+:root.theme-firebug .treeTable .treeRow.hasChildren > .treeLabelCell > .treeIcon, /* vs. resource://devtools/client/shared/components/tree/tree-view.css */
+.theme-firebug .theme-twisty {
+  background-image: url("chrome://devtools/skin/images/firebug/twisty-closed-firebug.svg");
+  background-size: auto;
+  background-position: 1px center;
+}
+
+:root.theme-firebug .treeTable .treeRow.hasChildren.opened > .treeLabelCell > .treeIcon, /* vs. resource://devtools/client/shared/components/tree/tree-view.css */
+.theme-firebug .theme-twisty[open], .theme-twisty.open {
+  background-image: url("chrome://devtools/skin/images/firebug/twisty-open-firebug.svg");
+  background-size: auto; /* needed only vs. resource://.../tree-view.css */
+  background-position: 1px center;
+}
+
+.theme-firebug .theme-selected ~ .theme-twisty,
+.theme-firebug .theme-selected ~ .theme-twisty[open] {
+  background-position: 1px center;
+}
+

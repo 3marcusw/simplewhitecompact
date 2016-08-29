@@ -5,7 +5,7 @@
 
 .theme-dark {
   --table-splitter-color: rgba(255,255,255,0.15);
-  --table-zebra-background: rgba(255,255,255,0.05);
+  --table-zebra-background: rgba(255,255,255,0.0375); /* This was rgba(255,255,255,0.05) */
   --sidemenu-selected-arrow: url(images/itemArrow-dark-ltr.svg);
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-dark-rtl.svg);
   --sidemenu-selected-other-background: #193347;
@@ -13,7 +13,7 @@
 
 .theme-light {
   --table-splitter-color: rgba(0,0,0,0.15);
-  --table-zebra-background: rgba(0,0,0,0.05);
+  --table-zebra-background: rgba(0,0,0,0.0425); /* This was rgba(0,0,0,0.05) */
   --sidemenu-selected-arrow: url(images/itemArrow-ltr.svg);
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-rtl.svg);
   --sidemenu-selected-other-background: #b9d7fd;
@@ -24,7 +24,7 @@
   --table-zebra-background: rgba(0,0,0,0.05);
   --sidemenu-selected-arrow: url(images/itemArrow-ltr.svg);
   --sidemenu-selected-arrow-rtl: url(images/itemArrow-rtl.svg);
-  --sidemenu-selected-other-background: var(--theme-sidebar-background);
+  --sidemenu-selected-other-background: #e3eefc; /* var(--theme-sidebar-background) --johnGraciliano */
 }
 
 
@@ -94,6 +94,7 @@
     cursor: n-resize;
   }
 
+  .devtools-responsive-container > .devtools-sidebar-tabs:not(.pane-collapsed),
   .devtools-responsive-container > .devtools-sidebar-tabs:not([pane-collapsed]) {
     /* When the panel is collapsed min/max height should not be applied because
        collapsing relies on negative margins, which implies constant height. */
@@ -344,6 +345,7 @@
 .theme-firebug .breadcrumbs-widget-item {
   margin-inline-start: 10px;
   margin-inline-end: 1px;
+  background-image: none;
   border: 1px solid transparent;
   color: #141414;
   border-radius: 2px;
@@ -627,6 +629,12 @@ widgets.css is overwritten. */
   border-top-width: 1px;
   border-top-style: solid;
   margin-top: -1px;
+}
+
+/* Custom scope stylings */
+
+.variables-view-watch-expressions .title > .name  {
+  max-width: 14em;
 }
 
 .theme-firebug .variables-view-scope > .title {

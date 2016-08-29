@@ -2,20 +2,18 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-* {
-  box-sizing: border-box;
-}
-
 :root {
+  box-sizing: border-box;
   height: 100%;
 }
 
 body {
+  box-sizing: border-box;
+  margin: 0;
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px;  %* This is moved to #all-fonts --johnGraciliano */
 }
 
 #root {
@@ -23,15 +21,24 @@ body {
 }
 
 #sidebar-panel-fontinspector {
+  box-sizing: border-box;
   margin: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px;   %* This is moved to #all-fonts --johnGraciliano */
   width: 100%;
   /* Bug 1243598 - Reduce the container height by the tab height to make room
      for the tabs above. */
   height: calc(100% - 24px);
   position: absolute;
+}
+.theme-firebug tabpanel#sidebar-panel-fontinspector {  /* Firefox 48-49 */
+  height: calc(100% - 28px);
+}
+
+div#sidebar-panel-fontinspector {  /* Firefox >= 50 */
+  height: 100%;
+  position: static;
 }
 
 #sidebar-panel-fontinspector > .devtools-toolbar {
@@ -51,6 +58,7 @@ body {
 #all-fonts {
   padding: 0;
   margin: 0;
+  padding-bottom: 20px; /* This moved here from body --johnGraciliano */
 }
 
 #showall,
@@ -59,9 +67,27 @@ body {
   border: 1px solid black;
   margin: 3px;
   cursor: pointer;
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  right: 0;
+  right: 16px; /* Make space for the scroll-bar.  It was 0 --johnGraciliano */
+  /* offset-inline-end: 16px;   /* Introduced in Firefox 50, this would be more effective. */
+  border-color: var(--theme-splitter-color);
+  background-color: var(--theme-toolbar-background);
+  color: var(--theme-body-color);
+  padding: 0 6px;
+  font: -moz-button;
+}
+#showall:-moz-locale-dir(rtl),
+#font-showall:-moz-locale-dir(rtl) {
+  right: auto;
+  left: 16px;
+}
+.theme-firebug #font-showall {
+  background-color: rgb(219, 234, 249);
+}
+#font-showall:hover:active {
+  padding-inline-start: 7px;
+  padding-inline-end: 5px;
 }
 
 .dim > #root,
@@ -89,6 +115,7 @@ body {
 }
 
 .preview-input-toolbar {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
 }
@@ -128,6 +155,7 @@ body {
 }
 
 .font-preview {
+  box-sizing: border-box;
   margin-left: -4px;
   height: 60px;
   display: block;
@@ -142,6 +170,7 @@ body {
 }
 
 .font-css-code {
+  box-sizing: border-box;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

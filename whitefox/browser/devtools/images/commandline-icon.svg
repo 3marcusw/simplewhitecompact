@@ -1,0 +1,42 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      g {
+        display: none;
+      }
+
+      #light-theme:target,
+      #light-theme-focus:target ~ #light-theme,
+      #dark-theme:target,
+      #dark-theme-focus:target ~ #dark-theme {
+        display: inline;
+      }
+
+      #light-theme-focus:target ~ #light-theme,
+      #dark-theme-focus:target ~ #dark-theme {
+        fill: #39ACE6;
+      }
+
+      /* Unfocused states */
+      #light-theme:target {
+        fill: rgba(10, 8, 5, .4);
+      }
+      #dark-theme:target {
+        fill: rgba(245, 247, 250, .4);
+      }
+    </style>
+  </defs>
+  <g id="light-theme-focus"/>
+  <g id="light-theme">
+    <path d="M8.95 13 l4.05-5 l-4.05-5 h-1.9l4.1,5l-4.1,5z"/>
+    <path d="M4.95 13 l4.05-5 l-4.05-5 h-1.9l4.1,5l-4.1,5z"/>
+  </g>
+  <g id="dark-theme-focus"/>
+  <g id="dark-theme">
+    <path d="M8.95 13 l4.05-5 l-4.05-5 h-1.9l4.1,5l-4.1,5z"/>
+    <path d="M4.95 13 l4.05-5 l-4.05-5 h-1.9l4.1,5l-4.1,5z"/>
+  </g>
+</svg>

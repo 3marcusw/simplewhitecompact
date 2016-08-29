@@ -16,19 +16,35 @@
   --even-animation-timeline-background-color: rgba(128,128,128,0.03);
 }
 
+/* To match markup-view.css --johnGraciliano */
+.theme-firebug .theme-fg-color3 {
+  color: var(--theme-graphs-full-blue);
+}
+
+.theme-firebug .theme-fg-color6 {
+  color: var(--theme-highlight-red);
+}
+/*********************************************/
+
+
 :root {
   /* How high should toolbars be */
-  --toolbar-height: 20px;
+  --toolbar-height: 20px; /* Toolbar height for content-box */
+  --toolbar-border-height: 21px; /* Toolbar height for border-box -- 1px for the border */
   /* How wide should the sidebar be (should be wide enough to contain long
      property names like 'border-bottom-right-radius' without ellipsis) */
-  --timeline-sidebar-width: 200px;
+  /* --timeline-sidebar-width: 200px;    *********************************** This value is 'hard coded' through this file --johnGraciliano */
   /* How high should animations displayed in the timeline be */
-  --timeline-animation-height: 20px;
+  /*--timeline-animation-height: 20px;   *********************************** This value is 'hard coded' through this file --johnGraciliano */
   /* The size of a keyframe marker in the keyframes diagram */
-  --keyframes-marker-size: 10px;
+  /* --keyframes-marker-size: 10px;      *********************************** This value is 'hard coded' through this file --johnGraciliano */
   /* The color of the time graduation borders. This should match the the color
      devtools/client/animationinspector/utils.js */
-  --time-graduation-border-color: rgba(128, 136, 144, .5);
+  /* --time-graduation-border-color: rgba(128, 136, 144, .5);  ************* This value is 'hard coded' through this file --johnGraciliano */
+}
+:root.theme-firebug {
+  --toolbar-height: 21px;
+  --toolbar-border-height: 30px; /* 1px for border and 8px for padding */
 }
 
 .animation { /* FF 46.0 & FF < 46.0 */
@@ -72,6 +88,7 @@ body {
 #toolbar, /* For Firefox 42 & earlier */
 #global-toolbar,
 #timeline-toolbar {
+  box-sizing: content-box;
   border-bottom: 1px solid var(--theme-splitter-color);
   display: flex;
   flex-direction: row;
@@ -93,17 +110,13 @@ body {
   display: flex;
 }
 
-.theme-firebug .theme-toolbar{
-  height: 29px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
-  min-height: 29px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
+.theme-firebug .theme-toolbar {
+  height: 21px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
+  min-height: 21px !important; /* To override 28px setting in firebug-theme.css --johnGraciliano */
 }
 
-.theme-firebug #timeline-toolbar.theme-toolbar {
-  padding: 0 4px;        /* To maintain uniform appearance. --johnGraciliano */
-}
-
-.theme-firebug #timeline-rate{
-  box-sizing: border-box;        /* To maintain uniform appearance. --johnGraciliano */
+.theme-firebug .theme-toolbar {
+  padding: 4px;        /* To maintain uniform appearance. --johnGraciliano */
 }
 
 #toolbar .label, /* Firefox 42 & earlier */
@@ -114,13 +127,19 @@ body {
 
 /* The main animations container */
 
+#sidebar-panel-animationinspector {
+  height: 100%;
+  width: 100%;
+}
+
 #players:not(:empty) {
   height: 100%; /* Firefox 37 only! */
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .theme-toolbar ~ #players {
-  height: calc(100% - var(--toolbar-height));
+  height: calc(100% - var(--toolbar-border-height));
 }
 
 [empty] #players {
@@ -147,6 +166,7 @@ body {
 
 #global-toolbar > *,
 #timeline-toolbar > * {
+  box-sizing: border-box;
   min-height: var(--toolbar-height);
   border-color: var(--theme-splitter-color);
   border-width: 0 0 0 1px;
@@ -220,18 +240,19 @@ body {
   background-image: url(images/firebug/command-pick.svg);
 }
 
-.theme-firebug #toggle-all::before,
 .theme-firebug .pause-button::before {
   background-image: url(images/firebug/pause.svg);
+  filter: none;
 }
 
 .theme-firebug #rewind-timeline::before {
   background-image: url(images/firebug/rewind.svg);
+  filter: none;
 }
 
-.theme-firebug #toggle-all.paused::before,
 .theme-firebug .pause-button.paused::before {
   background-image: url(images/firebug/play.svg);
+  filter: none;
 }
 
 #timeline-rate select.devtools-button {
@@ -256,66 +277,143 @@ body {
   width: 4.5em;
 }
 
-/* Animation timeline component */
+
+/* Corrections for the Firebug theme --johnGraciliano */
+
+.theme-firebug #timeline-rate {
+  border-width: 0 !important;
+  background-color: transparent;
+}
+
+.theme-firebug #global-toolbar > button,
+.theme-firebug #timeline-toolbar > button,
+.theme-firebug #timeline-rate > .devtools-button {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.theme-firebug #element-picker {
+  border: 1px solid transparent;
+  background-color: transparent;
+  min-height: 24px;
+}
+.theme-firebug #timeline-rate > .devtools-button {
+  border-color: transparent rgba(0,0,0,0.125);
+}
+.theme-firebug button:hover + #timeline-rate > .devtools-button {
+  border-inline-start-color: transparent;
+}
+.theme-firebug #timeline-toolbar > .label {
+  border-inline-end-width: 0;
+}
+.theme-firebug #global-toolbar > .label {
+  border-inline-start-width: 0;
+}
+
+.theme-firebug #element-picker:hover,
+.theme-firebug #global-toolbar > button:hover,
+.theme-firebug #timeline-toolbar > button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+.theme-firebug #element-picker:hover:active,
+.theme-firebug #global-toolbar > button:hover:active,
+.theme-firebug #timeline-toolbar > button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+.theme-firebug #element-picker:not(:active)[checked=true] {
+  background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.theme-firebug #timeline-rate > .devtools-button:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: url(images/dropmarker.svg), linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat: no-repeat;
+  background-position: calc(100% - 4px) center, 0 0;
+}
+
+.theme-firebug #timeline-rate > .devtools-button[checked],
+.theme-firebug #timeline-rate > .devtools-button:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: url(images/dropmarker.svg), linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+
+/* Animation timeline component (Firefox 43 and later) */
 
 .animation-timeline {
-  height: 100%;
-  overflow: hidden;
   position: relative;
-  /* The timeline gets its background-image from a canvas element created in
-     /browser/devtools/animationinspector/utils.js drawGraphElementBackground
-     thanks to document.mozSetImageElement("time-graduations", canvas)
-     This is done so that the background can be built dynamically from script */
-  background-image: -moz-element(#time-graduations);
-  background-repeat: repeat-y;
-  /* The animations are drawn away from the left edge so that animated nodes
-     can be displayed in a sidebar */
-  /* background-size: calc(100% - var(--timeline-sidebar-width)) 100%; *** This rule is removed for being unnecessary and problematic --johnGraciliano */
-  background-position: var(--timeline-sidebar-width) 0;
   display: flex;
   flex-direction: column;
 }
 
+/** The 'time graduations' will be done drawn by the style using the 'time ticks'       **\
+ ** The following was used in Firefox 43-48 but will be ignored and eventually deleted. **
+  .animation-timeline {
+    /* The timeline gets its background-image from a canvas element created in
+       /browser/devtools/animationinspector/utils.js drawGraphElementBackground
+       thanks to document.mozSetImageElement("time-graduations", canvas)
+       This is done so that the background can be built dynamically from script *|
+    background-image: -moz-element(#time-graduations);
+    background-repeat: repeat-y;
+    /* The animations are drawn away from the left edge so that animated nodes
+       can be displayed in a sidebar *|
+    background-position: 200px /*var(--timeline-sidebar-width)*|  0;
+  }
+\*****************************************************************************************/
+
+
 /* Useful for positioning animations or keyframes in the timeline */
 .animation-timeline .track-container {
   position: absolute;
-  top: 2px; /* --johnGraciliano */
-  left: var(--timeline-sidebar-width);
+  top: 0;
+  left: 200px /*var(--timeline-sidebar-width)*/ ;
   /* Leave the width of a marker right of a track so the 100% markers can be
      selected easily */
-  right: var(--keyframes-marker-size);
-  height: var(--timeline-animation-height);
+  right: 10px /*var(--keyframes-marker-size)*/ ;
+  height: 20px /*var(--timeline-animation-height)*/ ;
 }
 
 .animation-timeline .scrubber-wrapper {
-  z-index: 2;
-  pointer-events: none;
+  position: absolute;
+  left: 200px /* var(--timeline-sidebar-width) */ ;
+  /* Leave the width of a marker right of a track so the 100% markers can be
+     selected easily */
+  right: 10px /*var(--keyframes-marker-size)*/ ;
   height: 100%;
+}
+
+.animation-timeline > .scrubber { /* Firefox 43-44 */
+  padding-left: 200px /* var(--timeline-sidebar-width) */ ;
+  top: 0;
 }
 
 .animation-timeline .scrubber {
+  z-index: 5;
+  pointer-events: none;
   position: absolute;
-  height: 100%;
-  width: var(--timeline-sidebar-width);
+  /* Make the scrubber as tall as the viewport minus the toolbar height and the
+     header-wrapper's borders */
+  height: calc(100vh - var(--toolbar-border-height));
+  min-height: 100%;
+  width: 0;
   border-right: 1px solid red;
   box-sizing: border-box;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.animation-timeline .scrubber-wrapper .scrubber {
-  width: 0;
-}
-
-.animation-timeline .scrubber::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 1px;
-  right: -6px;
-  border-top: 5px solid red;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
 }
 
 /* The scrubber handle is a transparent element displayed on top of the scrubber
@@ -323,58 +421,109 @@ body {
 .animation-timeline .scrubber .scrubber-handle {
   position: absolute;
   height: 100%;
-  top: 0;
   /* Make it thick enough for easy dragging */
   width: 6px;
-  right: -3px;
+  right: -1.5px;
   cursor: col-resize;
   pointer-events: all;
 }
 
+.animation-timeline .scrubber:empty::before, /* Firefox 43 */
+.animation-timeline .scrubber .scrubber-handle::before { /* Firefox >= 44 */
+  box-sizing: content-box;
+  content: "";
+  position: sticky;
+  top: 0;
+  width: 1px;
+  border-top: 5px solid red;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+.animation-timeline .scrubber:empty::before { /* Firefox 43 */
+  position: absolute;
+  right: -6px;
+}
+
 .animation-timeline .scrubber ~ .time-header { /* Firefox 43-44 */
-  margin-left: var(--timeline-sidebar-width);
-  min-height: var(--toolbar-height);
-  overflow: hidden;
-  position: relative;
-  /* This is the same color as the time graduations in
-     browser/devtools/animationinspector/utils.js */
-  border-bottom: 1px solid rgba(128, 136, 144, .5);
-  cursor: col-resize;
-  -moz-user-select: none;
+  position: absolute;
+  top: 0;
+  left: 200px /*var(--timeline-sidebar-width)*/ ;
+  right: 0;
+  height: 100%;
 }
 
 .animation-timeline .time-header {
-  min-height: var(--toolbar-height);
+  box-sizing: content-box;
+  min-height: 20px /*var(--timeline-animation-height)*/ ;
   cursor: col-resize;
   -moz-user-select: none;
 }
 
-.animation-timeline .time-header .time-tick {
+.animation-timeline > .time-header {  /* Firefox 39-49 */
+  height: 100%;
+}
+
+.animation-timeline > * > .time-header > .header-item {
   position: absolute;
-  top: 3px;
+  height: 100%;
+  padding-top: 3px;
+  border-left: 0.5px solid rgba(128,136,144,.5) /*var(--time-graduation-border-color)*/;
+}
+
+.animation-timeline > .header-wrapper {
+  position: sticky;
+  top: 0;
+  background-color: var(--theme-body-background);
+  border-bottom: 1px solid rgba(128,136,144,.5) /*var(--time-graduation-border-color)*/;
+  z-index: 3;
+  height: 20px /*var(--timeline-animation-height)*/;
+  overflow: hidden;
+}
+
+.animation-timeline > .time-body {
+  height: 100%;
+}
+
+.animation-timeline > .time-header > .time-tick,  /* Firefox 43-49 */
+.animation-timeline > .time-body > .time-tick {  /* Firefox >= 50 */
+  -moz-user-select: none;
+  position: absolute;
+  width: 0;
+  /* When scroll bar is shown, make it covers entire time-body */
+  height: 100%;
+  /* When scroll bar is hidden, make it as tall as the viewport minus the
+     timeline animation height and the header-wrapper's borders */
+  min-height: calc(100vh - var(--toolbar-border-height));
+  border-left: 0.5px solid rgba(128,136,144,.5) /*var(--time-graduation-border-color)*/;
+  box-sizing: border-box;
+}
+
+.animation-timeline > .time-header > .time-tick {  /* Firefox 39-49 */
+  top: 0;
+  padding-top: 3px;
+  width: auto;
 }
 
 .animation-timeline .animations {
   width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 0;
+  height: 100%;
   padding: 0;
   list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-.animation-timeline .scrubber-wrapper ~ .animations { /* Firefox 45 & later */
-  height: 100%;
-  /* Leave some space for the header */
-  margin-top: var(--timeline-animation-height);
-  border-top: 1px solid var(--time-graduation-border-color);
+.animation-timeline .scrubber ~ .animations, /* Firefox 43-44 */
+.animation-timeline > .time-header.track-container ~ .animations { /* Firefox 45-49 */
+  margin-top: 20px /*var(--timeline-animation-height)*/ ;
+  border-top: 1px solid rgba(128,136,144,.5) /*var(--time-graduation-border-color)*/ ;
 }
 
 /* Animation block widgets */
 
 .animation-timeline .animation {
   padding: 2px 0; /* --johnGraciliano */
-  height: var(--timeline-animation-height);
+  height: 20px /*var(--timeline-animation-height)*/ ;
   position: relative;
 }
 
@@ -390,7 +539,7 @@ body {
 }
 
 .animation-timeline .animation .target {
-  width: var(--timeline-sidebar-width);
+  width: 200px /*var(--timeline-sidebar-width)*/ ;
   height: 100%;
   overflow: hidden;
   display: flex;
@@ -404,18 +553,20 @@ body {
 .animation-timeline .scrubber ~ .animations .animation .time-block { /* Firefox 43-44 */
   position: absolute;
   top: 2px;
-  left: var(--timeline-sidebar-width);
+  left: 200px /*var(--timeline-sidebar-width)*/ ;
   right: 0;
-  height: var(--timeline-animation-height);
+  height: 20px /*var(--timeline-animation-height)*/ ;
 }
 
 .animation-timeline .scrubber-wrapper ~ .animations .animation .time-block { /* Firefox 45 & later */
   cursor: pointer;
+  top: 2px; /* I had this in the rule for '.animation-timeline .track-container', but that was wrong, it goes here. --johnGraciliano */
 }
 
 /* Animation iterations */
 
 .animation-timeline .animation .iterations {
+  position: absolute; /* For Firefox version >= 46, the next rule takes care of Firefox versions < 46 */
   height: 100%;
   box-sizing: border-box;
 
@@ -440,18 +591,18 @@ body {
 .animation-timeline .animation .iterations:only-child { /* FF < 46.0 */
   position: relative;
 }
-.animation-timeline .animation .iterations:not(:only-child) { /* FF 46.0 */
+.animation-timeline .animation .iterations:not(:only-child)#REMOVED-RULE { /* FF 46.0 */ /******* THIS IS NOW OBSOLETE -johnGraciliano ******/
   position: absolute;
   /* Border-right is already handled by the gradient */
-  border-width: 1px 0 1px 1px;
+  /*     border-width: 1px 0 1px 1px;  ****UNNEEDED!  REPEATITIVE! *****/
 }
 
-.animation-timeline .animation .cssanimation { /* FF < 46.0 */
+.animation-timeline .animation > * > .cssanimation { /* FF < 46.0 */
   --timeline-border-color: var(--theme-highlight-lightorange);
   --timeline-background-color: var(--theme-contrast-background);
 }
 
-.animation-timeline .animation .csstransition { /* FF < 46.0 */
+.animation-timeline .animation > * > .csstransition { /* FF < 46.0 */
   --timeline-border-color: var(--theme-highlight-bluegrey);
   --timeline-background-color: var(--theme-highlight-blue);
 }
@@ -484,7 +635,7 @@ body {
   line-height: 150%;
   padding: 0 2px;
 }
-.animation-timeline .animation .iterations + .name { /* FF 46.0 */
+.animation-timeline .animation .iterations + .name { /* FF >= 46.0 */
   position: absolute;
   color: var(--theme-selection-color);
   height: 100%;
@@ -492,42 +643,53 @@ body {
   align-items: center;
   padding: 0 2px;
   box-sizing: border-box;
-  --fast-track-icon-width: 12px;
+  /* --fast-track-icon-width: 15px; %*** The variable value will replace the references for speed --johnGraciliano ***/
   z-index: 1;
 }
 
-.animation-timeline .animation .name div { /* FF 46.0 */
+.animation-timeline .animation > * > .name > div { /* FF >= 46.0 */
   /* Flex items don't support text-overflow, so a child div is used */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.animation-timeline .fast-track .iterations > .name { /* FF < 46.0 */
+/* .animation-timeline .fast-track .iterations > .name  %*** Proven selector.  Test selector in next. --johnGraciliano */
+.animation-timeline .fast-track > * > .iterations > .name { /* FF < 46.0 */
   /* Animations running on the compositor have the fast-track background image*/
-  background-image: url("images/animation-fast-track.svg");
+  background-image: url("images/animation-fast-track-full.svg");
   background-repeat: no-repeat;
   background-position: calc(100% - 5px) center;
 }
 
-.animation-timeline .fast-track .name div { /* FF 46.0 */
-  width: calc(100% - var(--fast-track-icon-width));
+/* .animation-timeline .fast-track .name > div   %*** Proven selector.  Test selector in next. --johnGraciliano */
+.animation-timeline .fast-track > * > .name > div { /* FF >= 46.0 */
+  width: calc(100% - 15px /* = var(--fast-track-icon-width) */ );
 }
 
-.animation-timeline .fast-track .iterations + .name::after { /* FF 46.0 */
+/* .animation-timeline .fast-track .iterations + .name::after   %*** Proven selector.  Test selector in next. --johnGraciliano */
+.animation-timeline .fast-track > * > .iterations + .name::after { /* FF >= 46.0 */
   /* Animations running on the compositor have the fast-track background image*/
   content: "";
   display: block;
   position: absolute;
-  top: 0;
+  top: 1px;
   right: 0;
   height: 100%;
-  width: var(--fast-track-icon-width);
+  width: 15px /* = var(--fast-track-icon-width) */ ;
   z-index: 1;
 
-  background-image: url("images/animation-fast-track.svg");
   background-repeat: no-repeat;
   background-position: center;
+  background-color: white; /*** FF49 ***/
+  clip-path: url(images/animation-fast-track.svg#thunderbolt); /*** FF49 ***/
+}
+
+/* The defaut background-color in the rule above makes unecessary to have a rule for the selector:
+.animation-timeline .fast-track.all-properties > * > .iterations +  .name::after */
+
+.animation-timeline /*.fast-track*/.some-properties > * > .iterations +  .name::after {
+  background-color: var(--theme-content-color3);
 }
 
 .animation-timeline .animation .delay,
@@ -592,7 +754,7 @@ body {
 
 .animation-target .node-highlighter,
 .animation-target .node-selector {
-  background: url("./images/vview-open-inspector.png") no-repeat 0 0;
+  background: url("images/vview-open-inspector.png") no-repeat 0 0;
   padding-left: 16px;
   margin-right: 5px;
   cursor: pointer;
@@ -626,7 +788,7 @@ body {
 }
 
 .animation-timeline .animated-properties .property {
-  height: var(--timeline-animation-height);
+  height: 20px /*var(--timeline-animation-height)*/ ;
   position: relative;
 }
 
@@ -634,9 +796,9 @@ body {
   background-color: var(--even-animation-timeline-background-color);
 }
 
-.animation-timeline .animated-properties .name {
-  width: var(--timeline-sidebar-width);
-  padding-right: var(--keyframes-marker-size);
+.animation-timeline .animated-properties > * > .name {
+  width: 200px /*var(--timeline-sidebar-width)*/ ;
+  padding-right: 10px /*var(--keyframes-marker-size)*/ ;
   box-sizing: border-box;
   height: 100%;
   color: var(--theme-body-color-alt);
@@ -646,9 +808,34 @@ body {
   align-items: center;
 }
 
-.animation-timeline .animated-properties .name div {
+.animation-timeline .animated-properties > * > .name > div {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.animation-timeline .animated-properties.cssanimation .oncompositor::before {
+  background-color: var(--theme-contrast-background);
+}
+
+.animation-timeline .animated-properties.csstransition .oncompositor::before {
+  background-color: var(--theme-highlight-blue);
+}
+
+.animation-timeline .animated-properties.scriptanimation .oncompositor::before {
+  background-color: var(--theme-graphs-green);
+}
+
+.animation-timeline .animated-properties .oncompositor::before {
+  content: "";
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  clip-path: url(images/animation-fast-track.svg#thunderbolt);
+  vertical-align: middle;
+}
+
+.animation-timeline .animated-properties .warning {
+  text-decoration: underline dotted;
 }
 
 .animation-timeline .animated-properties .frames {
@@ -661,10 +848,6 @@ body {
   /* Using flexbox to vertically center the frames */
   display: flex;
   align-items: center;
-}
-
-.animation-timeline .animated-properties .track-container{
-  top: 0;
 }
 
 /* Keyframes diagram, displayed below the timeline, inside the animation-details
@@ -691,7 +874,7 @@ body {
   background-color: var(--theme-graphs-green);
 }
 
-.keyframes .frame {
+.keyframes > .frame {
   position: absolute;
   top: 0;
   width: 0;
@@ -700,19 +883,20 @@ body {
   cursor: pointer;
 }
 
-.keyframes .frame::before {
+.keyframes > .frame::before {
   content: "";
   display: block;
-  transform:
+  transform: translateX(-5px) translateY(-5px); /*
     translateX(calc(var(--keyframes-marker-size) * -.5))
-    translateY(calc((var(--toolbar-height) - var(--keyframes-marker-size)) * -.5)); /* --johnGraciliano */
-  width: var(--keyframes-marker-size);
-  height: var(--keyframes-marker-size);
+    translateY(calc((var(--timeline-animation-height) - var(--keyframes-marker-size)) * -.5)); %* --johnGraciliano */
+  width: 10px /*var(--keyframes-marker-size)*/ ;
+  height: 10px /*var(--keyframes-marker-size)*/ ;
   border-radius: 100%;
   background-color: inherit;
 }
 
 /* All that follows is for Firefox 42 and earlier */
+@supports not (hyphens:none) {
 
 /* Animation title gutter, contains the name, duration, iteration */
 
@@ -762,7 +946,7 @@ body {
 }
 
 .timeline {
-  height: var(--timeline-animation-height);
+  height: 20px /*var(--timeline-animation-height)*/ ;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -875,4 +1059,6 @@ body {
   width: 50px;
   border-left: 1px solid var(--theme-splitter-color);
   background: var(--theme-toolbar-background);
+}
+
 }

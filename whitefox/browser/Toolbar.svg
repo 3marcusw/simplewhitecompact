@@ -39,10 +39,23 @@
                M 9.5,9.5   m -.5,3.969   a 4,4 0 0,1 -.5,-7.842   m -3,-.6   l 3,.6   l -.6,3   m .6,-3
                m 1.5,-.096    a 4,4 0 0,1 .5,7.842   m 3,.6   l -3,-.6   l .6,-3"/>
     </g>
+    <g id="ContainerTabs-shape">
+      <path d="M 4.5,16.5   h 10   a 1,1 0 0,0 1,-1   v -12   a 1,1 0 0,0 -1,-1   h -10   a 1,1 0 0,0 -1,1   v 12   a 1,1 0 0,0 1,1   Z
+               M 4,9.5   h 11   M 8,6.5   h 3   M 8,13.5   h 3"/>
+    </g>
+    <g id="ContainerTabs-outline-shape">
+      <path d="M 4.5,16.5   h 10   a 1,1 0 0,0 1,-1   v -12   a 1,1 0 0,0 -1,-1   h -10   a 1,1 0 0,0 -1,1   v 12   a 1,1 0 0,0 1,1   Z
+               M 4,9.5   h 11   M 7.5,6.5   h 4   M 7.5,13.5   h 4"/>
+    </g>
   </defs>
   <use id="SyncTabs"   xlink:href="#SyncTabs-shape"/>
   <g id="SyncTabs-bright">
     <use xlink:href="#SyncTabs-outline-shape"/>
     <use xlink:href="#SyncTabs-shape"/>
+  </g>
+  <use id="ContainerTabs"   xlink:href="#ContainerTabs-shape"/>
+  <g id="ContainerTabs-bright">
+    <use xlink:href="#ContainerTabs-outline-shape"/>
+    <use xlink:href="#ContainerTabs-shape"/>
   </g>
 </svg>

@@ -28,6 +28,7 @@
   list-style-image: url(./images/timeline-filter.svg);
 }
 
+/*** OLD STYLE *****************************%
 #timelineFilterPopup > menuitem:before {
   content: "";
   display: block;
@@ -38,6 +39,20 @@
   border-radius: 1px;
   background-color: var(--bullet-bg);
   border-color: var(--bullet-border);
+}
+%*******************************************/
+
+#timelineFilterPopup > menuitem > .menu-iconic-text {
+  background-size: 10px 10px, 12px 12px;
+  background-repeat: no-repeat;
+  background-position: 1px center, 0 center;
+  -moz-padding-start: 16px;
+  padding-inline-start: 16px;
+  background-image: linear-gradient(var(--bullet-bg),var(--bullet-bg)), linear-gradient(var(--bullet-border),var(--bullet-border));
+}
+
+#timelineFilterPopup > menuitem > .menu-iconic-text:-moz-locale-dir(rtl) {
+  background-position: calc(100% - 1px) center, 100% center;
 }
 
 .notice-container {

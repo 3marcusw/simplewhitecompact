@@ -8,31 +8,36 @@
  * Styles for React component at `devtools/client/shared/components/frame.js`
  */
 
+.stack-trace > :nth-child(2n+0){background-color: rgba(128,128,128,.08);}
+.stack-trace > * {margin: 0 -3px; padding: 0 3px;}
+
 .frame-link {
-  margin-left: 7px;
   display: flex;
+  justify-content: space-between;
+}
+
+a.message-location > .frame-link { /* Firefox 48-49 */
+  overflow: hidden;
+}
+
+.frame-link-async-cause {
+  color: var(--theme-body-color-inactive);
+  display: flex; /* Added so the background fills the line --johnGraciliano */
 }
 
 .frame-link .frame-link-source {
-  display: flex;
+  flex: 0 1 auto; /* This text should not grow to fill the space between columns but may shrink (be cropped) if needed. The default theme sets this to 'initial' --johnGraciliano */
+  color: var(--theme-highlight-blue);
 }
+
 .frame-link a.frame-link-source {
   cursor: pointer;
   text-decoration: none;
-}
-.frame-link a.frame-link-source:hover {
-  text-decoration: underline;
+  font-style: normal;
 }
 
-.frame-link .frame-link-filename {
-  color: var(--theme-highlight-blue);
-  text-overflow: ellipsis;
-  overflow: hidden;
-  flex: 1;
-  text-align: right;
-  /* overrides styling some tools have with anchors */
-  text-decoration: none;
-  font-style: normal;
+.frame-link a.frame-link-source:hover {
+  text-decoration: underline;
 }
 
 .frame-link .frame-link-host {
@@ -42,20 +47,20 @@
 }
 
 .frame-link .frame-link-function-display-name {
+  flex: 0 0 auto; /* Added. This text should not shrink (be cropped) and does not need to grow to fill the line. --johnGraciliano */
   margin-inline-end: 5px;
 }
 
-.frame-link .frame-link-column,
-.frame-link .frame-link-line,
-.frame-link .frame-link-colon {
+.frame-link .frame-link-column, /* Firefox 48-49 */
+.frame-link .frame-link-colon, /* Firefox 48-49 */
+.frame-link .frame-link-line {
   color: var(--theme-highlight-orange);
-  display: block;
 }
 
-.focused .frame-link .frame-link-filename,
-.focused .frame-link .frame-link-column,
+.focused .frame-link .frame-link-column, /* Firefox 48-49 */
+.focused .frame-link .frame-link-colon, /* Firefox 48-49 */
+.focused .frame-link .frame-link-source,
 .focused .frame-link .frame-link-line,
-.focused .frame-link .frame-link-host,
-.focused .frame-link .frame-link-colon {
+.focused .frame-link .frame-link-host {
   color: var(--theme-selection-color);
 }

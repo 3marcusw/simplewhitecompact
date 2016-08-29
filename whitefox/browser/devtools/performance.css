@@ -42,11 +42,14 @@
 
 #performance-toolbar-control-other {
   -moz-padding-end: 5px;
+  padding-inline-end: 5px;
 }
 
 #performance-toolbar-controls-detail-views .toolbarbutton-text {
   -moz-padding-start: 4px;
   -moz-padding-end: 8px;
+  padding-inline-start: 4px;
+  padding-inline-end: 8px;
 }
 
 #filter-button {
@@ -57,6 +60,7 @@
   list-style-image: url(images/firebug/timeline-filter.svg);
 }
 
+/*** OLD STYLE ***************************************%
 #performance-filter-menupopup > menuitem:before {
   content: "";
   display: block;
@@ -64,6 +68,20 @@
   height: 8px;
   margin: 0 8px;
   border-radius: 1px;
+}
+%*** OLD STYLE ***************************************/
+
+#performance-filter-menupopup > menuitem .menu-iconic-text {
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  -moz-padding-start: 16px;
+  padding-inline-start: 16px;
+  background-image: linear-gradient(var(--bullet-bg),var(--bullet-bg));
+}
+
+#performance-filter-menupopup > menuitem > .menu-iconic-text:-moz-locale-dir(rtl) {
+  background-position: 100% center;
 }
 
 /* Details panel buttons */
@@ -92,11 +110,56 @@
   list-style-image: url(images/profiler-stopwatch.svg);
 }
 
-#main-record-button .button-icon {
+#import-button {
+  list-style-image: url(images/import.svg);
+}
+
+#clear-button[label] { /* This will be transformed into an icon only button! --johnGraciliano */
+  list-style-image: url(images/clear.svg);
+}
+
+@supports (box-sizing: padding-box) {  /* Firefox < 50 */
+  /* Special rules to transform the import and clear buttons into icon only buttons.  Adapted from toolbars.css */
+
+  #import-button,
+  #clear-button[label] {
+    background-color: transparent !important;
+    min-width: 32px !important;
+  }
+
+  .theme-firebug #import-button,
+  .theme-firebug #clear-button[label] {
+    min-width: 24px !important; 
+  }
+
+  :-moz-any(#import-button, #clear-button[label]) > .toolbarbutton-text {
+    display: none;
+  }
+
+  /* Icon-only buttons */
+  :-moz-any(#import-button, #clear-button[label]):not([disabled]) > image {
+    opacity: 0.8;
+  }
+
+  :-moz-any(#import-button, #clear-button[label]):hover > image,
+  :-moz-any(#import-button, #clear-button[label])[checked=true] > image,
+  :-moz-any(#import-button, #clear-button[label])[open=true] > image {
+    opacity: 1;
+  }
+
+  :-moz-any(#import-button, #clear-button[label])[checked=true] > image,
+  :-moz-any(#import-button, #clear-button[label])[open=true] > image {
+    filter: url(images/filters.svg#checked-icon-state);
+  }
+
+}
+
+
+#main-record-button .button-icon, #import-button .button-icon {
   margin: 0;
 }
 
-#main-record-button .button-text {
+#main-record-button .button-text, #import-button .button-text {
   display: none;
 }
 
@@ -283,12 +346,15 @@
   padding: 1px 4px;
   color: var(--theme-body-color);
   -moz-border-end-color: var(--cell-border-color);
+  border-inline-end-color: var(--cell-border-color);
 }
 
 .call-tree-header:not(:last-child),
 .call-tree-cell:not(:last-child) {
   -moz-border-end-width: 1px;
   -moz-border-end-style: solid;
+  border-inline-end-width: 1px;
+  border-inline-end-style: solid;
 }
 
 .call-tree-header:not(:last-child) {
@@ -337,6 +403,7 @@
 
 .call-tree-item:focus .call-tree-cell {
   -moz-border-end-color: var(--focus-cell-border-color);
+  border-inline-end-color: var(--focus-cell-border-color);
 }
 
 .call-tree-item:not([origin="content"]) .call-tree-name,
@@ -349,6 +416,7 @@
 
 .call-tree-name {
   -moz-margin-end: 4px !important;
+  margin-inline-end: 4px !important;
 }
 
 .call-tree-url {
@@ -374,6 +442,7 @@
 
 .call-tree-host {
   -moz-margin-start: 8px !important;
+  margin-inline-start: 8px !important;
   font-size: 90%;
   color: var(--theme-content-color2);
 }
@@ -405,6 +474,7 @@
 
 .waterfall-header-tick:not(:first-child) {
   -moz-margin-start: -100px !important; /* Don't affect layout. */
+  margin-inline-start: -100px !important; /* Don't affect layout. */
 }
 
 .waterfall-background-ticks {
@@ -497,6 +567,7 @@
 
 .waterfall-sidebar {
   -moz-border-end: 1px solid var(--cell-border-color);
+  border-inline-end: 1px solid var(--cell-border-color);
 }
 
 .waterfall-tree-item > .waterfall-sidebar:hover,
@@ -510,6 +581,8 @@
   height: 8px;
   -moz-margin-start: 8px;
   -moz-margin-end: 6px;
+  margin-inline-start: 8px;
+  margin-inline-end: 6px;
   border-radius: 1px;
 }
 
@@ -536,6 +609,7 @@
   /* Don't affect layout. */
   width: 14px;
   -moz-margin-end: -14px;
+  margin-inline-end: -14px;
 }
 
 /**
@@ -556,6 +630,8 @@
 #waterfall-details {
   -moz-padding-start: 8px;
   -moz-padding-end: 8px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
   padding-top: 2vh;
   overflow: auto;
   min-width: 50px;
@@ -574,6 +650,7 @@
 .marker-details-labelname, /* This is probably an old name that was replaced by the next --johnGraciliano */
 .marker-details-name-label {
   -moz-padding-end: 4px;
+  padding-inline-end: 4px;
 }
 
 .marker-details-type {
@@ -594,56 +671,58 @@
  * Marker colors
  */
 
-menuitem.marker-color-graphs-full-red:before,
+/*** menuitem.marker-color-graphs-full-red:before,  %*** FOR OLD STYLE ********/
 .marker-color-graphs-full-red {
   background-color: var(--theme-graphs-full-red);
   border-color: var(--theme-graphs-full-red);
+  --bullet-bg: var(--theme-graphs-full-red);
 }
-menuitem.marker-color-graphs-full-blue:before,
+/*** menuitem.marker-color-graphs-full-blue:before,  %*** FOR OLD STYLE ********/
 .marker-color-graphs-full-blue {
   background-color: var(--theme-graphs-full-blue);
   border-color: var(--theme-graphs-full-blue);
+  --bullet-bg: var(--theme-graphs-full-blue);
 }
-
-menuitem.marker-color-graphs-green:before,
+/*** etc. ****/
 .marker-color-graphs-green {
   background-color: var(--theme-graphs-green);
   border-color: var(--theme-graphs-green);
+  --bullet-bg: var(--theme-graphs-green);
 }
-menuitem.marker-color-graphs-blue:before,
 .marker-color-graphs-blue {
   background-color: var(--theme-graphs-blue);
   border-color: var(--theme-graphs-blue);
+  --bullet-bg: var(--theme-graphs-blue);
 }
-menuitem.marker-color-graphs-bluegrey:before,
 .marker-color-graphs-bluegrey {
   background-color: var(--theme-graphs-bluegrey);
   border-color: var(--theme-graphs-bluegrey);
+  --bullet-bg: var(--theme-graphs-bluegrey);
 }
-menuitem.marker-color-graphs-purple:before,
 .marker-color-graphs-purple {
   background-color: var(--theme-graphs-purple);
   border-color: var(--theme-graphs-purple);
+  --bullet-bg: var(--theme-graphs-purple);
 }
-menuitem.marker-color-graphs-yellow:before,
 .marker-color-graphs-yellow {
   background-color: var(--theme-graphs-yellow);
   border-color: var(--theme-graphs-yellow);
+  --bullet-bg: var(--theme-graphs-yellow);
 }
-menuitem.marker-color-graphs-orange:before,
 .marker-color-graphs-orange {
   background-color: var(--theme-graphs-orange);
   border-color: var(--theme-graphs-orange);
+  --bullet-bg: var(--theme-graphs-orange);
 }
-menuitem.marker-color-graphs-red:before,
 .marker-color-graphs-red {
   background-color: var(--theme-graphs-red);
   border-color: var(--theme-graphs-red);
+  --bullet-bg: var(--theme-graphs-red);
 }
-menuitem.marker-color-graphs-grey:before,
 .marker-color-graphs-grey{
   background-color: var(--theme-graphs-grey);
   border-color: var(--theme-graphs-grey);
+  --bullet-bg: var(--theme-graphs-grey);
 }
 
 /**
@@ -805,6 +884,7 @@ ul.frames-list li.selected {
 /**
  * devtools.performance.ui.experimental
  */
+/*** OLD STYLE ***************************************%
 menuitem.experimental-option::before {
   content: "";
   background-image: url(images/webconsole.svg);
@@ -821,10 +901,34 @@ menuitem.experimental-option::before {
 .theme-light menuitem.experimental-option::before {
   background-image: url(images/webconsole.svg#light-icons);
 }
+%*** OLD STYLE ***************************************/
 
-#performance-options-menupopup:not(.experimental-enabled) .experimental-option,
-#performance-options-menupopup:not(.experimental-enabled) .experimental-option::before {
+#performance-options-menupopup:not(.experimental-enabled) .experimental-option 
+/* , #performance-options-menupopup:not(.experimental-enabled) .experimental-option::before  %*** OLD STYLE ***/ {
   display: none;
+}
+
+menuitem.experimental-option > .menu-iconic-text {
+  font-style: italic;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  -moz-padding-start: 12px;
+  padding-inline-start: 12px;
+  -moz-margin-start: -1px !important; /* Override '!important' in a rule for '.menu-iconic-text' in 'ostarget/general/global/menu.css' --johnGraciliano  */
+  margin-inline-start: -1px !important;
+  background-image: -moz-image-rect(url(images/webconsole.svg), 24, 36, 36, 24);
+}
+
+/*** This rule is unnecessary because the background-image remains identical despite the target #light-icons ************%
+%*** For reasons I do not understand, it may create a problem when switching themes. So I remove it. --johnGraciliano ***%
+.theme-light menuitem.experimental-option > .menu-iconic-text {
+  background-image: -moz-image-rect(url(images/webconsole.svg#light-icons), 24, 36, 36, 24);
+}
+%************************************************************************************************************************/
+
+menuitem.experimental-option > .menu-iconic-text:-moz-locale-dir(rtl) {
+  background-position: 100% 0;
 }
 
 .opt-icon::before {

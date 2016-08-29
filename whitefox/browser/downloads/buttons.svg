@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="80"
+     height="60"
+     viewBox="0 0 80 60">
+  <style>
+    .t:not(:target){
+      display: none;
+    }
+    use  {
+      stroke-width: 0;
+      stroke: none;
+      fill: #8C9AB7;
+    }
+    circle + use {
+      fill: #EDF1F7;
+    }
+    g[id$="select"] circle {
+      fill: url(#select-gradient);
+    }
+    g[id$="hover"] circle {
+      fill: url(#hover-gradient);
+    }
+    g[id$="active"] circle {
+      fill: url(#active-gradient);
+    }
+  </style>
+  <defs>
+    <filter id="Gx">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+    <linearGradient id="select-gradient" x1="8" x2="8" y1="1.5" y2="14.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#95A3BF"/>
+      <stop offset="1" stop-color="#8594B2"/>
+    </linearGradient>
+    <linearGradient id="hover-gradient" x1="8" x2="8" y1="1.5" y2="14.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7A869E"/>
+      <stop offset="1" stop-color="#6D7A94"/>
+    </linearGradient>
+    <linearGradient id="active-gradient" x1="8" x2="8" y1="2" y2="13.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00A9FD"/>
+      <stop offset="1" stop-color="#008BD1"/>
+    </linearGradient>
+	  <path id="cancel-shape"
+          d="M 4.70711,3.29289  
+             l3.29289,3.29289 l3.29289-3.29289 l1.41421,1.41421
+             l-3.29289,3.29289 l3.29289,3.29289 l-1.41421,1.41421
+             l-3.29289-3.29289 l-3.29289,3.29289 l-1.41421-1.41421
+             l3.29289-3.29289 l-3.29289-3.29289 l1.41421-1.41421  z"/>
+	  <path id="cancel-O-shape"
+          d="M 0,8   a 8,8 0 0,1 8,-8   a 8,8 0 0,1 8,8   a 8,8 0 0,1 -8,8   a 8,8 0 0,1 -8,-8  z
+             M 3.29289,4.70711
+             l3.29289,3.29289 l-3.29289,3.29289 l1.41421,1.41421
+             l3.29289-3.29289 l3.29289,3.29289 l1.41421-1.41421
+             l-3.29289-3.29289 l3.29289-3.29289 l-1.41421-1.41421
+             l-3.29289,3.29289 l-3.29289-3.29289 l-1.41421,1.41421  z"/>
+	  <path id="show-shape"
+          d="M 3,4     a 1,1 0 0,1 1,-1   h 4   a 1,1 0 0,1 1,1   h 3   a 1,1 0 0,1 1,1   v .2   h -4.6   a 1,1 0 0,0 -1,1   h -4.4   v -2.2   z
+             M 3,7    h 5    a 1,1 0 0,1 1,-1    h 4    a .8,.8 0 0,1 .8,.8    c 0,1.2 0,2.2 -.8,6.2    h -10    c -.8,-3.5 -.8,-4.2 -.8,-5.2    a .8,.8 0 0,1 .8,-.8    z"/>
+	  <path id="show-O-shape"
+          d="M 0,8   a 8,8 0 0,1 8,-8   a 8,8 0 0,1 8,8   a 8,8 0 0,1 -8,8   a 8,8 0 0,1 -8,-8  z
+             M 3,4   v 2.2   h 4.4   a 1,1 0 0,1 1,-1   h 4.6   v -.2   a 1,1 0 0,0 -1,-1   h -3   a 1,1 0 0,0 -1,-1   h -4   a 1,1 0 0,0 -1,1   z
+             M 3,7   a .8,.8 0 0,0 -.8,.8   c 0,1 0,1.7 .8,5.2   h 10   c .8,-4 .8,-5 .8,-6.2   a .8,.8 0 0,0 -.8,-.8   h -4   a 1,1 0 0,0 -1,1   h -5   z"/>
+	  <path id="retry-shape"
+          d="M 11.536,11.536   a 5,5 0 1,1 0,-7.071   l -1.414,1.414   a 3,3 0 1,0 0,4.243   l 1.414,1.414   z
+             M 7,8   l 6,-6   v 6   h -6   z"/>
+	  <path id="retry-O-shape"
+          d="M 0,8   a 8,8 0 0,1 8,-8   a 8,8 0 0,1 8,8   a 8,8 0 0,1 -8,8   a 8,8 0 0,1 -8,-8  z
+             M 7,8   h 6   v -6   l -2,2
+                     a 5,5 0 1,0 0.53553, 7.53553   l -1.41421,-1.41421   a 3,3 0 1,1 -0.55977,-4.68287 
+                     l -2.56155,2.56155  z"/>
+  </defs>
+  <g id="cancel">                                           <use xlink:href="#cancel-shape" x= "2" y= "2"/>   </g>
+  <g id="cancel-select">  <circle cx="30" cy="10" r="8"/>   <use xlink:href="#cancel-shape" x="22" y= "2"/>   </g>
+  <g id="cancel-hover">   <circle cx="50" cy="10" r="8"/>   <use xlink:href="#cancel-shape" x="42" y= "2"/>   </g>
+  <g id="cancel-active">  <circle cx="70" cy="10" r="8"/>   <use xlink:href="#cancel-shape" x="62" y= "2"/>   </g>
+  <g id="show">                                             <use xlink:href="#show-shape"   x= "2" y="22"/>   </g>
+  <g id="show-select">    <circle cx="30" cy="30" r="8"/>   <use xlink:href="#show-shape"   x="22" y="22"/>   </g>
+  <g id="show-hover">     <circle cx="50" cy="30" r="8"/>   <use xlink:href="#show-shape"   x="42" y="22"/>   </g>
+  <g id="show-active">    <circle cx="70" cy="30" r="8"/>   <use xlink:href="#show-shape"   x="62" y="22"/>   </g>
+  <g id="retry">                                            <use xlink:href="#retry-shape"  x= "2" y="42"/>   </g>
+  <g id="retry-select">   <circle cx="30" cy="50" r="8"/>   <use xlink:href="#retry-shape"  x="22" y="42"/>   </g>
+  <g id="retry-hover">    <circle cx="50" cy="50" r="8"/>   <use xlink:href="#retry-shape"  x="42" y="42"/>   </g>
+  <g id="retry-active">   <circle cx="70" cy="50" r="8"/>   <use xlink:href="#retry-shape"  x="62" y="42"/>   </g>
+</svg>
+

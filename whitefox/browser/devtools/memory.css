@@ -136,31 +136,47 @@ html, body, #app, #memory-tool {
 #take-snapshot::before {
   background-image: url(images/command-screenshot.png);
 }
+.theme-firebug .devtools-button.take-snapshot::before,
+.theme-firebug #take-snapshot::before {
+  background-image: url(images/firebug/command-screenshot.svg);
+  filter: none;
+}
 
 #clear-snapshots::before {
-  background-image: url(chrome://devtools/skin/images/clear.svg);
+  background-image: url(images/clear.svg);
+}
+.theme-firebug #clear-snapshots::before {
+  background-image: url(images/firebug/clear.svg);
+  filter: none;
 }
 
 #diff-snapshots::before {
-  background-image: url(chrome://devtools/skin/images/diff.svg);
+  background-image: url(images/diff.svg);
+}
+
+#import-snapshot::before {
+  background-image: url(images/import.svg);
 }
 
 /* Hide the text labels to make image only buttons (some versions of Firefox). --johnGraciliano */
 #clear-snapshots,
-#diff-snapshots{
+#diff-snapshots,
+#import-snapshot {
   font-size: 0;
   background-color: transparent;
 }
 
 /* The next two rule sets help the buttons behave as image only --johnGraciliano */
 #clear-snapshots::before,
-#diff-snapshots:not([disabled])::before{
+#diff-snapshots:not([disabled])::before,
+#import-snapshot::before {
   opacity: .8;
 }
 
 #diff-snapshots[disabled]::before, /* The opacity for the button is already .5 */
 #clear-snapshots:hover::before,
-#diff-snapshots:not([disabled]):hover::before{
+#diff-snapshots:not([disabled]):hover::before,
+#import-snapshot:hover::before {
   opacity: 1;
 }
 
@@ -179,11 +195,14 @@ html, body, #app, #memory-tool {
 }
 %*********************************************/
 
+/*** Removed to comform with icon only buttons --johnGraciliano ***%
+%*** This removal is copied from a Firefox 50 update.           ***%
 #import-snapshot,
 #clear-snapshots {
   -moz-box-align: center;
   flex-grow: 1;
 }
+%******************************************************************/
 
 .spacer {
   flex: 1;
@@ -277,11 +296,11 @@ html, body, #app, #memory-tool {
 }
 
 .theme-light .snapshot-list-item.selected .delete {
-  filter: invert(100%);
+  filter: invert(1);
 }
 
 .snapshot-list-item .delete::before {
-  background-image: url("chrome://devtools/skin/images/close.svg");
+  background-image: url("images/close.svg");
   background-position: 0.2em 0;
 }
 
@@ -515,7 +534,8 @@ html, body, #app, #memory-tool {
    * These subcolumns may have specific widths or need to flex.
    */
   display: flex;
-  text-align: end;
+  /* Make sure units/decimals/... are always vertically aligned to right in both LTR and RTL locales */
+  text-align: right;
   border-inline-end: var(--cell-border-color) 1px solid;
 }
 
@@ -565,7 +585,11 @@ html, body, #app, #memory-tool {
 }
 
 .heap-tree-number {
-  padding-inline-start: 3px;
+  padding: 0 3px;
+  flex: 1;
+  color: var(--theme-content-color3);
+  /* Make sure number doesn't appear backwards on RTL locales */
+  direction: ltr;
 }
 
 .heap-tree-percent {
@@ -576,11 +600,6 @@ html, body, #app, #memory-tool {
 .heap-tree-number,
 .heap-tree-percent {
   font-family: var(--monospace-font-family);
-}
-
-.heap-tree-number {
-  flex: 1;
-  color: var(--theme-content-color3);
 }
 
 .heap-tree-percent {
@@ -627,7 +646,7 @@ html, body, #app, #memory-tool {
   width: 12px;
   height: 12px;
   max-height: 12px;
-  background-image: url(./images/webconsole.svg);
+  background-image: url(images/webconsole.svg);
   background-size: 72px 60px;
   background-position: -24px -24px;
   background-repeat: no-repeat;
@@ -637,7 +656,7 @@ html, body, #app, #memory-tool {
 }
 
 .theme-light .error::before {
-  background-image: url(./images/webconsole.svg#light-icons);
+  background-image: url(images/webconsole.svg#light-icons);
 }
 
 /**

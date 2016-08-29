@@ -20,17 +20,20 @@
 
 #sources-pane > tabs {
   -moz-border-end: 1px solid;
+  border-inline-end: 1px solid;
 }
 
 #sources-pane .devtools-toolbar {   /* Added note: The may be the same as '#sources-toolbar.devtools-toolbar' --johnGraciliano */
   border: none; /* Remove the devtools-toolbar bottom border. */
   -moz-border-end: 1px solid;
+  border-inline-end: 1px solid;
   border-top: 1px solid var(--theme-splitter-color);  /* ADDED --johnGraciliano */
 }
 
 #sources-pane > tabs,
 #sources-pane .devtools-toolbar {
   -moz-border-end-color: var(--theme-splitter-color);
+  border-inline-end-color: var(--theme-splitter-color);
 }
 
 /* Sources and breakpoints list */
@@ -59,6 +62,7 @@
 
 .dbg-breakpoint-text {
   -moz-padding-start: 6px;
+  padding-inline-start: 6px;
   font-style: italic;
   font-size: 90%;
 }
@@ -95,6 +99,7 @@
 .dbg-breakpoint.dbg-breakpoint-condition-thrown .dbg-breakpoint-condition-thrown-message {
   display: block;
   -moz-padding-start: 0;
+  padding-inline-start: 0;
 }
 
 /* Sources toolbar */
@@ -187,6 +192,7 @@
   background-size: 32px 16px;
   background-repeat: no-repeat;
   -moz-margin-end: 5px;
+  margin-inline-end: 5px;
 }
 
 @media (min-resolution: 1.1dppx) {
@@ -224,6 +230,7 @@
 
 .dbg-stackframe-details {
   -moz-padding-start: 4px;
+  padding-inline-start: 4px;
 }
 
 /* Classic stack frames view */
@@ -285,6 +292,7 @@
 
 .trace-name {
   -moz-padding-start: 4px;
+  padding-inline-start: 4px;
 }
 
 /* Tracer dark theme */
@@ -426,16 +434,19 @@
 #searchbox {
   min-width: 220px;
   -moz-margin-start: 1px;
+  margin-inline-start: 1px;
 }
 
 #filter-label {
   -moz-margin-start: 2px;
+  margin-inline-start: 2px;
 }
 
 #searchbox-panel-operators {
   margin-top: 5px;
   margin-bottom: 8px;
   -moz-margin-start: 2px;
+  margin-inline-start: 2px;
 }
 
 .searchbox-panel-operator-button {
@@ -444,6 +455,8 @@
   margin-bottom: 0;
   -moz-margin-start: 2px;
   -moz-margin-end: 6px;
+  margin-inline-start: 2px;
+  margin-inline-end: 6px;
   text-align: center;
 }
 
@@ -472,6 +485,7 @@
 
 .results-panel-item-label-before {
   -moz-padding-end: 6px;
+  padding-inline-end: 6px;
 }
 
 .theme-dark .results-panel-item-label {
@@ -504,6 +518,7 @@
 
 .dbg-results-header {
   -moz-padding-start: 6px;
+  padding-inline-start: 6px;
 }
 
 .dbg-results-header-location {
@@ -512,17 +527,21 @@
 
 .dbg-results-header-match-count {
   -moz-padding-start: 6px;
+  padding-inline-start: 6px;
 }
 
 .dbg-results-line-number {
   min-width: 3em;
   -moz-border-end: 1px solid rgba(128,128,128,0.2);
   -moz-padding-end: 4px;
+  border-inline-end: 1px solid rgba(128,128,128,0.2);
+  padding-inline-end: 4px;
   text-align: end;
 }
 
 .dbg-results-line-contents {
   -moz-padding-start: 4px;
+  padding-inline-start: 4px;
 }
 
 .dbg-results-line-contents-string[match=true] {
@@ -624,6 +643,20 @@
   opacity: 0.5;
 }
 
+/* This cancels a rule in toolbars.css (selector '.devtools-toolbarbutton:not([label])[checked=true] > image')
+ * That rule is not needed because the icon is different so the filter has no purpose.        --johnGraciliano  */
+#resume[checked] > image {
+  filter: none;
+}
+.theme-light:not(.theme-firebug) #resume[checked] > image { /* If the 'checked' filter is absent this is needed! */
+  filter: invert(1);
+}
+
+/* This is to cancel a rule in toolbars.css (selector '.devtools-toolbarbutton:not([label])[checked=true] > image') --johnGraciliano */
+#resume[checked=true]:not([disabled]):not(:hover):not(:active) > image {
+  opacity: .8;
+}
+
 #step-over {
   list-style-image: url(images/debugger-step-over.png);
 }
@@ -666,6 +699,7 @@
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
+#instruments-pane-toggle.pane-collapsed,
 #instruments-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
 }
@@ -674,6 +708,7 @@
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
 
+.theme-firebug #instruments-pane-toggle.pane-collapsed,
 .theme-firebug #instruments-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
 }
@@ -687,6 +722,7 @@
 
 #body[layout=vertical] #sources-pane > tabs {
   -moz-border-end: none;
+  border-inline-end: none;
 }
 
 #body[layout=vertical] #instruments-pane {
@@ -706,6 +742,7 @@
 #body[layout=vertical] .side-menu-widget-group,
 #body[layout=vertical] .side-menu-widget-item {
   -moz-margin-end: 0;
+  margin-inline-end: 0;
 }
 
 /* Firebug theme customization of source group title */

@@ -295,25 +295,25 @@ treechildren::-moz-tree-column(insertafter) {
 }
 
 treecol:not([hideheader="true"]) > .treecol-sortdirection[sortDirection="ascending"] {
-  list-style-image: url("chrome://global/skin/tree/sort-asc.png");
+  list-style-image: url("chrome://global/skin/tree/sort.svg#asc");
 }
 
 treecol:not([hideheader="true"]) > .treecol-sortdirection[sortDirection="ascending"]:-moz-system-metric(windows-classic) {
-  list-style-image: url("chrome://global/skin/tree/sort-asc-classic.png");
+  list-style-image: url("chrome://global/skin/tree/sort.svg#asc-classic");
 }
 
 treecol:not([hideheader="true"]) > .treecol-sortdirection[sortDirection="descending"] {
-  list-style-image: url("chrome://global/skin/tree/sort-dsc.png");
+  list-style-image: url("chrome://global/skin/tree/sort.svg#dsc");
 }
 
 treecol:not([hideheader="true"]) > .treecol-sortdirection[sortDirection="descending"]:-moz-system-metric(windows-classic) {
-  list-style-image: url("chrome://global/skin/tree/sort-dsc-classic.png");
+  list-style-image: url("chrome://global/skin/tree/sort.svg#dsc-classic");
 }
 
 /* ::::: column picker :::::  */
 
 .tree-columnpicker-icon {
-  list-style-image: url("chrome://global/skin/tree/columnpicker.gif");
+  list-style-image: url("chrome://global/skin/tree/columnpicker.svg");
 }
 
 /* ::::: twisty :::::  */
@@ -322,12 +322,12 @@ treechildren::-moz-tree-twisty {
   -moz-padding-end: 4px;
   padding-top: 1px;
   width: 9px; /* The image's width is 9 pixels */
-  list-style-image: url("chrome://global/skin/tree/twisty-clsd.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#clsd");
 }
 
 treechildren::-moz-tree-twisty(open) {
   width: 9px; /* The image's width is 9 pixels */
-  list-style-image: url("chrome://global/skin/tree/twisty-open.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#open");
 }
 
 treechildren::-moz-tree-indentation {
@@ -389,25 +389,25 @@ treechildren::-moz-tree-twisty {
    * chrome://global/skin/tree/twisty-open-hover-rtl.png
 */
 treechildren::-moz-tree-twisty(hover) {
-  list-style-image: url("chrome://global/skin/tree/twisty-clsd-hover.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#clsd-hover");
 }
 
 treechildren::-moz-tree-twisty(hover, open) {
-  list-style-image: url("chrome://global/skin/tree/twisty-open-hover.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#open-hover");
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty {
-  list-style-image: url("chrome://global/skin/tree/twisty-clsd-rtl.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#clsd-rtl");
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(open) {
-  list-style-image: url("chrome://global/skin/tree/twisty-open-rtl.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#open-rtl");
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(hover) {
-  list-style-image: url("chrome://global/skin/tree/twisty-clsd-hover-rtl.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#clsd-hover-rtl");
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(hover, open) {
-  list-style-image: url("chrome://global/skin/tree/twisty-open-hover-rtl.png");
+  list-style-image: url("chrome://global/skin/tree/twisty.svg#open-hover-rtl");
 }

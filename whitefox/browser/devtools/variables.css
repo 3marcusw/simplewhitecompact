@@ -42,6 +42,7 @@
   --theme-highlight-orange: #f13c00;
   --theme-highlight-red: #ed2655;
   --theme-highlight-pink: #b82ee5;
+  --theme-highlight-gray: #dde1e4;
 
   /* For accessibility purposes we want to enhance the focus styling. This
    * should improve keyboard navigation usability. */
@@ -62,6 +63,11 @@
   /* Images */
   --theme-pane-collapse-image: url(images/pane-toggle.svg#collapse);
   --theme-pane-expand-image: url(images/pane-expand.svg#expand);
+
+  /* Tooltips */
+  --theme-tooltip-border: #d9e1e8;
+  --theme-tooltip-background: rgba(255, 255, 255, .9);
+  --theme-tooltip-shadow: rgba(155, 155, 155, 0.26);
 }
 
 :root.theme-dark {
@@ -70,7 +76,7 @@
   --theme-contrast-background: #b28025;
 
   --theme-tab-toolbar-background: #252c33;
-  --theme-toolbar-background: #343c45;
+  --theme-toolbar-background: #2e343c; /* It was #343c45 --johnGraciliano */
   --theme-selection-background: #1d4f73;
   --theme-selection-background-semitransparent: rgba(29, 79, 115, .5);
   --theme-selection-color: #f5f7fa;
@@ -92,6 +98,7 @@
   --theme-highlight-orange: #d96629;
   --theme-highlight-red: #eb5368;
   --theme-highlight-pink: #df80ff;
+  --theme-highlight-gray: #e9f4fe;
 
   /* For accessibility purposes we want to enhance the focus styling. This
    * should improve keyboard navigation usability. */
@@ -112,6 +119,11 @@
   /* Images */
   --theme-pane-collapse-image: url(images/pane-toggle.svg#collapse);
   --theme-pane-expand-image: url(images/pane-toggle.svg#expand);
+
+  /* Tooltips */
+  --theme-tooltip-border: #434850;
+  --theme-tooltip-background: rgba(19, 28, 38, .9);
+  --theme-tooltip-shadow: rgba(25, 25, 25, 0.76);
 }
 
 :root.theme-firebug {
@@ -134,13 +146,14 @@
   --theme-content-color3: #667380;
 
   --theme-highlight-green: #2cbb0f;
-  --theme-highlight-blue: #0088cc;
+  --theme-highlight-blue: #3477db; /* It was #0088cc as in '.theme-light'. This is #3455db in the default theme. --johnGraciliano */
   --theme-highlight-bluegrey: #0072ab;
   --theme-highlight-purple: #5b5fff;
   --theme-highlight-lightorange: #d97e00;
   --theme-highlight-orange: #f13c00;
   --theme-highlight-red: #ed2655;
   --theme-highlight-pink: #b82ee5;
+  --theme-highlight-gray: #dde1e4;
 
   /* Colors used in Graphs, like performance tools. Similar colors to Chrome's timeline. */
   --theme-graphs-green: #85d175;

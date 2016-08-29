@@ -127,6 +127,8 @@
   padding: 0.75em 0 1em;
   -moz-padding-start: calc(2em + 24px);
   -moz-padding-end: 1em;
+  padding-inline-start: calc(2em + 24px);
+  padding-inline-end: 1em;
   background-repeat: no-repeat;
   background-position: 1em 1em;
   background-size: 24px auto;
@@ -217,11 +219,13 @@
 
 .identity-popup-warning-gray {
   -moz-padding-start: 24px;
+  padding-inline-start: 24px;
   background: url(chrome://browser/skin/controlcenter/warning-gray.svg) no-repeat 0 50%;
 }
 
 .identity-popup-warning-yellow {
   -moz-padding-start: 24px;
+  padding-inline-start: 24px;
   background: url(chrome://browser/skin/controlcenter/warning-yellow.svg) no-repeat 0 50%;
 }
 
@@ -306,6 +310,7 @@
 #identity-popup-securityView-footer,
 #identity-popup-securityView-body {
   -moz-padding-end: 1em;
+  padding-inline-end: 1em;
 }
 
 #identity-popup-content-owner {
@@ -333,6 +338,8 @@ description#identity-popup-content-verifier,
 
 #identity-popup-securityView-footer > button,
 #identity-popup-securityView-body > button {
+  -moz-margin-start: 0;
+  -moz-margin-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
@@ -375,6 +382,21 @@ description#identity-popup-content-verifier,
   background-image: url(chrome://browser/skin/controlcenter/permissions.svg);
 }
 
+#identity-popup-permissions-headline {
+  /* Make sure the label is as tall as the icon so that the permission list
+     which is aligned with the icon doesn't cover it up. */
+  min-height: 24px;
+}
+
+.identity-popup-permission-item {
+  min-height: 24px;
+}
+
+#identity-popup-permission-list menulist,
+#identity-popup-permission-list menupopup{
+  min-width: 60px;
+}
+
 #identity-popup-permission-list:not(:empty) {
   margin-top: 5px;
 }
@@ -383,13 +405,50 @@ description#identity-popup-content-verifier,
   display: none;
 }
 
-.identity-popup-permission-label {
-  -moz-margin-start: 0;
+.identity-popup-permission-icon {
+  width: 16px;
+  height: 16px;
+  margin-inline-start: calc(-1em - 16px); /*  This replaces margin-inline-start for #identity-popup-permission-list in Firefox 50 classic theme */
+  margin-inline-end: 1em; /* This replaces margin-inline-start for .identity-popup-permission-label in Firefox 50 classic theme */
 }
 
-#identity-popup-permission-list menulist,
-#identity-popup-permission-list menupopup{
-  min-width: 60px;
+.identity-popup-permission-label {
+  -moz-margin-start: 0;
+  margin-inline-start: 0;
+  word-wrap: break-word;
+}
+
+.identity-popup-permission-state-label {
+  text-align: end;
+}
+
+.identity-popup-permission-remove-button {
+  -moz-appearance: none;
+  margin: 0;
+  border-width: 0;
+  min-width: 0;
+  padding: 2px;
+  background-color: transparent;
+}
+
+.identity-popup-permission-remove-button > .button-box {
+  border-width: 0;
+  padding: 0;
+}
+
+.identity-popup-permission-remove-button > .button-box > .button-icon {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  list-style-image: url(panel-icons.svg#ok);
+}
+
+.identity-popup-permission-remove-button > .button-box > .button-text {
+  display: none;
+}
+
+.identity-popup-permission-remove-button:hover > .button-box > .button-icon {
+  list-style-image: url(panel-icons.svg#cancel);
 }
 
 /* FOOTER BUTTONS */
