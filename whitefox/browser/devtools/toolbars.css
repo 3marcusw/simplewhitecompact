@@ -200,6 +200,9 @@ button#toolbox-dock-bottom-minimize, /* button#toolbox-dock-bottom-minimize shou
   -moz-box-orient: horizontal;
   padding: 0;
 }
+.theme-firebug .webconsole-filter-button.devtools-toolbarbutton[type=menu-button] > .toolbarbutton-menubutton-button {
+  padding-bottom: 1px; /* This is a special adjustment for web console filters with the Firebug theme --johnGraciliano */
+}
 
 .devtools-toolbarbutton[type=menu-button] {
   padding: 0 1px;
@@ -302,37 +305,37 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 .theme-dark .devtools-button:not(:empty):not([disabled]):hover,
 .theme-dark #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover,
 .theme-dark .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover {
-  background: rgba(0, 0, 0, .3); /* Splitters */
+  background-color: rgba(0, 0, 0, .3); /* Splitters */
 }
 .theme-light .devtools-button:not(:empty):not([disabled]):hover,
 .theme-light #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover,
 .theme-light .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover {
-  background: rgba(170, 170, 170, .3); /* Splitters */
+  background-color: rgba(170, 170, 170, .3); /* Splitters */
 }
 
 .theme-dark .devtools-button:not(:empty):not([disabled]):hover:active,
 .theme-dark #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
 .theme-dark .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active {
-  background: rgba(0, 0, 0, .4); /* Splitters */
+  background-color: rgba(0, 0, 0, .4); /* Splitters */
 }
 .theme-light .devtools-button:not(:empty):not([disabled]):hover:active,
 .theme-light #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
 .theme-light .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active {
-  background: rgba(170, 170, 170, .4); /* Splitters */
+  background-color: rgba(170, 170, 170, .4); /* Splitters */
 }
 
 .theme-dark .devtools-toolbarbutton:not([disabled])[label][checked=true],
 .theme-dark .devtools-toolbarbutton:not([disabled])[label][open],
 .theme-dark .devtools-button:not(:empty)[checked=true],
 .theme-dark #toolbox-buttons .devtools-toolbarbutton[text-as-image][checked=true] {
-  background: rgba(29, 79, 115, .7); /* Select highlight blue */
+  background-color: rgba(29, 79, 115, .7); /* Select highlight blue */
   color: var(--theme-selection-color);
 }
 .theme-light .devtools-toolbarbutton:not([disabled])[label][checked=true],
 .theme-light .devtools-toolbarbutton:not([disabled])[label][open],
 .theme-light .devtools-button:not(:empty)[checked=true],
 .theme-light #toolbox-buttons .devtools-toolbarbutton[text-as-image][checked=true] {
-  background: rgba(76, 158, 217, .3); /* Select highlight blue */
+  background-color: rgba(76, 158, 217, .3); /* Select highlight blue */
 }
 
 :root {
