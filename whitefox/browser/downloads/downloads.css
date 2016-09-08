@@ -3,12 +3,20 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /*** Panel and outer controls ***/
 
+/*** This is introduced with Firefox 50. It is problematic for earlier Firefox. ****
 #downloadsPanel > .panel-arrowcontainer > .panel-arrowcontent {
+  overflow: hidden;
+  display: block;
+}
+***********************************************************************************/
+
+#downloadsPanel > .panel-arrowcontainer > .panel-arrowcontent,
+#downloadsPanel-multiView > .panel-viewcontainer > .panel-viewstack > .panel-subviews {
   padding: 0;
 }
 
@@ -16,6 +24,9 @@
   background-color: transparent;
   padding: 4px;
   color: inherit;
+  -moz-appearance: none;
+  margin: 0;
+  border: none;
 }
 
 #downloadsPanel:not([hasdownloads]) #downloadsListBox,
@@ -34,13 +45,13 @@
   cursor: pointer;
 }
 
-#downloadsPanel[keyfocus] #downloadsFooter > #downloadsHistory:focus {
+#downloadsPanel[keyfocus] #downloadsFooter #downloadsHistory:focus {
   outline: 1px -moz-dialogtext dotted;
   outline-offset: -1px;
 }
 
-#downloadsPanel:not([keyfocus])[hasdownloads] #downloadsFooter > #downloadsHistory:focus {
-  outline: 1px hsl(0,0%,30%) dotted;
+#downloadsPanel:not([keyfocus])[hasdownloads] #downloadsFooter #downloadsHistory:focus {
+  outline: 1px hsl(0,0%,55%) dotted;
   outline-offset: -1px;
 }
 
@@ -77,6 +88,60 @@
 
 #downloadsPanel:not([hasdownloads]) #downloadsFooter:hover:active{
   background-color: hsla(210,4%,10%,.05);
+}
+
+#downloadsFooterButtons > .downloadsPanelFooterButton {
+  min-height: 40px; /* This is for #downloadsHistory. Later it is reset for .downloadsDropmarker */
+  -moz-appearance: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+#downloadsFooterButtons > .downloadsDropmarkerSplitter {
+  display: none;
+}
+#downloadsFooterButtons > .downloadsDropmarker {
+  background-color: transparent;
+  width: 16px;
+  height: 16px;
+  margin-top: 24px !important; /* Override .plain's !important (if present!) --johnGraciliano */
+  -moz-margin-start: -16px !important;
+  margin-inline-start: -16px !important; /* Override .plain's !important (if present!) --johnGraciliano */
+  min-width: 0;
+  min-height: 0;
+  max-height: 16px;
+}
+
+#downloadsPanel[keyfocus] #downloadsFooterButtons > .downloadsDropmarker:focus {
+  outline: 1px -moz-dialogtext dotted;
+  outline-offset: -1px;
+}
+
+#downloadsPanel:not([keyfocus]) #downloadsFooterButtons > .downloadsDropmarker:focus {
+  outline: 1px hsl(0,0%,55%) dotted;
+  outline-offset: -1px;
+}
+
+.downloadsDropmarker > .button-box {
+  padding: 0;
+  border: 0;
+}
+
+.downloadsDropmarker > .button-box > .box-inherit {
+  display: none;
+}
+
+.downloadsDropmarker > .button-box > .button-menu-dropmarker {
+  /* This is to override the linux !important */
+  -moz-appearance: none !important;
+  display: -moz-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Override default icon size which is too small for this dropdown */
+.downloadsDropmarker > .button-box > .button-menu-dropmarker > .dropmarker-icon {
+  list-style-image: url("chrome://browser/skin/toolbarbutton-dropdown-arrow.png");
 }
 
 /*** Downloads Summary and List items ***/
