@@ -572,8 +572,11 @@ button#eyedropper-button::before {
   border-color: rgba(255,255,255,.8) !important;
 }
 
-:root.theme-light .spectrum-slider-control {
+:root.theme-light .spectrum-slider.spectrum-slider-control {
   box-shadow: 0 0 2px rgba(0,0,0,.662), 0 0 2.5px rgb(255,255,255) inset !important;
+}
+:root.theme-light .spectrum-alpha-handle.spectrum-slider-control {
+  box-shadow: 0 0 2px rgba(0,0,0,.9), 0 0 2.5px rgb(255,255,255) inset !important;
 }
 
 /********************************************/
