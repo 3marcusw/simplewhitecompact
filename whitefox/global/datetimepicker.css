@@ -21,6 +21,7 @@ datepicker, timepicker {
   -moz-appearance: textfield;
   cursor: text;
   -moz-margin-end: 2px;
+  margin-inline-end: 2px;
   border: 2px solid;
   -moz-border-top-colors: ThreeDShadow ThreeDDarkShadow;
   -moz-border-right-colors: ThreeDHighlight ThreeDLightShadow;
@@ -29,8 +30,14 @@ datepicker, timepicker {
   padding: 2px 0 3px 0;
   -moz-padding-start: 4px;
   -moz-padding-end: 2px;
+  padding-inline-start: 4px;
+  padding-inline-end: 2px;
   background-color: -moz-Field;
   color: -moz-FieldText;
+}
+.datetimepicker-input-box:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-right-colors: ThreeDShadow ThreeDDarkShadow;
 }
 
 .datetimepicker-input-subbox {
@@ -71,6 +78,10 @@ timepicker[disabled="true"] {
   -moz-border-left-colors: ThreeDShadow ThreeDDarkShadow;
   background-color: -moz-Field;
   color: -moz-FieldText;
+}
+.datepicker-mainbox:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-right-colors: ThreeDShadow ThreeDDarkShadow;
 }
 
 .datepicker-popupgrid > .datepicker-mainbox {

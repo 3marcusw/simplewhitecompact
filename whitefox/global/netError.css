@@ -41,6 +41,7 @@ html  {
 ul, ol {
   margin: 0;
   -moz-margin-start: 1.5em;
+  margin-inline-start: 1.5em;
   padding: 0;
 }
 
@@ -61,6 +62,7 @@ ul {
   border-radius: 10px;
   padding: 3em;
   -moz-padding-start: 30px;
+  padding-inline-start: 30px;
 }
 #errorPageContainer {
   background: url("chrome://global/skin/icons/warning-large.png") left 0 no-repeat -moz-Field;
@@ -75,13 +77,18 @@ ul {
 body[dir="rtl"] #errorPageContainer {
   background-position: right 0;
 }
+#errorPageContainer:dir(rtl) {
+  background-position: right 0;
+}
 
 #errorTitle {
   -moz-margin-start: 80px;
+  margin-inline-start: 80px;
 }
 
 :root:not(.blacklist) #errorLongContent {
   -moz-margin-start: 80px;
+  margin-inline-start: 80px;
 }
 
 :root:not(.blacklist) #errorShortDesc > p {
@@ -94,12 +101,14 @@ body[dir="rtl"] #errorPageContainer {
 
 :root:not(.blacklist) #errorLongDesc {
   -moz-padding-end: 3em;
+  padding-inline-end: 3em;
   font-size: 110%;
 }
 
 #errorTryAgain {
   margin-top: 2em;
   -moz-margin-start: 80px;
+  margin-inline-start: 80px;
 }
 
 #brand {
@@ -107,10 +116,15 @@ body[dir="rtl"] #errorPageContainer {
   right: 0;
   bottom: -1.5em;
   -moz-margin-end: 10px;
+  margin-inline-end: 10px;
   opacity: .4;
 }
 
 #brand:-moz-dir(rtl) {
+  right: auto;
+  left: 0;
+}
+#brand:dir(rtl) {
   right: auto;
   left: 0;
 }
@@ -160,6 +174,7 @@ body[dir="rtl"] #errorPageContainer {
 :root.blacklist ul,
 :root.blacklist ol {
   -moz-margin-start: 1em;
+  margin-inline-start: 1em;
 }
 
 :root.blacklist ul {
@@ -178,7 +193,9 @@ body[dir="rtl"] #errorPageContainer {
   background: url("chrome://global/skin/icons/blocked.svg") left 2px no-repeat;
   background-size: 45px; /* it was 3em */
   -moz-margin-start: -5em;
+  margin-inline-start: -5em;
   -moz-padding-start: 5em;
+  padding-inline-start: 5em;
 }
 
 :root.blacklist #errorTitle h1 {
@@ -190,13 +207,18 @@ body[dir="rtl"] #errorPageContainer {
 :root.blacklist #errorTitle:-moz-dir(rtl) {
   background-position: right 2px;
 }
+:root.blacklist #errorTitle:dir(rtl) {
+  background-position: right 2px;
+}
 
 @media (max-width: 675px) {
   :root.blacklist #errorTitle {
     padding-top: 0;
     background-image: none;
     -moz-padding-start: 0;
+    padding-inline-start: 0;
     -moz-margin-start: 0;
+    margin-inline-start: 0;
   }
 }
 
