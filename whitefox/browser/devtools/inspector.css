@@ -251,6 +251,14 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 #inspector-element-add-button {
   list-style-image: url(images/add.svg);
 }
+.theme-firebug #inspector-element-add-button::before {
+  background-image: url(images/firebug/add.svg);
+  filter: none;
+}
+.theme-firebug #inspector-element-add-button > image {
+  list-style-image: url(images/firebug/add.svg);
+  filter: none
+}
 
 /* Set the minimum width for the side bar so, all tabs are
   properly visible. The value can be decreased when bug 1281789
@@ -290,7 +298,18 @@ div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
 .theme-light .tabs nav.tabs-navigation {
   background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
+.theme-firebug .tabs nav.tabs-navigation {
+/*  background-color: rgb(219, 234, 249);  *** This fixed this is fixed in variables.css --johnGraciliano */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+}
 
+/* For Firefox 48-49 */
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected] {
+  background-color: rgb(247, 251, 254);
+}
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected]#sidebar-tab-layoutview {
+  background-color: var(--theme-sidebar-background);
+}
 
 /* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
 /* Make sure panel content takes entire vertical space.
