@@ -20,6 +20,12 @@
       stroke: none;
       fill: #9C9C9C;
     }
+    .hiLiteOutline {
+      stroke-width: 1;
+      stroke: HighlightText;
+      fill: none;
+      opacity: .7;
+    }
   </style>
   <defs>
 
@@ -36,6 +42,9 @@
 
   <g id="defaultFavicon" class="t">
     <use xlink:href="#default-shape"/>
+  </g>
+  <g id="defaultFaviconHL" class="t">
+    <use xlink:href="#default-shape" class="hiLiteOutline"/>
   </g>
   <g id="tag" class="t">
     <use xlink:href="#tag-shape"/>
