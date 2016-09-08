@@ -147,7 +147,7 @@
   margin: 0;
   padding: 4px 0;
   min-width: auto;
-  width: 38px;
+  width: var(--identity-popup-expander-width, 38px);
   border: 0 none;
   -moz-appearance: none;
   background-image: url("chrome://browser/skin/controlcenter/arrow-subview.svg"),
@@ -200,6 +200,8 @@
 
 /* CONTENT */
 
+.identity-popup-permission-label,
+.identity-popup-permission-state-label,
 #identity-popup-security-content > description,
 #identity-popup-security-descriptions > description,
 #identity-popup-securityView-header > description,
@@ -215,6 +217,13 @@
 .identity-popup-headline {
   margin: 2px 0 4px;
   font-size: 150%;
+}
+
+.identity-popup-headline.host {
+  word-wrap: break-word;
+  /* 1em + 2em + 24px is #identity-popup-security-content padding
+   * 30em is .panel-mainview:not([panelid="PanelUI-popup"]) width */
+  max-width: calc(30rem - 3rem - 24px - var(--identity-popup-expander-width, 38px));
 }
 
 .identity-popup-warning-gray {
@@ -408,6 +417,8 @@ description#identity-popup-content-verifier,
 .identity-popup-permission-icon {
   width: 16px;
   height: 16px;
+  -moz-margin-start: calc(-1em - 16px);
+  -moz-margin-end: 1em;
   margin-inline-start: calc(-1em - 16px); /*  This replaces margin-inline-start for #identity-popup-permission-list in Firefox 50 classic theme */
   margin-inline-end: 1em; /* This replaces margin-inline-start for .identity-popup-permission-label in Firefox 50 classic theme */
 }
@@ -419,6 +430,8 @@ description#identity-popup-content-verifier,
 }
 
 .identity-popup-permission-state-label {
+  -moz-margin-end: 5px;
+  margin-inline-end: 5px;
   text-align: end;
 }
 
@@ -434,6 +447,7 @@ description#identity-popup-content-verifier,
 .identity-popup-permission-remove-button > .button-box {
   border-width: 0;
   padding: 0;
+  -moz-appearance: none;
 }
 
 .identity-popup-permission-remove-button > .button-box > .button-icon {
@@ -449,6 +463,10 @@ description#identity-popup-content-verifier,
 
 .identity-popup-permission-remove-button:hover > .button-box > .button-icon {
   list-style-image: url(panel-icons.svg#cancel);
+}
+
+.identity-popup-permission-remove-button:-moz-focusring > .button-box > .button-icon {
+  outline: 1px -moz-dialogtext dotted;
 }
 
 /* FOOTER BUTTONS */
