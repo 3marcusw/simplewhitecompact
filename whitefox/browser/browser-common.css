@@ -1853,7 +1853,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-an
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano */
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-container,
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-  padding: 3px 7px;  /* This is for 16px × 16px icon buttons!  It may be best also add: 'max-height: 16px; max-width 16px;'  --johnGraciliano */
+  padding: calc(var(--toolbarbutton-vertical-inner-padding) + 1px) 7px;  /* This is for 16px × 16px icon buttons!  It may be best also add: 'max-height: 16px; max-width 16px;'  --johnGraciliano */
 }
 
 /*****  All this taken from default theme shall be gone --johnGraciliano *******%
@@ -5247,8 +5247,13 @@ menuitem#BMB_pocket {
 }
 
 /***********  Full Screen Warning for Firefox 43.0+  ****************/
+/*
+ *  html|*#fullscreen-warning... selectors are for Firefox 43 through 49
+ *  html|*.pointerlockfswarning.. selectors are for Firefox 50 and later.
+ */
 
-html|*#fullscreen-warning {
+html|*#fullscreen-warning,
+html|*.pointerlockfswarning {
   align-items: center;
   background: rgba(34,34,34,.625);
   border-width: 0;
@@ -5259,27 +5264,33 @@ html|*#fullscreen-warning {
   font: message-box;
 }
 
-html|*#fullscreen-warning::before {
+html|*#fullscreen-warning::before,
+html|*.pointerlockfswarning::before {
   margin: 0;
   -moz-margin-end: -10px;
   width: 18px; height: 18px;
 }
 
 html|*#fullscreen-warning.verifiedIdentity::before,
-html|*#fullscreen-warning.verifiedDomain::before {
+html|*#fullscreen-warning.verifiedDomain::before,
+html|*.pointerlockfswarning[data-identity="verifiedIdentity"]::before,
+html|*.pointerlockfswarning[data-identity="verifiedDomain"]::before {
   content:"";
   background-image: url("chrome://browser/skin/fullscreen/secure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
   background-size: 100%, 100%;
 }
 
-html|*#fullscreen-warning.unknownIdentity::before {
+html|*#fullscreen-warning.unknownIdentity::before,
+html|*.pointerlockfswarning[data-identity="unknownIdentity"]::before {
   content:"";
   background-image: url("chrome://browser/skin/fullscreen/insecure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
   background-size: 100%, 100%;
 }
 
 html|*#fullscreen-domain-text,
-html|*#fullscreen-generic-text {
+html|*#fullscreen-generic-text,
+html|*.pointerlockfswarning-domain-text,
+html|*.pointerlockfswarning-generic-text {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
@@ -5287,12 +5298,14 @@ html|*#fullscreen-generic-text {
   margin: 0 16px;
 }
 
-html|*#fullscreen-domain {
+html|*#fullscreen-domain,
+html|*.pointerlockfswarning-domain {
   font-weight: bolder;
   margin: 0;
 }
 
-html|*#fullscreen-exit-button {
+html|*#fullscreen-exit-button,
+html|*.pointerlockfswarning-exit-button {
   padding: 0 3px;
   margin: 0;
   -moz-margin-start: -8px;
@@ -5776,8 +5789,8 @@ svg|line.css-transform-line {
 }
 
 :root[devtoolstheme="dark"] #developer-toolbar {
-  --gcli-input-background: #343c45; /* --theme-toolbar-background */
-  --gcli-background-color: #343c45; /* --theme-toolbar-background */
+  --gcli-input-background: #2e343c; /* --theme-toolbar-background (it was #343c45) */
+  --gcli-background-color: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
   --gcli-input-color: #b6babf; /* --theme-body-color-alt */
   --gcli-border-color: black; /* --theme-splitter-color */
