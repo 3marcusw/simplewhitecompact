@@ -52,6 +52,7 @@
   width: 10px;
   height: 10px;
   position: absolute;
+  -moz-margin-start: -15px;
   margin-inline-start: -15px;
   margin-top: 3px;
 }
@@ -87,6 +88,8 @@
 }
 
 .theme-firebug #sources-pane .dbg-breakpoint-checkbox {
+  -moz-padding-end: 0;
+  -moz-margin-end: 0;
   padding-inline-end: 0;
   margin-inline-end: 0;
 }
@@ -199,6 +202,12 @@
   #black-boxed-message-button > .button-box > .button-icon {
     background-image: url(images/debugger-blackbox@2x.png);
   }
+}
+
+.theme-firebug #black-boxed-message-button > .button-box > .button-icon {
+  background-image: url(images/firebug/debugger-blackbox.svg);
+  background-size: auto;
+  filter: none;
 }
 
 /* Black box message and source progress meter */

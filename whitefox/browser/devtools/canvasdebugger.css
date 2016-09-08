@@ -32,6 +32,10 @@
   margin: 0;
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+.theme-firebug #empty-notice > button > hbox > image {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+  filter: none;
+}
 
 #empty-notice > button .button-text {
   display: none;
@@ -51,9 +55,20 @@
 #record-snapshot {
   list-style-image: url("images/profiler-stopwatch.svg");
 }
+.theme-firebug #record-snapshot > image {
+  list-style-image: url("images/firebug/profiler-stopwatch.svg");
+  filter: none;
+}
+.theme-firebug #record-snapshot[checked=true] > image {
+  list-style-image: url("images/firebug/profiler-stopwatch.svg#active");
+}
 
 #import-snapshot {
   list-style-image: url("images/import.svg");
+}
+.theme-firebug #import-snapshot > image {
+  list-style-image: url("images/firebug/import.svg");
+  filter: none;
 }
 
 

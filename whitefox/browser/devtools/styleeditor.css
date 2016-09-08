@@ -23,9 +23,17 @@ li:hover > hgroup > .stylesheet-more > h3 > .stylesheet-saveButton {
 .style-editor-newButton {
   list-style-image: url(images/add.svg);
 }
+.theme-firebug#style-editor-chrome-window .style-editor-newButton > image {
+  list-style-image: url(images/firebug/add.svg);
+  filter: none;
+}
 
 .style-editor-importButton {
   list-style-image: url(images/import.svg);
+}
+.theme-firebug#style-editor-chrome-window .style-editor-importButton > image {
+  list-style-image: url(images/firebug/import.svg);
+  filter: none;
 }
 
 @supports (box-sizing: padding-box) {  /* Firefox < 50 */
