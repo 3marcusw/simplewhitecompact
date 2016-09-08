@@ -82,10 +82,14 @@ div#sidebar-panel-fontinspector {  /* Firefox >= 50 */
   right: auto;
   left: 16px;
 }
+/*  This is corrected in variables.css --johnGraciliano ***
 .theme-firebug #font-showall {
   background-color: rgb(219, 234, 249);
 }
+*/
 #font-showall:hover:active {
+  -moz-padding-start: 7px;
+  -moz-padding-end: 5px;
   padding-inline-start: 7px;
   padding-inline-end: 5px;
 }
