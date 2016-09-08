@@ -1,0 +1,139 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16">
+  <defs>
+    <linearGradient id="c">
+      <stop offset="0" stop-color="#dd8506"/>
+      <stop offset="1" stop-color="#f4a24b"/>
+    </linearGradient>
+    <linearGradient id="b">
+      <stop offset="0" stop-color="#e68507"/>
+      <stop offset="1" stop-color="#f4b65f"/>
+    </linearGradient>
+    <linearGradient id="a">
+      <stop offset="0" stop-color="#f3a952"/>
+      <stop offset="1" stop-color="#fadbba"/>
+    </linearGradient>
+    <linearGradient id="j">
+      <stop offset="0" stop-color="#bbb"/>
+      <stop offset="1" stop-color="#ddd"/>
+    </linearGradient>
+    <linearGradient x1="9.06" y1="13.305" x2="9.06" y2="1.704" id="d" xlink:href="#a" gradientUnits="userSpaceOnUse"/>
+    <linearGradient x1="3.865" y1="14.919" x2="3.865" y2="13.049" id="f" xlink:href="#b" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.9974 0 0 1.0026 -1.01 -.02)"/>
+    <!--linearGradient x1="14.005" y1="14.902" x2="14.005" y2="13.07" id="g" xlink:href="#b" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.9974 0 0 1.0026 -.959 -.02)"/-->
+    <linearGradient x1="14.005" y1="14.902" x2="14.005" y2="13.07" id="g" xlink:href="#j" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.9974 0 0 1.0026 -.959 -.02)"/>
+    <linearGradient x1="10.576" y1="11.641" x2=".835" y2="1.901" id="e" xlink:href="#c" gradientUnits="userSpaceOnUse"/>
+
+
+
+
+    <linearGradient id="ee">
+      <stop offset="0" stop-color="#434f5d"/>
+      <stop offset="1" stop-color="#65788b"/>
+    </linearGradient>
+    <linearGradient id="dd">
+      <stop offset="0" stop-color="#787878"/>
+      <stop offset="1" stop-color="#8c8c8c"/>
+    </linearGradient>
+    <linearGradient id="cc">
+      <stop offset="0" stop-color="#8c8c8c"/>
+      <stop offset="1" stop-color="#a0a0a0"/>
+    </linearGradient>
+    <linearGradient id="bb">
+      <stop offset="0" stop-color="#b6b38a"/>
+      <stop offset="1" stop-color="#d3d2bd"/>
+    </linearGradient>
+    <linearGradient id="aa">
+      <stop offset="0" stop-color="#ecebe0"/>
+      <stop offset="1" stop-color="#fbfbf9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient gradientTransform="translate(-1.018 -.726)" gradientUnits="userSpaceOnUse" y2="4.549" x2="4.08" y1="14.382" x1="13.934" id="ff" xlink:href="#aa"/>
+    <linearGradient gradientTransform="translate(-1.018 -.726)" gradientUnits="userSpaceOnUse" y2="4.836" x2="1.893" y1="16.614" x1="13.78" id="gg" xlink:href="#bb"/>
+    <linearGradient y2="2.41" x2="4.751" y1="4.023" x1="5.458" gradientTransform="translate(-1.018 -1.026)" gradientUnits="userSpaceOnUse" id="hh" xlink:href="#cc"/>
+    <linearGradient y2=".94" x2="4.252" y1="3.313" x1="5.323" gradientTransform="translate(0 -.3)" gradientUnits="userSpaceOnUse" id="ii" xlink:href="#dd"/>
+    <linearGradient gradientUnits="userSpaceOnUse" y2="9.29" x2="11.377" y1="9.29" x1="4.575" id="jj" xlink:href="#ee"/>
+
+
+
+
+
+
+
+    <linearGradient id="jb">
+      <stop offset="0" stop-color="#2959b8"/>
+      <stop offset="1" stop-color="#83ace8"/>
+    </linearGradient>
+    <linearGradient id="ja">
+      <stop offset="0" stop-color="#5c87d0"/>
+      <stop offset="1" stop-color="#abc7ed"/>
+    </linearGradient>
+    <linearGradient x1="1.472" y1="-4.098" x2="1.472" y2="6.772" id="jc" xlink:href="#ja" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.65609 0 0 -1.01925 4.494 9.401)"/>
+    <linearGradient x1="10.18" y1="8.767" x2="3.926" y2="2.99" id="jd" xlink:href="#jb" gradientUnits="userSpaceOnUse"/>
+
+
+
+
+
+
+    </defs>
+  <!--path d="M.534 2.46  v-1v1 h3.864C7.45 2.46 9.5 4.288 9.5 7.028  h1h-1
+           v3.565
+           h1.961
+           L8.076 13.5l-3.382-2.914h1.899V7.74   h1h-1
+           c0-1.554-.866-2.492-2.966-2.492H.534  v1v-1z"
+        fill="url(#d)" stroke="url(#e)" stroke-linejoin="round"/-->
+  <!--path d="M9.5 7.028
+           v3.565
+           h1.961
+           L8.076 13.5l-3.382-2.914h1.899v-3.565z"
+        fill="url(#d)" stroke="url(#e)" stroke-linejoin="round"/-->
+
+
+
+
+  <!--path style="marker:none" color="#000" overflow="visible" fill="url(#ff)" stroke="url(#gg)" stroke-linejoin="round" d="M2 2.75h12v12H2z"/-->
+
+
+
+
+  <path style="marker:none" color="#000" overflow="visible" fill="url(#ff)" stroke="url(#gg)" stroke-linejoin="round" d="M2 8.75h12v6H2z"/>
+
+
+
+
+  <!--path fill="url(#g)" d="M1 8h14l-2 6h-10z"/-->
+
+  <!--path d="M9.5 11.028
+           v-5.565
+           h1.961
+           l-3.382-2.914l-3.382+2.914h1.899v5.565z"
+        fill="url(#d)" stroke="url(#e)" stroke-linejoin="round"/-->
+
+
+
+
+
+
+  <path d="M9.5 11.028
+           v-5.565
+           h1.961
+           l-3.382-2.914l-3.382+2.914h1.899v5.565z"
+        fill="url(#jc)" stroke="url(#jd)" stroke-linejoin="round"/>
+
+  <!--path fill="url(#f)" d="M1 13h4v2H1z"/-->
+  <!--path fill="url(#g)" d="M11 13h4v2h-4z"/-->
+
+
+
+
+
+
+  <!--path style="marker:none" d="M4 .75c-.553 0-1 .672-1 1.5 0 .829.399 1.474 1 1.5.106.006.2-.08.2-.25 0-.168-.11-.25-.2-.25-.277 0-.5-.447-.5-1 0-.552.223-1 .5-1 .275 0 .5.448.5 1H5c0-.828-.448-1.5-1-1.5z" id="kk" color="#000" overflow="visible" fill="url(#hh)" stroke="url(#ii)" stroke-width=".2" stroke-linejoin="round"/-->
+
+
+
+
+
+
+</svg>

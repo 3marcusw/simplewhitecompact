@@ -1,0 +1,37 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="#babec3">
+  <defs>
+    <linearGradient id="la">
+      <stop offset="0" stop-color="#505050"/>
+      <stop offset="1" stop-color="#787878"/>
+    </linearGradient>
+    <linearGradient gradientTransform="translate(.078 -1.018) scale(1.07692)" gradientUnits="userSpaceOnUse" y2="2.767" x2="1.624" y1="14.154" x1="13.01" id="ld" xlink:href="#la"/>
+
+    <linearGradient id="aa">
+      <stop offset="0" stop-color="#ecebe0"/>
+      <stop offset="1" stop-color="#fbfbf9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient gradientTransform="translate(-1.018 -.726)" gradientUnits="userSpaceOnUse" y2="4.549" x2="4.08" y1="14.382" x1="13.934" id="ff" xlink:href="#aa"/>
+
+
+    <linearGradient id="ge">
+      <stop offset="0" stop-color="#65808b"/>
+      <stop offset="1" stop-color="#7c939c"/>
+    </linearGradient>
+    <linearGradient xlink:href="#ge" id="gf" x1="9.212" y1="12.437" x2="6.127" y2="3.047" gradientUnits="userSpaceOnUse"/>
+
+
+  </defs>
+
+  <circle cx="5.7" cy="9" r="4.5" fill="url(#ff)"/>
+
+  <circle cx="10.7" cy="9" r="4.5" fill="url(#gf)"/>
+
+  <circle cx="5.7" cy="9" r="4.5" stroke="url(#ld)" fill="url(#ff)" fill-opacity=".8"/>
+
+  <circle cx="10.7" cy="9" r="4.5" stroke="url(#ld)" fill="none"/>
+
+
+</svg>

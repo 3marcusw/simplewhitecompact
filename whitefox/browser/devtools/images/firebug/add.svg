@@ -1,0 +1,27 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="c0">
+      <stop offset="0" stop-color="#282828"/>
+      <stop offset="1" stop-color="#505050"/>
+    </linearGradient>
+    <linearGradient id="c">
+      <stop offset="0" stop-color="#282828"/>
+      <stop offset="1" stop-color="#aaa"/>
+    </linearGradient>
+    <linearGradient id="d">
+      <stop offset="0"/>
+      <stop offset="1" stop-color="#3c3c3c"/>
+    </linearGradient>
+    <linearGradient x1="7.771" y1="13.451" x2="7.771" y2="3.941" id="g" xlink:href="#c" gradientUnits="userSpaceOnUse"/>
+    <linearGradient x1="7.21" y1="13.411" x2="7.21" y2="3.037" id="h" xlink:href="#d" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <g fill="#babec3">
+    <path d="M 3.2,7.2  h 4  v -4  h 2  v 4  h 4  v 2  h -4  v 4  h -2  v -4  h -4  v -2  z"
+          stroke-linejoin="round"
+          style="marker:none" color="#000" fill="url(#g)" stroke="url(#h)" stroke-width=".4" overflow="visible"/>
+
+  </g>
+</svg>
