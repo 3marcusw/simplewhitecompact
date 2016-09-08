@@ -28,6 +28,14 @@
   --row-hover-background-color: rgba(76,158,217,0.2);
 }
 
+/*
+ * DE-XUL: Set a sidebar width because inline XUL components will cause the flex
+ * to overflow if dynamically sized.
+ */
+.performance-tool {
+  --sidebar-width: 185px;
+}
+
 /**
  * A generic class to hide elements, replacing the `element.hidden` attribute
  * that we use to hide elements that can later be active
@@ -103,15 +111,63 @@
 #select-optimizations-view {
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+.theme-firebug #select-optimizations-view {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+}
+.theme-firebug #select-optimizations-view > image {
+  filter: none;
+}
 
 /* Recording buttons */
+
+#clear-button::before {
+  background-image: url(images/clear.svg);
+}
+.theme-firebug #clear-button::before {
+  background-image: url(images/firebug/clear.svg);
+  filter: none;
+}
+
+#main-record-button::before {
+  background-image: url(images/profiler-stopwatch.svg);
+}
+.theme-firebug #main-record-button::before {
+  background-image: url(images/firebug/profiler-stopwatch.svg);
+  filter: none;
+}
+.theme-firebug #main-record-button[checked]::before {
+  background-image: url(images/firebug/profiler-stopwatch.svg#active);
+}
+
+#import-button::before {
+  background-image: url(images/import.svg);
+}
+.theme-firebug #import-button::before {
+  background-image: url(images/firebug/import.svg);
+  filter: none;
+}
 
 #main-record-button {
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+.theme-firebug #main-record-button {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+}
+.theme-firebug #main-record-button[checked] {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg#active);
+}
+.theme-firebug #main-record-button > image {
+  filter: none;
+}
 
 #import-button {
   list-style-image: url(images/import.svg);
+}
+.theme-firebug #import-button {
+  list-style-image: url(images/firebug/import.svg);
+}
+.theme-firebug #import-button > image {
+  filter: none;
 }
 
 #clear-button[label] { /* This will be transformed into an icon only button! --johnGraciliano */
@@ -181,8 +237,24 @@
 /* Sidebar & recording items */
 
 #recordings-pane {
-  border-inline-end: 1px solid var(--theme-splitter-color);
   -moz-border-end: 1px solid var(--theme-splitter-color);
+  border-inline-end: 1px solid var(--theme-splitter-color);
+  width: calc(var(--sidebar-width) - 0);  /******************************************************* REVISIT --johnGraciliano ***/
+}
+
+#recording-controls-mount {
+  width: calc(var(--sidebar-width) - 1px);  /********************************************************* REVISIT --johnGraciliano ***/
+}
+
+#recording-controls-mount > div {
+  width: calc(var(--sidebar-width) - 1px);  /********************************************************* REVISIT --johnGraciliano ***/
+}
+
+/*
+ * DE-XUL: The height of the toolbar is not correct without tweaking the line-height.
+ */
+#recordings-pane .devtools-toolbar {  /********************************************************* REVISIT --johnGraciliano ***/
+  line-height: 0;
 }
 
 #recordings-list {
@@ -958,4 +1030,81 @@ description.opt-icon {
 }
 description.opt-icon::before {
   margin: 1px 4px 0px 0px;
+}
+
+
+/*** The following may eventually be moved (merged) into toolbars.css ***/
+/* .theme-light was inserted into many selectors to override the .theme-light selectors in toolbars.css */
+#recordings-pane {
+  min-width: 100px;
+}
+.theme-firebug #performance-toolbar-controls-detail-views{
+  -moz-margin-start: 2px;
+  margin-inline-start: 2px;
+}
+
+.theme-firebug #performance-toolbar-controls-detail-views > .devtools-toolbarbutton {
+  margin: 0;
+  -moz-margin-end: 1px;
+  margin-inline-end: 1px;
+  padding-bottom: 2px;
+}
+
+.theme-firebug #performance-toolbar-controls-detail-views > .devtools-toolbarbutton:not(:hover):not([checked=true]):first-child,
+.theme-firebug #performance-toolbar-controls-detail-views > .devtools-toolbarbutton:not(:hover):not([checked=true]) + .devtools-toolbarbutton:not(:hover):not([checked=true]) {
+  -moz-border-start-color: rgba(0,0,0,0.125);
+  border-inline-start-color: rgba(0,0,0,0.125);
+}
+
+/*** The following may eventually be moved (merged) into toolbars.css ***/
+/* .theme-light was inserted into many selectors to override the .theme-light selectors in toolbars.css */
+
+/* Text-only buttons */
+.theme-light.theme-firebug .devtools-toolbarbutton[label]:not([text-as-image]):not([type=menu-button]),
+.theme-light.theme-firebug .devtools-toolbarbutton[data-text-only],
+.theme-light.theme-firebug #toolbox-buttons .devtools-toolbarbutton[text-as-image] {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
+/* Text-only button states */
+.theme-light.theme-firebug .devtools-button:not(:empty):not([disabled]):hover,
+.theme-light.theme-firebug #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover,
+.theme-light.theme-firebug .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6) inset, 0 0 1px rgba(255, 255, 255, 0.6) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+.theme-light.theme-firebug .devtools-button:not(:empty):not([disabled]):hover:active,
+.theme-light.theme-firebug #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
+.theme-light.theme-firebug .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
+.theme-light.theme-firebug .devtools-toolbarbutton:not([disabled])[label][checked=true],
+.theme-light.theme-firebug .devtools-toolbarbutton:not([disabled])[label][open],
+.theme-light.theme-firebug .devtools-button:not(:empty)[checked=true],
+.theme-light.theme-firebug #toolbox-buttons .devtools-toolbarbutton[text-as-image][checked=true] {
+  background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+
+/* This is to prevent the preceeding rules from affecting a button while the other similar buttons are not ready. */
+.theme-firebug #recordings-controls > #import-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  /* margin: 0 1px; ** This change will be needed as part of updating the buttons (when the preceeding correction becomes incorrect). */
 }
