@@ -153,10 +153,15 @@ toolbarbutton.bookmark-item > menupopup {
 }
 
 .tabbrowser-tab,
-.tabs-newtab-button,
-.ac-url-text,
-.ac-action-text {
+.tabs-newtab-button {
   font: message-box;
+}
+
+@supports not (line-height:calc(1px)) { /* Prior to Firefox 48.0 */
+  .ac-url-text,
+  .ac-action-text {
+    font: message-box;
+  }
 }
 
 #BMB_bookmarksPopup[side="top"],
@@ -201,5 +206,12 @@ toolbarbutton.bookmark-item > menupopup {
   #PanelUI-customize > .toolbarbutton-icon,
   #PanelUI-help > .toolbarbutton-icon {
     width: 16px;
+  }
+}
+
+@supports (line-height:calc(1px)) { /* Firefox 48.0 and later */
+  /* Force the base font size for entries in the suggestion panel of the location bar to be 12px (for URLs, actions, etc.) --johnGraciliano */
+  .autocomplete-richlistitem {
+    font-size: 12px;
   }
 }
