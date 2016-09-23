@@ -169,6 +169,23 @@
   filter: none;
 }
 
+.theme-firebug #toggle-breakpoints[checked] {
+  list-style-image: none;
+}
+.theme-firebug #toggle-breakpoints[checked]::before {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  content: "";
+  background-image: url(images/firebug/breakOn/breakOnError.svg),
+                    url(images/firebug/breakOn/breakOnError.svg),
+                    url(images/firebug/debugger-toggleBreakpoints.svg#DIM);
+  background-size: 16px, 16px, 14px;
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: no-repeat;
+  margin-inline-end: -16px;
+}
+
 #toggle-promise-debugger {
   /* TODO Bug 1186119: Add a toggle promise debugger image */
 }
