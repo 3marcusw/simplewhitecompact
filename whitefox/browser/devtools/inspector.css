@@ -47,7 +47,7 @@ div.devtools-main-content { /* For Firefox 51.  Previously this was vbox.devtool
 
 #inspector-splitter-box { /* Posibly new in Firefox 51. It is html:div */
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
 
 /* Minimum width for the Inspector main (uncontrolled) area. */
@@ -175,6 +175,10 @@ div#inspector-breadcrumbs { /* For late FF49.  The tag 'div' makes it distinct f
   left: 0;
   bottom: 0;
   right: 0;
+}
+.theme-firebug div#inspector-breadcrumbs {
+  top: 2px;
+  bottom: auto;
 }
 
 div#inspector-breadcrumbs .scrollbutton-up,
@@ -338,6 +342,10 @@ div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
 }
 
 /* Markup Box */
+
+iframe {
+  border: 0;
+}
 
 #markup-box {
   width: 100%;
