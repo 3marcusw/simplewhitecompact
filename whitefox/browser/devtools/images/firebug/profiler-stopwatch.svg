@@ -3,86 +3,60 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
   <defs>
-    <linearGradient id="c">
+    <linearGradient id="marksColors">
       <stop offset="0" stop-color="#dd8506"/>
       <stop offset="1" stop-color="#f4a24b"/>
     </linearGradient>
-    <linearGradient id="b">
-      <stop offset="0" stop-color="#e68507"/>
-      <stop offset="1" stop-color="#f4b65f"/>
-    </linearGradient>
-    <linearGradient id="a">
+    <linearGradient id="caseColors">
       <stop offset="0" stop-color="#f3a952"/>
       <stop offset="1" stop-color="#fadbba"/>
     </linearGradient>
-    <linearGradient x1="9.06" y1="13.305" x2="9.06" y2="1.704" id="d" xlink:href="#a" gradientUnits="userSpaceOnUse"/>
-    <linearGradient x1="3.865" y1="14.919" x2="3.865" y2="13.049" id="f" xlink:href="#b" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.9974 0 0 1.0026 -1.01 -.02)"/>
-    <linearGradient x1="10.576" y1="11.641" x2=".835" y2="1.901" id="e" xlink:href="#c" gradientUnits="userSpaceOnUse"/>
-
-
-
-
-
-    <linearGradient id="jb">
+    <linearGradient x1="9.06" y1="13.305" x2="9.06" y2="1.704" id="caseGradient" xlink:href="#caseColors" gradientUnits="userSpaceOnUse"/>
+    <linearGradient x1="10.576" y1="11.641" x2=".835" y2="1.901" id="marksGradient" xlink:href="#marksColors" gradientUnits="userSpaceOnUse"/>
+    <linearGradient id="marksActiveColors">
       <stop offset="0" stop-color="#2959b8"/>
       <stop offset="1" stop-color="#83ace8"/>
     </linearGradient>
-    <linearGradient id="ja">
+    <linearGradient id="caseActiveColors">
       <stop offset="0" stop-color="#5c87d0"/>
       <stop offset="1" stop-color="#abc7ed"/>
     </linearGradient>
-    <linearGradient x1="1.472" y1="-4.098" x2="1.472" y2="6.772" id="jc" xlink:href="#ja" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.65609 0 0 -1.01925 4.494 9.401)"/>
-    <linearGradient x1="10.18" y1="8.767" x2="3.926" y2="2.99" id="jd" xlink:href="#jb" gradientUnits="userSpaceOnUse"/>
-
-
-
-
+    <linearGradient x1="1.472" y1="-4.098" x2="1.472" y2="6.772" id="caseActiveGradient" xlink:href="#caseActiveColors" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.65609 0 0 -1.01925 4.494 9.401)"/>
+    <linearGradient x1="10.18" y1="8.767" x2="3.926" y2="2.99" id="marksActiveGradient" xlink:href="#marksActiveColors" gradientUnits="userSpaceOnUse"/>
   </defs>
   <style>
     path {
-      fill: url(#d);
-      stroke: url(#e);
+      fill: url(#caseGradient);
+      stroke: url(#marksGradient);
     }
     g.marks path {
-      fill: url(#e);
+      fill: url(#marksGradient);
       stroke: none;
     }
     path.foot {
-      fill: url(#d);
+      fill: url(#caseGradient);
       stroke: none;
     }
     #active:target path {
-      fill: url(#jc);
-      stroke: url(#jd);
+      fill: url(#caseActiveGradient);
+      stroke: url(#marksActiveGradient);
     }
     #active:target g.marks path {
-      fill: url(#jd);
+      fill: url(#marksActiveGradient);
       stroke: none;
     }
     #active:target path.foot {
-      fill: url(#jc);
+      fill: url(#caseActiveGradient);
       stroke: none;
     }
   </style>
-
-
   <g id="active">
-    <!--path d="m8,1c-3.9,0-7,3.1-7,7s3.1,7 7,7c3.9,0 7-3.1 7-7s-3.1-7-7-7zm-.1,12c-2.8,0-5-2.2-5-5 0-2.8 2.2-5 5-5s5,2.2 5,5c0,2.8-2.2,5-5,5z"/-->
-
-
-
     <circle cx="8" cy="8" r="6" fill="#fff"/>
-
-
     <path d="m8,.6a 7.4,7.4 0 0,0 -7.4,7.4a 7.4,7.4 0 0,0 7.4,7.4a 7.4,7.4 0 0,0 7.4,-7.4a 7.4,7.4 0 0,0 -7.4,-7.4
              zm-0,12.7a5.4,5.4 0 0,1 -5.4-5.4 a5.4,5.4 0 0,1  5.4-5.4a5.4,5.4 0 0,1 5.4,5.4a5.4,5.4 0 0,1 -5.4,5.4z"
           stroke-width=".4" stroke-linejoin="round"/>
-
-
-
     <g class="marks">
       <path d="m11.3,4.6l-3.9,2.5 1.5,1.4 2.4-3.9z"/>
-      <!--path d="m8,6.9c.6,0 1.1,.5 1.1,1.1 0,.6-.5,1.1-1.1,1.1-.6,0-1.1-.5-1.1-1.1 0-.6 .5-1.1 1.1-1.1z"   fill="url(#e)"/-->
       <path d="m8,6.9a1.1,1.1 0 0,1 1.1,1.1 a1.1,1.1 0 0,1 -1.1,1.1a1.1,1.1 0 0,1 -1.1-1.1 a1.1,1.1 0 0,1  1.1-1.1z"/>
     </g>
     <path class="foot" opacity=".5" d="m4.6,10c.7,1.2 2,2 3.4,2 1.5,0 2.7-.8 3.4-2h-6.8z"/>
