@@ -261,6 +261,7 @@ button#toolbox-dock-bottom-minimize::before, /* button#toolbox-dock-bottom-minim
 
 button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom-minimize should have class .devtools-button --johnGraciliano */
 .devtools-button:hover:empty::before,
+.devtools-button.checked:empty::before,  /* It may be best to remove this selector. --johnGraciliano */
 .devtools-button[checked]:empty::before,  /* It may be best to remove this selector. --johnGraciliano */
 .devtools-button[open]:empty::before,     /* It may be best to remove this selector. --johnGraciliano */
 .devtools-toolbarbutton:not([label]):hover > image,
@@ -272,12 +273,13 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 .devtools-button:disabled,
 .devtools-button[disabled],
 .devtools-toolbarbutton[disabled] {
+  pointer-events: none;
   opacity: 0.5 !important;
 }
 
 .devtools-button[checked]:empty::before,
 .devtools-button[open]:empty::before,
-.devtools-button.checked::before,
+.devtools-button.checked:empty::before, /* :empty is missing in the default theme ?!?! ****************************************************/
 .devtools-toolbarbutton:not([label])[checked=true] > image,
 .devtools-toolbarbutton:not([label])[open=true] > image {
   filter: url(images/filters.svg#checked-icon-state);
@@ -285,6 +287,7 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 
 /* Icon-and-text buttons */
 .devtools-toolbarbutton.icon-and-text .toolbarbutton-text {
+  -moz-margin-start: .5em !important;
   margin-inline-start: .5em !important;
   font-weight: 600;
 }
@@ -292,32 +295,38 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 /* Text-only buttons */
 .theme-light .devtools-toolbarbutton[label]:not([text-as-image]):not([type=menu-button]),
 .theme-light .devtools-toolbarbutton[data-text-only],
-.theme-light #toolbox-buttons .devtools-toolbarbutton[text-as-image] {
+.theme-light #toolbox-buttons .devtools-toolbarbutton[text-as-image],
+.theme-light .devtools-button:not(:empty) {
   background-color: rgba(170, 170, 170, .2); /* Splitter */
 }
 .theme-dark .devtools-toolbarbutton[label]:not([text-as-image]):not([type=menu-button]),
 .theme-dark .devtools-toolbarbutton[data-text-only],
-.theme-dark #toolbox-buttons .devtools-toolbarbutton[text-as-image] {
+.theme-dark #toolbox-buttons .devtools-toolbarbutton[text-as-image],
+.theme-dark .devtools-button:not(:empty) {
   background-color: rgba(0, 0, 0, .2); /* Splitter */
 }
 
 /* Text-only button states */
+.theme-dark .devtools-button:not(:empty):not(:disabled):hover,
 .theme-dark .devtools-button:not(:empty):not([disabled]):hover,
 .theme-dark #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover,
 .theme-dark .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover {
   background-color: rgba(0, 0, 0, .3); /* Splitters */
 }
+.theme-light .devtools-button:not(:empty):not(:disabled):hover,
 .theme-light .devtools-button:not(:empty):not([disabled]):hover,
 .theme-light #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover,
 .theme-light .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover {
   background-color: rgba(170, 170, 170, .3); /* Splitters */
 }
 
+.theme-dark .devtools-button:not(:empty):not(:disabled):hover:active,
 .theme-dark .devtools-button:not(:empty):not([disabled]):hover:active,
 .theme-dark #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
 .theme-dark .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active {
   background-color: rgba(0, 0, 0, .4); /* Splitters */
 }
+.theme-light .devtools-button:not(:empty):not(:disabled):hover:active,
 .theme-light .devtools-button:not(:empty):not([disabled]):hover:active,
 .theme-light #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
 .theme-light .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active {
@@ -395,15 +404,15 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
 }
 %*********************************************************/
 
-.devtools-toolbarbutton-group > .devtools-toolbarbutton:last-child {
+.devtools-toolbarbutton-group > .devtools-toolbarbutton:last-child { /* This was intended for the Memory tool. --johnGraciliano */
   -moz-margin-end: 0;
 }
 
-.devtools-toolbarbutton-group + .devtools-toolbarbutton {
+.devtools-toolbarbutton-group + .devtools-toolbarbutton { /* This was intended for the Memory tool. --johnGraciliano */
   -moz-margin-start: 3px;
 }
 
-.devtools-separator + .devtools-toolbarbutton {
+.devtools-separator + .devtools-toolbarbutton { /* This was intended for the Memory tool. --johnGraciliano */
   -moz-margin-start: 1px;
 }
 
@@ -443,6 +452,16 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   background-repeat: no-repeat;
   font-size: inherit;
   font: message-box;
+}
+
+/*
+ * @TODO : has-clear-btn class was added for bug 1296187 and we should remove it
+ *  once we have a standardized search and filter input across the toolboxes.
+ */
+.has-clear-btn > .devtools-searchinput,
+.has-clear-btn > .devtools-filterinput {
+  -moz-padding-end: 23px;
+  padding-inline-end: 23px;
 }
 
 .theme-dark .devtools-searchinput,
@@ -540,10 +559,16 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   font-style: italic;
 }
 
+#preview-text-input.devtools-textinput::placeholder,
+.devtools-searchinput.devtools-rule-searchbox::placeholder,
+.devtools-filterinput.devtools-rule-searchbox::placeholder {
+  font-style: italic;
+}
+
 .devtools-rule-searchbox[filled] {
 /*  background-color: var(--searchbox-background-color);  ** Not here --johnGraciliano */
 /*  border-color: var(--searchbox-border-color);  ** Not here --johnGraciliano */
-  -moz-padding-end: 23px;
+  -moz-padding-end: 23px; /* This is removed in Firefox 51 as a new rule is introduced --johnGraciliano */
 }
 
 .devtools-style-searchbox-no-match {
