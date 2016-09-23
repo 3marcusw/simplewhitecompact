@@ -10,6 +10,11 @@
  * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
  *
  */
+ 
+.debugger {
+  font-size: 11px;
+  font-family: var(--proportional-font-family);
+}
 
 .debugger .split-box > .splitter {
   background-clip: content-box;
@@ -26,6 +31,12 @@ div.sources-header, div.source-header, div.command-bar, div._header {
 }
 div.sources-header {
   line-height: 28px;
+}
+
+div.sources-header,
+.accordion div._header {
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .source-header > span.subsettings {
