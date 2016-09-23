@@ -1,6 +1,57 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <path d="M2 2v3l5 4v6h2V9l5-4V2z" fill="#3bace5"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="OColors">
+      <stop offset="0" stop-color="#787878"/>
+      <stop offset=".764" stop-color="#dcdcdc"/>
+      <stop offset="1" stop-color="#c8c8c8"/>
+    </linearGradient>
+    <linearGradient id="XColors">
+      <stop offset="0" stop-color="#646464"/>
+      <stop offset=".734" stop-color="#c8c8c8"/>
+      <stop offset="1" stop-color="#b4b4b4"/>
+    </linearGradient>
+    <linearGradient xlink:href="#OColors" id="tipGradient" x1="9.578" y1="8" x2="6.398" y2="8" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#XColors" id="tipXGradient" x1="10.017" y1="7" x2="5.960" y2="7" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#OColors" id="coneGradient" x1="12.253" y1="2" x2="3.652" y2="2" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#XColors" id="coneXGradient" x1="12.438" y1="4" x2="3.566" y2="4" gradientUnits="userSpaceOnUse"/>
+    <linearGradient id="activeOColors">
+      <stop offset="0" stop-color="#4c70ac"/>
+      <stop offset=".764" stop-color="#bad8ff"/>
+      <stop offset="1" stop-color="#93c1ff"/>
+    </linearGradient>
+    <linearGradient id="activeXColors">
+      <stop offset="0" stop-color="#2755b0"/>
+      <stop offset=".734" stop-color="#93c1ff"/>
+      <stop offset="1" stop-color="#6aa9ff"/>
+    </linearGradient>
+    <linearGradient xlink:href="#activeOColors" id="tipActiveGradient" x1="9.578" y1="8" x2="6.398" y2="8" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#activeXColors" id="tipActiveXGradient" x1="10.017" y1="7" x2="5.960" y2="7" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#activeOColors" id="coneActiveGradient" x1="12.253" y1="2" x2="3.652" y2="2" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#activeXColors" id="coneActiveXGradient" x1="12.438" y1="4" x2="3.566" y2="4" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <style>
+    #cone {
+      fill: url(#coneGradient);
+      stroke: url(#coneXGradient);
+    }
+    #tip {
+      fill: url(#tipGradient);
+      stroke: url(#tipXGradient);
+    }
+    #active:target #cone {
+      fill: url(#coneActiveGradient);
+      stroke: url(#coneActiveXGradient);
+    }
+    #active:target #tip {
+      fill: url(#tipActiveGradient);
+      stroke: url(#tipActiveXGradient);
+    }
+  </style>
+  <g id="active" stroke-width=".4" stroke-linejoin="round">
+    <path id="cone" d="M1.233 2.170l4.638 6.118h4.258l4.638-6.116z" fill="url(#coneGradient)" stroke="url(#coneXGradient)"/>
+    <path id="tip" d="M10.1 8.269h-4.2v5.5488h4.2z" fill="url(#tipGradient)" stroke="url(#tipXGradient)"/>
+  </g>
 </svg>
