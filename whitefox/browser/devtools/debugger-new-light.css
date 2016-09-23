@@ -1,0 +1,72 @@
+/* vim:set ts=2 sw=2 sts=2 et: */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/*
+ * IMPORTANT NOTE:
+ *
+ * All rules here may need to be prefixed by .debugger  so they do not affect other tools.  
+ * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
+ *
+ */
+
+
+:root:not(.theme-firebug) .tree .node {
+  --theme-tab-toolbar-background: #f3f3f3; /* This is the color used when :hover */
+}
+
+.debugger .split-box > .splitter {
+  background-clip: content-box;
+  padding: 0 1px;
+  margin: 0 -1px;
+  position: relative;
+  z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
+}
+
+.debugger .split-box > .splitter > .splitter-handle {
+  position: static;
+  margin: 0 -1px;
+  width: 3px;
+}
+
+div.sources-header, div.source-header, div.command-bar, div._header {
+  background-color:  var(--theme-toolbar-background);
+}
+
+:-moz-any(.domain,.file,.folder) > svg {
+  fill: #959595;
+}
+
+:root:not(.theme-firebug) div.source-tab:hover {
+  background-color: var(--toolbar-tab-hover);
+}
+
+:root:not(.theme-firebug) div.source-tab.active {
+  color: var(--theme-selection-color);
+  background-color: var(--theme-selection-background);
+}
+
+:root:not(.theme-firebug) div.source-tab.active .close > svg > path {
+  fill: var(--theme-selection-color);
+}
+
+.accordion div._header:hover{
+  background-color:  #f1f1f1;
+}
+
+.command-bar > span:not(.disabled):not(:hover):not(:active) {
+  opacity: .8;
+}
+
+:root:not(.theme-firebug) i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
+  fill: #393f4c; /*var(--theme-body-color);*/
+}
+:root:not(.theme-firebug) .pause > svg{
+  transform: translateX(-.8px);
+}
+
+
+:root:not(.theme-firebug) .breakpoints-list .breakpoint {
+  --theme-toolbar-background: #f3f3f3; /* This is the color used when :hover */
+}
