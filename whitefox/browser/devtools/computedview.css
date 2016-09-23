@@ -192,26 +192,30 @@ body > #propertyContainer > .property-view > * {
   position: relative; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
   z-index: 0; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
 }
-:-moz-locale-dir(rtl) > .property-value {
-  padding-left: 2px;
-  padding-right: 10px;
-  background-position: calc(100% - 2px) center;
+:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > .property-value {
+  direction: ltr;
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0;
   background-image: none;  /* url(images/arrow-w@2x.png) */
-  position: relative;
 }
-:-moz-locale-dir(rtl) > .property-value::after {
+:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > .property-value::after {
   content: "";
-  position: absolute;
-  right: 2px;
-  top: 0;
   display: inline-block;
-  background-image: url(images/arrow-e@2x.png);  /* url(images/arrow-w@2x.png) */
+  background-image: url(images/arrow-e.png);  /* url(images/arrow-w@2x.png) */
   background-size: 5px 8px;
   background-repeat: no-repeat;
   background-position: center;
   width: 5px;
-  height: 100%;
+  height: 8px;
   transform: scaleX(-1);
+  margin-left: 4px;
+  margin-right: 2px;
+}
+@media (min-resolution: 1.1dppx) {
+  :-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > .property-value::after {
+    background-image: url(images/arrow-e@2x.png);
+  }
 }
 
 .other-property-value {
@@ -223,8 +227,27 @@ body > #propertyContainer > .property-view > * {
   position: relative; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
   z-index: 0; /* This is to make .computedview-colorswatch::before visible through semi-transparent colors. --johnGraciliano */
 }
-.other-property-value:dir(rtl) { /* :dir(rtl) may be wrong! --johnGraciliano */
-  background-position: right center;
+
+:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > * > .other-property-value {
+  background-image: none;
+  -moz-padding-start: 0;
+  padding-inline-start: 0;
+}
+:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > * > .other-property-value::before {
+  content: "";
+  display: inline-block;
+  background-image: url(images/arrow-e.png);  /* url(images/arrow-w@2x.png) */
+  background-size: 5px 8px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 5px;
+  height: 8px;
+  margin-right: 4px;
+}
+@media (min-resolution: 1.1dppx) {
+  :-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) > * > .other-property-value::before {
+    background-image: url(images/arrow-e@2x.png);
+  }
 }
 
 @media (min-width: 400px) {
@@ -271,6 +294,7 @@ body > #propertyContainer > .property-view > * {
   -moz-margin-start: -12px !important;
   margin-inline-start: -12px !important;
 }
+:root:not(.theme-firebug) .expander:not([open]):-moz-dir(rtl),
 :root:not(.theme-firebug) .expander:not([open]):-moz-locale-dir(rtl) {
   transform: scaleX(-1);
 }
@@ -353,6 +377,7 @@ body > #propertyContainer > .property-view > * {
   cursor: pointer;
   float: right;
 }
+.link:-moz-dir(rtl),
 .link:-moz-locale-dir(rtl) {
   float: left;
 }
