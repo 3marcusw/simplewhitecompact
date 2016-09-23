@@ -70,6 +70,7 @@
   border: none;
   height: 28px;
   width: 28px;
+  color: transparent; /* Hide the buttons text (the symbol) in Firefox 51 */
 }
 
 #newtab-customize-button:-moz-any(:hover, :active, [active]) {
