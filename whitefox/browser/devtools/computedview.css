@@ -66,6 +66,7 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
 
 #computedview-toolbar { /* Firefox >= 50 */
   display: flex;
+  align-items: center;
 }
 
 #browser-style-checkbox {
