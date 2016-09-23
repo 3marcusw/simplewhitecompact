@@ -1,0 +1,180 @@
+/* vim:set ts=2 sw=2 sts=2 et: */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/*
+ * IMPORTANT NOTE:
+ *
+ * All rules here may need to be prefixed by .debugger  so they do not affect other tools.  
+ * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
+ *
+ */
+
+.debugger .split-box > .splitter {
+  background-clip: content-box;
+  padding: 0 1px;
+  margin: 0 -1px;
+  position: relative;
+  z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
+}
+
+div.sources-header, div.source-header, div.command-bar, div._header {
+  background-color:  var(--theme-toolbar-background);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  height: 28px;
+}
+div.sources-header {
+  line-height: 28px;
+}
+
+.source-header > span.subsettings {
+  top: 6px;
+}
+
+.source-header > span.subsettings:not(:hover) {
+  opacity: .8;
+}
+
+div.editor-wrapper,
+div.welcomebox {
+  height: calc(100% - 28px);
+}
+div.editor-wrapper,
+div.welcomebox {
+  top: 28px;
+}
+div.welcomebox {
+  background-color: rgb(247, 251, 254);
+}
+div.source-tabs {
+  overflow: visible;
+  padding-left: 3px;
+}
+div.source-tab {
+  margin-left: 0px;
+  margin-top: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 1px solid var(--theme-splitter-color);
+  margin: 3px 0 -1px;
+  height: 25px;
+}
+div.source-tab:hover:not(.active) {
+  border-color: #c8c8c8;
+}
+div.source-tab:not(:hover):not(.active) {
+  border-color: transparent;
+}
+div.source-tab.active {
+  border-bottom-color: transparent;
+}
+
+div.sources-dropdown {
+  top: 29px;
+}
+
+.accordion div._header:hover{
+  background-color:  #accbeb; /* 7/8 * theme-toolbar-background #9dc1e5; /* 5/6  #aabccf; /* var(--theme-toolbar-background);*/
+}
+
+div.source-footer {
+  background-color: transparent;
+  opacity: .8;
+  bottom: 12px;
+  right: 12px;
+  width: auto;
+}
+
+div.command-bar {
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+.source-footer > div.command-bar {
+  height: 29px;
+  padding-left: 9px;
+  padding-right: 9px;
+  background-color: transparent;
+  background-image: none;
+  background-color:  rgba(220, 234, 249, .6);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.12));
+  border: 1px solid var(--theme-splitter-color);
+  background-color:  var(--theme-toolbar-background);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+}
+
+:-moz-any(.domain,.file,.folder) > svg {
+  fill: #7786a6; /* #7188a2; /* var(--theme-splitter-color) !important;  H*1 S*3/4  L*3/4 */
+}
+
+
+.command-bar > span:not(.disabled):not(:hover):not(:active) {
+  opacity: .8;
+}
+
+
+i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
+  display: none;
+}
+i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint)::after {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  content: "";
+}
+
+i.pause::after {
+  background-image: url(images/firebug/pause.svg);
+}
+i.resume::after {
+  background-image: url(images/firebug/play.svg);
+}
+i.stepOver::after {
+  background-image: url(images/firebug/debugger-step-over.svg);
+}
+i.stepIn::after {
+  background-image: url(images/firebug/debugger-step-in.svg);
+}
+i.stepOut::after {
+  background-image: url(images/firebug/debugger-step-out.svg);
+}
+i.disableBreakpoints::after {
+  background-image: url(images/firebug/debugger-toggleBreakpoints.svg);
+}
+.breakpoints-disabled > i.disableBreakpoints::after {
+  background-image: url(images/firebug/breakOn/breakOnError.svg),
+                    url(images/firebug/breakOn/breakOnError.svg),
+                    url(images/firebug/debugger-toggleBreakpoints.svg#DIM);
+  background-size: 16px, 16px, 14px;
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: no-repeat;
+}
+i.pause-exceptions {
+  overflow: hidden;
+}
+i.pause-exceptions::after {
+  background-image: url(images/firebug/breakOn/breakOnError.svg), url(images/firebug/pause.svg);
+  background-size: 16px, 14px;
+  background-position: 0 0, 0 0;
+  background-repeat: no-repeat;
+}
+i.pause-exceptions[title="Pause on uncaught exceptions"]::after {
+  background-image: url(images/firebug/breakOn/breakOnMutate.svg), url(images/firebug/pause.svg);
+  background-position: 1px 0, 0 0;
+}
+i.pause-exceptions[title="Ignore exceptions"]::after {
+  background-image: url(images/firebug/breakOn/breakOnNext.svg), url(images/firebug/pause.svg);
+}
+
+.command-bar > span.prettyPrint {
+  margin-right: 0;
+}
+
+i.prettyPrint::after {
+  background-image: url(images/firebug/debugger-prettyprint.svg);
+}
+
+.debugger div.CodeMirror {
+  height: 100%;
+}
