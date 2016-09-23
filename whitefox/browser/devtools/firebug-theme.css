@@ -8,6 +8,7 @@
  *   @import url(common.css);
  */
 @import url(light-theme.css);
+@import url(debugger-new-firebug.css);
 
 :root {
   font-size: 11px;
