@@ -144,6 +144,12 @@ a.message-location { /* Firefox <= 49 */
   flex: none;
 }
 
+.stack-trace {
+  /* The markup contains extra whitespace to improve formatting of clipboard text.
+     Make sure this whitespace doesn't affect the HTML rendering */
+  white-space: normal;
+}
+
 .stack-trace .frame-link-source,
 .message-location .frame-link-source {
   /* Makes the file name truncated (and ellipsis shown) on the left side */
@@ -179,6 +185,7 @@ a.message-location { /* Firefox <= 49 */
 .message-flex-body > .message-body {
   display: block;
   flex: auto;
+  width: 40%; /* This will sets a minimum width but more importantly prevents the box from growing too wide. --johnGraciliano ***** RESEARCH   ******/
 }
 
 #output-wrapper {
