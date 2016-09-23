@@ -9,7 +9,7 @@
  */
 
 .stack-trace > :nth-child(2n+0){background-color: rgba(128,128,128,.08);}
-.stack-trace > * {margin: 0 -3px; padding: 0 3px;}
+.stack-trace > [class] {margin: 0 -3px; padding: 0 3px;}
 
 .frame-link {
   display: flex;
