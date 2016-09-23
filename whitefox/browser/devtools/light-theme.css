@@ -7,6 +7,7 @@
 @import url(common.css);
 @import url(toolbars.css);
 @import url(tooltips.css);
+@import url(debugger-new-light.css);
 
 /*** What follows is a copy of "variables.css" for the Timeline tool in Firefox 39 and earlier. **/
 /*** This is needs to be here to be used, even in the form of a comment.       --johnGraciliano **/
