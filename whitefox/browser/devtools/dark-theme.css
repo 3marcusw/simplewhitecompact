@@ -7,6 +7,7 @@
 @import url(common.css);
 @import url(toolbars.css);
 @import url(tooltips.css);
+@import url(debugger-new-dark.css);
 
 /*** What follows is copied from "variables.css" for the Timeline tool in Firefox 39 and prior. **/
 /*** The :root.theme-light rules were removed, or they would override :root.theme-dark rules. ****/
