@@ -11,43 +11,28 @@
       display: none;
     }
     use {
-      fill: #f4f6f9;
-      stroke: #f4f6f9;
+      stroke: #0b0b0b;
       stroke-width: 1;
-      fill-opacity: .7;
-      stroke-opacity: .7;
+      fill: none;
+      stroke-linejoin: round;
     }
   </style>
   <defs style="display: none;">
-  <g id="vv-collapse-shape">
-    <path d="M 1.5,12  v -11.5  h 13  v 11.5" fill="none"/>
-    <line x1="1" x2="15" y1="13.5" y2="13.5" stroke-width="3"/>
-    <polygon points="4,4 12,4 8,11" stroke-width="0"/>
-  </g>
   <g id="v-collapse-shape">
-    <path d="M 2.5,12  v -11.5  h 11  v 11.5" fill="none"/>
-    <line x1="2" x2="14" y1="13.5" y2="13.5" stroke-width="3"/>
-    <polygon points="4,4 12,4 8,11" stroke-width="0"/>
-  </g>
-  <g id="vv-expand-shape">
-    <path d="M 1.5,12  v -11.5  h 13  v 11.5" fill="none"/>
-    <line x1="1" x2="15" y1="13.5" y2="13.5" stroke-width="3"/>
-    <polygon points="4,10 12,10 8,3" stroke-width="0"/>
+    <path d="M 2.5,11.5  h 11  M 2.5,14.5  v -13  h 11  v 13  z" fill="none"/>
+    <polygon points="5,4.5 11,4.5 8,9.5"/>
   </g>
   <g id="v-expand-shape">
-    <path d="M 2.5,12  v -11.5  h 11  v 11.5" fill="none"/>
-    <line x1="2" x2="14" y1="13.5" y2="13.5" stroke-width="3"/>
-    <polygon points="4,10 12,10 8,3" stroke-width="0"/>
+    <path d="M 2.5,11.5  h 11  M 2.5,14.5  v -13  h 11  v 13  z" fill="none"/>
+    <polygon points="5,8.5 11,8.5 8,3.5"/>
   </g>
   <g id="collapse-shape">
-    <path d="M 13,2.5  h -12.5  v 11  h 12.5" fill="none"/>
-    <line x1="14.5" x2="14.5" y1="2" y2="14" stroke-width="3"/>
-    <polygon points="4,4 12,8 4,12" stroke-width="0"/>
+    <path d="M 11.5,2.5  v 11  M 14.5,2.5  h -13  v 11  h 13  z" fill="none"/>
+    <polygon points="4.5,5 9.5,8 4.5,11" stroke-width="1"/>
   </g>
   <g id="expand-shape">
-    <path d="M 13,2.5  h -12.5  v 11  h 12.5" fill="none"/>
-    <line x1="14.5" x2="14.5" y1="2" y2="14" stroke-width="3"/>
-    <polygon points="10,4 2,8 10,12" stroke-width="0"/>
+    <path d="M 11.5,2.5  v 11  M 14.5,2.5  h -13  v 11  h 13  z" fill="none"/>
+    <polygon points="8.5,5 3.5,8 8.5,11" stroke-width="1"/>
   </g>
   </defs>
   <use id="collapse"   xlink:href="#collapse-shape"/>
