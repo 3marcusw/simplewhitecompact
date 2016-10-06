@@ -1,0 +1,63 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px">
+  <defs>
+    <linearGradient id="c">
+      <stop offset="0" stop-color="#282828"/>
+      <stop offset="1" stop-color="#505050"/>
+    </linearGradient>
+    <linearGradient id="d">
+      <stop offset="0"/>
+      <stop offset="1" stop-color="#3c3c3c"/>
+    </linearGradient>
+    <linearGradient x1="8.652" y1="11.763" x2="8.652" y2="5.317" id="g" xlink:href="#c" gradientUnits="userSpaceOnUse"/>
+    <linearGradient x1="9.168" y1="12.3" x2="9.168" y2="4.811" id="h" xlink:href="#d" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <style>
+    g {
+      fill: #babec3;
+      marker:none
+      color: #000;
+      fill: url(#g);
+      stroke: url(#h);
+      stroke-width: .4;
+      overflow: visible;
+    }
+    g:not(:target) {
+      display: none;
+    }
+  </style>
+  <g id="overview-markers">
+    <rect x="0.2px" y="3.2px" width="4.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="7.2px" y="3.2px" width="8.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="0.2px" y="7.2px" width="8.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="10.2px" y="7.2px" width="5.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="4.2px" y="11.2px" width="4.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="12.2px" y="11.2px" width="3.6px" height="2.1px" rx="1" ry="1"/>
+  </g>
+  <g id="overview-frames">
+    <rect x="1.2px" y="4.2px" width="1.6px" height="11.6px" rx="1" ry="1"/>
+    <rect x="5.2px" y="12.2px" width="1.6px" height="3.6px" rx="1" ry="1"/>
+    <rect x="9.2px" y="9.2px" width="1.6px" height="6.6px" rx="1" ry="1"/>
+    <rect x="13.2px" y="7.2px" width="1.6px" height="8.6px" rx="1" ry="1"/>
+  </g>
+  <g id="details-waterfall">
+    <rect x="0.2px" y="3.2px" width="8.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="5.2px" y="7.2px" width="7.6px" height="2.1px" rx="1" ry="1"/>
+    <rect x="7.2px" y="11.2px" width="8.6px" height="2.1px" rx="1" ry="1"/>
+  </g>
+  <g id="details-call-tree">
+    <rect x="0.2px" y="3.2px" width="15.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="0.2px" y="6.2px" width="7.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="0.2px" y="9.2px" width="10.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="0.2px" y="12.2px" width="5.6px" height="1.6px" rx="1" ry="1"/>
+  </g>
+  <g id="details-flamegraph">
+    <rect x="0.2px" y="3.2px" width="15.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="0.2px" y="6.2px" width="7.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="10.2px" y="6.2px" width="5.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="2.2px" y="9.2px" width="5.6px" height="1.6px" rx="1" ry="1"/>
+    <rect x="5.2px" y="12.2px" width="2.6px" height="1.6px" rx="1" ry="1"/>
+  </g>
+</svg>
