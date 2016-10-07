@@ -20,7 +20,14 @@
   }
 }
 
-/* */
+/*
+ * In Firefox 52, the collapsed #tabpanels may take space in the bottom of the window push the top out of view.
+ * Then next rule should prevent this problem.  ***Another solution is in "#inspector-splitter-box {...position: fixed;}"***
+ */
+.inspector-responsive-container > #tabpanels[style*="collapse"] {
+  display: none;
+}
+
 /* Make sure to hide scroll bars for the parent window */
 window {
   overflow: hidden; /* For Firefox 51. On earlier Firefox it was -moz-hidden-unscrollable from chrome://global/content/minimal-xul.css */
@@ -45,9 +52,10 @@ div.devtools-main-content { /* For Firefox 51.  Previously this was vbox.devtool
 
 /* Inspector Panel Splitter */
 
-#inspector-splitter-box { /* Posibly new in Firefox 51. It is html:div */
+#inspector-splitter-box { /* For Firefox 51. It is html:div */
   height: 100vh;
   width: 100vw;
+  position: fixed;
 }
 
 /* Minimum width for the Inspector main (uncontrolled) area. */
@@ -221,7 +229,7 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 
 @media not all and (max-width: 700px) {
   .sidebar-toggle:-moz-locale-dir(rtl)::before,
-  #inspector-pane-toggle:-moz-locale-dir(rtl) {
+  #inspector-pane-toggle:-moz-locale-dir(rtl) > .toolbarbutton-icon {
     transform: scaleX(-1);
   }
 }
@@ -277,13 +285,7 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 }
 
 #inspector-eyedropper-toggle::before {
-  background-image: url(images/command-eyedropper.png);
-}
-
-@media (min-resolution: 1.1dppx) {
-  #inspector-eyedropper-toggle::before {
-    background-image: url(images/command-eyedropper@2x.png);
-  }
+  background-image: url(images/command-eyedropper.svg);
 }
 
 .theme-firebug #inspector-eyedropper-toggle::before {
@@ -349,7 +351,8 @@ iframe {
 
 #markup-box {
   width: 100%;
-  flex: 1 1 auto;
+  flex: 1;
+  min-height: 0;
 }
 
 #markup-box > iframe {

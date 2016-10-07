@@ -13,7 +13,7 @@
 body {
   box-sizing: border-box;
   margin: 0;
-  display : flex;
+  display: flex;
   flex-direction: column;
   height: 100%;
 }
@@ -299,6 +299,9 @@ body > #propertyContainer > .property-view > * {
 :root:not(.theme-firebug) .expander:not([open]):-moz-locale-dir(rtl) {
   transform: scaleX(-1);
 }
+:root:not(.theme-firebug) .expander:not([open]):dir(rtl) {
+  transform: scaleX(-1);
+}
 
 .expandable {
   visibility: visible;
@@ -380,6 +383,9 @@ body > #propertyContainer > .property-view > * {
 }
 .link:-moz-dir(rtl),
 .link:-moz-locale-dir(rtl) {
+  float: left;
+}
+.link:dir(rtl) {
   float: left;
 }
 

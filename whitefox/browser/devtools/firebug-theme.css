@@ -205,10 +205,6 @@
   margin: 3px 7px 1px; /* Raise the icon one pixel --johnGraciliano */
 }
 
-.theme-firebug #toolbox-tab-options:not([selected]):hover::before {
-  filter: brightness(80%);
-}
-
 /* Toolbar */
 
 .theme-firebug .theme-toolbar,

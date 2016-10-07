@@ -63,7 +63,7 @@
 }
 
 #filter-button {
-  list-style-image: url(images/timeline-filter.svg);
+  list-style-image: url(images/filter.svg);
 }
 
 .theme-firebug #filter-button {
@@ -117,6 +117,21 @@
 #select-optimizations-view {
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+
+.theme-firebug #select-waterfall-view {
+  list-style-image: url(images/firebug/performance-icons.svg#details-waterfall);
+}
+
+.theme-firebug #select-js-calltree-view,
+.theme-firebug #select-memory-calltree-view {
+  list-style-image: url(images/firebug/performance-icons.svg#details-call-tree);
+}
+
+.theme-firebug #select-js-flamegraph-view,
+.theme-firebug #select-memory-flamegraph-view {
+  list-style-image: url(images/firebug/performance-icons.svg#details-flamegraph);
+}
+
 .theme-firebug #select-optimizations-view {
   list-style-image: url(images/firebug/profiler-stopwatch.svg);
 }
@@ -192,7 +207,7 @@
 
   .theme-firebug #import-button,
   .theme-firebug #clear-button[label] {
-    min-width: 24px !important; 
+    min-width: 24px !important;
   }
 
   :-moz-any(#import-button, #clear-button[label]) > .toolbarbutton-text {
@@ -266,7 +281,7 @@
 }
 
 /* The following rules are in the default theme to fix the recordings controls toolbar in Firefox 51.
- * Here, these rules are substituted by a different set of rules which do not fix the sidebar width.     
+ * Here, these rules are substituted by a different set of rules which do not fix the sidebar width.
  *              --johnGraciliano
  *
 #recordings-pane {
@@ -336,6 +351,80 @@
 #recordings-list .selected label {
   /* Text inside a selected item should not be custom colored. */
   color: inherit !important;
+}
+
+
+/* For Firefox 52 and later... */
+
+/**
+ * DE-XUL: This is probably only needed for the html:div inside of a vbox.
+ */
+#recordings-list > div {
+  height: calc(100vh - 24px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.theme-firebug #recordings-list > div {
+  height: calc(100vh - 28px);
+}
+
+.recording-list {
+  min-width: -moz-fit-content;
+  margin: 0;
+  padding: 0;
+  background-color: var(--theme-sidebar-background);
+}
+
+.recording-list-item {
+  display: flex;
+  flex-direction: column;
+  color: var(--theme-body-color);
+  border-bottom: 1px solid rgba(128,128,128,0.15);
+  padding: 8px;
+  cursor: default;
+  padding-inline-end: 18px;
+  overflow: hidden;
+}
+
+.recording-list-item.selected {
+  background-color: var(--theme-selection-background);
+  color: var(--theme-selection-color);
+}
+
+.recording-list-empty {
+  padding: 8px;
+}
+
+.recording-list-item-label {
+  font-size: 110%;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-end: 4px;
+}
+
+.recording-list-item-footer {
+  padding-top: 4px;
+  font-size: 90%;
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+
+.recording-list-item:not(.selected) .recording-list-item-footer {
+  color: var(--theme-body-color-alt);
+}
+
+.recording-list-item-save {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 90%;
+  padding:0;
+  color: inherit;
+  padding-inline-start: 6px;
 }
 
 /* Recording notices */
@@ -1107,7 +1196,7 @@ menuitem.experimental-option::before {
 }
 %*** OLD STYLE ***************************************/
 
-#performance-options-menupopup:not(.experimental-enabled) .experimental-option 
+#performance-options-menupopup:not(.experimental-enabled) .experimental-option
 /* , #performance-options-menupopup:not(.experimental-enabled) .experimental-option::before  %*** OLD STYLE ***/ {
   display: none;
 }
@@ -1217,7 +1306,7 @@ description.opt-icon::before {
 .theme-light.theme-firebug .devtools-toolbarbutton[data-text-only]:hover:active,
 .theme-light.theme-firebug .devtools-button:not(:empty):not([disabled]):hover:active,
 .theme-light.theme-firebug #toolbox-buttons .devtools-toolbarbutton:not([disabled])[text-as-image]:hover:active,
-.theme-light.theme-firebug .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active 
+.theme-light.theme-firebug .devtools-toolbarbutton:not(:-moz-any([checked=true],[disabled],[text-as-image]))[label]:hover:active
 {
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.3);
@@ -1244,4 +1333,44 @@ description.opt-icon::before {
   border: none;
   box-shadow: none;
   /* margin: 0 1px; ** This change will be needed as part of updating the buttons (when the preceeding correction becomes incorrect). */
+}
+
+:-moz-any(.theme-dark,.theme-light):not(.theme-firebug) #performance-toolbar-controls-detail-views {
+  position: relative;
+  -moz-padding-start: 1px;
+}
+
+:-moz-any(.theme-dark,.theme-light):not(.theme-firebug) #performance-toolbar-controls-detail-views > .devtools-toolbarbutton::before {
+  display: none;
+}
+:-moz-any(.theme-dark,.theme-light):not(.theme-firebug) #performance-toolbar-controls-detail-views > .devtools-toolbarbutton:not([hidden="true"]) {
+  position: relative;
+  z-index: auto;
+  margin: 0;
+  -moz-margin-start: -1px;
+  padding: 3px 2px;
+  -moz-padding-start: 10px;
+  background-color: var(--theme-toolbar-background);
+  background-clip: padding-box;
+  border-width: 0 1px;
+  border-style: solid;
+  border-image-source: linear-gradient(transparent 15%, var(--theme-splitter-color) 15%, var(--theme-splitter-color) 85%, transparent 85%);
+  border-image-slice: 1;
+}
+
+.theme-light:not(.theme-firebug) #performance-toolbar-controls-detail-views > .devtools-toolbarbutton:not([checked="true"]):hover {
+  background-color:  #eaeaea;
+}
+.theme-dark #performance-toolbar-controls-detail-views > .devtools-toolbarbutton:not([checked="true"]):hover {
+  background-color: #262c33;
+}
+
+:-moz-any(.theme-dark,.theme-light):not(.theme-firebug) #performance-toolbar-controls-detail-views > .devtools-toolbarbutton[checked="true"] {
+  z-index: 10;
+  color: var(--theme-selection-color);
+  background-color: var(--theme-selection-background);
+  border-image-source:  linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color));
+}
+.theme-light:not(.theme-firebug) #performance-toolbar-controls-detail-views > .devtools-toolbarbutton[checked="true"] > .toolbarbutton-icon {
+  filter: invert(1);
 }

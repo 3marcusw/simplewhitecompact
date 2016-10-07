@@ -631,6 +631,14 @@ body > #ruleview-container {
   background-size: cover;
 }
 
+.theme-firebug #ruleview-add-rule-button::before {
+  background-image: url(images/firebug/add.svg);
+}
+
+.theme-firebug #pseudo-class-panel-toggle::before {
+  background-image: url(images/firebug/pseudo-class.svg);
+}
+
 .ruleview-overridden-rule-filter {
   opacity: 0.8;
 }

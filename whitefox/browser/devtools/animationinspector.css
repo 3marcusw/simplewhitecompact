@@ -203,37 +203,19 @@ body {
 }
 
 #element-picker::before {
-  background-image: url(images/command-pick.png);
+  background-image: url(images/command-pick.svg);
 }
 
 .pause-button::before {
-  background-image: url(images/debugger-pause.png);
+  background-image: url(images/pause.svg);
 }
 
 #rewind-timeline::before {
-  background-image: url(images/rewind.png);
+  background-image: url(images/rewind.svg);
 }
 
 .pause-button.paused::before {
-  background-image: url(images/debugger-play.png);
-}
-
-@media (min-resolution: 1.1dppx) {
-  #element-picker::before {
-    background-image: url(images/command-pick@2x.png);
-  }
-
-  .pause-button::before {
-    background-image: url(images/debugger-pause@2x.png);
-  }
-
-  .pause-button.paused::before {
-    background-image: url(images/debugger-play@2x.png);
-  }
-
-  #rewind-timeline::before {
-    background-image: url(images/rewind@2x.png);
-  }
+  background-image: url(images/play.svg);
 }
 
 .theme-firebug #element-picker::before {
@@ -972,42 +954,21 @@ body {
 
 #toggle-all::before,
 .timeline .toggle::before {
-  background-image: url(./images/debugger-pause.png);
+  background-image: url(./images/pause.svg);
 }
 
 #toggle-all.paused::before,
 .paused .timeline .toggle::before,
 .finished .timeline .toggle::before {
-  background-image: url(./images/debugger-play.png);
+  background-image: url(./images/play.svg);
 }
 
 .timeline .ff::before {
-  background-image: url(./images/fast-forward.png);
+  background-image: url(./images/fast-forward.svg);
 }
 
 .timeline .rw::before {
-  background-image: url(./images/rewind.png);
-}
-
-@media (min-resolution: 1.1dppx) {
-  #toggle-all::before,
-  .timeline .toggle::before {
-    background-image: url(./images/debugger-pause@2x.png);
-  }
-
-  #toggle-all.paused::before,
-  .paused .timeline .toggle::before,
-  .finished .timeline .toggle::before {
-    background-image: url(./images/debugger-play@2x.png);
-  }
-
-  .timeline .ff::before {
-    background-image: url(./images/fast-forward@2x.png);
-  }
-
-  .timeline .rw::before {
-    background-image: url(./images/rewind@2x.png);
-  }
+  background-image: url(./images/rewind.svg);
 }
 
 .timeline .rate {

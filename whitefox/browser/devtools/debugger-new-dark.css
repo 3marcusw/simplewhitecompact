@@ -6,7 +6,7 @@
 /*
  * IMPORTANT NOTE:
  *
- * All rules here may need to be prefixed by .debugger  so they do not affect other tools.  
+ * All rules here may need to be prefixed by .debugger  so they do not affect other tools.
  * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
  *
  */
@@ -23,6 +23,17 @@
   z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
 }
 
+.debugger .split-box.vert > .splitter,
+.debugger .split-box > .splitter {
+  background-clip: content-box;
+  margin: 0 -1px;
+  border: 0;
+  padding: 0 1px;
+  position: relative;
+  min-width: 3px;
+  z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
+}
+
 .debugger .split-box > .splitter > .splitter-handle {
   position: static;
   margin: 0 -1px;
@@ -31,6 +42,10 @@
 
 div.sources-header, div.source-header, div.command-bar, div._header {
   background-color: var(--theme-toolbar-background);
+}
+
+div.welcomebox {
+  width: 100%;
 }
 
 :-moz-any(.domain,.file,.folder) > svg {
@@ -71,16 +86,24 @@ div.source-tab.active .close > svg > path {
 i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
   fill: #bcc9d5; /*var(--theme-body-color);*/
   stroke: #bcc9d5; /*var(--theme-body-color);*/
-  stroke-width: .2px;
+  stroke-width: 0;
 }
+
 .pause > svg{
   transform: translateX(-.8px);
 }
-.disableBreakpoints.breakpoints-disabled > i > svg > g > path {
+
+.breakpoints-disabled > .disableBreakpoints > svg {
   fill: var(--theme-highlight-blue);
-  stroke-width: .4px;
 }
 
+.uncaught > .pause-exceptions > svg {
+  fill: var(--theme-highlight-purple);
+}
+
+.all > .pause-exceptions > svg {
+  fill: var(--theme-highlight-blue);
+}
 
 .frames ul li.frame.selected,
 .frames ul li.frame.selected .location {

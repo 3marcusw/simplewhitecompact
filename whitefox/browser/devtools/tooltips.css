@@ -305,6 +305,25 @@
   margin-inline-end: 3px;
 }
 
+.theme-firebug .event-header.devtools-toolbar > .event-tooltip-debugger-icon {
+  opacity: 0;
+}
+.theme-firebug .event-header.devtools-toolbar::before {
+  display: inline-block;
+  box-sizing: border-box;
+  content: "";
+  height: 16px;
+  width: 16px;
+  min-width: 16px;
+  max-width: 16px;
+  flex: 0;
+  background-image: url("chrome://devtools/skin/images/firebug/tool-debugger-paused.svg");
+  background-position: 2px center;
+  background-repeat: no-repeat;
+  -moz-margin-start: 3px;
+  -moz-margin-end: -19px;
+}
+
 .event-header:first-child {
   border-width: 0;
 }
@@ -526,20 +545,23 @@
 /* The properties need !important otherwise they are overriden by chrome://devtools/content/shared/widgets/spectrum.css in Firefox 50 */
 div#eyedropper-button,
 button#eyedropper-button::before {
-  background-image: url("images/command-eyedropper.png") !important;
-}
-
-@media (min-resolution: 1.1dppx) {
-  div#eyedropper-button,
-  button#eyedropper-button::before {
-    background-image: url("images/command-eyedropper@2x.png") !important;
-  }
+  background-image: url("images/command-eyedropper.svg") !important;
 }
 
 :root.theme-firebug button#eyedropper-button::before {
   background-image: url("images/firebug/command-eyedropper.svg") !important;
   filter: none;
 }
+
+/*** For rules in chrome://devtools/content/shared/widgets/spectrum.css (of Firefox 44) ***/
+.theme-light div#eyedropper-button {
+  filter: none;
+}
+
+.theme-dark div#eyedropper-button {
+  filter: invert(1);
+}
+/******************************************************************************************/
 
 .spectrum-checker {
   background-color: transparent !important;
@@ -549,7 +571,6 @@ button#eyedropper-button::before {
   background-position: 0 0, 0 6px !important;
   background-repeat: repeat-x, repeat-x !important;
 }
-/*********************************************************************************************************/
 
 .spectrum-dragger,
 .spectrum-slider-control {
@@ -591,12 +612,7 @@ button#eyedropper-button::before {
 }
 
 .remove-button {
-  background-image: url(images/close.png) !important;
-}
-@media (min-resolution: 1.1dppx) {
-  .remove-button {
-    background-image: url(images/close@2x.png) !important;
-  }
+  background-image: url(images/close.svg) !important;
 }
 
 #toggle-presets {
@@ -608,12 +624,21 @@ button#eyedropper-button::before {
   filter: url(images/filters.svg#checked-icon-state);
 }
 
-.theme-light #add-filter,
-.theme-light .add,
-.theme-light .remove-button,
+/*** Undo rule in chrome://devtools/content/shared/widgets/filter-widget.css (in Firefox 49,50) ***/
+.theme-light #add-filter, /* Vs. chrome://browser/content/devtools/filter-widget.css Firefox 41 */
+.theme-light button.add,
+.theme-light button.remove-button,
 .theme-light :not(.show-presets) > * > * > #toggle-presets {
+  filter: none !important;
+}
+
+.theme-dark #add-filter, /* Vs. chrome://browser/content/devtools/filter-widget.css Firefox 41 */
+.theme-dark .add,
+.theme-dark .remove-button,
+.theme-dark :not(.show-presets) > * > * > #toggle-presets {
   filter: invert(1) !important;
 }
+/**************************************************************************************************/
 
 #add-filter:not(:hover),
 .add:not(:hover),

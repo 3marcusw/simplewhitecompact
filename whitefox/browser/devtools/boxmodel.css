@@ -63,22 +63,31 @@ body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rul
 
 /* Header */
 
-#header, /* Firefox <= 45 */
-#boxmodel-header,
+p#header{ /* Firefox <= 45 */
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-top: calc(10px + 6px * var(--expand));
+  padding-right: 13px;
+  padding-bottom: calc(8px + 8px * var(--expand));
+  padding-left: 13px;
+}
+
+#boxmodel-header{
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-top: calc(7px + 6px * var(--expand));
+  padding-right: 13px;
+  padding-bottom: calc(5px + 8px * var(--expand));
+  padding-left: 13px;
+}
+
 #boxmodel-info {
   display: flex;
   align-items: center;
-  padding: 4px 13px; /* This was 4px 17px; --johnGraciliano */
-  margin-top: calc(6px + 6px * var(--expand));
-  margin-bottom: calc(4px + 8px * var(--expand));
-}
-#boxmodel-header{
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-#boxmodel-info {
-  margin-top: 0px;
-  margin-bottom: 2px;
+  margin: 0;
+  padding: 4px 13px 6px;
 }
 
 p#header:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/devtools/layoutview/view.css'. The tag 'p' is to give this rule priority. --johnGraciliano */
@@ -91,11 +100,11 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
 /* .theme-firebug #sidebar-panel-layoutview > * > * > #boxmodel-header, */
 .theme-firebug #boxmodel-header {
-  padding: 1px 14px;
-  margin-top: calc(2px + 6px * var(--expand));
-  margin-bottom: calc(2px + 6px * var(--expand));
+  padding-top: calc(3px + 6px * var(--expand));
+  padding-left: 14px;
+  padding-bottom: calc(3px + 6px * var(--expand));
+  padding-right: 14px;
 }
-
 
 #layout-geometry-editor {
   visibility: hidden;

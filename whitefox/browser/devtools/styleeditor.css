@@ -225,28 +225,34 @@ li.error > .stylesheet-info > .stylesheet-more  > .stylesheet-error-message {
   cursor: pointer;
   padding: 8px 0;
   margin: 0 8px;
-  background-image: url(images/itemToggle.png);
+  background-image: url(images/itemToggle.svg);
   background-repeat: no-repeat;
   background-clip: content-box;
-  background-position: 0 8px;
-  background-size: 48px 24px;
+  background-position: center;
+  background-size: 16px;
   width: 24px;
   height: 40px;
 }
-
-@media (min-resolution: 1.1dppx) {
-  .stylesheet-enabled {
-    background-image: url(images/itemToggle@2x.png);
-  }
+.theme-dark .stylesheet-enabled {
+  filter: invert(1);
+}
+.theme-firebug  .stylesheet-enabled {
+  background-image: url(images/firebug/debugger-blackbox.svg);
 }
 
 .disabled > .stylesheet-enabled {
-  background-position: -24px 8px;
+  opacity: 0.3;
+}
+.theme-firebug .disabled > .stylesheet-enabled {
+  opacity: 0.4;
 }
 
-/* Invert all toggle icons but the one in the active row for light theme */
-.theme-light .splitview-nav > li:not(.splitview-active) .stylesheet-enabled {
+/* Invert the toggle icon in the active row for light theme */
+.theme-light:not(.theme-firebug) .splitview-nav > li.splitview-active .stylesheet-enabled {
   filter: invert(1);
+}
+.theme-firebug .splitview-nav > li.splitview-active .stylesheet-enabled {
+  background-image: url(images/firebug/debugger-blackbox.svg#bright);
 }
 
 .splitview-nav > li > .stylesheet-enabled:focus,

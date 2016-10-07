@@ -16,11 +16,14 @@
   font-family: var(--proportional-font-family);
 }
 
+.debugger .split-box.vert > .splitter,
 .debugger .split-box > .splitter {
   background-clip: content-box;
-  padding: 0 1px;
   margin: 0 -1px;
+  border: 0;
+  padding: 0 1px;
   position: relative;
+  min-width: 3px;
   z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
 }
 
@@ -50,6 +53,7 @@ div.sources-header,
 div.editor-wrapper,
 div.welcomebox {
   height: calc(100% - 28px);
+  XXX-width: 100%;
 }
 div.editor-wrapper,
 div.welcomebox {
@@ -164,18 +168,24 @@ i.disableBreakpoints::after {
 i.pause-exceptions {
   overflow: hidden;
 }
-i.pause-exceptions::after {
+
+i.pause-exceptions::after,
+i.pause-exceptions[title="Ignore exceptions"]::after {
+  background-image: url(images/firebug/breakOn/breakOnNext.svg), url(images/firebug/pause.svg);
+}
+
+.all > i.pause-exceptions::after,
+i.pause-exceptions[title="Pause on all exceptions"]::after {
   background-image: url(images/firebug/breakOn/breakOnError.svg), url(images/firebug/pause.svg);
   background-size: 16px, 14px;
   background-position: 0 0, 0 0;
   background-repeat: no-repeat;
 }
+
+.uncaught > i.pause-exceptions::after,
 i.pause-exceptions[title="Pause on uncaught exceptions"]::after {
   background-image: url(images/firebug/breakOn/breakOnMutate.svg), url(images/firebug/pause.svg);
   background-position: 1px 0, 0 0;
-}
-i.pause-exceptions[title="Ignore exceptions"]::after {
-  background-image: url(images/firebug/breakOn/breakOnNext.svg), url(images/firebug/pause.svg);
 }
 
 .command-bar > span.prettyPrint {

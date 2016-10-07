@@ -24,6 +24,17 @@
   z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
 }
 
+.debugger .split-box.vert > .splitter,
+.debugger .split-box > .splitter {
+  background-clip: content-box;
+  margin: 0 -1px;
+  border: 0;
+  padding: 0 1px;
+  position: relative;
+  min-width: 3px;
+  z-index: 101; /* This value is just above the value for '.welcomebox' to cover the center-pane. */
+}
+
 .debugger .split-box > .splitter > .splitter-handle {
   position: static;
   margin: 0 -1px;
@@ -32,6 +43,10 @@
 
 div.sources-header, div.source-header, div.command-bar, div._header {
   background-color:  var(--theme-toolbar-background);
+}
+
+div.welcomebox {
+  width: 100%;
 }
 
 :-moz-any(.domain,.file,.folder) > svg {
@@ -61,11 +76,24 @@ div.sources-header, div.source-header, div.command-bar, div._header {
 
 :root:not(.theme-firebug) i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
   fill: #393f4c; /*var(--theme-body-color);*/
+  stroke-width: 0;
 }
+
 :root:not(.theme-firebug) .pause > svg{
   transform: translateX(-.8px);
 }
 
+:root:not(.theme-firebug) .breakpoints-disabled > .disableBreakpoints > svg {
+  fill: var(--theme-highlight-blue);
+}
+
+:root:not(.theme-firebug) .uncaught > .pause-exceptions > svg {
+  fill: var(--theme-highlight-purple);
+}
+
+:root:not(.theme-firebug) .all > .pause-exceptions > svg {
+  fill: var(--theme-highlight-blue);
+}
 
 :root:not(.theme-firebug) .breakpoints-list .breakpoint {
   --theme-toolbar-background: #f3f3f3; /* This is the color used when :hover */

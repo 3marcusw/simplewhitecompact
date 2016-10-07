@@ -41,11 +41,6 @@
   list-style-image: url(./images/profiler-stopwatch.svg);
 }
 
-#empty-notice button[checked],
-#recording-notice button[checked] {
-  list-style-image: url(./images/profiler-stopwatch-checked.svg);
-}
-
 #empty-notice button .button-text,
 #recording-notice button .button-text {
   display: none;
@@ -75,10 +70,6 @@
 
 #record-button {
   list-style-image: url(./images/profiler-stopwatch.svg);
-}
-
-#record-button[checked] {
-  list-style-image: url(./images/profiler-stopwatch-checked.svg);
 }
 
 #record-button[locked] {

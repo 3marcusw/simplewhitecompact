@@ -640,16 +640,17 @@ box.requests-menu-status[code^="5"] {
 
 /* Network request details */
 
-#details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
-#details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 #details-pane-toggle {
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
-#details-pane-toggle:-moz-locale-dir(rtl),
 #details-pane-toggle.pane-collapsed,
 #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
+}
+
+:root:not(.theme-firebug) #details-pane-toggle:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+  transform: scaleX(-1);
 }
 
 :root.theme-firebug #details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
@@ -1049,7 +1050,7 @@ box.requests-menu-status[code^="5"] {
   padding: 0;
   opacity: 1;
 }
-.theme-light #requests-menu-clear-button[label] > .button-box  > .button-icon {
+.theme-dark #requests-menu-clear-button[label] > .button-box  > .button-icon {
   filter: invert(1);
 }
 
