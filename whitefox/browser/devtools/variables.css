@@ -131,8 +131,8 @@
   --theme-sidebar-background: #fcfcfc;
   --theme-contrast-background: #e6b064;
 
-  --theme-tab-toolbar-background: #ebeced;
-  --theme-toolbar-background: #f0f1f2;
+  --theme-tab-toolbar-background: #d8eaf9; /* New value in default theme.  I had #dbeaf9. --johnGraciliano */
+  --theme-toolbar-background: #d8eaf9; /* Here I had #dbeaf9, it remains #f0f1f2 in the default theme. --johnGraciliano */
   --theme-selection-background: #3399ff;
   --theme-selection-background-semitransparent: rgba(128,128,128,0.2);
   --theme-selection-color: white;

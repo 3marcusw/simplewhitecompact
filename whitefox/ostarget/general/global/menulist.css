@@ -2,10 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 /* ===== menulist.css ===================================================
   == Styles used by the XUL menulist element.
   ======================================================================= */
@@ -27,6 +23,10 @@ menulist {
   color: -moz-FieldText;
   text-shadow: none;
 }
+menulist:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-right-colors: ThreeDShadow ThreeDDarkShadow;
+}
 
 .menulist-label-box {
   -moz-box-align: center;
@@ -44,14 +44,17 @@ menulist {
 .menulist-label {
   margin-top: 0 !important;
   -moz-margin-end: 0 !important;
+  margin-inline-end: 0 !important;
   margin-bottom: 0 !important;
   -moz-margin-start: 1px !important;
+  margin-inline-start: 1px !important;
 }
 
 .menulist-description {
   font-style: italic;
   color: GrayText;
   -moz-margin-start: 1ex !important;
+  margin-inline-start: 1ex !important;
 }
 
 /* ..... dropmarker ..... */
@@ -63,6 +66,10 @@ menulist[disabled="true"]:hover:active > .menulist-dropmarker {
   -moz-border-left-colors: ThreeDLightShadow ThreeDHighlight;
   padding: 1px;
 }
+menulist[disabled="true"]:hover:active > .menulist-dropmarker:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-right-colors: ThreeDLightShadow ThreeDHighlight;
+}
 
 menulist:hover:active > .menulist-dropmarker {
   -moz-border-top-colors: ThreeDShadow ThreeDFace;
@@ -73,6 +80,8 @@ menulist:hover:active > .menulist-dropmarker {
   padding-bottom: 0px;
   -moz-padding-start: 2px;
   -moz-padding-end: 0px;
+  padding-inline-start: 2px;
+  padding-inline-end: 0px;
 }
 
 /* ..... focused state ..... */
@@ -83,8 +92,16 @@ menulist:focus:not([open="true"]) > .menulist-label-box {
 }
 
 menulist:-moz-focusring:not([open="true"]) > .menulist-label-box {
-  border: 1px dotted #F5DB95;
+  border: 1px dotted ThreeDDarkShadow;
 }
+
+/*** The default theme includes the next rule but Simple White overrides it. --johnGraciliano ***
+@media (-moz-os-version: windows-xp) {
+  menulist:-moz-focusring:not([open="true"]) > .menulist-label-box {
+    border: 1px dotted #F5DB95;
+  }
+}
+ ************************************************************************************************/
 
 /* ..... disabled state ..... */
 
@@ -100,6 +117,8 @@ menulist[disabled="true"] {
   padding-bottom: 3px;
   -moz-padding-start: 2px;
   -moz-padding-end: 0px;
+  padding-inline-start: 2px;
+  padding-inline-end: 0px;
 }
 
 html|*.menulist-editable-input {
@@ -110,11 +129,8 @@ html|*.menulist-editable-input {
   font: inherit;
 }
 
-menulist:-moz-focusring:not([open="true"]) > .menulist-label-box {
-  border: 1px dotted ThreeDDarkShadow;
-}
-
 @media (-moz-windows-default-theme) {
+  /* The default theme excludes Windows XP but the original Simple White does not guard against it.  --johnGraciliano */
   .menulist-label-box {
     background-color: transparent !important;
     color: inherit !important;
@@ -124,16 +140,20 @@ menulist:-moz-focusring:not([open="true"]) > .menulist-label-box {
     margin-top: -1px !important;
     margin-bottom: -1px !important;
     -moz-margin-start: 0 !important;
+    margin-inline-start: 0 !important;
   }
 
   .menulist-description {
     -moz-margin-start: 1ex !important;
+    margin-inline-start: 1ex !important;
   }
 
   menulist:not([editable="true"]) > .menulist-dropmarker {
     margin-top: -2px;
     -moz-margin-start: 3px;
     -moz-margin-end: -3px;
+    margin-inline-start: 3px;
+    margin-inline-end: -3px;
   }
 
   .menulist-icon {

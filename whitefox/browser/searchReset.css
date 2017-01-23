@@ -1,0 +1,28 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+body {
+  align-items: center;
+}
+
+.title {
+  background-image: url("chrome://browser/skin/icon-search-45.svg");
+  background-size: 1.3em; /* 45px */
+  background-position: .25em 0; /* .325em 3px */
+}
+
+.title:-moz-dir(rtl) {
+  background-position: calc(100% - .25em) 0;
+}
+
+#defaultEngine {
+  padding-inline-start: 26px;
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-size: 16px, 16px;
+}
+
+#defaultEngine:-moz-dir(rtl) {
+  background-position: calc(100% - 5px) center;
+}

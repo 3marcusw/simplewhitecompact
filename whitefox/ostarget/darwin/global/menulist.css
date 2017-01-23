@@ -8,9 +8,14 @@
 menulist {
   -moz-appearance: menulist;
   margin: 5px 2px 3px;
-  min-height: 20px !important;
+  /* min-height: 20px !important;  |* Removed by suishouen to fix bug #31 */
   color: -moz-DialogText;
   text-shadow: none;
+}
+
+/* Added by suishouen to fix bug #31 */
+menulist:not([popuponly="true"]) {
+  min-height: 20px;
 }
 
 .menulist-label-box {

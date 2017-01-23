@@ -7,13 +7,24 @@
      height="11"
      viewBox="0 0 16 11">
   <style>
-    use:not(:target) {
-      display: none;
-    }
     use {
+      display: none;
       fill: none;
       stroke: #000;
       stroke-width: 1;
+    }
+    use:target {
+      display: inline;
+    }
+    g:target + use {
+      display: inline;
+      stroke: HighlightText;
+    }
+    #any {
+      display: inline;
+    }
+    :target ~ #any {
+      display: none;
     }
   </style>
   <defs style="display: none;">
@@ -34,8 +45,10 @@
               M 0,5.5   h 7.3   m .2,0   m -2.75,-2.75   l 2.75,2.75   l -2.75,2.75" stroke="#5a5a5a"/>
 	</g>
   </defs>
-  <use id="this"  xlink:href="#this-shape"/>
+  <g   id="HL"/>
+  <use id="selected"  xlink:href="#this-shape"/>
+  <g   id="HL-RTL"/>
+  <use id="selected-RTL"  xlink:href="#this-rtl-shape"/>
+  <use id="RTL" xlink:href="#any-rtl-shape"/>
   <use id="any" xlink:href="#any-shape"/>
-  <use id="this-rtl"  xlink:href="#this-rtl-shape"/>
-  <use id="any-rtl" xlink:href="#any-rtl-shape"/>
 </svg>

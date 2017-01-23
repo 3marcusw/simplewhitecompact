@@ -332,8 +332,10 @@
   #spectrum + div#eyedropper-button:hover {
     opacity: .85;
   }
-  
-  :root.theme-light div#eyedropper-button {
+
+  /*
+  :root.theme-dark div#eyedropper-button {
     filter: invert(1);
   }
+   */
 } /* @supports */

@@ -2,7 +2,24 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+/* This file is loaded by both browser.xul and toolbox.xul. Therefore, rules
+   defined here can not rely on toolbox.xul variables. */
+
 /* Splitters */
+
+:root { /* I added these variables to be used in content */
+  /* Define the widths of the draggable areas on each side of a splitter. top
+     and bottom widths are used for horizontal splitters, inline-start and
+     inline-end for side splitters.*/
+
+  --devtools-splitter-top-width: 2px;
+  --devtools-splitter-bottom-width: 2px;
+
+  /* Small draggable area on inline-start to avoid overlaps on scrollbars.*/
+  --devtools-splitter-inline-start-width: 1px;
+  --devtools-splitter-inline-end-width: 2px; /* This is 4px in the default theme --johnGraciliano */
+}
+
 :root[devtoolstheme="light"] {
   /* These variables are used in browser.xul but inside the toolbox they are overridden by --theme-splitter-color */
   --devtools-splitter-color: #c7c7c7;
@@ -23,6 +40,7 @@
   height: 3px;
   margin-top: -3px;
   position: relative;
+  cursor: n-resize;
 }
 
 .devtools-side-splitter {

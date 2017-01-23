@@ -2,10 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 /* ===== autocomplete.css =================================================
   == Styles used by the autocomplete widget.
   ======================================================================= */
@@ -78,6 +74,7 @@ panel[type="autocomplete-richlistbox"],
 
 .autocomplete-treebody::-moz-tree-cell-text {
   -moz-padding-start: 8px;
+  padding-inline-start: 8px;
 }
 
 treechildren.autocomplete-treebody::-moz-tree-row(selected) {
@@ -169,6 +166,8 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
   height: 16px;
   -moz-margin-start: 6px;
   -moz-margin-end: 4px;
+  margin-inline-start: 6px;
+  margin-inline-end: 4px;
   margin-bottom: -1px;
 }
 
@@ -184,6 +183,7 @@ treechildren.autocomplete-treebody::-moz-tree-cell-text(selected) {
 
 .ac-extra > .ac-comment {
   -moz-padding-end: 4px;
+  padding-inline-end: 4px;
 }
 
 .ac-ellipsis-after {

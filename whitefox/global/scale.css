@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /* ::::: scale ::::: */
@@ -31,6 +35,10 @@
   min-width: 30px;
   min-height: 15px;
 }
+.scale-thumb:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-right-colors: ThreeDLightShadow ThreeDHighlight;
+}
 
 .scale-thumb[orient="vertical"] {
   -moz-appearance: scalethumb-vertical;
@@ -43,4 +51,8 @@
   -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow !important;
   -moz-border-bottom-colors: ThreeDDarkShadow ThreeDShadow !important;
   -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow !important;
+}
+.scale-thumb[disabled="true"]:-moz-locale-dir(rtl) {
+  -moz-border-left-colors: ThreeDDarkShadow ThreeDShadow !important;
+  -moz-border-right-colors: ThreeDHighlight ThreeDLightShadow !important;
 }

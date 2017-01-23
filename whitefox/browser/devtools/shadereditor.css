@@ -44,30 +44,41 @@
 
 .side-menu-widget-item-checkbox .checkbox-check {
   -moz-appearance: none;
-  background-image: url(images/itemToggle.png);
+  background-image: url(images/itemToggle.svg);
   background-color: transparent;
-  background-repeat: no-repeat;
-  background-clip: content-box;
-  background-size: 32px 16px;
-  background-position: -16px 0;
   width: 16px;
   height: 16px;
   border: 0;
 }
 
-@media (min-resolution: 1.1dppx) {
-  .side-menu-widget-item-checkbox .checkbox-check {
-    background-image: url(images/itemToggle@2x.png);
-  }
+.theme-firebug .side-menu-widget-item-checkbox .checkbox-check {
+  background-image: url(images/firebug/debugger-blackbox.svg);
 }
 
-.side-menu-widget-item-checkbox[checked] .checkbox-check {
-  background-position: 0 0;
+.side-menu-widget-item-checkbox:not([checked]) .checkbox-check,
+.side-menu-widget-item-checkbox:not([checked]) + vbox {
+  opacity: 0.3;
+}
+.theme-firebug .side-menu-widget-item-checkbox:not([checked]) .checkbox-check,
+.theme-firebug .side-menu-widget-item-checkbox:not([checked]) + vbox {
+  opacity: 0.4;
 }
 
-/* Invert all toggle icons but the one in the active row for light theme */
-.theme-light .side-menu-widget-item:not(.selected) .checkbox-check {
+/* The next rule is substituted by the one that follows *|
+.side-menu-widget-item:not(.selected) .checkbox-check {
+  filter: var(--icon-filter);
+}
+ */
+.theme-dark .side-menu-widget-item .checkbox-check {
   filter: invert(1);
+}
+
+/* Make sure icon is white when the item is selected */
+.theme-light:not(.theme-firebug) .side-menu-widget-item.selected .checkbox-check {
+  filter: invert(1);
+}
+.theme-firebug .side-menu-widget-item.selected .checkbox-check {
+  background-image: url(images/firebug/debugger-blackbox.svg#bright);
 }
 
 /* Shader source editors */

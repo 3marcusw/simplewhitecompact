@@ -1853,7 +1853,7 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper > .toolbarbutton-1:-moz-an
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-stack,  /* Firefox 42+ --johnGraciliano */
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-badge-container,
 #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button, #home-button, #print-button, #downloads-button, #bookmarks-menu-button, #new-tab-button, #new-window-button, #fullscreen-button, #sync-button, #feed-button, #tabview-button, #social-share-button, #open-file-button, #find-button, #developer-button, #preferences-button, #privatebrowsing-button, #save-page-button, #switch-to-metro-button, #add-ons-button, #history-panelmenu, #nav-bar-overflow-button, #PanelUI-menu-button, #characterencoding-button, #email-link-button, #sidebar-button, #zoom-out-button, #zoom-reset-button, #zoom-in-button, #cut-button, #copy-button, #paste-button, #e10s-button, #panic-button, #web-apps-button, #webide-button, #loop-button, #pocket-button, #containers-panelmenu)) > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-  padding: 3px 7px;  /* This is for 16px × 16px icon buttons!  It may be best also add: 'max-height: 16px; max-width 16px;'  --johnGraciliano */
+  padding: calc(var(--toolbarbutton-vertical-inner-padding) + 1px) 7px;  /* This is for 16px × 16px icon buttons!  It may be best also add: 'max-height: 16px; max-width 16px;'  --johnGraciliano */
 }
 
 /*****  All this taken from default theme shall be gone --johnGraciliano *******%
@@ -2549,6 +2549,50 @@ html|*.urlbar-input:-moz-lwtheme::-moz-placeholder,
   padding: 0 3px;
 }
 
+
+/****************************************************************************************************************************************/
+/* ::::: URL Bar Zoom Reset Button ::::: */
+@keyframes urlbar-zoom-reset-pulse {
+  0% {
+    transform: scale(0);
+  }
+  75% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+#urlbar-zoom-button {
+  -moz-appearance: none;
+  margin: 0 3px;
+  font-size: .8em;
+  padding: 0 8px;
+  border-radius: 1em;
+  background-color: hsla(0,0%,0%,.05);
+  border: 1px solid ThreeDLightShadow;
+}
+
+#urlbar-zoom-button[animate="true"] {
+  animation-name: urlbar-zoom-reset-pulse;
+  animation-duration: 250ms;
+}
+
+#urlbar-zoom-button:hover:active {
+  background-color: hsla(0,0%,0%,.1);
+}
+
+#urlbar-zoom-button > .toolbarbutton-text {
+  display: -moz-box;
+}
+
+#urlbar-zoom-button > .toolbarbutton-icon {
+  display: none;
+}
+/****************************************************************************************************************************************/
+
+
 .searchbar-engine-button,
 .search-go-container {
   padding: 2px 2px;
@@ -3093,6 +3137,18 @@ window:not([chromehidden~="toolbar"]) #urlbar-wrapper:not(:hover) > #forward-but
   max-width: 36px;
 }
 
+richlistitem[image="chrome://mozapps/skin/places/defaultFavicon.png"] > .ac-title-box > .ac-site-icon {
+  display: none;
+}
+richlistitem[image="chrome://mozapps/skin/places/defaultFavicon.png"] > .ac-title-box::before {
+  display: -moz-box;
+  margin: 0 5px -2px;
+  background-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
+  width: 16px;
+  height: 16px;
+  content: "";
+}
+
 .ac-result-type-bookmark,
 .autocomplete-treebody::-moz-tree-image(bookmark, treecolAutoCompleteImage) {
   list-style-image: url("chrome://browser/skin/places/bookmark.svg");
@@ -3120,6 +3176,11 @@ richlistitem[type~="action"][actiontype="searchengine"] > .ac-title-box > .ac-si
   list-style-image: url(chrome://global/skin/icons/Search-glass-RTL.svg);
 }
 
+/* Revert a rule in chrome://browser/content/browser.css:384 --johnGraciliano */
+.autocomplete-richlistitem[type~="action"][actiontype="searchengine"] > .ac-title-box > .ac-title > .ac-comment:-moz-locale-dir(rtl) {
+  direction: rtl !important;
+}
+
 richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box > .ac-title > .ac-comment:not([selected])::after {
   display: inline-block;
   -moz-margin-start: 2px;
@@ -3141,7 +3202,7 @@ richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box >
 }
 richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box > .ac-title > .ac-comment:not([selected]):-moz-locale-dir(rtl)::after,
 richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box > .ac-title > .ac-comment > html|span.ac-selected-text:-moz-locale-dir(rtl)::before {
-  list-style-image: url(chrome://global/skin/icons/Search-glass-RTL.svg);
+  background-image: url(chrome://global/skin/icons/Search-glass-RTL.svg);
 }
 
 /** No autocomplete-search.svg, so removed the next is gone *******%
@@ -3163,17 +3224,31 @@ richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box >
   height: 16px;
 }
 
+/* Increase the size of the text in the suggestion's title line (Firefox <= 47) */
 .ac-comment {
-  font-size: 1.06em;
+  font-size: calc(100% + 1px);
 }
 
-.ac-extra > .ac-comment {
-  font-size: 1em;
+/* Leave the tag labels at original (smaller) size. */
+.ac-result-type-tag:not([hidden]) ~ .ac-comment {
+  font-size: inherit;
+  padding-top: 1px;
+}
+
+/* Reset the "Search with ..." text size. */
+.ac-comment > html|span.ac-selected-text {
+  font-size: calc(100% - 1px);
+  padding-top: 1px;
+}
+
+/* Tag labels should normaly be gray color */
+.ac-result-type-tag:not([hidden]) ~ .ac-comment:not([selected]) {
+  color: hsl(0, 0%, 40%);
 }
 
 .ac-url-text,
 .ac-action-text {
-  font-size: 1em;
+  font-size: inherit; /* This line is to be removed!!!!! *************************************************************************************************/
   color: -moz-nativehyperlinktext;
 }
 
@@ -3192,13 +3267,13 @@ richlistitem[type~="action"][actiontype="searchengine"][image] > .ac-title-box >
 }/*Is this supposed to be here??? (It was not in SimpleWhite) --johnGraciliano */
 
 richlistitem[type~="action"][actiontype="switchtab"] > .ac-url-box > .ac-action-icon {
-  list-style-image: url("chrome://browser/skin/switchTab.svg#any");
+  list-style-image: url("chrome://browser/skin/switchTab.svg");
   padding: 0 3px;
 /*width: 22px;
   height: 11px; --this was not in SimpleWhite! ****/
 }
 richlistitem[type~="action"][actiontype="switchtab"] > .ac-url-box > .ac-action-icon:-moz-locale-dir(rtl) {
-  list-style-image: url("chrome://browser/skin/switchTab.svg#any-rtl");
+  list-style-image: url("chrome://browser/skin/switchTab.svg#RTL");
 }
 
 /** No actionicon-tab@2x.png, so the next is gone  ******%
@@ -3212,10 +3287,10 @@ richlistitem[type~="action"][actiontype="switchtab"] > .ac-url-box > .ac-action-
 
 /* The next was in taken from the @media selectors that follows --johnGraciliano */
 richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-box > .ac-action-icon {
-  list-style-image: url("chrome://browser/skin/switchTab.svg#this");
+  list-style-image: url("chrome://browser/skin/switchTab.svg#selected");
 }
 richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-box > .ac-action-icon:-moz-locale-dir(rtl) {
-  list-style-image: url("chrome://browser/skin/switchTab.svg#this-rtl");
+  list-style-image: url("chrome://browser/skin/switchTab.svg#selected-RTL");
 }
 @media not all and (-moz-os-version: windows-vista),
        not all and (-moz-windows-default-theme) {
@@ -3257,10 +3332,55 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
   border-top: 1px solid GrayText;
 }
 
+/* Special icon versions for 'background-color: Highlight' in Firefox <= 47 */
+@media not all and (-moz-windows-default-theme) {
+  richlistitem[selected][image="chrome://mozapps/skin/places/defaultFavicon.png"] > .ac-title-box::before {
+    background-image: url(chrome://browser/skin/places/place.svg#defaultFaviconHL);
+  }
 
-/*****************************************************************************************************************************************************************/
+  [selected] > * > .ac-result-type-bookmark,
+  .autocomplete-treebody::-moz-tree-image(bookmark, treecolAutoCompleteImage, selected) {
+    list-style-image: url("chrome://browser/skin/places/bookmark.svg#HL");
+  }
+
+  [selected] > * > .ac-result-type-keyword,
+  .autocomplete-treebody::-moz-tree-image(keyword, treecolAutoCompleteImage, selected),
+  richlistitem[type~="action"][actiontype="searchengine"][selected] > .ac-title-box > .ac-site-icon {
+    list-style-image: url(chrome://global/skin/icons/Search-glass.svg#HL);
+  }
+  [selected] > * > .ac-result-type-keyword:-moz-locale-dir(rtl),
+  .autocomplete-treebody:-moz-locale-dir(rtl)::-moz-tree-image(keyword, treecolAutoCompleteImage, selected),
+  richlistitem[type~="action"][actiontype="searchengine"][selected] > .ac-title-box > .ac-site-icon:-moz-locale-dir(rtl) {
+    list-style-image: url(chrome://global/skin/icons/Search-glass-RTL.svg#HL);
+  }
+
+  richlistitem[type~="action"][actiontype="searchengine"][image][selected] > .ac-title-box > .ac-title > .ac-comment > html|span.ac-selected-text::before {
+    background-image: url(chrome://global/skin/icons/Search-glass.svg#HL);
+  }
+  richlistitem[type~="action"][actiontype="searchengine"][image][selected] > .ac-title-box > .ac-title > .ac-comment > html|span.ac-selected-text:-moz-locale-dir(rtl)::before {
+    background-image: url(chrome://global/skin/icons/Search-glass-RTL.svg#HL);
+  }
+
+  [selected] > * > * > .ac-result-type-tag,
+  .autocomplete-treebody::-moz-tree-image(tag, treecolAutoCompleteImage, selected) {
+    list-style-image: url(chrome://browser/skin/places/place.svg#tagHL);
+  }
+
+  richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-box > .ac-action-icon {
+    list-style-image: url("chrome://browser/skin/switchTab.svg#HL");
+  }
+  richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-box > .ac-action-icon:-moz-locale-dir(rtl) {
+    list-style-image: url("chrome://browser/skin/switchTab.svg#HL-RTL");
+  }
+}
+
+/************************************************************************************************************************************************************/
 
 @supports (line-height:calc(1px)) { /* Firefox 48.0 and later */
+
+  .autocomplete-richlistitem {
+    font: message-box;
+  }
 
   #PopupAutoCompleteRichResult{
     margin: 0 !important;
@@ -3271,18 +3391,33 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
     max-width: calc(100vw - 61px - 41px) !important;
   }
 
+  .autocomplete-richlistitem {
+    height: 29px;
+    min-height: 29px;
+  }
 
+  .ac-title {
+    --acTitleExtraSize: 2px;
+    font-size: calc(100% + var(--acTitleExtraSize));
+    margin-top: calc(0px - var(--acTitleExtraSize));
+    margin-bottom: var(--acTitleExtraSize);
+  }
+
+@media (-moz-windows-default-theme) {
   .autocomplete-richlistitem {
     height: 28px;
     min-height: 28px;
   }
 
   .ac-title {
-    font-size: 1.06em;
+    --acTitleExtraSize: 1px;
   }
+}
+
   .ac-tags:not([selected]) {
     color: hsl(0, 0%, 40%);
   }
+
   .ac-separator:not([selected]) {
     color: hsl(0, 0%, 50%);
   }
@@ -3298,7 +3433,6 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
     margin-inline-end: 6px;  /* Override a setting in chrome://global/skin/autocomplete.css */
     list-style-image: url(chrome://browser/skin/places/place.svg#defaultFavicon);
   }
-
 
   .ac-text-overflow-container,
   .ac-title-text,
@@ -3346,20 +3480,20 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
   }
 
   /* Use the search glass as the site icon if it is the default search */
-  .ac-site-icon[type=searchengine] {
+  image.ac-site-icon[type=searchengine] {
     list-style-image: url(chrome://global/skin/icons/Search-glass.svg);
   }
-  .ac-site-icon[type=searchengine]:-moz-locale-dir(rtl) {
+  image.ac-site-icon[type=searchengine]:-moz-locale-dir(rtl) {
     list-style-image: url(chrome://global/skin/icons/Search-glass-RTL.svg);
   }
 
   /* When the icon shows a search engine icon, append the search glass to the title */
   [type=searchengine][src] + .ac-title {
-    background: url(chrome://global/skin/icons/Search-glass.svg) right center no-repeat;
+    background: url(chrome://global/skin/icons/Search-glass.svg) right calc(50% + var(--acTitleExtraSize)) no-repeat;
     padding-inline-end: 18px;
   }
   [type=searchengine][src] + .ac-title:-moz-locale-dir(rtl) {
-    background: url(chrome://global/skin/icons/Search-glass-RTL.svg) left center no-repeat;
+    background: url(chrome://global/skin/icons/Search-glass-RTL.svg) left calc(50% + var(--acTitleExtraSize)) no-repeat;
   }
 
   /* Add a search icon to the keyword search text */
@@ -3382,29 +3516,75 @@ richlistitem[type~="action"][actiontype="switchtab"][selected="true"] > .ac-url-
     background-position: right center;
   }
 
-  /* Insert the switch tab when appropriate */
+  /* Insert the switch tab icon when appropriate */
   [type=switchtab] + .ac-title,
   [type=remotetab] + .ac-title {
-    background: url("chrome://browser/skin/switchTab.svg#any") no-repeat 2px center;
+    background: url("chrome://browser/skin/switchTab.svg") no-repeat 2px calc(50% + var(--acTitleExtraSize));
     padding-inline-start: 22px;
   }
   [type=switchtab] + .ac-title:-moz-locale-dir(rtl),
   [type=remotetab] + .ac-title:-moz-locale-dir(rtl) {
-    background: url("chrome://browser/skin/switchTab.svg#any-rtl") no-repeat calc(100% - 2px) center;
+    background: url("chrome://browser/skin/switchTab.svg#RTL") no-repeat calc(100% - 2px) calc(50% + var(--acTitleExtraSize));
   }
-
   [type=switchtab] + .ac-title[selected],
   [type=remotetab] + .ac-title[selected] {
-    background-image: url("chrome://browser/skin/switchTab.svg#this");
+    background-image: url("chrome://browser/skin/switchTab.svg#selected");
   }
   [type=switchtab] + .ac-title[selected]:-moz-locale-dir(rtl),
   [type=remotetab] + .ac-title[selected]:-moz-locale-dir(rtl) {
-    background-image: url("chrome://browser/skin/switchTab.svg#this-rtl");
+    background-image: url("chrome://browser/skin/switchTab.svg#selected-RTL");
   }
+
+/* Special icon versions for 'background-color: Highlight' */
+@media not all and (-moz-windows-default-theme) {
+  /* Override chrome://global/skin/autocomplete.css */
+  image.ac-site-icon[selected] {
+    list-style-image: url(chrome://browser/skin/places/place.svg#defaultFaviconHL);
+  }
+
+  /* The bookmarks icon */
+  .autocomplete-richlistitem[type=bookmark][selected]::after {
+    background-image: url("chrome://browser/skin/places/bookmark.svg#HL");
+  }
+
+  /* Use the search glass as the site icon if it is the default search */
+  image.ac-site-icon[type=searchengine][selected] {
+    list-style-image: url(chrome://global/skin/icons/Search-glass.svg#HL);
+  }
+  image.ac-site-icon[type=searchengine][selected]:-moz-locale-dir(rtl) {
+    list-style-image: url(chrome://global/skin/icons/Search-glass-RTL.svg#HL);
+  }
+
+  /* When the icon shows a search engine icon, append the search glass to the title */
+  /* Add a search icon to the keyword search text */
+  [type=searchengine][src] + .ac-title[selected],
+  [actiontype=keyword].ac-action > description > .ac-action-text[selected] {
+    background-image: url(chrome://global/skin/icons/Search-glass.svg#HL);
+  }
+  [type=searchengine][src] + .ac-title[selected]:-moz-locale-dir(rtl),
+  [actiontype=keyword].ac-action > description > .ac-action-text[selected]:-moz-locale-dir(rtl) {
+    background-image: url(chrome://global/skin/icons/Search-glass-RTL.svg#HL);
+  }
+
+  /* Insert a tag icon before the tags */
+  .ac-tags-text[selected] {
+    background-image: url(chrome://browser/skin/places/place.svg#tagHL);
+  }
+
+  /* Insert the switch tab icon when appropriate */
+  [type=switchtab] + .ac-title[selected],
+  [type=remotetab] + .ac-title[selected] {
+    background-image: url("chrome://browser/skin/switchTab.svg#HL");
+  }
+  [type=switchtab] + .ac-title[selected]:-moz-locale-dir(rtl),
+  [type=remotetab] + .ac-title[selected]:-moz-locale-dir(rtl) {
+    background-image: url("chrome://browser/skin/switchTab.svg#HL-RTL");
+  }
+}
 
 } /* End of Firefox 48.0 */
 
-/*****************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
 
 /* combined go/reload/stop button in location bar */
@@ -5247,8 +5427,13 @@ menuitem#BMB_pocket {
 }
 
 /***********  Full Screen Warning for Firefox 43.0+  ****************/
+/*
+ *  html|*#fullscreen-warning... selectors are for Firefox 43 through 49
+ *  html|*.pointerlockfswarning.. selectors are for Firefox 50 and later.
+ */
 
-html|*#fullscreen-warning {
+html|*#fullscreen-warning,
+html|*.pointerlockfswarning {
   align-items: center;
   background: rgba(34,34,34,.625);
   border-width: 0;
@@ -5259,27 +5444,33 @@ html|*#fullscreen-warning {
   font: message-box;
 }
 
-html|*#fullscreen-warning::before {
+html|*#fullscreen-warning::before,
+html|*.pointerlockfswarning::before {
   margin: 0;
   -moz-margin-end: -10px;
   width: 18px; height: 18px;
 }
 
 html|*#fullscreen-warning.verifiedIdentity::before,
-html|*#fullscreen-warning.verifiedDomain::before {
+html|*#fullscreen-warning.verifiedDomain::before,
+html|*.pointerlockfswarning[data-identity="verifiedIdentity"]::before,
+html|*.pointerlockfswarning[data-identity="verifiedDomain"]::before {
   content:"";
   background-image: url("chrome://browser/skin/fullscreen/secure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
   background-size: 100%, 100%;
 }
 
-html|*#fullscreen-warning.unknownIdentity::before {
+html|*#fullscreen-warning.unknownIdentity::before,
+html|*.pointerlockfswarning[data-identity="unknownIdentity"]::before {
   content:"";
   background-image: url("chrome://browser/skin/fullscreen/insecure.svg"), radial-gradient(farthest-corner at 50% 50% , rgba(0,0,0,0.1875) 0, rgba(0,0,0,0) 100%);
   background-size: 100%, 100%;
 }
 
 html|*#fullscreen-domain-text,
-html|*#fullscreen-generic-text {
+html|*#fullscreen-generic-text,
+html|*.pointerlockfswarning-domain-text,
+html|*.pointerlockfswarning-generic-text {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
@@ -5287,12 +5478,14 @@ html|*#fullscreen-generic-text {
   margin: 0 16px;
 }
 
-html|*#fullscreen-domain {
+html|*#fullscreen-domain,
+html|*.pointerlockfswarning-domain {
   font-weight: bolder;
   margin: 0;
 }
 
-html|*#fullscreen-exit-button {
+html|*#fullscreen-exit-button,
+html|*.pointerlockfswarning-exit-button {
   padding: 0 3px;
   margin: 0;
   -moz-margin-start: -8px;
@@ -5776,8 +5969,8 @@ svg|line.css-transform-line {
 }
 
 :root[devtoolstheme="dark"] #developer-toolbar {
-  --gcli-input-background: #343c45; /* --theme-toolbar-background */
-  --gcli-background-color: #343c45; /* --theme-toolbar-background */
+  --gcli-input-background: #2e343c; /* --theme-toolbar-background (it was #343c45) */
+  --gcli-background-color: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
   --gcli-input-color: #b6babf; /* --theme-body-color-alt */
   --gcli-border-color: black; /* --theme-splitter-color */

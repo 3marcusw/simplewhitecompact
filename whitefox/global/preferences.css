@@ -19,6 +19,8 @@ prefpane {
   padding-bottom: 10px;
   -moz-padding-start: 8px;
   -moz-padding-end: 10px;
+  padding-inline-start: 8px;
+  padding-inline-end: 10px;
 }
 
 prefwindow[type="child"] {
@@ -26,6 +28,8 @@ prefwindow[type="child"] {
   padding-bottom: 10px;
   -moz-padding-start: 8px;
   -moz-padding-end: 10px;
+  padding-inline-start: 8px;
+  padding-inline-end: 10px;
 }
 
 prefwindow[type="child"] > prefpane {
@@ -36,6 +40,8 @@ prefwindow[type="child"] > prefpane {
   padding-bottom: 10px;
   -moz-padding-start: 8px;
   -moz-padding-end: 10px;
+  padding-inline-start: 8px;
+  padding-inline-end: 10px;
 }
 
 prefwindow[type="child"] .prefWindow-dlgbuttons {
@@ -53,6 +59,7 @@ radio[pane] {
   border-bottom: 2px groove ThreeDFace;
   margin: 0px;
   -moz-padding-start: 10px;
+  padding-inline-start: 10px;
   background-color: -moz-Field;
   color: -moz-FieldText;
 }

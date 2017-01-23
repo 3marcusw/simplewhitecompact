@@ -2,6 +2,40 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/ */
 
+ 
+#header, #main,
+#layout-header, #layout-main, #layout-info {
+  --expand: 1;
+  --condense: 0px;
+}
+@media (max-height: 252px) {
+  #layout-header, #layout-main, #layout-info {
+    --expand: 0;
+  }
+}
+@media (max-height: 228px) {
+  #header, #main {
+    --expand: 0;
+  }
+}
+
+#computedview-container #layout-header,
+#computedview-container #layout-main,
+#computedview-container #layout-info {
+  --expand: 0;
+  --condense: 1px;
+}
+#computedview-container #layout-main > p > span,
+#computedview-container #layout-main > p > input,
+#computedview-container .layout-legend,
+#computedview-container #layout-info > span,
+#computedview-container #layout-info > section > span  {
+  font-size: 92%;
+}
+#computedview-container #layout-container {
+  max-width: 300px;
+}
+
 .theme-sidebar {
   box-sizing: border-box;
 }
@@ -29,12 +63,31 @@ body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rul
 
 /* Header */
 
-#header, /* Firefox <= 45 */
-#layout-header,
+p#header{ /* Firefox <= 45 */
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-top: calc(10px + 6px * var(--expand));
+  padding-right: 13px;
+  padding-bottom: calc(8px + 8px * var(--expand));
+  padding-left: 13px;
+}
+
+#layout-header{
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-top: calc(7px + 6px * var(--expand));
+  padding-right: 13px;
+  padding-bottom: calc(5px + 8px * var(--expand));
+  padding-left: 13px;
+}
+
 #layout-info {
   display: flex;
   align-items: center;
-  padding: 4px 13px; /* This was 4px 17px; --johnGraciliano */
+  margin: 0;
+  padding: 4px 13px 6px;
 }
 
 p#header:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/devtools/layoutview/view.css'. The tag 'p' is to give this rule priority. --johnGraciliano */
@@ -45,28 +98,12 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 }
 
 /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
-.theme-firebug #sidebar-panel-layoutview > * > * > #layout-header {
-  padding: 1px 14px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-@media (max-height: 228px) {
-  #header {
-    margin-top: 6px;
-    margin-bottom: 4px;
-  }
-}
-
-@media (max-height: 252px) {
-  #sidebar-panel-layoutview > * > * > #layout-header {
-    margin-top: 6px;
-    margin-bottom: 4px;
-  }
-  .theme-firebug #sidebar-panel-layoutview > * > * > #layout-header {
-    margin-top: 2px;
-    margin-bottom: 2px;
-  }
+/* .theme-firebug #sidebar-panel-layoutview > * > * > #layout-header, */
+.theme-firebug #layout-header {
+  padding-top: calc(3px + 6px * var(--expand));
+  padding-left: 14px;
+  padding-bottom: calc(3px + 6px * var(--expand));
+  padding-right: 14px;
 }
 
 #layout-geometry-editor {
@@ -85,10 +122,10 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
   box-sizing: border-box;
   /* The regions are semi-transparent, so the white background is partly
      visible */
-  background-color: white;
-  color: var(--theme-selection-color);
+  background-color: rgba(248,248,248,.75); /* This was white */
+  color: var(--theme-selection-color); /* This color is used for the border and padding values */
   /* Make sure there is some space between the window's edges and the regions */
-  margin: 0 14px 10px 14px;
+  margin: 0 14px 4px 14px;
   width: calc(100% - 2 * 14px);
 }
 #computedview-container #layout-main{ /* Firefox >= 50*/
@@ -97,34 +134,34 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 
 .margin,
 .size,
-.layout-margin,
-.layout-size {
+:root:not(.theme-firebug) .layout-margin,
+:root:not(.theme-firebug) .layout-size {
   color: var(--theme-highlight-blue);
+  color: #0088cc; /* The color for the margin and size values */
 }
 
 /* Regions are 3 nested elements with wide borders and outlines */
 
-#content,
+div#content,
 #layout-content {
-  height: 25px;
+  height: calc(21px + 4px * var(--expand) - var(--condense));
 }
 
-#margins,
-#borders,
-#padding,
+div#margins,
+div#borders,
+div#padding,
 #layout-margins,
 #layout-borders,
 #layout-padding {
-  border-color: hsla(210,100%,85%,0.2);
-  border-width: 25px;
+  border-width: calc(21px + 4px * var(--expand) - var(--condense));
   border-style: solid;
   outline: dotted 1px hsl(210,100%,85%);
 }
 
 div#borders, /* Added specificity so it supersedes rules elsewhere */
 div#layout-borders{
-  border-width: 25px; /* Override Firefox 40 and earlier --johnGraciliano */
-  padding:0; /* Override Firefox 40 and earlier --johnGraciliano */
+  border-width: calc(22px + 3px * var(--expand) - var(--condense));
+  padding:0;
   outline: dotted 1px hsl(210,100%,45%);
 }
 
@@ -133,70 +170,81 @@ div#layout-borders{
   outline: dotted 1px hsl(210,100%,75%);
 }
 
-#margins,
-#layout-margins {
-  /* This opacity applies to all of the regions, since they are nested */
-  opacity: .8;
-}
-
 /* Respond to window size change by changing the size of the regions */
 
-@media (max-height: 228px) {
-  div#content {
-    height: 22px;
-  }
-
-  div#margins,
-  div#padding {
-    border-width: 21px;
-  }
-
-  div#borders {
-    border-width: 22px;
-  }
-}
-
-@media (max-height: 252px) {
-  div#layout-content {
-    height: 22px;
-  }
-
-  div#layout-margins,
-  div#layout-padding {
-    border-width: 21px;
-  }
-
-  div#layout-borders{
-    border-width: 22px;
-  }
-}
 
 /* Regions colors */
 
 #margins,
 #layout-margins {
-  border-color: #edff64;
+  border-color: rgba(237, 255, 100, .8); /* #edff64 * 80% */
 }
 
 #borders,
 #layout-borders {
-  border-color: #444444;
+  border-color: rgba(68, 68,68, .8); /* #444444 * 80% */
 }
 
 #padding,
 #layout-padding {
-  border-color: #6a5acd;
+  border-color: rgba(106, 90, 205, .8); /* #6a5acd * 80% */
 }
 
 #content,
 #layout-content {
-  background-color: #87ceeb;
+  background-color: rgba(135, 206, 235, .8); /* #87ceeb * 80% */
+}
+
+.tab-panel-box[id] #layout-main {
+  color: #1A1C22;
+}
+
+.tab-panel-box[id] #layout-margins {
+  border-color: #9ebce1cc;
+  outline: 1px solid #2f5b8e;
+  opacity: 1;
+}
+
+.tab-panel-box[id] #layout-borders {
+  border-color: #b3c8e2cc;
+  outline: 1px solid #3b72b3;
+}
+
+.tab-panel-box[id] #layout-padding {
+  border-color: #7fe3cccc;
+  outline: 1px solid #00c79a;
+}
+
+.tab-panel-box[id] #layout-content {
+  background-color: #f0f7ffcc;
+  border: 1px solid #eaf4ff;
+}
+
+.tab-panel-box[id] #layout-main {
+  border-width: 0px;
+  background-color: #f8f8f899;
+}
+
+.tab-panel-box[id] .layout-margin,
+.tab-panel-box[id] .layout-border,
+.tab-panel-box[id] .layout-padding,
+.tab-panel-box[id] .layout-size {
+  color: #1A1C22;
+}
+
+.tab-panel-box[id] #layout-main > .layout-legend {
+  color: #2f5b8e;
+}
+.tab-panel-box[id] #layout-margins > .layout-legend {
+  color: #3b72b3;
+}
+.tab-panel-box[id] #layout-borders > .layout-legend {
+  color: #008b6c;
 }
 
 .theme-firebug #layout-main,
-.theme-firebug #layout-borders,
 .theme-firebug #layout-content {
-  border-style: solid;
+  border: 1px solid transparent;
 }
 
 .theme-firebug #layout-main,
@@ -204,7 +252,8 @@ div#layout-borders{
   font-family: var(--proportional-font-family);
 }
 
-.theme-firebug #layout-main {
+.theme-firebug #layout-main,
+.theme-firebug #layout-info {
   color: var(--theme-body-color);
   font-size: var(--theme-toolbar-font-size);
 }
@@ -224,6 +273,7 @@ div#layout-borders{
 }
 
 #main > p > span,
+#main > p > input,
 #layout-main > p > span,
 #layout-main > p > input {
   vertical-align: middle;
@@ -240,43 +290,43 @@ div#layout-borders{
   text-align: center;
 }
 
-.padding.top,
+p.padding.top,
 .layout-padding.layout-top {
-  top: 55px;
+  top: calc(46px + 9px * var(--expand) - 2 * var(--condense));
 }
 
-.padding.bottom,
+p.padding.bottom,
 .layout-padding.layout-bottom {
-  bottom: 57px;
+  bottom: calc(46px + 11px * var(--expand) - 2 * var(--condense));
 }
 
-.border.top,
+p.border.top,
 .layout-border.layout-top {
-  top: 30px;
+  top: calc(24px + 6px * var(--expand) - var(--condense));
 }
 
-.border.bottom,
+p.border.bottom,
 .layout-border.layout-bottom {
-  bottom: 31px;
+  bottom: calc(24px + 7px * var(--expand) - var(--condense));
 }
 
-.margin.top,
+p.margin.top,
 .layout-margin.layout-top {
-  top: 5px;
+  top: calc(2px + 3px * var(--expand));
 }
 
-.margin.bottom,
+p.margin.bottom,
 .layout-margin.layout-bottom {
-  bottom: 6px;
+  bottom: calc(2px + 4px * var(--expand));
 }
 
-.size,
-.margin.left,
-.margin.right,
-.border.left,
-.border.right,
-.padding.left,
-.padding.right,
+p.size,
+p.margin.left,
+p.margin.right,
+p.border.left,
+p.border.right,
+p.padding.left,
+p.padding.right,
 .layout-size,
 .layout-margin.layout-left,
 .layout-margin.layout-right,
@@ -284,8 +334,8 @@ div#layout-borders{
 .layout-border.layout-right,
 .layout-padding.layout-left,
 .layout-padding.layout-right {
-  top: 22px;
-  line-height: 132px;
+  top:  calc(65px + 14px * var(--expand) - 2 * var(--condense));
+  line-height: initial;
 }
 
 .size,
@@ -293,39 +343,39 @@ div#layout-borders{
   width: calc(100% - 2px);
 }
 
-.margin.right,
-.margin.left,
-.border.left,
-.border.right,
-.padding.right,
-.padding.left,
+p.margin.right,
+p.margin.left,
+p.border.left,
+p.border.right,
+p.padding.right,
+p.padding.left,
 .layout-margin.layout-right,
 .layout-margin.layout-left,
 .layout-border.layout-left,
 .layout-border.layout-right,
 .layout-padding.layout-right,
 .layout-padding.layout-left {
-  width: 25px;
+  width: calc(21px + 4px * var(--expand));
 }
 
-.padding.left,
+p.padding.left,
 .layout-padding.layout-left {
-  left: 52px;
+  left: calc(43px + 9px * var(--expand) - 2 * var(--condense));
 }
 
-.padding.right,
+p.padding.right,
 .layout-padding.layout-right {
-  right: 51px;
+  right: calc(43px + 8px * var(--expand) - 2 * var(--condense));
 }
 
-.border.left,
+p.border.left,
 .layout-border.layout-left {
-  left: 26px;
+  left: calc(22px + 4px * var(--expand) - var(--condense));
 }
 
-.border.right,
+p.border.right,
 .layout-border.layout-right {
-  right: 26px;
+  right: calc(22px + 4px * var(--expand) - var(--condense));
 }
 
 .margin.right,
@@ -342,161 +392,55 @@ div#layout-borders{
 .layout-rotate.layout-left:not(.layout-editing) {
   transform: rotate(-90deg);
 }
+.rotate.left:not(.editing) > .editable,
+.layout-rotate.layout-left:not(.layout-editing) > .layout-editable {
+  margin-left: calc(-2px * (1 - var(--expand)));
+}
+.padding.rotate:not(.editing) > .editable,
+.layout-padding.layout-rotate:not(.layout-editing) > .layout-editable {
+  text-shadow: 0 0 2px #6a5acd, 0 0 2px #6a5acd, 0 0 2px #6a5acd;
+}
+.tab-panel-box[id] .layout-padding.layout-rotate:not(.layout-editing) > .layout-editable {
+  text-shadow: 0 0 2px #7fe3cc, 0 0 2px #7fe3cc, 0 0 2px #7fe3cc;
+}
 
 .rotate.right:not(.editing),
 .layout-rotate.layout-right:not(.layout-editing) {
   transform: rotate(90deg);
 }
 
+.left.editing,
+.right.editing,
+.layout-left.layout-editing,
+.layout-right.layout-editing {
+  position: relative;
+  z-index: 5;
+}
+
 /* Coordinates should be different when the window is small, because we make
    the regions smaller then */
 
-@media (max-height: 228px) {
-  .padding.top {
-    top: 46px;
-  }
-
-  .padding.bottom {
-    bottom: 46px;
-  }
-
-  .border.top {
-    top: 25px;
-  }
-
-  .border.bottom {
-    bottom: 25px;
-  }
-
-  .margin.top {
-    top: 4px;
-  }
-
-  .margin.bottom {
-    bottom: 4px;
-  }
-
-  .size,
-  .margin.left,
-  .margin.right,
-  .border.left,
-  .border.right,
-  .padding.left,
-  .padding.right {
-    line-height: 106px;
-  }
-
-  .margin.right,
-  .margin.left,
-  .border.left,
-  .border.right,
-  .padding.right,
-  .padding.left {
-    width: 21px;
-  }
-
-  .padding.left {
-    left: 43px;
-  }
-
-  .padding.right {
-    right: 43px;
-  }
-
-  .border.left {
-    left: 22px;
-  }
-
-  .border.right {
-    right: 22px;
-  }
-}
-
-@media (max-height: 252px) {
-  .layout-padding.layout-top {
-    top: 46px;
-  }
-
-  .layout-padding.layout-bottom {
-    bottom: 46px;
-  }
-
-  .layout-border.layout-top {
-    top: 25px;
-  }
-
-  .layout-border.layout-bottom {
-    bottom: 25px;
-  }
-
-  .layout-margin.layout-top {
-    top: 4px;
-  }
-
-  .layout-margin.layout-bottom {
-    bottom: 4px;
-  }
-
-  .layout-size,
-  .layout-margin.layout-left,
-  .layout-margin.layout-right,
-  .layout-border.layout-left,
-  .layout-border.layout-right,
-  .layout-padding.layout-left,
-  .layout-padding.layout-right {
-    line-height: 106px;
-  }
-
-  .layout-margin.layout-right,
-  .layout-margin.layout-left,
-  .layout-border.layout-left,
-  .layout-border.layout-right,
-  .layout-padding.layout-right,
-  .layout-padding.layout-left {
-    width: 21px;
-  }
-
-  .layout-padding.layout-left {
-    left: 43px;
-  }
-
-  .layout-padding.layout-right {
-    right: 43px;
-  }
-
-  .layout-border.layout-left {
-    left: 22px;
-  }
-
-  .layout-border.layout-right {
-    right: 22px;
-  }
-}
 
 /* Legend, displayed inside regions */
 
-.legend,
+span.legend,
 .layout-legend {
   position: absolute;
-  margin: 5px 6px;
-  z-index: 1;
+  margin: calc(2px + 3px * var(--expand)) 6px;
+  z-index: auto; /* This was 1 --johnGraciliano */
 }
 
-.legend[data-box="margin"],
+span.legend[data-box="margin"],
 .layout-legend[data-box="margin"] {
-  color: var(--theme-highlight-blue);
+  color: #7b852c;
 }
-
-@media (max-height: 228px) {
-  .legend {
-    margin: 2px 6px;
-  }
+span.legend[data-box="border"],
+.layout-legend[data-box="border"] {
+  color: #222222;
 }
-
-@media (max-height: 252px) {
-  .layout-legend {
-    margin: 2px 6px;
-  }
+span.legend[data-box="padding"],
+.layout-legend[data-box="padding"] {
+  color: #443c74;
 }
 
 /* Editable fields */
@@ -505,6 +449,7 @@ div#layout-borders{
 .layout-editable {
   border: 1px dashed transparent;
   -moz-user-select: text;
+  direction: ltr; /* So the period character will not be moved to the left when entering a decimal fraction --johnGraciliano */
 }
 
 .editable:hover,
@@ -546,24 +491,4 @@ body.inactive > #main > p,
 #layout-position-group {
   display: flex;
   align-items: center;
-}
-
-/* What follows are special rules to avoid showing horizontal scrollbar at the bottom --johnGraciliano */
-/* This correction only works on LTR locales.  It needs to be done for RTL locales.                    */
-
-p.rotate.right,
-p.layout-rotate.layout-right {
-  height: 18px;
-  line-height: initial;
-  top: 79px;
-}
-@media (max-height: 228px) {
-  p.rotate.right {
-    top: 66px;
-  }
-}
-@media (max-height: 252px) {
-  p.layout-rotate.layout-right {
-    top: 66px;
-  }
 }

@@ -2,10 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 /* ===== toolbarbutton.css =====================================================
   == Styles used by the XUL button element.
   ======================================================================= */
@@ -28,6 +24,7 @@ toolbarbutton {
 .toolbarbutton-icon[label]:not([label=""]),
 .toolbarbutton-icon[type="menu"] {
   -moz-margin-end: 5px;
+  margin-inline-end: 5px;
 }
 
 .toolbarbutton-text {
@@ -59,6 +56,8 @@ toolbarbutton[open="true"] {
   padding-bottom: 2px;
   -moz-padding-start: 4px;
   -moz-padding-end: 2px;
+  padding-inline-start: 4px;
+  padding-inline-end: 2px;
 }
 
 toolbarbutton[disabled="true"] {
@@ -79,6 +78,8 @@ toolbarbutton[checked="true"]:not([disabled="true"]) {
   padding-bottom: 2px;
   -moz-padding-start: 4px;
   -moz-padding-end: 2px;
+  padding-inline-start: 4px;
+  padding-inline-end: 2px;
   background-color: rgba(255,255,255,0.5);
   color: ButtonText;
 }
@@ -91,6 +92,13 @@ toolbarbutton[checked="true"]:not([disabled="true"]) {
   toolbarbutton:-moz-lwtheme:not(:hover):not([checked="true"]):not([open="true"]):not([disabled="true"]) {
     color: inherit;
     text-shadow: inherit;
+  }
+
+  @media not all and (-moz-os-version: windows-xp) {
+    toolbarbutton:-moz-lwtheme:not([disabled="true"]) {
+      color: inherit;
+      text-shadow: inherit;
+    }
   }
 }
 
@@ -143,17 +151,38 @@ toolbarbutton[type="menu-button"][disabled="true"]:hover:active {
 
 /* ::::: toolbarbutton badged ::::: */
 
-.toolbarbutton-badge-stack > .toolbarbutton-icon[label]:not([label=""]),
-.toolbarbutton-badge-container > .toolbarbutton-icon[label]:not([label=""]) {
+.toolbarbutton-badge-container > .toolbarbutton-icon[label]:not([label=""]), /* Firefox <= 41 */
+.toolbarbutton-badge-stack > .toolbarbutton-icon[label]:not([label=""]) { /* Firefox >= 42 */
   -moz-margin-end: 0;
-}
-
-.toolbarbutton-badge[badge=""] {
-  display: none;
+  margin-inline-end: 0;
 }
 
 .toolbarbutton-badge {
   background-color: #d90000;
+}
+
+label.toolbarbutton-badge{ /* Firefox >= 42 */
+  font-size: 10px;
+  font-weight: bold;
+  padding: 0 2px;  /* padding-bottom was 1px, I changed it to 0px --johngraciliano */
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 hsla(0, 100%, 100%, .2) inset,
+              0 -1px 0 hsla(0, 0%, 0%, .1) inset,
+              0 1px 0 hsla(206, 50%, 10%, .2);
+  margin: -7px 0 0 !important; /* margin-top was -6px, I changed it to -7px --johngraciliano */
+  -moz-margin-end: -8px !important;
+  margin-inline-end: -8px !important;
+  min-width: 14px;
+  max-width: 28px;
+  line-height: 10px;
+  text-align: center;
+  -moz-stack-sizing: ignore;
+}
+
+/* Badge's rules for Firefox <= 41 follow */
+hbox.toolbarbutton-badge[badge=""] {
+  display: none;
 }
 
 .toolbarbutton-badge::after {
@@ -184,24 +213,6 @@ toolbarbutton[type="menu-button"][disabled="true"]:hover:active {
   position: relative;
 }
 
-label.toolbarbutton-badge{ /* .toolbarbutton-badge is a label in Firefox 42+ but it was an hbox in earlier versions ?!?!? --johngraciliano */
-  background-color: #d90000;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 0 2px;  /* padding-bottom was 1px, I changed it to 0px --johngraciliano */
-  color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 1px 0 hsla(0, 100%, 100%, .2) inset,
-              0 -1px 0 hsla(0, 0%, 0%, .1) inset,
-              0 1px 0 hsla(206, 50%, 10%, .2);
-  margin: -7px 0 0 !important; /* margin-top was -6px, I changed it to -7px --johngraciliano */
-  -moz-margin-end: -8px !important;
-  min-width: 14px;
-  line-height: 10px;
-  text-align: center;
-  -moz-stack-sizing: ignore;
-}
-
 /* .......... dropmarker .......... */
 
 .toolbarbutton-menubutton-dropmarker {
@@ -210,11 +221,4 @@ label.toolbarbutton-badge{ /* .toolbarbutton-badge is a label in Firefox 42+ but
   border: none;
   background-color: transparent;
   width: auto;
-}
-
-@media (-moz-windows-default-theme) {
-  toolbarbutton:-moz-lwtheme:not([disabled="true"]) {
-    color: inherit;
-    text-shadow: inherit;
-  }
 }

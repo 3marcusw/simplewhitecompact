@@ -20,6 +20,57 @@
   }
 }
 
+/*
+ * In Firefox 52, the collapsed #tabpanels may take space in the bottom of the window push the top out of view.
+ * Then next rule should prevent this problem.  ***Another solution is in "#inspector-splitter-box {...position: fixed;}"***
+ */
+.inspector-responsive-container > #tabpanels[style*="collapse"] {
+  display: none;
+}
+
+/* Make sure to hide scroll bars for the parent window */
+window {
+  overflow: hidden; /* For Firefox 51. On earlier Firefox it was -moz-hidden-unscrollable from chrome://global/content/minimal-xul.css */
+}
+
+/* The main Inspector panel container. */
+.inspector-responsive-container { /* For Firefox 51, where this is html:div.  Previously it was box.devtools-responsive-container.theme-body */
+  height: 100vh;
+}
+
+/* The main panel layout. This area consists of a toolbar, markup view
+  and breadcrumbs bar. */
+div.devtools-main-content { /* For Firefox 51.  Previously this was vbox.devtools-main-content */
+  /* Subtract 1 pixel from the panel height. It's puzzling why this
+    is needed, but if not presented the entire Inspector panel
+    content jumps 1 pixel up when the Toolbox is opened. */
+  height: calc(100% - 1px);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* Inspector Panel Splitter */
+
+#inspector-splitter-box { /* For Firefox 51. It is html:div */
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+/* Minimum width for the Inspector main (uncontrolled) area. */
+#inspector-splitter-box .uncontrolled {
+  min-width: 275px;
+}
+
+#inspector-splitter-box .controlled {
+  min-width: 320px !important; /* !important to override the programmed value --johnGraciliano */
+}
+
+#inspector-splitter-box .controlled.pane-collapsed {
+  visibility: collapse;
+}
+
 /* The following rules for #inspector-toolbar are for late FF49.
  * The tag 'div' prevent the rules from applying in distinct from earlier versions.
  * The corresponding tag is 'toolbar' in earlier versions.
@@ -27,7 +78,7 @@
  */
 /* Use flex layout for the Inspector toolbar. For now, it's done
    specifically for the Inspector toolbar since general rule applied
-   on .devtools-toolbar breaks breadcrubs and also toolbars in other
+   on .devtools-toolbar breaks breadcrumbs and also toolbars in other
    panels (e.g. webconsole, debugger), these are not ready for HTML
    layout yet. */
 
@@ -133,6 +184,10 @@ div#inspector-breadcrumbs { /* For late FF49.  The tag 'div' makes it distinct f
   bottom: 0;
   right: 0;
 }
+.theme-firebug div#inspector-breadcrumbs {
+  top: 2px;
+  bottom: auto;
+}
 
 div#inspector-breadcrumbs .scrollbutton-up,
 div#inspector-breadcrumbs .scrollbutton-down {
@@ -174,7 +229,7 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 
 @media not all and (max-width: 700px) {
   .sidebar-toggle:-moz-locale-dir(rtl)::before,
-  #inspector-pane-toggle:-moz-locale-dir(rtl) {
+  #inspector-pane-toggle:-moz-locale-dir(rtl) > .toolbarbutton-icon {
     transform: scaleX(-1);
   }
 }
@@ -230,13 +285,7 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 }
 
 #inspector-eyedropper-toggle::before {
-  background-image: url(images/command-eyedropper.png);
-}
-
-@media (min-resolution: 1.1dppx) {
-  #inspector-eyedropper-toggle::before {
-    background-image: url(images/command-eyedropper@2x.png);
-  }
+  background-image: url(images/command-eyedropper.svg);
 }
 
 .theme-firebug #inspector-eyedropper-toggle::before {
@@ -251,6 +300,14 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 #inspector-element-add-button {
   list-style-image: url(images/add.svg);
 }
+.theme-firebug #inspector-element-add-button::before {
+  background-image: url(images/firebug/add.svg);
+  filter: none;
+}
+.theme-firebug #inspector-element-add-button > image {
+  list-style-image: url(images/firebug/add.svg);
+  filter: none
+}
 
 /* Set the minimum width for the side bar so, all tabs are
   properly visible. The value can be decreased when bug 1281789
@@ -259,6 +316,7 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
   overflow: hidden;
   min-width: 320px; /* This is 300px in the default theme of Firefox 51.  It is 400px in Firefox 50.  --johnGraciliano */
   position: relative;
+  height: 100%;
 }
 
 div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
@@ -281,8 +339,25 @@ div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
 #computedview-no-results {
   color: var(--theme-body-color-inactive);
   text-align: center;
-  padding: 5px; /* The property was originally 'margin: 5px', but that generated a superfluous sidabar --johnGraciliano. */
+  padding: 5px; /* The property was originally 'margin: 5px', but that generated a superfluous scrollbar --johnGraciliano. */
   font: message-box;
+}
+
+/* Markup Box */
+
+iframe {
+  border: 0;
+}
+
+#markup-box {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+#markup-box > iframe {
+  height: 100%;
+  width: 100%;
 }
 
 /* The following could be belong in toolbars.css but I only know it is needed for the inspector module --johnGraciliano */
@@ -290,7 +365,18 @@ div#inspector-sidebar { /* Added 'div' for Firefox >= 50.
 .theme-light .tabs nav.tabs-navigation {
   background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
+.theme-firebug .tabs nav.tabs-navigation {
+/*  background-color: rgb(219, 234, 249);  *** This fixed this is fixed in variables.css --johnGraciliano */
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+}
 
+/* For Firefox 48-49 */
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected] {
+  background-color: rgb(247, 251, 254);
+}
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected]#sidebar-tab-layoutview {
+  background-color: var(--theme-sidebar-background);
+}
 
 /* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
 /* Make sure panel content takes entire vertical space.

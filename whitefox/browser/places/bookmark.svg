@@ -6,10 +6,28 @@
      width="16"
      height="16"
      viewBox="0 0 16 16">
-  <path d="M 5.5,4   v 10   l 4,-3.5   l 4,3.5   v -10   a 1.5,1.5 0 0,0 -1.5,-1.5   h -5   a 1.5,1.5 0 0,0 -1.5,1.5   Z"
-        stroke-width="0" stroke="none" fill="#75C8FE"/>
-  <path d="M 6.5,3   v 9   l 3,-2.5   l 3,2.5   v -9"
-        stroke-width="1" stroke="#FFF" fill="none" opacity=".37"/>
-  <path d="M 5.5,4   v 10   l 4,-3.5   l 4,3.5   v -10   a 1.5,1.5 0 0,0 -1.5,-1.5   h -5   a 1.5,1.5 0 0,0 -1.5,1.5   Z"
-        stroke-width="1" stroke="#359BDE" fill="none"/>
+  <style>
+    g #shade {
+      stroke-opacity: .37;
+    }
+    g #edge {
+      stroke: #359BDE;
+    }
+    g:target[id=HL] #shade {
+      stroke-opacity: .15;
+    }
+    g:target[id=HL] #edge {
+      stroke: HighlightText;
+      opacity: .8;
+    }
+  </style>
+  <g id="HL">
+    <path d="M 5.5,4   v 10   l 4,-3.5   l 4,3.5   v -10   a 1.5,1.5 0 0,0 -1.5,-1.5   h -5   a 1.5,1.5 0 0,0 -1.5,1.5   Z"
+          id="inside" stroke-width="0" stroke="none" fill="#75C8FE"/>
+    <path d="M 6.5,3   v 9   l 3,-2.5   l 3,2.5   v -9"
+          id="shade" stroke-width="1" stroke="#FFF" fill="none" opacity=".37"/>
+    <path d="M 5.5,4   v 10   l 4,-3.5   l 4,3.5   v -10   a 1.5,1.5 0 0,0 -1.5,-1.5   h -5   a 1.5,1.5 0 0,0 -1.5,1.5   Z"
+          id="edge" stroke-width="1" fill="none"/>
+  </g>
+
 </svg>

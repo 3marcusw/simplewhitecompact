@@ -29,6 +29,7 @@ menupopup {
 menupopup > menu > menupopup {
  /* align submenus */
   -moz-margin-start: -3px;
+  margin-inline-start: -3px;
   margin-top: -3px;
 }
 
@@ -52,17 +53,19 @@ panel[type="arrow"][side="right"] {
 
 .panel-arrowcontent {
   border-radius: 4px;
-  padding: 10px;
+  padding: var(--panel-arrowcontent-padding, 10px);
   color: var(--panel-arrowcontent-color);
   background: var(--panel-arrowcontent-background);
   background-clip: padding-box;
   border: var(--panel-arrowcontent-border);
+  /* box-shadow: 0 0 4px hsla(0,0%,0%,.2);  ** Added to the default theme but I am leaving it out.  --johnGraciliano */
   margin: 4px;
 }
 
 .panel-arrow[side="top"],
 .panel-arrow[side="bottom"] {
-  list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical-white.png");
+  list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical.svg");
+    /* In the default theme the value is  var(--panel-arrow-image-vertical, url("chrome://global/skin/arrow/panelarrow-vertical-themed.svg")); */
   position: relative;
   margin-left: 10px;
   margin-right: 10px;
@@ -79,7 +82,7 @@ panel[type="arrow"][side="right"] {
 
 .panel-arrow[side="left"],
 .panel-arrow[side="right"] {
-  list-style-image: url("chrome://global/skin/arrow/panelarrow-horizontal-white.png");
+  list-style-image: url("chrome://global/skin/arrow/panelarrow-horizontal.svg");
   position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -118,12 +121,13 @@ panel[type="arrow"][side="right"] {
 
   .panel-arrow[side="top"],
   .panel-arrow[side="bottom"] {
-    list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical-white.png");
+    list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical.svg");
+      /* In the default theme the value is  var(--panel-arrow-image-vertical, url("chrome://global/skin/arrow/panelarrow-vertical.svg")); */
   }
 
   .panel-arrow[side="left"],
   .panel-arrow[side="right"] {
-    list-style-image: url("chrome://global/skin/arrow/panelarrow-horizontal-white.png");
+    list-style-image: url("chrome://global/skin/arrow/panelarrow-horizontal.svg");
   }
 }
 

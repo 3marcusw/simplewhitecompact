@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0"
+     y="0"
+     width="45"
+     height="45"
+     viewBox="0 0 45 45">
+  <style>
+    use {
+      fill: none;
+      stroke: #5a5a5a;
+      stroke-width: 1;
+    }
+  </style>
+  <defs style="display: none;">
+    <g id="info-shape">
+      <circle cx="22.5" cy="22.5" r="22"/>
+      <circle cx="19.5" cy="19.5" r="10"/>
+      <line  x1="26.5"  y1="26.5"  x2="35"  y2="35"/>
+    </g>
+  </defs>
+  <use  xlink:href="#info-shape"/>
+</svg>

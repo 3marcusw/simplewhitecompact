@@ -34,6 +34,10 @@
   margin: 0;
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+.theme-firebug #requests-menu-perf-notice-button > hbox > image.button-icon {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+  filter: none;
+}
 
 /* Make sure the icon is visible on Linux (to overwrite a rule
   in xul.css that hides the icon if there is no label.
@@ -316,6 +320,7 @@ label + .requests-menu-method {
   border-radius: 3px;
   padding: 0 2px;
   margin: 0;
+  -moz-margin-end: 3px;
   margin-inline-end: 3px;
   -moz-user-select: none;
 }
@@ -635,16 +640,17 @@ box.requests-menu-status[code^="5"] {
 
 /* Network request details */
 
-#details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
-#details-pane-toggle[pane-collapsed]:-moz-locale-dir(rtl),
 #details-pane-toggle {
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
 
-#details-pane-toggle:-moz-locale-dir(rtl),
 #details-pane-toggle.pane-collapsed,
 #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
+}
+
+:root:not(.theme-firebug) #details-pane-toggle:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+  transform: scaleX(-1);
 }
 
 :root.theme-firebug #details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl),
@@ -871,6 +877,13 @@ box.requests-menu-status[code^="5"] {
   border-radius: 2px;
 }
 
+.theme-firebug .requests-menu-filter-button > .button-box {
+  line-height: var(--theme-toolbar-font-size);
+  font-size: var(--theme-toolbar-font-size);
+  padding-top: 0px;
+  padding-bottom: 1px;
+}
+
 .requests-menu-footer-spacer {
   min-width: 2px;
 }
@@ -907,6 +920,7 @@ box.requests-menu-status[code^="5"] {
 
 :root.theme-firebug .requests-menu-filter-button {
   border: 1px solid transparent;
+  -moz-margin-end: 1px;
   margin-inline-end: 1px;
 }
 
@@ -989,12 +1003,14 @@ box.requests-menu-status[code^="5"] {
 .requests-menu-stack-frame-file-name {
   color: var(--theme-highlight-blue); /* This color was taken from '.requests-menu-stack-frame-function-name', which now implicitly uses 'inherit' --johnGraciliano */
   cursor: inherit;
+  -moz-margin-end: 0;
   margin-inline-end: 0;
 }
 
 .requests-menu-stack-frame-line {
   color: var(--theme-highlight-orange);
   cursor: inherit;
+  -moz-margin-start: 0;
   margin-inline-start: 0;
 }
 /*** THE PRECEEDING SECTION IS ONLY USED IN FIREFOX 49 !!!!! ******************************************************/
@@ -1009,6 +1025,10 @@ box.requests-menu-status[code^="5"] {
   -moz-padding-end: 0;
   cursor: pointer;
   min-width: 12px;
+}
+.theme-firebug #requests-menu-network-summary-button > image {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+  filter: none;
 }
 
 #requests-menu-network-summary-label {
@@ -1030,7 +1050,7 @@ box.requests-menu-status[code^="5"] {
   padding: 0;
   opacity: 1;
 }
-.theme-light #requests-menu-clear-button[label] > .button-box  > .button-icon {
+.theme-dark #requests-menu-clear-button[label] > .button-box  > .button-icon {
   filter: invert(1);
 }
 
@@ -1324,6 +1344,7 @@ box.requests-menu-status[code^="5"] {
     }
 
     .requests-menu-header-button > .button-box > .button-icon{
+      -moz-margin-end: 2px;
       margin-inline-end: 2px;
     }
 

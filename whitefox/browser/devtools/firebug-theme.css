@@ -8,6 +8,7 @@
  *   @import url(common.css);
  */
 @import url(light-theme.css);
+@import url(debugger-new-firebug.css);
 
 :root {
   font-size: 11px;
@@ -105,14 +106,14 @@
 
   Use !important to override even the rule in webconsole.css that uses
   ID in the selector. */
-.theme-firebug .devtools-tabbar,
-.theme-firebug .devtools-sidebar-tabs tabs {
+.theme-firebug .devtools-tabbar 
+/* , .theme-firebug .devtools-sidebar-tabs tabs */  {  /* This selector is now only needend in the next rule --johnGraciliano */
   background-image: linear-gradient(rgba(253, 253, 253, 0.2), rgba(253, 253, 253, 0));
-  border-bottom: 1px solid rgb(170, 188, 207) !important;
+/*border-bottom: 1px solid rgb(170, 188, 207) !important;  *** Removed. light-theme.css & toolbars.css use corrected color in variables.css --johnGraciliano */
 }
 
 .theme-firebug .devtools-sidebar-tabs tabs {
-  background-color: rgb(219, 234, 249) !important;
+/*background-color: rgb(219, 234, 249) !important;  *** Removed because light-theme.css uses corrected color from variables.css --johnGraciliano */
   background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
 }
 
@@ -191,7 +192,7 @@
 
 .theme-firebug #toolbox-tab-options {
   margin-inline-end: 4px;
-  background-color: white;
+  background-color: var(--theme-body-background);
 }
 
 .theme-firebug #toolbox-tab-options[selected] {
@@ -204,17 +205,13 @@
   margin: 3px 7px 1px; /* Raise the icon one pixel --johnGraciliano */
 }
 
-.theme-firebug #toolbox-tab-options:not([selected]):hover::before {
-  filter: brightness(80%);
-}
-
 /* Toolbar */
 
 .theme-firebug .theme-toolbar,
-.theme-firebug toolbar,
+.theme-firebug toolbar, /* border-bottom and background-color may be needed for this selector, but the selector it is probably never needed --johnGraciliano */
 .theme-firebug .devtools-toolbar {
-  border-bottom: 1px solid rgb(170, 188, 207) !important;
-  background-color: rgb(219, 234, 249) !important;
+/*border-bottom: 1px solid rgb(170, 188, 207) !important;  *** Removed because light-theme.css uses corrected color from variables.css --johnGraciliano */
+/*background-color: rgb(219, 234, 249) !important;  *** Removed because light-theme.css uses corrected color from variables.css --johnGraciliano */
   background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
   padding-inline-end: 4px;
 }

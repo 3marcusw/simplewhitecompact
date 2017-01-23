@@ -134,7 +134,7 @@ html, body, #app, #memory-tool {
 
 .devtools-button.take-snapshot::before, /* Firefox 44.0a2 --johnGraciliano */
 #take-snapshot::before {
-  background-image: url(images/command-screenshot.png);
+  background-image: url(images/command-screenshot.svg);
 }
 .theme-firebug .devtools-button.take-snapshot::before,
 .theme-firebug #take-snapshot::before {
@@ -153,9 +153,17 @@ html, body, #app, #memory-tool {
 #diff-snapshots::before {
   background-image: url(images/diff.svg);
 }
+.theme-firebug #diff-snapshots::before {
+  background-image: url(images/firebug/diff.svg);
+  filter: none;
+}
 
 #import-snapshot::before {
   background-image: url(images/import.svg);
+}
+.theme-firebug #import-snapshot::before {
+  background-image: url(images/firebug/import.svg);
+  filter: none;
 }
 
 /* Hide the text labels to make image only buttons (some versions of Firefox). --johnGraciliano */
@@ -178,13 +186,6 @@ html, body, #app, #memory-tool {
 #diff-snapshots:not([disabled]):hover::before,
 #import-snapshot:hover::before {
   opacity: 1;
-}
-
-@media (min-resolution: 1.1dppx) {
-  .devtools-button.take-snapshot::before, /* Firefox 44.0a2 --johnGraciliano */
-  #take-snapshot::before {
-    background-image: url(images/command-screenshot@2x.png);
-  }
 }
 
 /* I am excluding this bars --johnGraciliano *%
@@ -416,14 +417,6 @@ html, body, #app, #memory-tool {
   padding: 20px;
 }
 
-/* Two extra rules because no rule matches in toolbars.css --johnGraciliano */
-.theme-dark .devtools-toolbarbutton.take-snapshot:hover {
-  background: rgba(0, 0, 0, .3); /* Splitters */
-}
-.theme-light .devtools-toolbarbutton.take-snapshot:hover {
-  background: rgba(170, 170, 170, .3); /* Splitters */
-}
-
 /**
  * Heap tree view header
  */
@@ -490,6 +483,13 @@ html, body, #app, #memory-tool {
 
 .children-pointer {
   padding-inline-end: 5px;
+}
+
+.children-pointer:-moz-dir(rtl) {
+  transform: scaleX(-1);
+}
+.children-pointer:dir(rtl) {
+  transform: scaleX(-1);
 }
 
 /**
@@ -728,14 +728,21 @@ html, body, #app, #memory-tool {
 .edgePath path {
   stroke-width: 1px;
   fill: none;
+  stroke: var(--theme-body-color-alt);
 }
 
+marker#arrowhead path {
+  fill: var(--theme-body-color-alt);
+}
+
+/************************************************
 .theme-dark .edgePath path {
   stroke: var(--theme-body-color-alt);
 }
 .theme-light .edgePath path {
   stroke: var(--theme-splitter-color);
 }
+ ************************************************/
 
 g.edgeLabel rect {
   fill: var(--theme-body-background);
@@ -749,10 +756,10 @@ g.edgeLabel tspan {
 }
 
 .nodes rect {
-  stroke: var(--theme-tab-toolbar-background);
+  stroke: var(--theme-splitter-color); /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
 }
 .theme-light rect {
-  fill: var(--theme-tab-toolbar-background);
+  fill: var(--theme-highlight-gray); /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
 }
 .theme-dark rect {
   fill: var(--theme-toolbar-background);

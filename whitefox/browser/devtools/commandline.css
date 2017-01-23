@@ -17,7 +17,7 @@
 }
 
 :root[devtoolstheme="dark"] {
-  --gcli-background-color: #343c45; /* --theme-toolbar-background */
+  --gcli-background-color: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
   --gcli-input-color: #b6babf; /* --theme-body-color-alt */
   --gcli-border-color: black; /* --theme-splitter-color */

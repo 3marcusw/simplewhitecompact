@@ -12,7 +12,7 @@
 /* ::::: scrollbar ::::: */
 
 scrollbar {
-  -moz-appearance: scrollbartrack-horizontal;
+  -moz-appearance: scrollbartrack-horizontal;  /* Firefox <= 45 do not understand the next line --johnGraciliano */
   -moz-appearance: scrollbar-horizontal;
   -moz-binding: url("chrome://global/content/bindings/scrollbar.xml#scrollbar");
   cursor: default;
@@ -34,7 +34,7 @@ scrollbar {
 
 scrollbar[orient="vertical"] 
 {
-   -moz-appearance: scrollbartrack-vertical;
+   -moz-appearance: scrollbartrack-vertical;  /* Firefox <= 45 do not understand the next line --johnGraciliano */
    -moz-appearance: scrollbar-vertical;
 }
 
@@ -144,7 +144,7 @@ scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"][disabled="true"
   /* ::::: scrollbar ::::: */
 
   html|div scrollbar {
-    -moz-appearance: scrollbartrack-horizontal;
+    -moz-appearance: scrollbartrack-horizontal;   /* Firefox <= 45 do not understand the next line --johnGraciliano */
     -moz-appearance: scrollbar-horizontal;
     -moz-binding: url("chrome://global/content/bindings/scrollbar.xml#scrollbar");
     cursor: default;
@@ -153,7 +153,7 @@ scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"][disabled="true"
 
   html|div scrollbar[orient="vertical"] 
   {
-     -moz-appearance: scrollbartrack-vertical;
+     -moz-appearance: scrollbartrack-vertical;   /* Firefox <= 45 do not understand the next line --johnGraciliano */
      -moz-appearance: scrollbar-vertical;
   }
 

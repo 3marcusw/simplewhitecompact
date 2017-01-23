@@ -32,6 +32,10 @@
   margin: 0;
   list-style-image: url(images/profiler-stopwatch.svg);
 }
+.theme-firebug #empty-notice > button > hbox > image {
+  list-style-image: url(images/firebug/profiler-stopwatch.svg);
+  filter: none;
+}
 
 #empty-notice > button .button-text {
   display: none;
@@ -51,9 +55,20 @@
 #record-snapshot {
   list-style-image: url("images/profiler-stopwatch.svg");
 }
+.theme-firebug #record-snapshot > image {
+  list-style-image: url("images/firebug/profiler-stopwatch.svg");
+  filter: none;
+}
+.theme-firebug #record-snapshot[checked=true] > image {
+  list-style-image: url("images/firebug/profiler-stopwatch.svg#active");
+}
 
 #import-snapshot {
   list-style-image: url("images/import.svg");
+}
+.theme-firebug #import-snapshot > image {
+  list-style-image: url("images/firebug/import.svg");
+  filter: none;
 }
 
 
@@ -157,37 +172,35 @@
 
 /* Debugging pane controls */
 #resume {
-  list-style-image: url(images/debugger-play.png);
+  list-style-image: url(images/play.svg);
 }
 
 #step-over {
-  list-style-image: url(images/debugger-step-over.png);
+  list-style-image: url(images/debugger-step-over.svg);
 }
 
 #step-in {
-  list-style-image: url(images/debugger-step-in.png);
+  list-style-image: url(images/debugger-step-in.svg);
 }
 
 #step-out {
-  list-style-image: url(images/debugger-step-out.png);
+  list-style-image: url(images/debugger-step-out.svg);
 }
 
-@media (min-resolution: 1.1dppx) {
-  #resume {
-    list-style-image: url(images/debugger-play@2x.png);
-  }
+.theme-firebug #resume {
+  list-style-image: url(images/firebug/play.svg);
+}
 
-  #step-over {
-    list-style-image: url(images/debugger-step-over@2x.png);
-  }
+.theme-firebug #step-over {
+  list-style-image: url(images/firebug/debugger-step-over.svg);
+}
 
-  #step-in {
-    list-style-image: url(images/debugger-step-in@2x.png);
-  }
+.theme-firebug #step-in {
+  list-style-image: url(images/firebug/debugger-step-in.svg);
+}
 
-  #step-out {
-    list-style-image: url(images/debugger-step-out@2x.png);
-  }
+.theme-firebug #step-out {
+  list-style-image: url(images/firebug/debugger-step-out.svg);
 }
 
 #calls-slider {
@@ -248,6 +261,7 @@
   color: var(--theme-content-color3);
 }
 
+/***  Old style rules  *****************************************************
 .selected .call-item-gutter {
   background-image: url("images/editor-debug-location.png");
   background-repeat: no-repeat;
@@ -259,6 +273,11 @@
   .selected .call-item-gutter {
     background-image: url("images/editor-debug-location@2x.png");
   }
+}
+ ***  New style rule follows...  *******************************************/
+.selected .call-item-gutter {
+  background-color: #2cbb0f;
+  color: white;
 }
 
 .call-item-index {

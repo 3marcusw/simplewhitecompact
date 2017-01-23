@@ -80,6 +80,8 @@ body > #reset-box, /* Firefox 37 and prior  --johnGraciliano */
   margin-bottom: 20px;
   -moz-margin-start: 20px;
   -moz-margin-end: 0;
+  margin-inline-start: 20px;
+  margin-inline-end: 0;
   padding: 16px;
   width: 30%;
 }
@@ -97,6 +99,9 @@ body > #reset-box:-moz-dir(rtl), /* Firefox 37 and earlier */
 #action-box:-moz-dir(rtl) {      /* Firefox 38 and later */
   float: left;
 }
+#action-box:dir(rtl) {
+  float: left;
+}
 
 #reset-box > h3 {
   margin-top: 0;
@@ -105,6 +110,11 @@ body > #reset-box:-moz-dir(rtl), /* Firefox 37 and earlier */
 #reset-box > button, /* Firefox 37 and earlier */
 #action-box button { /* Firefox 38 and later */
   display: block;
+}
+
+#verify-place-result {
+  max-height: 200px;
+  overflow: auto;
 }
 
 .block {
