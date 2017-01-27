@@ -2,12 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* ===== global.css =====================================================
-  == Styles that apply everywhere.
-  ======================================================================= */
-
 /* all localizable skin settings shall live here */
 @import url("chrome://global/locale/intl.css");
+
+
+
+
+
+
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
@@ -15,6 +17,15 @@
 
 menulist > menupopup {
   -moz-binding: url("chrome://global/content/bindings/popup.xml#popup-scrollbars");
+}
+
+/* ::::: Variables ::::: */
+:root {
+  --panel-arrowcontent-padding: 10px; /* 16px in default */
+  --panel-arrowcontent-background: #ffffff; /* From popup.css. It is linear-gradient(hsla(0,0%,99%,1), hsla(0,0%,99%,.975) 10%, hsla(0,0%,98%,.975)) in the default theme --johnGraciliano */
+  --panel-arrowcontent-color: #333; /* hsl(0,0%,10%) in default */
+  --panel-arrowcontent-border-color: rgba(0,0,0,.3); /* value in global/popup.css, no border in darwin/popup.css. It is hsla(210,4%,10%,.05) in the default theme --johnGraciliano */
+  --panel-arrowcontent-border-radius: 5px; /* value in popup.css.  It is 3.5px in default --johnGraciliano */
 }
 
 /* ::::: draggable elements ::::: */
@@ -44,14 +55,21 @@ page,
 dialog,
 wizard,
 prefwindow {
-  -moz-appearance: window;
-  background-color: #F8F8F8;
+  -moz-appearance: dialog; /* The value in the original Simple White was "window" */
+  background-color: #F8F8F8; /* #FFFFFF in default */
   color: -moz-DialogText;
   font: message-box;
 }
 
 window {
-  background-color: #F6F6F6;
+  background-color: #F6F6F6; /* #FFFFFF in default */
+}
+
+prefwindow[type="child"] {
+  padding-top: 18px;
+  padding-bottom: 15px;
+  padding-inline-start: 18px;
+  padding-inline-end: 20px;
 }
 
 /* deprecated */
@@ -60,6 +78,8 @@ window.dialog {
   padding-bottom: 10px;
   -moz-padding-start: 8px;
   -moz-padding-end: 10px;
+  padding-inline-start: 8px;
+  padding-inline-end: 10px;
 }
 
 /* ::::: alert icons :::::*/
@@ -72,6 +92,7 @@ window.dialog {
   height: 64px;
   margin: 6px;
   -moz-margin-end: 20px;
+  margin-inline-end: 20px;
 }
 
 .message-icon {
@@ -136,6 +157,7 @@ sidebarheader {
 
 sidebarheader > label {
   -moz-padding-start: 4px;
+  padding-inline-start: 4px;
 }
 
 .toolbar-focustarget {
@@ -208,7 +230,7 @@ separator.groove[orient="vertical"] {
   margin-left: 0.4em;
   margin-right: 0.4em;
 }
-    
+
 .plain {
   -moz-appearance: none;
   margin: 0 !important;
@@ -219,10 +241,14 @@ separator.groove[orient="vertical"] {
 description,
 label {
   cursor: default;
+  margin-top: 1px;
+  margin-bottom: 2px;
+  margin-inline-start: 6px;
+  margin-inline-end: 5px;
 }
 
-label {
-  margin: 2px 6px;
+description {
+  margin-bottom: 4px;
 }
 
 label[disabled="true"] {
@@ -233,12 +259,7 @@ label[disabled="true"] {
   margin: 0;
 }
 
-description {
-  margin-bottom: 4px;
-}
-
 .header {
-  margin-bottom: 6px;
   font-weight: bold;
 }
 
@@ -248,6 +269,7 @@ description {
 
 .indent {
   -moz-margin-start: 23px;
+  margin-inline-start: 23px;
 }
 
 .box-padded {
