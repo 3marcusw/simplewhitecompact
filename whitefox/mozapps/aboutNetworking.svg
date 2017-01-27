@@ -34,7 +34,6 @@
 	<g id="sockets-shape">
     <rect x="3.5" y="3.5" width="25" height="25" rx="3.5" ry="3.5"/>
     <path d="M 11.5,10   v 7   m 9,-6.66   v 6.33   m -3,6.83   v -1.4   a 1.5,1.8 0 0,0 -3,0   v 1.4   h 3   v -1"/>
-    
 	</g>
 	<g id="dns-shape-TRIAL">
     <path d="M 6,4.5   h 20   a 2.5,2.5 0 0,1 2.5,2.5   v 8   a 2.5,2.5 0 0,1 -2.5,2.5   h -8.33   l -8,8   l 2,-8   h -5.67   a 2.5,2.5 0 0,1 -2.5,-2.5   v -8   a 2.5,2.5 0 0,1 2.5,-2.5   z"/>
@@ -55,10 +54,15 @@
     <circle  cx="14"  cy="13"  r="9.5"/>
 	  <line  x1="21"  y1="20"  x2="27.5"  y2="26.5"/>
   </g>
+	<g id="logging-shape">
+	  <path  d="M 5.5,3.5   v 24   h 20   v -17   l -7,-7   Z   m 12,.5   v 7.5   h 7.5"/>
+	  <path  d="M 9.0,15.5   h 13   m -13,4   h 13   m -13,4   h 8"/>
+	</g>
   </defs>
   <use id="http"  xlink:href="#http-shape"/>
   <use id="sockets"   xlink:href="#sockets-shape"/>
   <use id="dns"  xlink:href="#dns-shape"/>
   <use id="websockets"  xlink:href="#websockets-shape"/>
   <use id="dnslookup"  xlink:href="#dnslookup-shape"/>
+  <use id="logging"  xlink:href="#logging-shape"/>
 </svg>

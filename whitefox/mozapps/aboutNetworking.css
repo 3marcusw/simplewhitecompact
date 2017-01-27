@@ -40,6 +40,7 @@
 
   .category .category-name {
     pointer-events: none;
+    white-space: nowrap;
   }
 
   #categories hr {
@@ -77,7 +78,7 @@
     content: "";
     flex: 2;
   }
-  
+
   .container{
     min-width: calc(13em);
     max-width: calc(52em);
@@ -190,6 +191,10 @@
     content: "";
     background-image: url(chrome://mozapps/skin/aboutNetworking.svg#dnslookup);
   }
+  .category[value="logging"]::before{
+    content: "";
+    background-image: url(chrome://mozapps/skin/aboutNetworking.svg#logging);
+  }
 
   .header{
     border: none;
@@ -236,6 +241,41 @@
   .main-content > div:not(.header)> table{
     margin-bottom: 40px;
   }
+
+  #logging > div {
+    max-width: 800px;
+    min-width: 400px;
+  }
+
+  #logging > div ~ div ~ div {
+    text-align-last: justify;
+    margin-top: 12px;
+  }
+  #logging > div > br {
+    display: none;
+  }
+
+  #logging > div > button {
+    padding: 0 8px;
+  }
+
+  #logging > div:nth-of-type(+2) > button {
+    margin: 5px 0;
+    margin-inline-start: 40px;
+  }
+
+  #logging > div > [id^="current-log"] {
+    display: inline-block;
+    margin-inline-start: 20px;
+    min-width: 200px;
+  }
+
+  #logging > div > input {
+    margin: 10px 12px;
+    min-width: 50%;
+    width: calc(100% - 200px);
+  }
+
 }
 
 
