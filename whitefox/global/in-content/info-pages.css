@@ -3,12 +3,14 @@
 body {
   display: flex;
   flex-direction: column;
-  box-sizing: padding-box;
+  box-sizing: border-box;
   min-height: 100vh;
   padding-top: 0;
   padding-bottom: 0;
   -moz-padding-start: calc(48px + 4.6em);
   -moz-padding-end: 48px;
+  padding-inline-start: calc(48px + 4.6em);
+  padding-inline-end: 48px;
   align-items: center;
   justify-content: center;
 }
@@ -18,7 +20,8 @@ body {
   max-width: 52em;
 }
 
-.container.flex {
+.container.flex,
+.container.restore-chosen {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -33,11 +36,16 @@ body {
   background-size: 1.6em;
   -moz-margin-start: -2.3em;
   -moz-padding-start: 2.3em;
+  margin-inline-start: -2.3em;
+  padding-inline-start: 2.3em;
   font-size: 2.5em;
 }
 
 .title:-moz-dir(rtl),
 .title:-moz-locale-dir(rtl) {
+  background-position: right 0;
+}
+.title:dir(rtl) {
   background-position: right 0;
 }
 
@@ -56,6 +64,8 @@ body {
     background-image: none !important;
     -moz-padding-start: 0;
     -moz-margin-start: 0;
+    padding-inline-start: 0;
+    margin-inline-start: 0;
   }
 
   .title-text {
@@ -67,6 +77,7 @@ ul, ol {
   margin: 0;
   padding: 0;
   -moz-margin-start: 1em;
+  margin-inline-start: 1em;
 }
 
 ul > li, ol > li {
@@ -88,6 +99,7 @@ ul {
 
 .button-container > button:first-child {
   -moz-margin-start: 0;
+  margin-inline-start: 0;
 }
 
 /* Trees */
@@ -103,4 +115,10 @@ ul {
 
 tree {
   width: 100%;
+}
+@supports not (scroll-snap-type:none) { {}/* Firefox < 39 */
+  tree {
+    min-height: 12em;
+    margin-top: 1.2em;
+  }
 }
