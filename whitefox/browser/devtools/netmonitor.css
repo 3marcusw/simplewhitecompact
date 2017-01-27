@@ -1,7 +1,84 @@
-/* vim:set ts=2 sw=2 sts=2 et: */
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import "resource://devtools/client/shared/components/tree/tree-view.css";
+
+#toolbar-labels {
+  overflow: hidden;
+}
+
+.devtools-toolbar-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.devtools-toolbar-group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+/*********************************************************************/
+.devtools-toolbar-group + .devtools-toolbar-group {
+  flex-grow: 1;
+  justify-content: end;
+  flex-basis: 0;
+}
+.devtools-toolbar-group > .devtools-searchbox {
+ flex-grow: 0;
+ flex-basis: auto;
+}
+.devtools-toolbar-group > .devtools-searchbox > .devtools-filterinput {
+  min-width: 0;
+}
+.devtools-toolbar-group > #requests-menu-network-summary-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+/*********************************************************************/
+
+/**
+ * Collapsed details pane needs to be truly hidden to prevent both accessibility
+ * tools and keyboard from accessing its contents.
+ */
+#details-pane.pane-collapsed {
+  visibility: hidden;
+}
+
+#details-pane-toggle[disabled] {
+  display: none;
+}
+
+#custom-pane {
+  overflow: auto;
+}
+
+#response-content-image-box {
+  overflow: auto;
+}
+
+#network-statistics-charts {
+  overflow: auto;
+}
+
+.cropped-textbox .textbox-input {
+  /* workaround for textbox not supporting the @crop attribute */
+  text-overflow: ellipsis;
+}
+
+/* Responsive sidebar */
+@media (max-width: 700px) {
+  #toolbar-spacer,
+  #details-pane-toggle,
+  #details-pane.pane-collapsed, /* Firefox 53 */
+  .requests-menu-waterfall,
+  #requests-menu-network-summary-button > .toolbarbutton-text,
+  #requests-menu-network-summary-button > .summary-info-text /* Firefox 53 */ {
+    display: none;
+  }
+}
 
 :root.theme-dark {
   --table-splitter-color: rgba(255,255,255,0.15);
@@ -18,6 +95,28 @@
   --table-zebra-background: rgba(0,0,0,0.05);
 }
 
+/* Firefox 53: */
+div#network-table {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+  overflow: hidden;
+}
+
+/* Firefox 53 */
+.request-list-container {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+}
+
+/* Firefox 53 */
+div#toolbar-labels {
+  display: flex;
+  flex: auto;
+}
+
+.request-list-empty-notice, /* Firefox 53 */
 #requests-menu-empty-notice {
   margin: 0;
   padding: 12px;
@@ -31,12 +130,19 @@
 #requests-menu-perf-notice-button {
   min-width: 30px;
   min-height: 26px;
-  margin: 0;
+  margin: 0 5px;
+  vertical-align: middle;
   list-style-image: url(images/profiler-stopwatch.svg);
 }
 .theme-firebug #requests-menu-perf-notice-button > hbox > image.button-icon {
   list-style-image: url(images/firebug/profiler-stopwatch.svg);
   filter: none;
+}
+#requests-menu-perf-notice-button::before { /* Firefox 53 */
+  background-image: url(images/profiler-stopwatch.svg);
+}
+.theme-firebug #requests-menu-perf-notice-button::before { /* Firefox 53 */
+  background-image: url(images/firebug/profiler-stopwatch.svg);
 }
 
 /* Make sure the icon is visible on Linux (to overwrite a rule
@@ -54,6 +160,12 @@
   min-height: 26px;
   margin: 0;
   background-color: var(--theme-toolbar-background);
+
+/* Firefox 53: */
+  font-size: inherit;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 5px;
 }
 
 /* Network requests table */
@@ -66,32 +178,81 @@
   height: 16px !important;
 }
 
+.devtools-toolbar-group > #requests-menu-filter-buttons { /* Firefox 53 */
+  display: flex; /* Firebug theme */
+  align-self: stretch; /* Dark/Light themes */
+}
+
+div.requests-menu-contents { /* Firefox 53 */
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  --timings-scale: 1;
+  --timings-rev-scale: 1;
+}
+
 .requests-menu-subitem {
   padding: 3px;
+}
+div.requests-menu-subitem { /* Firefox 53 */
+  display: flex;
+  flex: none;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.subitem-label { /* Firefox 53 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.requests-menu-header { /* Firefox 53 */
+  display: flex;
+  flex: none;
 }
 
 .requests-menu-header-button {
   -moz-appearance: none;
   background-color: transparent;
-  --border-img: linear-gradient(transparent 15%,
-                                var(--theme-splitter-color) 15%,
-                                var(--theme-splitter-color) 85%,
-                                transparent 85%) 1 1;
-  border-image: var(--border-img);
+  border-image-source: linear-gradient(transparent 15%,
+                                       var(--theme-splitter-color) 15%,
+                                       var(--theme-splitter-color) 85%,
+                                       transparent 85%);
+  border-image-slice: 1;
   border-style: solid;
   border-width: 0;
   -moz-border-start-width: 1px;
   border-inline-start-width: 1px;
   min-width: 1px;
-  min-height: 24px;
+  min-height: 23px;
   margin: 0;
-  padding-bottom: 2px;
+  padding: 0;
   -moz-padding-start: 13px;
   padding-inline-start: 13px;
-  padding-top: 2px;
   text-align: center;
   color: inherit;
   font-weight: inherit !important;
+  background-clip: padding-box;
+}
+div > .requests-menu-header-button { /* Firefox 53 */
+  display: flex;
+  align-items: center;
+  flex: auto;
+  text-align: center;
+  font: inherit;
+}
+#requests-menu-status-button {
+  padding-inline-start: 6px;
+}
+
+/*Firefox 53:  (What is this for? Is it needed?) */
+.requests-menu-header-button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }
 
 .requests-menu-header:first-child .requests-menu-header-button:first-of-type {
@@ -102,11 +263,21 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Firefox 53: */
+.requests-menu-header-button > .button-text {
+  flex: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 /* Make possible to crop header labels in Firefox 44 and earlier */
-.requests-menu-header:not(.requests-menu-waterfall) > button > hbox > label{
+.requests-menu-header:not(.requests-menu-waterfall) > button > hbox > label {
   min-width: 1.8em;
 }
-.requests-menu-status-and-method > #requests-menu-status-button > hbox > label{
+.requests-menu-status-and-method > #requests-menu-status-button > hbox > label {
   min-width: 1.2em;
 }
 
@@ -131,6 +302,34 @@
   -moz-box-ordinal-group: 2;
   width: 7px;
 }
+#requests-menu-status-button > .button-icon, /* Firefox 53 */
+#requests-menu-status-button > .button-box > .button-icon {
+  margin-inline-end: 2px;
+}
+
+
+/* Firefox 53: */
+.requests-menu-header-button > .button-icon {
+  flex: none;
+  height: 4px;
+  margin-inline-end: 6px;
+  width: 7px;
+}
+.requests-menu-header-button[data-sorted=ascending] > .button-icon {
+  background-image: url(images/sort-arrows.svg#ascending);
+}
+.requests-menu-header-button[data-sorted=descending] > .button-icon {
+  background-image: url(images/sort-arrows.svg#descending);
+}
+.theme-firebug .requests-menu-header-button[data-sorted=ascending] > .button-icon {
+  height: 7px;
+  background-image: url(images/firebug/arrow-up.svg);
+}
+.theme-firebug .requests-menu-header-button[data-sorted=descending] > .button-icon {
+  height: 7px;
+  background-image: url(images/firebug/arrow-down.svg);
+}
+
 
 :root.theme-firebug .requests-menu-header-button > .button-box > .button-icon,
 :root.theme-firebug #requests-menu-waterfall-image {
@@ -169,22 +368,29 @@
 #requests-menu-waterfall-label-wrapper {
   -moz-box-flex: 1;
 }
+.requests-menu-waterfall-label-wrapper { /* Firefox 53 */
+  display: flex;
+}
 
+.requests-menu-header-button[data-sorted], /* Firefox 53 */
+.requests-menu-header-button[data-sorted]:hover, /* Firefox 53 */
 .requests-menu-header-button[sorted],
 .requests-menu-header-button[sorted]:hover {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
 }
 
+.theme-firebug .requests-menu-header-button[data-sorted], /* Firefox 53 */
+.theme-firebug .requests-menu-header-button[data-sorted]:hover, /* Firefox 53 */
 :root.theme-firebug .requests-menu-header-button[sorted],
 :root.theme-firebug .requests-menu-header-button[sorted]:hover {
   background-color: #aac3dc;
   color: inherit;
 }
 
+.requests-menu-header-button[data-sorted],
 .requests-menu-header-button[sorted] {
-  --border-img: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color)) 1 1;
-  border-image: var(--border-img);
+  border-image-source: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color));
   box-shadow: 0.5px 0px 0px 0.5px var(--theme-splitter-color);
   z-index: 1;
 }
@@ -194,18 +400,25 @@
   box-shadow: -0.5px 0px 0px 0.5px var(--theme-splitter-color);
 }
 
+.requests-menu-header-button[data-sorted]:-moz-locale-dir(rtl), /* Firefox 53 */
+.requests-menu-header-button[data-sorted]:dir(rtl) { /* Firefox 53 */
+  box-shadow: -0.5px 0px 0px 0.5px var(--theme-splitter-color);
+}
+
 /* Firebug theme support for Network panel header */
 
 .theme-firebug .requests-menu-header {
   padding: 0 !important;
   font-weight: bold;
+}
+.theme-firebug #toolbar-labels {
   background: linear-gradient(rgba(255, 255, 255, 0.05),
                               rgba(0, 0, 0, 0.05)),
                               #C8D2DC;
 }
 
 .theme-firebug .requests-menu-header-button {
-  min-height: 17px;
+  min-height: 18px;
 }
 
 .theme-firebug .requests-header-menu-button[sorted] {
@@ -252,12 +465,18 @@ label + .requests-menu-method {
   width: 18vw;
 }
 
-.requests-menu-icon {
+.requests-menu-icon IGNORE OLD {
   background: #fff;
   width: calc(1em + 4px);
   height: calc(1em + 4px);
   margin: -4px 0px;
   -moz-margin-end: 4px;
+}
+.requests-menu-icon { /* Firefox 53 */
+  background: transparent;
+  width: 15px;
+  height: 15px;
+  margin-inline-end: 4px;
 }
 
 .requests-menu-icon {
@@ -299,6 +518,32 @@ label + .requests-menu-method {
   list-style-image: url(./images/security-state-local.svg);
 }
 
+/* Firefox 53: ***********************************************/
+div.requests-security-state-icon {
+  flex: none;
+}
+
+div.security-state-insecure {
+  background-image: url(./images/security-state-insecure.svg);
+}
+
+div.security-state-secure {
+  background-image: url(./images/security-state-secure.svg);
+}
+
+div.security-state-weak {
+  background-image: url(./images/security-state-weak.svg);
+}
+
+div.security-state-broken {
+  background-image: url(./images/security-state-broken.svg);
+}
+
+div.security-state-local {
+  background-image: url(./images/security-state-local.svg);
+}
+/* End Firefox 53 ********************************************/
+
 .requests-menu-cause {
   max-width: 8em;
   text-align: center;
@@ -308,7 +553,8 @@ label + .requests-menu-method {
 .requests-menu-subitem.requests-menu-cause{
   display: block; /* This prevents the label box from stretching, so the content can be centered as a whole. --johnGraciliano */
   white-space: nowrap; /* This will prevent the stack and the label be split in two lines when the column is narrow */
-  /* If the content does not fit the overflow will go into the next column (it is not hidden). */
+  overflow: hidden; /* If it does not fit, the overflow will be cut... */
+  text-overflow: clip; /* ...with no ellipsis! */
 }
 
 .requests-menu-cause-stack {
@@ -336,6 +582,7 @@ label + .requests-menu-method {
 .requests-menu-type {
   max-width: 6em;
   text-align: center;
+  justify-content: center; /* Firefox 53 */
   width: 8vw;
 }
 
@@ -343,12 +590,18 @@ label + .requests-menu-method {
 .requests-menu-size {
   max-width: 8em;
   text-align: right;
+  justify-content: right; /* Firefox 53 */
   width: 8vw;
 }
 
 .requests-menu-transferred[value="cached"],
 .requests-menu-transferred[value="—"] {
   text-align: center;
+}
+/* Firefox 53: */
+.requests-menu-transferred[title="cached"],
+.requests-menu-transferred[title="—"] {
+  justify-content: center;
 }
 
 /* Network requests table: status codes */
@@ -358,6 +611,7 @@ box.requests-menu-status {
   background: #fff;
   height: 10px;
   width: 10px;
+  box-sizing: border-box;
   -moz-margin-start: 5px;
   -moz-margin-end: 5px;
   border-radius: 10px;
@@ -378,29 +632,34 @@ label.requests-menu-status-code {
   -moz-margin-start: -2px !important;
 }
 
-.requests-menu-status-icon:not([code]),
+.requests-menu-status-icon:not([code]):not([data-code]),
 box.requests-menu-status:not([code]) {
   background-color: var(--theme-highlight-red);
   border-radius: 0; /* squares */
 }
 
+.requests-menu-status-icon[data-code="cached"],
 .requests-menu-status-icon[code="cached"],
 box.requests-menu-status[code="cached"] {
   border: 2px solid var(--theme-content-color2);
   background-color: transparent;
 }
 
+.requests-menu-status-icon[data-code^="1"],
+.requests-menu-status-icon[code^="1"],
 .requests-menu-status-icon[code^="1"],
 box.requests-menu-status[code^="1"] {
   background-color: var(--theme-highlight-blue);
 }
 
+.requests-menu-status-icon[data-code^="2"],
 .requests-menu-status-icon[code^="2"],
 box.requests-menu-status[code^="2"] {
   background-color: var(--theme-highlight-green);
 }
 
 /* 3xx are triangles */
+.requests-menu-status-icon[data-code^="3"],
 .requests-menu-status-icon[code^="3"],
 box.requests-menu-status[code^="3"] {
   background-color: transparent;
@@ -413,12 +672,14 @@ box.requests-menu-status[code^="3"] {
 }
 
 /* 4xx and 5xx are squares - error codes */
+.requests-menu-status-icon[data-code^="4"],
 .requests-menu-status-icon[code^="4"],
 box.requests-menu-status[code^="4"] {
   background-color: var(--theme-highlight-red);
   border-radius: 0; /* squares */
 }
 
+.requests-menu-status-icon[data-code^="5"],
 .requests-menu-status-icon[code^="5"],
 box.requests-menu-status[code^="5"] {
   background-color: var(--theme-highlight-pink);
@@ -428,18 +689,19 @@ box.requests-menu-status[code^="5"] {
 
 /* Network requests table: waterfall header */
 
-.requests-menu-waterfall {
-  -moz-padding-start: 0;
-  padding-inline-start: 0;
+div > .requests-menu-waterfall { /* Firefox 53 */
+  flex: auto;
 }
 
-#requests-menu-waterfall-label:not(.requests-menu-waterfall-visible) {
-  -moz-padding-start: 13px;
-  padding-inline-start: 13px;
+.requests-menu-waterfall-visible {
+  margin-inline-start: -13px;
+}
+.button-text.requests-menu-waterfall-visible {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .requests-menu-timings-division {
-  width: 100px;
   padding-top: 2px;
   -moz-padding-start: 4px;
   padding-inline-start: 4px;
@@ -448,14 +710,28 @@ box.requests-menu-status[code^="5"] {
   box-sizing: border-box;
   text-align: start;
 }
-
-.requests-menu-timings-division:first-child {
+label.requests-menu-timings-division { /* Firefox < 53 */
+  width: 100px;
+}
+label.requests-menu-timings-division:first-child { /* Firefox < 53 */
   width: 98px; /* Substract 2px for borders */
 }
 
-.requests-menu-timings-division:not(:first-child) {
+@supports not (word-spacing:100%) { {} /* Firefox < 45 */
+/*@supports not ((-moz-appearance:none) and (scroll-snap-type:none)) { {} /* Firefox < 39 */
+  #requests-menu-waterfall-button { /* Firefox 37 */
+    -moz-padding-start: 0;
+  }
+  #requests-menu-waterfall-label {
+    -moz-padding-start: 13px;
+  }
+}
+
+.requests-menu-timings-division:not(:first-child) { /* Firefox < 53 */
   -moz-border-start: 1px dashed;
   border-inline-start: 1px dashed;
+}
+label.requests-menu-timings-division:not(:first-child) {
   -moz-margin-start: -100px !important; /* Don't affect layout. */
   margin-inline-start: -100px !important; /* Don't affect layout. */
 }
@@ -468,6 +744,7 @@ box.requests-menu-status[code^="5"] {
   transform-origin: right center;
 }
 
+/******
 .theme-dark .requests-menu-timings-division {
   -moz-border-start-color: #5a6169 !important;
   border-inline-start-color: #5a6169 !important;
@@ -479,7 +756,10 @@ box.requests-menu-status[code^="5"] {
   border-inline-start-color: #585959 !important;
 
 }
+ ******/
 
+.requests-menu-timings-division[data-division-scale=second], /* Firefox 53 */
+.requests-menu-timings-division[data-division-scale=minute], /* Firefox 53 */
 .requests-menu-timings-division[division-scale=second],
 .requests-menu-timings-division[division-scale=minute] {
   font-weight: 600;
@@ -489,22 +769,38 @@ box.requests-menu-status[code^="5"] {
 
 .requests-menu-subitem.requests-menu-waterfall {
   -moz-border-start: 1px solid transparent; /* Mark the start of the timelines (Why is transparent OK?!) --johnGraciliano */
-  -moz-padding-start: 0px;
+  -moz-padding-start: 0;
   -moz-padding-end: 4px;
+  border-inline-start: 1px solid transparent;
+  padding-inline-start: 0;
+  padding-inline-end: 4px;
   /* Background created on a <canvas> in js. */
   /* @see devtools/client/netmonitor/netmonitor-view.js */
   background-image: -moz-element(#waterfall-background);
   background-repeat: repeat-y;
   background-position: -1px center;
 }
+div.requests-menu-subitem.requests-menu-waterfall { /* Firefox 53 */
+  border-inline-start-color: rgba(126,134,142,0.36364);
+}
+div.theme-dark .requests-menu-subitem.requests-menu-waterfall { /* Firefox 53 */
+  border-inline-start-color: rgba(143,152,161,.33333);
+}
 
 .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
   background-position: right center;
-  -moz-border-start-color: rgba(137,145,152,.4); /* This border needs to be visible on the RTL --johnGraciliano */
+  -moz-border-start-color: rgba(126,134,142,0.36364); /* This border needs to be visible on the RTL --johnGraciliano */
 }
 
 .theme-dark .requests-menu-subitem.requests-menu-waterfall:-moz-locale-dir(rtl) {
-  -moz-border-start-color: rgba(143,152,116,.333);
+  -moz-border-start-color: rgba(143,152,161,.33333);
+}
+
+.requests-menu-timings { /* Firefox 53 */
+  display: flex;
+  flex: none;
+  align-items: center;
+  transform: scaleX(var(--timings-scale));
 }
 
 .requests-menu-timings:-moz-locale-dir(ltr) {
@@ -527,6 +823,9 @@ box.requests-menu-status[code^="5"] {
   -moz-padding-start: 4px;
   font-size: 85%;
   font-weight: 600;
+  white-space: nowrap;  /* Firefox 53 */
+  /* This node should not be scaled - apply a reversed transformation */  /* Firefox 53 */
+  transform: scaleX(var(--timings-rev-scale));  /* Firefox 53 */
 }
 
 .requests-menu-timings-box {
@@ -581,6 +880,11 @@ box.requests-menu-status[code^="5"] {
 #network-table .side-menu-widget-container {
   background-color: var(--theme-body-background);
 }
+/* Firefox 53: */
+#network-table .request-list-empty-notice,
+#network-table .request-list-container {
+  background-color: var(--theme-body-background);
+}
 
 .side-menu-widget-container > .box-inherit.scrollbox-innerbox { /* This solves a problem for RTL locales */
   overflow-x: hidden;
@@ -591,19 +895,35 @@ box.requests-menu-status[code^="5"] {
   border-bottom-color: transparent;
   border-bottom-width: 0; /* Added to avoid discontinuities in the timimgs section (waterfall) vertical lines --johnGraciliano */
 }
+/* Firefox 53: */
+.request-list-item {
+  display: flex;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  padding: 0;
+}
 
 .side-menu-widget-item-contents {
   padding: 0px;
 }
 
+/* Firefox 53: */
+.request-list-item.selected {
+  background-color: var(--theme-selection-background);
+  color: var(--theme-selection-color);
+}
+
+.request-list-item:not(.selected).odd, /* Firefox 53 */
 .side-menu-widget-item:not(.selected)[odd] {
   background-color: var(--table-zebra-background);
 }
 
+.request-list-item:not(.selected):hover, /* Firefox 53 */
 .side-menu-widget-item:not(.selected):hover {
   background-color: var(--theme-selection-background-semitransparent);
 }
 
+.theme-firebug .request-list-item:not(.selected):hover, /* Firefox 53 */
 .theme-firebug .side-menu-widget-item:not(.selected):hover {
   background: #E3E3E3;  /* This was #EFEFEF --johnGraciliano */
 }
@@ -629,12 +949,15 @@ box.requests-menu-status[code^="5"] {
 }
 
 /* Adjustments to make some columns in a selected row clearer --johnGraciliano */
+.theme-light .request-list-item.selected .requests-menu-status-icon, /* Firefox 53 */
+.theme-light .request-list-item.selected .requests-security-state-icon, /* Firefox 53 */
 .theme-light .side-menu-widget-item.selected .requests-menu-status ,
 .theme-light .side-menu-widget-item.selected .requests-security-state-icon {
   filter: brightness(1.3125) saturate(1.25);
 }
 
-.side-menu-widget-item.selected > .theme-comment{
+.request-list-item.selected > * > .theme-comment, /* Firefox 53 */
+.side-menu-widget-item.selected > .theme-comment {
   color: var(--theme-selection-color);
 }
 
@@ -643,10 +966,16 @@ box.requests-menu-status[code^="5"] {
 #details-pane-toggle {
   list-style-image: url(images/pane-toggle.svg#collapse);
 }
+#details-pane-toggle::before {
+  background-image: url(images/pane-toggle.svg#collapse);
+}
 
 #details-pane-toggle.pane-collapsed,
 #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/pane-toggle.svg#expand);
+}
+#details-pane-toggle.pane-collapsed::before {
+  background-image: url(images/pane-toggle.svg#expand);
 }
 
 :root:not(.theme-firebug) #details-pane-toggle:-moz-locale-dir(rtl) > .toolbarbutton-icon {
@@ -658,15 +987,24 @@ box.requests-menu-status[code^="5"] {
 :root.theme-firebug #details-pane-toggle {
   list-style-image: url(images/firebug/pane-collapse.svg);
 }
+:root.theme-firebug #details-pane-toggle.pane-collapsed:-moz-locale-dir(rtl)::before,
+:root.theme-firebug #details-pane-toggle::before {
+  background-image: url(images/firebug/pane-collapse.svg);
+}
 
 :root.theme-firebug #details-pane-toggle:-moz-locale-dir(rtl),
 :root.theme-firebug #details-pane-toggle.pane-collapsed,
 :root.theme-firebug #details-pane-toggle[pane-collapsed] {
   list-style-image: url(images/firebug/pane-expand.svg);
 }
+:root.theme-firebug #details-pane-toggle:-moz-locale-dir(rtl)::before,
+:root.theme-firebug #details-pane-toggle.pane-collapsed::before {
+  background-image: url(images/firebug/pane-expand.svg);
+}
 
 /* Network request details tabpanels */
 
+.theme-firebug .devtools-sidebar-tabs tab[selected]:not(:active),
 .tabpanel-content {
   background-color: var(--theme-sidebar-background);
 }
@@ -675,14 +1013,36 @@ box.requests-menu-status[code^="5"] {
   color: var(--theme-selection-color);
 }
 
+.theme-firebug #params-tab[selected]:not(:active) {
+  /****
+  background-color: var(--theme-toolbar-background);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+   ****/
+  background-color: rgb(247, 251, 254);
+}
+
+.theme-firebug #headers-tab[selected]:not(:active) {
+  background-color: var(--theme-toolbar-background);
+  background-image: linear-gradient(rgba(252, 252, 252, 1), rgba(252, 252, 252, 0)); /* rgba(252, 252, 252, 1) = var(--theme-sidebar-background) */
+}
+
 #headers-tabpanel {
   background-color: var(--theme-toolbar-background);
+}
+
+/* Firefox 53 */
+#headers-tabpanel .properties-view .tree-container {
+  background-color: var(--theme-sidebar-background);
 }
 
 /* Headers separators are toolbars, but they have different height
   in Firebug theme */
 .theme-firebug .tabpanel-content .variables-view-container .title.devtools-toolbar {
   height: 20px !important;
+}
+
+.theme-firebug .variables-view-scope:focus > .title {
+  color: var(--theme-body-color);
 }
 
 /* Summary tabpanel */
@@ -700,13 +1060,23 @@ box.requests-menu-status[code^="5"] {
 .tabpanel-summary-value {
   color: inherit;
   -moz-padding-start: 3px;
+  min-width: 12ch; /* Allow it to shrink more (in Firefox 53) */
 }
 
 .theme-dark .tabpanel-summary-value {
   color: var(--theme-selection-color);
 }
 
+/* For Firefox 53 and later */
+.tabpanel-summary-value.textbox-input.devtools-monospace:focus {
+  -moz-user-modify: read-write; /* Make sure the caret is visible */
+}
+
 /* Headers tabpanel */
+
+#headers-tabpanel .summary /* For Firefox 53 --johnGraciliano */ {
+  padding-top: 2px;
+}
 
 #headers-summary-status,
 #headers-summary-version {
@@ -733,7 +1103,8 @@ box.requests-menu-status[code^="5"] {
 
 /* Response tabpanel */
 
-#response-content-info-header {
+#response-content-info-header,
+.response-error-header /* Firefox 53 */ {
   margin: 0;
   padding: 3px 8px;
   background-color: var(--theme-highlight-red);
@@ -745,10 +1116,25 @@ box.requests-menu-status[code^="5"] {
   padding-bottom: 10px;
 }
 
-#response-content-image {
+/* Firefox 53: */
+.response-image-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Minus 24px * 2 for toolbox height + tabpanel height + padding top + padding bottom  */
+  height: auto; /* It was calc(100vh - 68px) --johnGraciliano */
+  overflow-y: auto;
+  padding: 10px;
+}
+
+#response-content-image,
+.response-image /* Firefox 53 */ {
   background: #fff;
   border: 1px dashed GrayText;
   margin-bottom: 10px;
+  max-width: 100%;  /* Firefox 53 */
+  max-height: 100%; /* Firefox 53 */
 }
 
 /* Preview tabpanel */
@@ -764,14 +1150,35 @@ box.requests-menu-status[code^="5"] {
 
 /* Timings tabpanel */
 
+/* Firefox 53+ :   */
+#timings-tabpanel div.tabpanel-summary-container {
+  display: flex;
+}
+
 #timings-tabpanel .tabpanel-summary-label {
   width: 10em;
+}
+
+/* Firefox 53+ :   */
+#timings-tabpanel div.requests-menu-timings-container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+/* Firefox 53+ :   */
+#timings-tabpanel span.requests-menu-timings-offset {
+  transition: width 0.2s ease-out;
 }
 
 #timings-tabpanel .requests-menu-timings-box {
   transition: transform 0.2s ease-out;
   border: none;
   min-width: 1px;
+}
+/* Firefox 53+ :   */
+#timings-tabpanel span.requests-menu-timings-box {
+  transition-property: width;
 }
 
 #timings-tabpanel .requests-menu-timings-total {
@@ -854,6 +1261,7 @@ box.requests-menu-status[code^="5"] {
   padding: 2px 0.878477vw;
 }
 
+button.menu-filter-button, /* FF52 */
 .theme-firebug .requests-menu-filter-button, /* FF47 et al. */
 .theme-firebug .requests-menu-footer-button,
 .theme-firebug .requests-menu-footer-label {
@@ -975,6 +1383,28 @@ box.requests-menu-status[code^="5"] {
   -moz-box-flex: 1;
 }
 
+/* Firefox 53 ( and 52! ) */
+.devtools-searchbox.has-clear-btn > .devtools-filterinput {
+  transition-property: max-width, padding-inline-end;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+  max-width: unset;
+
+  width: 100%;
+}
+.devtools-searchbox.has-clear-btn > .devtools-filterinput:not(:focus):not(.filled) {
+  max-width: 0px;
+  padding-inline-end: 5px;
+}
+.devtools-searchbox.has-clear-btn > .devtools-filterinput::placeholder {
+  font-style: italic;
+}
+
+/* Firefox 53 */
+.devtools-searchinput-clear {
+  margin-top: -1px;
+}
+
 /*** THE FOLLOWING SECTION IS ONLY USED IN FIREFOX 49 !!!!! *******************************************************/
 /*** Classes .requests-menu-stack-* change to .stack-frame-* in Firefox 50 with new style rules in tooltips.css ***/
 /* Requests menu stacktrace tooltip */
@@ -1017,6 +1447,12 @@ box.requests-menu-status[code^="5"] {
 
 /* Performance analysis buttons */
 
+.devtools-toolbar-group > #requests-menu-network-summary-button { /* Firefox 53 */
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
 #requests-menu-network-summary-button {
   background: none;
   box-shadow: none;
@@ -1026,9 +1462,26 @@ box.requests-menu-status[code^="5"] {
   cursor: pointer;
   min-width: 12px;
 }
+button#requests-menu-network-summary-button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+}
 .theme-firebug #requests-menu-network-summary-button > image {
   list-style-image: url(images/firebug/profiler-stopwatch.svg);
   filter: none;
+}
+
+#requests-menu-network-summary-button > .summary-info-icon { /* Firefox 53 */
+  background-image: url(images/profiler-stopwatch.svg);
+  width: 16px;
+  height: 16px;
+}
+.theme-dark #requests-menu-network-summary-button > .summary-info-icon {
+  filter: invert(1);
+}
+.theme-firebug #requests-menu-network-summary-button > .summary-info-icon {
+  background-image: url(images/firebug/profiler-stopwatch.svg);
 }
 
 #requests-menu-network-summary-label {
@@ -1036,8 +1489,18 @@ box.requests-menu-status[code^="5"] {
   cursor: pointer;
 }
 
+#requests-menu-network-summary-button > .summary-info-text { /* Firefox 53 */
+  margin-inline-start: 0.5em;
+}
+.theme-firebug #requests-menu-network-summary-button > .summary-info-text {
+  /* font-family:  var(--proportional-font-family); */
+  font-size: var(--theme-toolbar-font-size);
+  /* font-weight: 600; */
+}
+
 #requests-menu-network-summary-button:hover > label,
-#requests-menu-network-summary-label:hover {
+#requests-menu-network-summary-label:hover,
+#requests-menu-network-summary-button:hover > .summary-info-text /* Firefox 53 */ {
   text-decoration: underline;
 }
 
@@ -1225,6 +1688,7 @@ box.requests-menu-status[code^="5"] {
     padding-left: calc(1.651651vw - 10.561561px);
     padding-right: calc(1.651651vw - 10.561561px);
   }
+  button.menu-filter-button, /* FF52 */
   .theme-firebug .requests-menu-filter-button, /* FF47 et al. */
   .theme-firebug .requests-menu-footer-button,
   .theme-firebug .requests-menu-footer-label {
@@ -1235,6 +1699,11 @@ box.requests-menu-status[code^="5"] {
 
 /* Responsive sidebar */
 @media (max-width: 700px) {
+  div > .requests-menu-waterfall { /* Firefox 53 */
+    display: none;
+  }
+
+  button.menu-filter-button, /* FF52 */
   .requests-menu-filter-button, /* FF47 et al. */
   .requests-menu-footer-button,
   .requests-menu-footer-label {
@@ -1339,16 +1808,19 @@ box.requests-menu-status[code^="5"] {
 
   @supports (overflow-wrap: normal) { /* Firefox >= 39 */
 
+    div > .requests-menu-header-button,
+    #requests-menu-status-button,
     .requests-menu-header-button {
       padding-left: 2px;
     }
 
-    .requests-menu-header-button > .button-box > .button-icon{
+    .requests-menu-header-button > .button-icon, /* Firefox 53 */
+    .requests-menu-header-button > .button-box > .button-icon {
       -moz-margin-end: 2px;
       margin-inline-end: 2px;
     }
 
-    .requests-menu-header-button > .button-box > .button-text{
+    .requests-menu-header-button > .button-box > .button-text {
       min-width: unset;
     }
 
@@ -1463,4 +1935,339 @@ box.requests-menu-status[code^="5"] {
       }
     }
   }
+}
+
+
+
+
+/* What follows is for Firefox 53+ *********************************************************/
+
+/* Remove tree-view cell colon `:` for security panel and tree section */
+#security-tabpanel .treeTable .treeLabelCell::after,
+.treeTable .tree-section .treeLabelCell::after {
+  content: none; /* The value 'none' removes the node.  It was "" which replaces the colon with nothing. */
+}
+
+/* Layout additional warning icon in tree value cell  */
+.security-info-value {
+  display: flex;
+}
+
+/* .security-info-value .textbox-input     ** This was the selector in Early Firefox 53 ***/
+.textbox-input /* Later Firefox 53 */ {
+  text-overflow: ellipsis;
+  border: none;
+  background: none;
+  color: inherit;
+  width: 100%;
+  /* margin-inline-end: 2px;    ** In Early Firefox 53 ***/
+  font: inherit;
+}
+
+.textbox-input:focus {
+  text-overflow: clip; /* Do not show the ellipsis when some of the text is selected --johnGraciliano */
+}
+
+/* .security-info-value .textbox-input:focus     ** This was the selector in Early Firefox 53 ***/
+.treeTable .textbox-input:focus /* Later Firefox 53 */ {
+  outline: 0;
+  /* box-shadow: var(--theme-focus-box-shadow-textbox); *** This is for the 'default' theme only */
+}
+
+
+
+/* From earlier Firefox 53:  ************************************************************/
+.treeTable .treeLabel {
+  font-weight: 600;
+}
+
+/* Customize default tree table style to align with devtools theme  */
+.theme-light .treeTable .treeLabel,
+.theme-light .treeTable .treeRow.hasChildren > .treeLabelCell > .treeLabel:hover {
+  color: var(--theme-highlight-red);
+}
+
+.theme-dark .treeTable .treeLabel,
+.theme-dark .treeTable .treeRow.hasChildren > .treeLabelCell > .treeLabel:hover {
+  color: var(--theme-graphs-purple); /* Identical to var(--theme-highlight-purple) */
+}
+
+.theme-firebug .treeTable .treeLabel {
+  color: var(--theme-body-color);
+}
+
+.treeTable .treeRow.hasChildren > .treeLabelCell > .treeLabel:hover {
+  cursor: default;
+  text-decoration: none;
+}
+/************************************************* End of 'From earlier Firefox 53' *****/
+
+
+/* On late Firefox 53:  ********************************************************************/
+.properties-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0%;
+  overflow-y: hidden;
+}
+
+.properties-view .searchbox-section {
+  flex: 0 1 auto;
+}
+
+.properties-view .devtools-searchbox {
+  padding: 0;
+}
+
+.properties-view .devtools-searchbox input {
+  margin: 1px 3px;
+}
+
+.properties-view > .searchbox-section > .devtools-searchbox.has-clear-btn > .devtools-filterinput {
+  max-width: none; /* Do not minimize the search box */
+}
+
+.tree-container {
+  flex: 1 0 0%;
+  overflow-y: auto;
+}
+
+.tree-container > .treeTable {
+  height: 100%;
+}
+
+.tree-container> .treeTable > tbody::after {
+  display:  table-row;
+  height: 100%;
+  width: auto;
+  content: "";
+}
+
+.editor-row-container > td[colspan="2"] {
+  height: 100%;
+}
+
+.editor-mount.devtools-monospace {
+  overflow: hidden;
+}
+
+/* Horizontal (Bottom) Layout */
+@media not all and (max-width: 700px) {
+  @media (max-height: 250px) { /* Only needed for shrinking the table */
+    .searchbox-section + .tree-container,
+    .editor-mount.devtools-monospace,
+    .editor-mount.devtools-monospace > iframe {
+      max-height: calc(100vh - 70px);
+    }
+    .theme-firebug .searchbox-section + .tree-container,
+    .theme-firebug .editor-mount.devtools-monospace,
+    .theme-firebug .editor-mount.devtools-monospace > iframe {
+      max-height: calc(100vh - 76px);
+    }
+  }
+
+  @media (max-height: 270px) { /* Only needed for shrinking the table */
+    /* Allow room for a two lines error */
+    .response-error-header + div.properties-view > div > .treeTable > tbody > tr > td > div > .editor-mount.devtools-monospace,
+    .response-error-header + div.properties-view > div > .treeTable > tbody > tr > td > div > .editor-mount.devtools-monospace > iframe {
+          max-height: calc(100vh - 88px);
+    }
+
+    .theme-firebug .response-error-header + div.properties-view > div > .treeTable > tbody > tr > td > div > .editor-mount.devtools-monospace,
+    .theme-firebug .response-error-header + div.properties-view > div > .treeTable > tbody > tr > td > div > .editor-mount.devtools-monospace > iframe {
+          max-height: calc(100vh - 93px);
+    }
+
+  }
+}
+
+.properties-view .devtools-searchbox,
+.tree-container .treeTable .tree-section {
+  width: 100%;
+  background-color: var(--theme-toolbar-background);
+}
+
+.properties-view .devtools-searchbox,
+.tree-container .treeTable tr:not(:last-child) td:not([class=""]) {
+  border-bottom: 1px solid var(--theme-splitter-color);
+}
+
+.tree-container .treeTable .tree-section > * {
+  vertical-align: middle;
+}
+
+.tree-container .treeTable .treeRow.tree-section > .treeLabelCell > .treeLabel,
+.tree-container .treeTable .treeRow.tree-section > .treeLabelCell > .treeLabel:hover {
+  color: var(--theme-body-color-alt);
+}
+
+/* Ignore the width of the tree sections' labels, so only the string rows' labels are used for alignment */
+.tree-container .treeTable .treeRow.tree-section > .treeLabelCell > .treeLabel {
+  display: inline-block;
+  vertical-align: baseline;
+  width: 0px;
+  overflow: visible;
+}
+
+.tree-container .treeTable .treeValueCell {
+  /* FIXME: Make value cell can be reduced to shorter width */
+  max-width: 0;
+  padding-inline-end: 5px;
+}
+
+ /* A reply for FIXME in the previous rule --johnGraciliano */
+.treeValueCell.stringCell > span > .objectBox.objectBox-string {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The next line allows the caret to be shown in the data values when examined */
+.treeValueCell.stringCell > input
+/*.treeValueCell.stringCell.inputEnabled */ {
+  font: inherit;
+  -moz-user-modify: read-write; /* To allows showing the caret in the data values when examined */
+}
+.treeValueCell.stringCell > input {
+  font: inherit;
+}
+
+.headers-summary input:not([type="button"]) {
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  margin-inline-end: 2px;
+}
+
+.headers-summary input:not([type="button"]):focus {
+  outline: none;
+  box-shadow: var(--theme-focus-box-shadow-textbox);
+  transition: all 0.2s ease-in-out;
+}
+
+.headers-summary-label,
+.tree-container .objectBox {
+  white-space: nowrap;
+}
+
+.headers-summary,
+.response-summary {
+  display: flex;
+  align-items: baseline; /* The value was 'center' --johnGraciliano */
+}
+
+.headers-summary .tool-button {
+  border: 1px solid transparent;
+  color: var(--theme-body-color);
+  transition: background 0.05s ease-in-out;
+  margin-inline-end: 6px;
+  padding: 0 5px;
+}
+
+.theme-light .headers-summary .tool-button {
+  background-color: var(--toolbar-tab-hover);
+}
+
+.theme-light .headers-summary .tool-button:hover {
+  background-color: rgba(170, 170, 170, 0.3);
+}
+
+.theme-light .headers-summary .tool-button:hover:active {
+  background-color: var(--toolbar-tab-hover-active);
+}
+
+.theme-dark .headers-summary .tool-button {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.theme-dark .headers-summary .tool-button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .headers-summary .tool-button:hover:active {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.headers-summary .requests-menu-status-icon {
+  min-width: 10px;
+}
+
+.headers-summary .raw-headers-container {
+  display: flex;
+  width: 100%;
+}
+
+.headers-summary .raw-headers {
+  width: 50%;
+  padding: 0px 4px;
+}
+
+.headers-summary .raw-headers textarea {
+  width: 100%;
+  height: 50vh;
+  font: message-box;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.headers-summary .raw-headers .tabpanel-summary-label {
+  padding: 0 0 4px 0;
+}
+
+.empty-notice {
+  color: var(--theme-body-color-alt);
+  padding: 3px 8px;
+}
+
+.response-summary {
+  display: flex;
+}
+
+.editor-container,
+.editor-mount,
+.editor-mount iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+/********************************************************* End of 'On late Firefox 53'  ****/
+
+/*
+ * FIXME: normal html block element cannot fill outer XUL element
+ * This workaround should be removed after netmonitor is migrated to react
+ */
+[id^="react-"][id$="-tabpanel-hook"] { /* This covers all "#react-...-tabpanel-hook" */
+  display: flex;
+  -moz-box-flex: 1;
+  -moz-box-orient: vertical;
+  position: relative;
+}
+
+[id^="react-"][id$="-tabpanel-hook"] > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#react-preview-tabpanel-hook > div > iframe {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#network-statistics-charts {
+  display: -moz-box;
+  -moz-box-flex: 1;
+}
+
+#primed-cache-chart,
+#empty-cache-chart {
+  display: -moz-box;
+  -moz-box-flex: 1;
+  -moz-box-pack: center;
 }
