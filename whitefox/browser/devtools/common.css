@@ -339,3 +339,135 @@
   }
    */
 } /* @supports */
+
+
+/****  Options Tab  ******************************************/
+
+#options-panel-container .options-groupbox {
+  -moz-box-align: start;
+}
+#options-panel-container .options-groupbox > .hidden-labels-box {
+  -moz-box-orient: vertical; /* Convert the hbox into a vbox --johnGraciliano */
+}
+#options-panel-container .options-groupbox > .hidden-labels-box > checkbox,
+#options-panel-container .options-groupbox > checkbox {
+  -moz-box-align: start;
+}
+#options-panel-container .options-groupbox > .hidden-labels-box > checkbox > .checkbox-check,
+#options-panel-container .options-groupbox > checkbox > .checkbox-check {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+#options-panel fieldset > label {
+  width: -moz-fit-content;
+}
+#options-panel fieldset > label > input:first-child {
+  align-self: start;
+}
+#options-panel fieldset > label > span:nth-child(+2) {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+/***********************************************/
+/* Fix the columns.                            */
+/* Allowing a 30px scrollbar. --johnGraciliano */
+/***********************************************/
+
+vbox.options-vertical-pane {
+  width: calc(100%/3 - 10px);
+  max-width: 500px;
+  /* 'min-width: 320px' is set elsewhere */
+}
+
+vbox#default-tools-box {
+  display: block;
+  -moz-column-width: calc(15vw - 19.8px);
+  -moz-column-gap: 0;
+  margin-top: 2px;
+}
+
+vbox#default-tools-box > checkbox {
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+@media not all and (max-width: 1560px) {
+  vbox#default-tools-box {
+    -moz-column-width: 214.2px;
+  }
+}
+
+@media (max-width: 1020px) {
+  vbox.options-vertical-pane {
+    width: calc(100%/2 - 10px);
+  }
+  vbox#default-tools-box {
+    -moz-column-width: auto;
+  }
+}
+
+@media (max-width: 690px) {
+  vbox.options-vertical-pane {
+    width: calc(100% - 10px);
+  }
+  vbox#default-tools-box {
+    -moz-column-width: 214.2px;
+  }
+}
+
+@media (max-width: 540px) {
+  vbox#default-tools-box {
+    -moz-column-width: calc(45vw - 28.8px);
+  }
+}
+
+@media (max-width: 360px) {
+  vbox#default-tools-box {
+    -moz-column-width: 133.2px;
+  }
+}
+
+
+fieldset#default-tools-box > label {
+  width: 45%;
+  float: left;
+  pointer-events: none;
+}
+
+fieldset#default-tools-box > label > input,
+fieldset#default-tools-box > label > span {
+  pointer-events: all;
+}
+
+div.options-vertical-pane {
+  width: calc(100%/3 - 10px);
+}
+
+div.options-vertical-pane {
+  max-width: 500px;
+}
+
+@media (max-width: 1020px) {
+  div.options-vertical-pane {
+    width: calc(100%/2 - 10px);
+  }
+  fieldset#default-tools-box > label {
+    width: auto;
+    float: none;
+  }
+}
+
+@media (max-width: 690px) {
+  div.options-vertical-pane {
+    width: calc(100% - 10px);
+  }
+  fieldset#default-tools-box > label {
+    width: 45%;
+    float: left;
+  }
+}
+
+/**********************************************************************/
