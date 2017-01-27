@@ -57,13 +57,21 @@ i.arrow > svg,
   fill: #727272;
 }
 
-div.source-tab:hover {
-  background-color: var(--theme-tab-toolbar-background);
+.subsettings {
+  height: 16px;
+  width: 16px;
 }
 
-div.source-tab.active {
-  color: var(--theme-selection-color);
-  background-color: var(--theme-selection-background);
+div.dropdown {
+  background-color: #181d20; /* = rgba(24, 29, 32, 1) = var(--theme-sidebar-background) */
+}
+
+div.source-tab {
+  padding-top: 1px;
+}
+
+div.source-tab:not(.active):hover {
+  background-color: var(--theme-tab-toolbar-background);
 }
 
 div.source-tab.active .close > svg > path {
@@ -83,7 +91,7 @@ div.source-tab.active .close > svg > path {
   opacity: .8;
 }
 
-i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
+i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.toggleBreakpoints,.pause-exceptions,.prettyPrint) > svg {
   fill: #bcc9d5; /*var(--theme-body-color);*/
   stroke: #bcc9d5; /*var(--theme-body-color);*/
   stroke-width: 0;
@@ -93,7 +101,8 @@ i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-
   transform: translateX(-.8px);
 }
 
-.breakpoints-disabled > .disableBreakpoints > svg {
+.breakpoints-disabled > .disableBreakpoints > svg,
+.breakpoints-disabled > .toggleBreakpoints > svg {
   fill: var(--theme-highlight-blue);
 }
 

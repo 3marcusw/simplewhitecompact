@@ -4,6 +4,10 @@
 
 /* General output styles */
 
+.devtools-plaininput.text-filter::placeholder {
+  font-style: italic;
+}
+
 a {
   -moz-user-focus: normal;
   -moz-user-input: enabled;
@@ -383,6 +387,7 @@ a.message-location { /* Firefox <= 49 */
   background-position: -12px 0;
 }
 
+.message.network .message-body > span:not([class]), /* For Firfox 52 --johnGraciliano */
 .message[category=network] > .message-body,
 .message.network > .message-body {
   display: flex;
@@ -400,7 +405,7 @@ a.message-location { /* Firefox <= 49 */
   /* Make sure the URL is very small initially, let flex change width as needed. */
   width: 100px;
   min-width: 5em;
-  white-space: nowrap;
+  white-space: nowrap; /** Some URL may be too long, it may be best to allow wrapping --johnGraciliano */
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -444,18 +449,21 @@ a.message-location { /* Firefox <= 49 */
 }
 
 .message[category=cssparser] > .indent,
-.message.cssparser > .indent  {
+.message.cssparser > .indent,
+.message.css > .indent  {
   -moz-border-end: solid #00b6f0 6px;
   border-inline-end: solid #00b6f0 6px;
 }
 
 .message[category=cssparser][severity=error] > .icon::before,
-.message.cssparser.error > .icon::before {
+.message.cssparser.error > .icon::before,
+.message.css.error > .icon::before {
   background-position: -12px -12px;
 }
 
 .message[category=cssparser][severity=warn] > .icon::before,
-.message.cssparser.warn > .icon::before {
+.message.cssparser.warn > .icon::before,
+.message.css.warn > .icon::before {
   background-position: -24px -12px;
 }
 
@@ -466,18 +474,21 @@ a.message-location { /* Firefox <= 49 */
 }
 
 .message[category=exception] > .indent,
-.message.exception > .indent {
+.message.exception > .indent,
+.message.javascript > .indent { /* Extra selector --johnGaciliano */
   -moz-border-end: solid #fb9500 6px;
   border-inline-end: solid #fb9500 6px;
 }
 
 .message[category=exception][severity=error] > .icon::before,
-.message.exception.error > .icon::before {
+.message.exception.error > .icon::before,
+.message.javascript.error > .icon::before { /* Extra selector --johnGaciliano */
   background-position: -12px -24px;
 }
 
 .message[category=exception][severity=warn] > .icon::before,
-.message.exception.warn > .icon::before {
+.message.exception.warn > .icon::before,
+.message.javascript.warn > .icon::before { /* Extra selector --johnGaciliano */
   background-position: -24px -24px;
 }
 
@@ -954,12 +965,22 @@ a.learn-more-link.webconsole-learn-more-link {
   overflow: auto;
 }
 
-.webconsole-filterbar-primary {
+.webconsole-filterbar-primary,
+.webconsole-filterbar-secondary {
   display: flex;
 }
 
 .webconsole-filterbar-primary .devtools-plaininput {
   flex: 1 1 100%;
+}
+
+.theme-firebug .webconsole-filterbar-secondary > .devtools-separator {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.webconsole-output.hideTimestamps > .message > .timestamp {
+  display: none;
 }
 
 .message.error > .icon::before {
@@ -1012,4 +1033,43 @@ a.learn-more-link.webconsole-learn-more-link {
   border-inline-end: var(--consoletable-border);
   height: 1.25em;
   line-height: 1.25em;
+}
+
+/*******************************************************************************/
+
+.devtools-plaininput {
+  -moz-appearance: none;
+  margin: 1px 3px;
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 4px 6px;
+  border-color: var(--theme-splitter-color);
+}
+
+:root[platform="mac"] .devtools-plaininput {
+  border-radius: 20px;
+}
+@supports (-moz-osx-font-smoothing: auto) { {}/* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
+  :root .devtools-plaininput {
+    border-radius: 20px;
+  }
+}
+
+.devtools-plaininput {
+  padding: 0;
+  -moz-padding-start: 22px;
+  -moz-padding-end: 4px;
+  background-position: 8px center;
+  background-size: 11px 11px;
+  background-repeat: no-repeat;
+  font-size: inherit;
+  font: message-box;
+
+  max-width: 240px;
+  -moz-padding-start: 4px;
+}
+
+.theme-dark .devtools-plaininput {
+  background-color: rgba(24, 29, 32, 1);
+  color: rgba(184, 200, 217, 1);
 }

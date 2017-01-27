@@ -330,7 +330,7 @@ body > #ruleview-container {
 }
 
 .theme-firebug .ruleview-namecontainer > .ruleview-propertyname,
-.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD THAT OF THE NEXT LINE --johnGraciliano ***********/
+.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD BE THAT OF THE NEXT LINE --johnGraciliano ***********/
 .theme-firebug .ruleview-propertycontainer > .ruleview-propertyvalue {
   border-bottom: none;
 }
@@ -341,7 +341,7 @@ body > #ruleview-container {
 }
 
 .theme-firebug .ruleview-computed > .ruleview-propertyvalue, /* Added selector --johnGraciliano */
-.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD THAT OF THE NEXT LINE --johnGraciliano ***********/
+.theme-firebug .ruleview-propertyvaluecontainer > .ruleview-propertyvalue, /* THIS SELECTOR SHOULD BE THAT OF THE NEXT LINE --johnGraciliano ***********/
 .theme-firebug .ruleview-propertycontainer > .ruleview-propertyvalue {
   color: var(--rule-property-value);
 }
@@ -355,7 +355,7 @@ body > #ruleview-container {
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-namecontainer > .ruleview-propertyname,   /* --johnGraciliano*/
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer,   /* --johnGraciliano */
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer > .ruleview-propertyvalue,   /* --johnGraciliano */
-.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer > .ruleview-propertyvalue > .theme-link   /* --johnGraciliano */ 
+.theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-propertyvaluecontainer > .ruleview-propertyvalue > .theme-link   /* --johnGraciliano */
 {
   color: #CCCCCC;
 }
@@ -365,7 +365,7 @@ body > #ruleview-container {
  * I removed it.  --johnGraciliano ******%
 .theme-firebug .ruleview-enableproperty:not([checked]) ~ .ruleview-computedlist * {
   color: #CCCCCC;
-}  
+}
 %**/
 
 /* The next rule is an attempt to do what the previous failed rule would do. --johnGraciliano */
@@ -475,6 +475,7 @@ body > #ruleview-container {
 }
 
 
+.ruleview-grid,
 .ruleview-colorswatch,
 .ruleview-bezierswatch,
 .ruleview-swatch {
@@ -489,6 +490,12 @@ body > #ruleview-container {
   -moz-margin-end: 5px;
   display: inline-block;
   position: relative;
+}
+
+.ruleview-grid {
+  background: url("chrome://devtools/skin/images/grid.svg");
+  background-size: 1em;
+  border-radius: 0;
 }
 
 .ruleview-colorswatch::before {
@@ -616,6 +623,7 @@ body > #ruleview-container {
   filter: url(images/filters.svg#checked-icon-state);
 }
 
+.ruleview-grid.active,
 .ruleview-selectorhighlighter:active,
 .ruleview-selectorhighlighter.highlighted {
   filter: url(images/filters.svg#checked-icon-state) brightness(0.9);

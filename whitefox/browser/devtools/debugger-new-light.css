@@ -6,7 +6,7 @@
 /*
  * IMPORTANT NOTE:
  *
- * All rules here may need to be prefixed by .debugger  so they do not affect other tools.  
+ * All rules here may need to be prefixed by .debugger  so they do not affect other tools.
  * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
  *
  */
@@ -42,7 +42,7 @@
 }
 
 div.sources-header, div.source-header, div.command-bar, div._header {
-  background-color:  var(--theme-toolbar-background);
+  background-color: var(--theme-toolbar-background);
 }
 
 div.welcomebox {
@@ -53,13 +53,21 @@ div.welcomebox {
   fill: #959595;
 }
 
-:root:not(.theme-firebug) div.source-tab:hover {
+.subsettings {
+  height: 16px;
+  width: 16px;
+}
+
+:root:not(.theme-firebug) .dropdown > ul > li:hover {
+  background-color: #f3f3f3; /* var(--theme-selection-background) */
+}
+
+:root:not(.theme-firebug) div.source-tab:not(.active):hover {
   background-color: var(--toolbar-tab-hover);
 }
 
-:root:not(.theme-firebug) div.source-tab.active {
-  color: var(--theme-selection-color);
-  background-color: var(--theme-selection-background);
+div.source-tab {
+  padding-top: 1px;
 }
 
 :root:not(.theme-firebug) div.source-tab.active .close > svg > path {
