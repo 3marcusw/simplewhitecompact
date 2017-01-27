@@ -41,6 +41,10 @@
   cursor: inherit;
 }
 
+richlistitem > toolbarseparator {
+  display: none;
+}
+
 .downloadButton {
   -moz-appearance: none;
   background: transparent;

@@ -173,6 +173,10 @@ richlistitem[type="download"] {
   color: -moz-nativehyperlinktext;
 }
 
+richlistitem > toolbarseparator {
+  display: none;
+}
+
 richlistitem[type="download"] {
   margin: 0;
   border: 1px solid transparent;
