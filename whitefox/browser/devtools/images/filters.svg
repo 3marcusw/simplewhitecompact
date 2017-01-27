@@ -19,13 +19,13 @@
   </filter>
 
   <!-- Web Audio Gradients -->
-  <linearGradient id="bypass-light" x1="6%" y1="8%" x2="12%" y2="12%" spreadMethod="repeat">
-    <stop offset="0%" stop-color="#f0f1f2"/> <!-- theme-toolbar-background -->
-    <stop offset="50%" stop-color="#fff"/>
+  <linearGradient id="bypass-light" x1="8%" y1="10%" x2="16%" y2="16%" spreadMethod="repeat">
+    <stop offset="0%" stop-color="#dde1e4"/> <!-- theme-highlight-gray -->
+    <stop offset="50%" stop-color="rgba(221, 225, 228, 0)"/> <!-- theme-highlight-gray (0.0 opacity) ~ transparent -->
   </linearGradient>
 
-  <linearGradient id="bypass-dark" x1="6%" y1="8%" x2="12%" y2="12%" spreadMethod="repeat">
-    <stop offset="0%" stop-color="#343c45"/> <!-- theme-toolbar-background -->
-    <stop offset="50%" stop-color="transparent"/>
+  <linearGradient id="bypass-dark" x1="8%" y1="10%" x2="16%" y2="16%" spreadMethod="repeat">
+    <stop offset="0%" stop-color="#2e343c"/> <!-- theme-toolbar-background -->
+    <stop offset="50%" stop-color="rgba(46, 52, 60, 0)"/>  <!-- theme-toolbar-background (0.0 opacity) ~ transparent -->
   </linearGradient>
 </svg>
