@@ -286,6 +286,71 @@
   background-image: none;
 }
 
+/***   Firefox 52 and later   ********************************************************/
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item {
+  position: relative;
+}
+
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item:not(:first-child)::before {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 10px;
+  background-color: transparent;
+  border-color: transparent  #888;
+  border-style: solid;
+  border-width: 10px 0 10px 10px;
+  box-sizing: border-box;
+}
+
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item:not(:first-child)::after {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  content: "";
+  display: block;
+  height: 22px;
+  width: 9px;
+  background-color: transparent;
+  border-color: transparent  var(--theme-toolbar-background);
+  border-style: solid;
+  border-width: 11px 0 11px 9px;
+  box-sizing: border-box;
+}
+
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item:not(:first-child)[checked]::before,
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item[checked] + .breadcrumbs-widget-item::before {
+  display: none;
+}
+
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item:not(:first-child)[checked]::after {
+  top: 0px;
+  left: 0px;
+  height: 24px;
+  width: 12px;
+  border-width: 12px 0 12px 12px;
+}
+
+:root:not(.theme-firebug) #inspector-main-content
+div > .breadcrumbs-widget-item[checked] + .breadcrumbs-widget-item::after {
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 12px;
+  border-width: 12px 0 12px 12px;
+  border-left-color: var(--theme-selection-background);
+}
+/*************************************************************************************/
+
 /* RTL support: move the images that were on the left to the right,
  * and move images that were on the right to the left.
  */
@@ -366,17 +431,22 @@
 
 /* Firebug theme support for breadcrumbs widget. */
 
+.theme-firebug .breadcrumbs-widget-container {
+  max-height: 21px;
+  height: 21px;
+}
+
 .theme-firebug .breadcrumbs-widget-item {
-  margin-inline-start: 10px;
-  margin-inline-end: 1px;
+  min-height: 21px;
+  margin-left: 10px;
+  margin-right: 1px;
   background-image: none;
   border: 1px solid transparent;
   color: #141414;
   border-radius: 2px;
   min-width: 0;
-  min-height: 0;
-  padding: 0;
-  font-size: var(--theme-toolbar-font-size);
+  padding: 0 2px 0 0;
+  font-size: inherit; /* var(--theme-toolbar-font-size); */
 }
 
 .theme-firebug .breadcrumbs-widget-item:hover {
@@ -389,22 +459,66 @@
               0 0 2px rgba(0, 0, 0, 0.05);
 }
 
+.theme-firebug .breadcrumbs-widget-item:hover:active {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset,
+              0 0 1px rgba(0, 0, 0, 0.1) inset,
+              0 0 2px rgba(0, 0, 0, 0.05);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
+}
+
 .theme-firebug .breadcrumbs-widget-item > .button-box {
   padding-left: 0;
   padding-right: 0;
 }
 
-.theme-firebug .breadcrumbs-widget-item:first-child {
-  margin: 0;
+.theme-firebug .breadcrumbs-widget-item:first-child:not(:-moz-locale-dir(rtl)),
+.theme-firebug .breadcrumbs-widget-item:last-child:-moz-locale-dir(rtl) {
+  margin-left: 1px;
 }
 
-.theme-firebug .breadcrumbs-widget-item:not(:first-child)::before {
+.theme-firebug .breadcrumbs-widget-item:first-child:not(:dir(rtl)),
+.theme-firebug .breadcrumbs-widget-item:last-child:dir(rtl) {
+  margin-left: 1px;
+}
+
+.theme-firebug .breadcrumbs-widget-item::before {
   content: url(chrome://devtools/skin/images/firebug/breadcrumbs-divider.svg);
   position: relative;
-  left: -3px;
-  margin: 0 0 0 -5px;
+  left: -6px;
+  margin-left: -5px;
   padding: 0;
   width: 5px;
+}
+@supports not (border-color: -moz-use-text-color) { /* Firefox 52 and later */
+  .theme-firebug .breadcrumbs-widget-item::before {
+    left: -3px;
+  }
+}
+
+.theme-firebug arrowscrollbox#inspector-breadcrumbs  .breadcrumbs-widget-item::before { /* Firefox 48 */
+  display: inline-block;
+  padding: 1px 0;
+  margin-left: -8px;
+  margin-right: 3px;
+}
+
+.theme-firebug .breadcrumbs-widget-item:first-child:not(:-moz-locale-dir(rtl))::before,
+.theme-firebug .breadcrumbs-widget-item:last-child:-moz-locale-dir(rtl)::before {
+  content: none;
+}
+
+.theme-firebug .breadcrumbs-widget-item:first-child:not(:dir(rtl))::before,
+.theme-firebug .breadcrumbs-widget-item:last-child:dir(rtl)::before {
+  content: none;
+}
+
+.theme-firebug .breadcrumbs-widget-item:-moz-locale-dir(rtl)::before {
+  transform: scaleX(-1);
+}
+
+.theme-firebug .breadcrumbs-widget-item:dir(rtl)::before {
+  transform: scaleX(-1);
 }
 
 /* Breadcrumbs Separators (reset selection styles) */
@@ -425,8 +539,7 @@ widgets.css is overwritten. */
 }
 
 .theme-firebug .breadcrumbs-widget-item .breadcrumbs-widget-item-tag {
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 2px;
 }
 
 /* Breadcrumbs Scrolling Buttons */

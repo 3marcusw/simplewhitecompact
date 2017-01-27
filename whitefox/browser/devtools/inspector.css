@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@supports (not (line-height:calc(1px))) { /* Firefox < 48 */
+@supports (not (line-height:calc(1px))) { {} /* Firefox < 48 */
   :root[platform="mac"] #inspector-toolbar:-moz-locale-dir(ltr) {
     padding-left: 2px;
   }
@@ -44,7 +44,7 @@ div.devtools-main-content { /* For Firefox 51.  Previously this was vbox.devtool
   /* Subtract 1 pixel from the panel height. It's puzzling why this
     is needed, but if not presented the entire Inspector panel
     content jumps 1 pixel up when the Toolbox is opened. */
-  height: calc(100% - 1px);
+  height: 100%;  /* calc(100% - 1px); ** The puzzle is solved, the 1px is was a border for #inspector-breadcrumbs-toolbar, now fixed --johnGraciliano */
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -154,6 +154,12 @@ div#inspector-toolbar.devtools-toolbar .devtools-toolbar-spacer {
   padding: 0px;
   border-bottom-width: 0px;
   border-top-width: 1px;
+  min-height: 25px; /* 24px content + 1px border --johnGraciliano */
+}
+
+.theme-firebug #inspector-breadcrumbs-toolbar {
+  min-height: 28px; /* The toolbar is higher for the Firebug theme --johnGraciliano */
+  -moz-box-align: center; /* For Firefox 48 */
 }
 
 /* The following rules for #inspector-breadcrumbs* are for late FF49.
@@ -165,6 +171,9 @@ div#inspector-toolbar.devtools-toolbar .devtools-toolbar-spacer {
 div#inspector-breadcrumbs-toolbar {
   display: block;
   position: relative;
+}
+.theme-firebug div#inspector-breadcrumbs-toolbar {
+  display: flex;
 }
 
 div#inspector-breadcrumbs-toolbar,
@@ -185,8 +194,9 @@ div#inspector-breadcrumbs { /* For late FF49.  The tag 'div' makes it distinct f
   right: 0;
 }
 .theme-firebug div#inspector-breadcrumbs {
-  top: 2px;
-  bottom: auto;
+  align-items: center;
+  height: auto;
+  max-height: none;
 }
 
 div#inspector-breadcrumbs .scrollbutton-up,
@@ -279,9 +289,17 @@ button.devtools-button.sidebar-toggle.pane-collapsed::before,
 
 /* Eyedropper toolbar button */
 
+@supports (border-color: -moz-use-text-color) { {} /* Only for Firefox prior to 52 */
 #inspector-eyedropper-toggle {
   /* hidden by default, until we can check that the required highlighter exists */
   display: none;
+}
+}
+@supports not (border-color: -moz-use-text-color) { {} /* Only for Firefox 52 and later */
+#inspector-eyedropper-toggle {
+  /* Required to display tooltip when eyedropper is disabled in non-HTML documents */
+  pointer-events: auto;
+}
 }
 
 #inspector-eyedropper-toggle::before {
@@ -363,15 +381,18 @@ iframe {
 /* The following could be belong in toolbars.css but I only know it is needed for the inspector module --johnGraciliano */
 .theme-dark .tabs nav.tabs-navigation,
 .theme-light .tabs nav.tabs-navigation {
+  box-sizing: border-box;
+  height: 24px;   /* Needed in Firefox 50 --johnGraciliano */
   background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
 .theme-firebug .tabs nav.tabs-navigation {
 /*  background-color: rgb(219, 234, 249);  *** This fixed this is fixed in variables.css --johnGraciliano */
+  height: 28px;
   background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
 }
 
-/* For Firefox 48-49 */
-.theme-firebug #inspector-sidebar > stack > tabs > tab[selected] {
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected],  /* For Firefox 48-49 */
+.theme-firebug .tabs > * > * > li.tabs-menu-item.is-active > a {   /* For late Firefox 53 */
   background-color: rgb(247, 251, 254);
 }
 .theme-firebug #inspector-sidebar > stack > tabs > tab[selected]#sidebar-tab-layoutview {
