@@ -79,6 +79,12 @@ xul|caption {
   margin: 0;
 }
 
+html|h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 22px;
+}
+
 xul|caption > xul|checkbox,
 xul|caption > xul|label {
   font-size: 1.3rem;
@@ -269,7 +275,7 @@ xul|tab[selected] {
   background-color: #ebebeb;
   color: var(--in-content-page-color);
   border-color: #c1c1c1;
-  transition: background-color 50ms ease 0s, 
+  transition: background-color 50ms ease 0s,
               border-color 0ms ease 0s;
 }
 xul|tab[selected]::before,
@@ -280,15 +286,15 @@ xul|tab[selected] + tab::before{
 
 xul|tab[selected] + tab:-moz-locale-dir(ltr){
   border-left-color: transparent;
-  transition: background-color 50ms ease 0s, 
+  transition: background-color 50ms ease 0s,
               border-left-color 0ms ease 0s,
               border-color 150ms ease 0s;
 }
 xul|tab[selected] + tab:-moz-locale-dir(rtl){
   border-left-color: transparent;
-  transition: background-color 50ms ease 0s, 
+  transition: background-color 50ms ease 0s,
               border-right-color 0ms ease 0s,
-              border-color 150ms ease 0s; 
+              border-color 150ms ease 0s;
 }
 
 xul|*.tab-text {
@@ -429,6 +435,26 @@ xul|*.help-button > xul|*.button-box > xul|*.button-icon {
 
 xul|*.help-button > xul|*.button-box > xul|*.button-text {
   display: none;
+}
+
+html|*.help-button {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  background-image: url("chrome://global/skin/in-content/help-glyph.svg#help");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+html|*.help-button:hover {
+  background-image: url("chrome://global/skin/in-content/help-glyph.svg#help-hover");
+}
+
+html|*.help-button:hover:active {
+  background-image: url("chrome://global/skin/in-content/help-glyph.svg#help-pressed");
 }
 
 /* Special dimensions for the help button in the options page  --johnGraciliano */
