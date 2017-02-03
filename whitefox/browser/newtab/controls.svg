@@ -6,9 +6,9 @@
      xmlns:xlink="http://www.w3.org/1999/xlink"
      x="0"
      y="0"
-     width="288"
+     width="384"
      height="33"
-     viewBox="0 0 288 33">
+     viewBox="0 0 384 33">
 
   <defs>
     <style type="text/css"><![CDATA[
@@ -22,8 +22,12 @@
         fill: #00aeff;
       }
 
-      .glyphShape-style-hover-pin {
+      .glyphShape-style-pinned {
         fill: #00aeff;
+      }
+
+      .glyphShape-style-hover-pinned {
+        fill: #009ce5;
       }
 
       .glyphShape-style-hover-delete {
@@ -49,10 +53,19 @@
       .default-transparent {
         opacity: .7;
       }
+      .default-pinned {
+        opacity: .8;
+      }
+      .default-pinned .glyphShape-style-circle-dropshadow {
+        fill-opacity: .43;
+      }
       .default-transparent .glyphShape-style-circle-dropshadow {
         fill-opacity: .5;
       }
       .active-grey .glyphShape-style-circle {
+        fill: #f0f0f0;
+      }
+      .active-white .glyphShape-style-circle {
         fill: #f0f0f0;
       }
       ]]></style>
@@ -68,7 +81,7 @@
     <circle  id="glyphShape-circle" cx="16" cy="16" r="14" />
 
     <path    id="glyphShape-pin" d="M19,15v-5h2V7H11v3h2v5l-3,2v2h5c0,4.5,0.4,8,1,8s1-3.5,1-8h5v-2L19,15z" />
-    <polygon id="glyphShape-delete" points="22.6,10.6 21.4,9.4 16,14.8 10.6,9.4 9.4,10.6 14.8,16 9.4,21.4 
+    <polygon id="glyphShape-delete" points="22.6,10.6 21.4,9.4 16,14.8 10.6,9.4 9.4,10.6 14.8,16 9.4,21.4
     10.6,22.6 16,17.2 21.4,22.6 22.6,21.4 17.2,16" />
 
   </defs>
@@ -87,10 +100,10 @@
     <use xlink:href="#glyphShape-pin"    class="glyphShape-style" />
   </g>
 
-  <g id="icon-pin-hover" transform="translate(96)" class="default-transparent">
+  <g id="icon-pin-hover" transform="translate(96)">
     <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle-dropshadow" />
     <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle" />
-    <use xlink:href="#glyphShape-pin"    class="glyphShape-style-hover-pin" />
+    <use xlink:href="#glyphShape-pin"    class="glyphShape-style" />
   </g>
 
   <g id="icon-pin-hover-active" transform="translate(128)" class="active-grey">
@@ -119,6 +132,24 @@
 
   <g id="icon-pin-default" transform="translate(256)">
     <use xlink:href="#glyphShape-pin"    class="glyphShape-style-pin" />
+  </g>
+
+  <g id="icon-pinned-default" transform="translate(288)" class="default-pinned">
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle-dropshadow" />
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle" />
+    <use xlink:href="#glyphShape-pin"    class="glyphShape-style-pinned" />
+  </g>
+
+  <g id="icon-pinned-hover" transform="translate(320)">
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle-dropshadow" />
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle" />
+    <use xlink:href="#glyphShape-pin"    class="glyphShape-style-hover-pinned" />
+  </g>
+
+  <g id="icon-pinned-hover-active" transform="translate(352)" class="active-grey">
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle-dropshadow" />
+    <use xlink:href="#glyphShape-circle" class="glyphShape-style-circle" />
+    <use xlink:href="#glyphShape-pin"    class="glyphShape-style-pinned" />
   </g>
 
 </svg>

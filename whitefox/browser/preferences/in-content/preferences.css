@@ -41,6 +41,7 @@ treecol {
 
 #blocklistsTree treechildren::-moz-tree-cell-text{
   -moz-margin-start: 7px;
+  margin-inline-start: 7px;
 }
 
 #selectionCol {
@@ -205,6 +206,7 @@ treecol {
 #useFirefoxSync  {
   font-size: 90%;
   -moz-margin-end: calc(1.5em - 6px) !important; /* it was 8px --johnGraciliano */
+  margin-inline-end: calc(1.5em - 6px) !important; /* it was 8px --johnGraciliano */
 }
 
 #getStarted {
@@ -217,6 +219,7 @@ treecol {
 
 #downloadFolder {
   -moz-margin-start: 0;
+  margin-inline-start: 0;
 }
 
 /* Content pane */
@@ -228,11 +231,13 @@ treecol {
 
 #notificationsPolicyLearnMore {
   -moz-margin-start: 1.5em !important;
+  margin-inline-start: 1.5em !important;
 }
 
 #defaultFontSizeLabel {
   /* !important needed to override common !important rule */
   -moz-margin-start: 4px !important;
+  margin-inline-start: 4px !important;
 }
 
 /* Applications Pane Styles */
@@ -243,6 +248,7 @@ treecol {
 
 #filter {
   -moz-margin-start: 0;
+  margin-inline-start: 0;
 }
 
 #handlersView {
@@ -256,11 +262,15 @@ treecol {
 .typeIcon {
   -moz-margin-start: 10px !important;
   -moz-margin-end: 9px !important;
+  margin-inline-start: 10px !important;
+  margin-inline-end: 9px !important;
 }
 
 .actionIcon {
   -moz-margin-start: 11px !important;
   -moz-margin-end: 8px !important;
+  margin-inline-start: 11px !important;
+  margin-inline-end: 8px !important;
 }
 
 .actionsMenu {
@@ -273,6 +283,7 @@ treecol {
 
 .actionsMenu > menupopup > menuitem > .menu-iconic-left {
   -moz-margin-end: 8px !important;
+  margin-inline-end: 8px !important;
 }
 
 /* Privacy pane */
@@ -283,14 +294,14 @@ treecol {
 #trackingProtectionPBMLearnMore,
 #trackingProtectionLearnMore {
   -moz-margin-start: 1.5em !important;
+  margin-inline-start: 1.5em !important;
   margin-top: 0;
   font-weight: normal;
 }
 
-#browserContainersbox,
 #trackingProtectionRadioGroup,
 #locationBarGroup .groupbox-body {
- -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
+  -moz-box-align: start; /* Avoid extending labels into trailing space --johnGraciliano */
 }
 
 /* Collapse the non-active vboxes in decks to use only the height the
@@ -324,10 +335,12 @@ description > html|a {
 #weavePrefsDeck > #hasFxaAccount > hbox:not(#tosPP-normal):not(#tosPP-small) > label { /** CHECK! -johnGraciliano ***/
   /* no margin-start for elements at the begin of a line */
   -moz-margin-start: 0;
+  margin-inline-start: 0;
 }
 
 #tabsElement {
   -moz-margin-end: 4px; /* add the 4px end-margin of other elements */
+  margin-inline-end: 4px; /* add the 4px end-margin of other elements */
 }
 
 #telemetryLearnMore,
@@ -336,9 +349,19 @@ description > html|a {
   /* provide some margin between the links and the label text */
   /* !important is needed to override the rules defined in common.css */
   -moz-margin-start: 20px !important;
+  margin-inline-start: 20px !important;
   /* center the links */
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+/* For Firefox 54 where these .learnMore have the tag flex="1" and are not preceeded by a spacer. */
+/* To prevent the text from using two lines and/or being missaligned. */
+label + #telemetryLearnMore[flex="1"],
+label + #FHRLearnMore[flex="1"],
+label + #crashReporterLearnMore[flex="1"] {
+  white-space: nowrap;
+  text-align: end;
 }
 
 #encryptionPanel {
@@ -350,10 +373,12 @@ description > html|a {
 }
 #certSelection radio:not(:last-of-type) {
   -moz-margin-end: 1.5em; /* Fix for Firefox 37 Only --johnGraciliano */
+  margin-inline-end: 1.5em; /* Fix for Firefox 37 Only --johnGraciliano */
 }
 
 .indent {
   -moz-margin-start: 33px;
+  margin-inline-start: 33px;
 }
 
 #trackingProtectionImage {
@@ -374,6 +399,7 @@ description > html|a {
 
 #showUpdateHistory {
   -moz-margin-start: 0;
+  margin-inline-start: 0;
 }
 
 /**
@@ -383,6 +409,7 @@ description > html|a {
 #dialogOverlay {
   background-color: rgba(0,0,0,0.5);
   visibility: hidden;
+  margin: -18px; /* To revert the value for 'padding' of 'script[src$="preferences.js"] ~ stack' in 'global/in-content/common.css' */
 }
 
 #dialogBox {
@@ -630,6 +657,7 @@ description > html|a {
 
 #fxaSyncEngines > vbox:first-child {
   -moz-margin-end: 80px;
+  margin-inline-end: 80px;
 }
 
 #fxaSyncComputerName {
@@ -641,6 +669,7 @@ description > html|a {
 #fxaSyncComputerName.plain{
   margin: 2px 4px !important;
   -moz-margin-start: 0 !important;
+  margin-inline-start: 0 !important;
   padding: 2px 10px 3px 10px !important;
   border: 1px solid #c1c1c1 !important;
 }
@@ -688,6 +717,8 @@ spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
 .fxaAccountBoxButtons {
   margin-bottom: 0 !important;
   margin-top: 11px;
+  display: flex;
+  align-items: center;
 }
 
 .fxaAccountBoxButtons > * {
@@ -703,6 +734,7 @@ spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
 
 .fxaAccountBoxButtons > button:first-child {
   -moz-margin-end: 14px;
+  margin-inline-end: 14px;
 }
 
 .fxaSyncIllustration {
@@ -762,6 +794,7 @@ spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
 }
 #tosPP-small > label:not(:last-of-type) {
   -moz-margin-end: 20px !important; /* !important over another in common.css --johnGraciliano */
+  margin-inline-end: 20px !important; /* !important over another in common.css --johnGraciliano */
 }
 
 .androidAttribution {
@@ -821,6 +854,7 @@ spacer.separator + groupbox #fxaDeviceName{ /* Only for Firefox 42+ */
 
 .actionsMenu > .menulist-label-box > .menulist-icon {
   -moz-margin-end: 9px;
+  margin-inline-end: 9px;
 }
 
 /** I don't like this rule --johnGraciliano       **%

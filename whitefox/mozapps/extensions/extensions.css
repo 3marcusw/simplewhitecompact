@@ -53,7 +53,7 @@
 
 #detail-view .global-warning {
   padding: 4px 12px;
-  border-bottom: 1px solid #CAD4E0;  
+  border-bottom: 1px solid #CAD4E0;
 }
 
 @media (max-width: 600px) {
@@ -336,12 +336,19 @@
   -moz-margin-end: 16px;
 }
 
+#list-view > .alert-container:not(#addon-list-empty),
 .view-header {
   background-color: rgba(252, 252, 252, 0.25);
   padding: 4px;
   margin: 0;
   min-height: 31px;
   border-bottom: 1px solid #CCC;
+}
+#list-view > .alert-container:not(#addon-list-empty) {
+  -moz-box-align: start;
+}
+#list-view > .alert-container:not(#addon-list-empty) > .alert {
+  padding: 0;
 }
 
 
@@ -990,7 +997,7 @@ menulist { /* Fixes some styling inconsistencies */
 
 .download-progress {
   background-color: rgba(151,152,153,.05);
-  background-image: linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, 
+  background-image: linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%,
                                     rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3));
   background-clip: padding-box;
   border-radius: 3px;

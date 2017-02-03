@@ -61,6 +61,11 @@ body.certerror #errorTitle {
   background-position: right 2px;
 }
 
+.title:dir(rtl),
+#errorTitle:dir(rtl) { /* It was #errorTitleText... (wrong!) --johnGraciliano */
+  background-position: right 2px;
+}
+
 body.certerror .title,
 #errorTitle[sslv3=true],
 #errorTitle[weakCrypto=true] {
@@ -98,7 +103,8 @@ button:disabled {
   display: none;
 }
 
-#certErrorButtonContainer {
+#certErrorButtonContainer,
+#certErrorAndCaptivePortalButtonContainer {
   display: none;
 }
 
@@ -112,10 +118,12 @@ button:disabled {
   flex: 1;
 }
 
-body.certerror #certErrorButtonContainer {
+body.certerror #certErrorButtonContainer,
+body:not(.neterror) #certErrorAndCaptivePortalButtonContainer {
   display: flex;
 }
 
+/* body:not(.neterror) #netErrorButtonContainer  *** May be needed for Firefox 53 */
 body.certerror #netErrorButtonContainer {
   display: none;
 }
@@ -135,6 +143,19 @@ body.certerror #netErrorButtonContainer {
   min-width: 150px;
 }
 
+body.captiveportal #returnButton {
+  display: none;
+}
+
+body:not(.captiveportal) #openPortalLoginPageButton {
+  display: none;
+}
+
+#openPortalLoginPageButton {
+  margin-inline-start: 0;
+}
+
+/* body:not(.neterror) #advancedButton  *** May be needed for Firefox 53 */
 body.certerror #advancedButton {
   display: block;
 }

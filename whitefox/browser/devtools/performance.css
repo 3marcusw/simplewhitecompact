@@ -1210,7 +1210,7 @@ menuitem.experimental-option > .menu-iconic-text {
   padding-inline-start: 12px;
   -moz-margin-start: -1px !important; /* Override '!important' in a rule for '.menu-iconic-text' in 'ostarget/general/global/menu.css' --johnGraciliano  */
   margin-inline-start: -1px !important;
-  background-image: -moz-image-rect(url(images/webconsole.svg), 24, 36, 36, 24);
+  background-image: url(images/alert-small.svg);
 }
 
 /*** This rule is unnecessary because the background-image remains identical despite the target #light-icons ************%

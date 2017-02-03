@@ -51,7 +51,10 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
 
 #computedview-container { /* Firefox >= 50 */
   overflow: auto;
-  height: 100%;
+  height: calc(100% - 24px);
+}
+.theme-firebug #computedview-container {
+  height: calc(100% - 30px);
 }
 
 /* This extra wrapper only serves as a way to get the content of the view focusable.
@@ -64,11 +67,6 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
   outline: none;
 }
 
-#computedview-toolbar { /* Firefox >= 50 */
-  display: flex;
-  align-items: center;
-}
-
 #browser-style-checkbox {
   /* Bug 1200073 - extra space before the browser styles checkbox so
      they aren't squished together in a small window. */
@@ -76,6 +74,7 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
   -moz-margin-end: 4px;
   margin-inline-start: 5px;
   margin-inline-end: 4px;
+  align-self: center; /* For Firefox 52, where input node precedes the label node */
 }
 
 #browser-style-checkbox > * > .checkbox-label { /* Firefox <= 49 */
@@ -83,7 +82,7 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
 }
 
 #browser-style-checkbox-label { /* Firefox >= 50 */
-  margin-inline-end: 5px; /* margin-right: 5px; */
+  margin-inline-end: 4px; /*It was 5px --johnGraciliano */
 
   /* Vertically center the 'Browser styles' checkbox in the
      Computed panel with its label. */
@@ -91,13 +90,12 @@ div#sidebar-panel-computedview {  /* Firefox >= 50 */
   align-items: center;
 }
 
-#browser-style-checkbox-label > #browser-style-checkbox { /* Firefox >= 50 */
-  margin-inline-end: 5px;
+/* Make the space between the box and the text usable for pointer events (in Firefox 52) --johnGraciliano */
+#computedview-toolbar > input#browser-style-checkbox {
+  margin-inline-end: 0;
 }
-
-#computedview-container > #propertyContainer REMOVED { /* Firefox >= 50 */
-  border-top-width: 1px;
-  border-top-style: dotted;
+#browser-style-checkbox + #browser-style-checkbox-label {
+  padding-inline-start: 4px;
 }
 
 #propertyContainer {

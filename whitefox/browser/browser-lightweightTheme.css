@@ -28,3 +28,12 @@
   background-image:  -moz-linear-gradient(rgba(5,5,5,.875), rgba(5,5,5,.875));/*, lwtHeader;*/
 }
 
+
+.tabbrowser-tab[usercontextid][selected="true"]:-moz-lwtheme {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-selected-background-image);/*, lwtHeader;*/
+  background-attachment: scroll, scroll, fixed;
+  background-size: auto 2px, calc(100% - 2px) calc(100% - 2px), auto auto;
+  background-position:  1px 2px, 1px 2px, right top;
+  background-origin:  border-box, border-box, padding-box;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+}

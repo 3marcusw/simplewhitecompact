@@ -70,6 +70,7 @@ body.dragging .tag-line {
 
   /* Keep the editor away from the markup view floating scrollbars */
   -moz-margin-end: 12px;
+  margin-inline-end: 12px;
 }
 
 .html-editor iframe {
@@ -209,6 +210,23 @@ ul.children + .tag-line::before {
   display: inline;
 }
 
+/* Mimic the rule for .CodeMirror-foldmarker in:
+ *  chrome://devtools/content/sourceeditor/codemirror/mozilla.css
+ * except the pointer property because this is not a button.
+ */
+.expander[style="visibility: visible;"]:not([open]) + * > .close::before,
+.expandable.collapsed .close::before {
+  /* Display a left-right-arrow character in collapsed nodes that can be expanded. */
+  content: "\2194";
+  display: inline;
+  color: blue;
+  text-shadow: #b9f 1px 1px 2px, #b9f -1px -1px 2px, #b9f 1px -1px 2px, #b9f -1px 1px 2px;
+  font-family: sans-serif;
+  line-height: .3;
+
+
+}
+
 /* Hide HTML void elements (img, hr, br, …) closing tag when the element is not
  * expanded (it can be if it has pseudo-elements attached) */
 .child.collapsed > .tag-line .void-element .close {
@@ -314,11 +332,21 @@ ul.children + .tag-line::before {
 .theme-selected ~ .editor .theme-fg-color7 {
   color: var(--theme-selection-color);
 }
+.theme-selected ~ .editor .close.close::before,
+.theme-selected ~ .editor .close::before {
+  color: var(--theme-selection-color);
+  text-shadow: none;
+}
 
 /* Make sure even text nodes are white when selected in the Inspector panel. */
 .theme-firebug .theme-selected ~ .editor .open,
 .theme-firebug .theme-selected ~ .editor .close {
   color: var(--theme-selection-color);
+}
+
+/* Applicable to the DOCTYPE */
+.theme-firebug .doctype {
+  color: #787878;
 }
 
 /* In case a node isn't displayed in the page, we fade the syntax highlighting */
@@ -335,6 +363,7 @@ ul.children + .tag-line::before {
   border-radius: 3px;
   padding: 0px 2px;
   -moz-margin-start: 5px;
+  margin-inline-start: 5px;
   -moz-user-select: none;
 }
 

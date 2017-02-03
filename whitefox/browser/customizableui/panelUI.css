@@ -1443,7 +1443,52 @@ menuitem[checked="true"].subviewbutton > .menu-iconic-left {
 #PanelUI-containersItems > .subviewbutton > .toolbarbutton-icon {
   width: 16px;
   height: 16px;
+  margin-inline-end: 0; /* For Non OS-X (darwin) */
 }
+
+#PanelUI-containersItems > .subviewbutton > .toolbarbutton-text {
+  padding-inline-start: 8px;
+}
+
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"] > .toolbarbutton-icon {
+  display: none;
+}
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"] > .toolbarbutton-text {
+  padding-inline-end: 8px;
+  text-align: center;
+}
+
+
+#PanelUI-containers {
+  margin-bottom: -4px;
+}
+#PanelUI-containersItems > .subviewbutton:last-of-type:not([command="Browser:OpenAboutContainers"]) {
+  margin-bottom: 4px;
+}
+#PanelUI-containersItems > menuseparator {
+  display: none;
+}
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"] {
+  margin: 4px -4px 0;
+  margin: 4px 0 0;
+  padding: 6px 10px;
+  background-color: hsla(210,4%,10%,.07);
+  border-width: 0;
+  border-top: 1px solid hsla(210,4%,10%,.12);
+  border-radius: 0;
+}
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"]:hover {
+  background-color: hsla(210,4%,10%,.15);
+  border-top: 1px solid hsla(210,4%,10%,.14);
+}
+
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"]:not([disabled])[_moz-menuactive]:active,
+#PanelUI-containersItems > .subviewbutton[command="Browser:OpenAboutContainers"]:-moz-any([open],:hover:active) {
+  background-color: hsla(210,4%,10%,.19);
+  border-top: 1px solid hsla(210,4%,10%,.14);
+  box-shadow: 0 1px 0 hsla(210,4%,10%,.05) inset;
+}
+
 
 .panel-mainview[panelid=customizationui-widget-panel],
 #customizationui-widget-multiview > .panel-viewcontainer,

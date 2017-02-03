@@ -2,11 +2,5 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="16" viewBox="0 0 8 16">
-  <style>
-    #dark:target ~ polygon {fill: #f4f4f4;}
-    #firebug:target ~ polygon {fill-opacity: .5;}
-  </style>
-  <g id="dark"/>
-  <g id="firebug"/>
-  <polygon points="0,7 4,11 8,7" fill="#0b0b0b" fill-opacity=".8"/>
+  <polygon points="0,7 4,11 8,7" fill="#0b0b0b" fill-opacity=".5"/>
 </svg>

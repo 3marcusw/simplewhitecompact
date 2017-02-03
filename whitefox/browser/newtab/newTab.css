@@ -1,7 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
+
 :root {
   -moz-appearance: none;
   font-size: 75%;
@@ -80,32 +80,35 @@
 /* GRID 3D */
 #newtab-grid {
   backface-visibility: hidden;
-  perspective: 1000px;
+  /* perspective: 1000px; ****** USED FOR THE SLANTED TILES ******************/
   padding-bottom: 12px;
 }
+/****** USED FOR THE SLANTED TILES ************
 #newtab-grid[locked] {
   perspective: none;
 }
+ **********************************************/
 
 /* CELLS */
 .newtab-cell {
   margin: 20px 10px 25px;
-  transform: rotateX(-8deg);
-  transform-origin: 0 0;
-  transition: 250ms;
-}
-.newtab-cell:hover:not(:empty) {
-  transform: rotateX(-8deg) translateY(-9px);
-  transition: 250ms;
+  /* transform: rotateX(-8deg); ****** USED FOR THE SLANTED TILES ******************/
+  /* transform-origin: 0 0; ****** USED FOR THE SLANTED TILES ******************/
 }
 
+/****** USED FOR THE SLANTED TILES *****************
 #newtab-grid[locked] > .newtab-cell {
   transform: none;
   transform-origin: 50% 50% 0;
-  transition: none;
 }
+
 #newtab-grid:not([locked]) .newtab-site[frozen] {
   position: relative;
+}
+ ***************************************************/
+
+#newtab-grid:not([locked]) .newtab-site[frozen][pinned] {/**** NOT USED IN THE SLANTED TILES ******************/
+  position: relative; /* This eliminates the animation after a site is dragged to a new cell */
 }
 
 .newtab-cell:empty {
@@ -113,32 +116,11 @@
   box-sizing: border-box;
 }
 
-/*.newtab-cell:hover:not(:empty):not([dragged]):not([ignorehover]) {
-}*/
-
 /* SITES */
 .newtab-site {
   text-decoration: none;
-  transition-property: top, left, opacity, box-shadow, background-color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
-  background-color: rgba(255,255,255,1);
-  box-shadow: 0 20px 17px rgba(0,0,0,.15);
-  transition: top 1ms, left 1ms, box-shadow 150ms;
-  /*transition: box-shadow 200ms ease-out;*/
-}
-
-#newtab-grid[locked] .newtab-site:not([dragged]){
-  transition: top 300ms, left 300ms;
-}
-
-.newtab-site:hover {
-  box-shadow: 0 29px 17px rgba(0,0,0,.12);
-}
-
-.newtab-site[dragged] {
-  transition: box-shadow 200ms ease-out;
-  box-shadow: 0 20px 17px rgba(0,0,0,.3);
+  transition-duration: 350ms;
+  background-color: transparent;
 }
 
 /* THUMBNAILS */
@@ -149,18 +131,34 @@
   background-size: cover;
   border-radius: inherit;
   opacity: 1;
+  z-index: 1;
+  transform: none;
+  transition: transform 300ms, opacity 300ms;
 }
 
-.newtab-site{
-  background-color: transparent;
+.newtab-site:hover .newtab-thumbnail {
+  transform: translateY(-15px);
 }
-.newtab-site:hover .newtab-thumbnail.enhanced-content,
+
+.newtab-thumbnail:first-child{
+  background-color: white;
+  box-shadow: 0 20px 17px rgba(0,0,0,.15);
+  transition: transform 300ms, opacity 300ms, box-shadow 300ms;
+}
+
+.newtab-site:hover .newtab-thumbnail:first-child {
+  box-shadow: 0 29px 17px rgba(0,0,0,.12);
+}
+
+.newtab-site:not([dragged]) > .newtab-link:focus > .newtab-thumbnail:first-child{
+  outline:  1px dotted black;
+  outline-offset: 1px;
+}
+
 .newtab-cell:not([ignorehover]) .newtab-site:hover .newtab-thumbnail.enhanced-content {
   opacity: 0;
 }
-.newtab-thumbnail:first-child{
-  background-color: #FFF;
-}
+
 .newtab-site[type=affiliate] .newtab-thumbnail,
 .newtab-site[type=enhanced] .newtab-thumbnail,
 .newtab-site[type=organic] .newtab-thumbnail,
@@ -169,8 +167,8 @@
   background-size: auto;
 }
 
-.newtab-link{
-  background-color: transparent;
+.newtab-link {
+  outline: none; /* Removes the outline that may appear when focused (or dragged) */
 }
 
 /* TITLES */
@@ -178,73 +176,57 @@
   border: 0;
   color: #000;
   background: none;
-  bottom: 0;
-  height: 27px;
+  height: 17px;
   font-size: 12px;
-  line-height: 24px;
+  line-height: 17px;
   text-align: center;
   opacity: 0;
-  z-index: -1;
-  transition: opacity 100ms ease-out;
+  pointer-events: none;
+  bottom: -4px;
+  transition: opacity 200ms ease-in;
 }
+
 .newtab-site:not([dragged]):hover .newtab-title {
   opacity: 1;
-  transition: opacity 100ms ease-in;
-  bottom: -27px;
+  transition-timing-function: ease-out;
 }
 
-.newtab-sponsored{
-  z-index: -1;
-  top:-15px;
-}
-.newtab-site:not([dragged]):hover .newtab-sponsored{
-  top: 11px;
+.newtab-sponsored {
+  top: -15px;
+  bottom: auto;
 }
 
-#newtab-grid[locked] .newtab-sponsored,
-#newtab-grid[locked] .newtab-title,
-#newtab-grid[locked] .newtab-suggested{
+.newtab-site[dragged] .newtab-sponsored,
+.newtab-site[dragged] .newtab-title,
+.newtab-site[dragged] .newtab-suggested {
   visibility: hidden;
 }
 
-.newtab-suggested:hover {
-  color: #588FE4;
-  border: 1px solid #588FE4;
-}
-.newtab-site:not([dragged]):hover .newtab-suggested{
-  top: 231px;
-  top: calc(100% + 26px);
-}
-.newtab-suggested[active] {
-  background-color: rgba(51, 51, 51, 0.95);
-  border: 0;
-  color: white;
+.newtab-site:hover .newtab-suggested {
+  opacity: 0;
 }
 
 .newtab-suggested {
-  background-color: white;
-  top: 205px;
   top: calc(100%);
+  transition: opacity 600ms;
+  pointer-events: none;
+  border-color: transparent;
 }
 
-/*.newtab-site[pinned] .newtab-title {
-  padding: 0 15px;
-}
 
 .newtab-site[pinned] .newtab-title::before {
-  background-image: -moz-image-rect(url("chrome://browser/skin/newtab/controls.svg"), 7, 278, 28, 266);
-  background-size: 10px;
   content: "";
-  height: 17px;
-  left: 0;
-  position: absolute;
-  width: 10px;
+  height: calc(1ex + 2px);
+  width: calc(1ex + 2px);
+  display: inline-block;
+  vertical-align: baseline;
+  border-radius: 50%;
+  background-color: #00aeff;
+  position: static;
+  -moz-margin-end: 2px;
+  margin-inline-end: 2px;
+  margin-bottom:  -1px;
 }
-
-.newtab-site[pinned] .newtab-title:-moz-locale-dir(rtl)::before {
-  left: auto;
-  right: 0;
-}*/
 
 /* CONTROLS */
 .newtab-control {
@@ -253,28 +235,58 @@
   border: none;
   height: 26px;
   width: 24px;
+  top: 4px;
+  z-index: 2;
 }
 
-.newtab-control-pin,
-.newtab-site[pinned] .newtab-control-pin:hover:active {
+.newtab-control {
+  transition: transform 300ms, opacity 200ms ease-out;
+  transform: translateY(-3px);
+}
+.newtab-site:hover .newtab-control {
+  transform: translateY(-15px);
+  transition: transform 300ms;
+}
+
+.newtab-control-pin:dir(ltr),
+.newtab-control-block:dir(rtl) {
+  left: 4px;
+}
+
+.newtab-control-block:dir(ltr),
+.newtab-control-pin:dir(rtl) {
+  right: 4px;
+}
+
+.newtab-control-pin {
   background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 96, 33, 64);
 }
 
-.newtab-control-pin:hover,
-.newtab-site[pinned] .newtab-control-pin:hover {
+.newtab-control-pin:-moz-any(:hover,:focus) {
+  background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 128, 33, 96);
+}
+
+.newtab-control-pin:hover:active {
   background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 160, 33, 128);
 }
 
-.newtab-control-pin:hover:active,
 .newtab-site[pinned] .newtab-control-pin {
-  background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 128, 33, 96);
+  background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 320, 33, 288);
+}
+
+.newtab-site[pinned] .newtab-control-pin:-moz-any(:hover,:focus) {
+  background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 352, 33, 320);
+}
+
+.newtab-site[pinned] .newtab-control-pin:hover:active {
+  background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 384, 33, 352);
 }
 
 .newtab-control-block {
   background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 192, 33, 160);
 }
 
-.newtab-control-block:hover {
+.newtab-control-block:-moz-any(:hover,:focus) {
   background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 224, 33, 192);
 }
 
@@ -295,6 +307,9 @@
 
 [dir="auto"]:-moz-dir(ltr){ /* [dir="auto"]:-moz-dir(ltr) seems to apply even on Firefox with rtl locales! --johnGraciliano */
   direction: inherit;       /* Therefore keep the direction that from the ancestor. --johnGraciliano */
+}
+[dir="auto"]:dir(ltr){ /* [dir="auto"]:-moz-dir(ltr) seems to apply even on Firefox with rtl locales! --johnGraciliano */
+  direction: inherit;  /* Therefore keep the direction that from the ancestor. --johnGraciliano */
 }
 
 #newtab-search-container{
@@ -326,6 +341,11 @@
   background-position: 2.25px 5.25px;
   border-radius: 0 5px 5px 0;
 }
+#newtab-search-logo#newtab-search-logo:dir(rtl),
+#newtab-search-icon#newtab-search-icon:dir(rtl){
+  background-position: 2.25px 5.25px;
+  border-radius: 0 5px 5px 0;
+}
 #newtab-search-logo#newtab-search-logo:hover,
 #newtab-search-logo#newtab-search-logo:active{
   background-image: url(chrome://browser/skin/newtab/newTab-search.svg#lens-hover);
@@ -352,7 +372,7 @@
   font-size: 0px !important;
   width: 30px;
   overflow: hidden;
-  padding: 0;
+  padding: 4px 3px 3px;
   margin: 0;
   background: url(chrome://browser/skin/newtab/newTab-search.svg#go-plain)  no-repeat  center center;
   border: 1px solid #DEDEDE;
@@ -362,6 +382,10 @@
 }
 #newtab-search-submit#newtab-search-submit:-moz-locale-dir(rtl),
 #newtab-search-submit#newtab-search-submit:-moz-dir(rtl){
+  background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-plain);
+  border-radius: 5px 0 0 5px;
+}
+#newtab-search-submit#newtab-search-submit:dir(rtl){
   background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-plain);
   border-radius: 5px 0 0 5px;
 }
@@ -387,6 +411,13 @@
 #newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit:-moz-dir(rtl){
   background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-hover);
 }
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:dir(rtl):hover,
+#newtab-search-text + #newtab-search-submit#newtab-search-submit:dir(rtl):active,
+#newtab-search-text:focus + #newtab-search-submit#newtab-search-submit:dir(rtl),
+#newtab-search-text[keepfocus="true"] + #newtab-search-submit#newtab-search-submit:dir(rtl),
+#newtab-search-text[aria-expanded="true"] + #newtab-search-submit#newtab-search-submit:dir(rtl){
+  background-image: url(chrome://browser/skin/newtab/newTab-search.svg#go-rtl-hover);
+}
 
 .searchSuggestionTable {
   -moz-margin-start: 23px;
@@ -398,12 +429,16 @@
   margin-left: 0;
 }
 /* Firefox 37 - 41 will not stretch the search results table to the left on rtl locales, so no stretching at all --johnGraciliano */
-.searchSuggestionTable[style*="left"]:-moz-locale-dir(rtl){ 
+.searchSuggestionTable[style*="left"]:-moz-locale-dir(rtl){
   max-width: 0 !important; /*This has to be important! to overide the setting from the xml code --johnGraciliano */
 }
 /* Correct the stretching direction for the results table for rtl locales for newer versions of Firefox --johnGraciliano */
 /* body[dir=rtl] .contentSearchSuggestionTable:not([style*="left"]){ */
 .contentSearchSuggestionTable:-moz-dir(rtl){
+  left: auto;
+  right: 0;
+}
+.contentSearchSuggestionTable:dir(rtl){
   left: auto;
   right: 0;
 }
@@ -414,6 +449,9 @@
   -moz-margin-end: 8px;
 }
 .contentSearchOneOffItem:-moz-dir(rtl) {
+  background-position: left center;
+}
+.contentSearchOneOffItem:dir(rtl) {
   background-position: left center;
 }
 
@@ -520,6 +558,9 @@
 #newtab-customize-enhanced:nth-child(+2)[selected] .checkbox:-moz-dir(rtl)::after{
   left: 6px;
 }
+#newtab-customize-enhanced:nth-child(+2)[selected] .checkbox:dir(rtl)::after{
+  left: 6px;
+}
 #newtab-customize-classic:first-child[selected],
 #newtab-customize-title ~ #newtab-customize-blank[selected]{
   background: url("chrome://global/skin/menu/shared-menu-check.png") no-repeat transparent;
@@ -532,6 +573,10 @@
 #newtab-customize-title ~ #newtab-customize-blank[selected]:-moz-locale-dir(rtl),
 #newtab-customize-classic:first-child[selected]:-moz-dir(rtl),
 #newtab-customize-title ~ #newtab-customize-blank[selected]:-moz-dir(rtl){
+  background-position: right 12px center;
+}
+#newtab-customize-classic:first-child[selected]:dir(rtl),
+#newtab-customize-title ~ #newtab-customize-blank[selected]:dir(rtl){
   background-position: right 12px center;
 }
 .newtab-customize-complex-option:hover #newtab-customize-classic:first-child:not([selected]),

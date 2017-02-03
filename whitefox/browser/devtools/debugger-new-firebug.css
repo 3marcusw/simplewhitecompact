@@ -6,11 +6,11 @@
 /*
  * IMPORTANT NOTE:
  *
- * All rules here may need to be prefixed by .debugger  so they do not affect other tools.  
+ * All rules here may need to be prefixed by .debugger  so they do not affect other tools.
  * E.g., the next rule needed to be prefixed so it does not affect the rule used elsewhere.
  *
  */
- 
+
 .debugger {
   font-size: 11px;
   font-family: var(--proportional-font-family);
@@ -52,12 +52,8 @@ div.sources-header,
 
 div.editor-wrapper,
 div.welcomebox {
-  height: calc(100% - 28px);
-  XXX-width: 100%;
-}
-div.editor-wrapper,
-div.welcomebox {
   top: 28px;
+  height: calc(100% - 28px);
 }
 div.welcomebox {
   background-color: rgb(247, 251, 254);
@@ -76,13 +72,18 @@ div.source-tab {
   height: 25px;
 }
 div.source-tab:hover:not(.active) {
-  border-color: #c8c8c8;
+  border-color: #c8c8c8 #c8c8c8 var(--theme-splitter-color);
 }
 div.source-tab:not(:hover):not(.active) {
   border-color: transparent;
 }
 div.source-tab.active {
   border-bottom-color: transparent;
+  height: 25px;
+}
+html[dir] div.source-tab {
+  margin-top: 3px;
+  margin-inline-start: 0;
 }
 
 div.sources-dropdown {
@@ -91,14 +92,6 @@ div.sources-dropdown {
 
 .accordion div._header:hover{
   background-color:  #accbeb; /* 7/8 * theme-toolbar-background #9dc1e5; /* 5/6  #aabccf; /* var(--theme-toolbar-background);*/
-}
-
-div.source-footer {
-  background-color: transparent;
-  opacity: .8;
-  bottom: 12px;
-  right: 12px;
-  width: auto;
 }
 
 div.command-bar {
@@ -129,10 +122,10 @@ div.command-bar {
 }
 
 
-i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint) > svg {
+i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.toggleBreakpoints,.pause-exceptions,.prettyPrint) > svg {
   display: none;
 }
-i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.pause-exceptions,.prettyPrint)::after {
+i:-moz-any(.pause,.resume,.stepOver,.stepIn,.stepOut,.disableBreakpoints,.toggleBreakpoints,.pause-exceptions,.prettyPrint)::after {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -154,10 +147,13 @@ i.stepIn::after {
 i.stepOut::after {
   background-image: url(images/firebug/debugger-step-out.svg);
 }
-i.disableBreakpoints::after {
+
+i.disableBreakpoints::after,
+i.toggleBreakpoints::after {
   background-image: url(images/firebug/debugger-toggleBreakpoints.svg);
 }
-.breakpoints-disabled > i.disableBreakpoints::after {
+.breakpoints-disabled > i.disableBreakpoints::after,
+.breakpoints-disabled > i.toggleBreakpoints::after {
   background-image: url(images/firebug/breakOn/breakOnError.svg),
                     url(images/firebug/breakOn/breakOnError.svg),
                     url(images/firebug/debugger-toggleBreakpoints.svg#DIM);

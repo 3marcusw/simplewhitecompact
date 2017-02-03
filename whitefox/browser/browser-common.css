@@ -3985,7 +3985,7 @@ toolbarbutton[type="socialmark"] > .toolbarbutton-icon {
   background: var(--tabbrowser-tab-background-image);
   background-origin: border-box;
   background-position: 1px 2px;
-  background-size: -moz-calc(100% - 2px) -moz-calc(100% - 2px);
+  background-size: calc(100% - 2px) calc(100% - 2px);
   background-repeat: no-repeat;
   margin: 0;
   padding: 2px 0 4px;
@@ -5958,7 +5958,7 @@ svg|line.css-transform-line {
 /* NOTE: THESE NEED TO STAY IN SYNC WITH LIGHT-THEME.CSS AND DARK-THEME.CSS.
    We are copy/pasting variables from light-theme and dark-theme,
    since they aren't loaded in this context (within browser.css). */
-:root[devtoolstheme="light"] #developer-toolbar {
+[devtoolstheme="light"] #developer-toolbar {
   --gcli-input-background: #fafafa; /* --theme-toolbar-background */
   --gcli-background-color: #fafafa; /* --theme-toolbar-background */
   --gcli-input-focused-background: #ffffff; /* --theme-sidebar-background */
@@ -5968,7 +5968,7 @@ svg|line.css-transform-line {
   --selection-color: #f5f7fa; /* --theme-selection-color */
 }
 
-:root[devtoolstheme="dark"] #developer-toolbar {
+[devtoolstheme="dark"] #developer-toolbar {
   --gcli-input-background: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-background-color: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
@@ -6000,9 +6000,9 @@ svg|line.css-transform-line {
   margin: auto 10px;
 }
 
-:root[devtoolstheme="light"] #developer-toolbar > toolbarbutton:not([checked=true]) > image,
-:root[devtoolstheme="light"] #developer-toolbar > #developer-toolbar-toolbox-button:hover:active > image,
-:root[devtoolstheme="light"] .gclitoolbar-input-node:not([focused=true])::before  {
+[devtoolstheme="light"] #developer-toolbar > toolbarbutton:not([checked=true]) > image,
+[devtoolstheme="light"] #developer-toolbar > #developer-toolbar-toolbox-button:hover:active > image,
+[devtoolstheme="light"] .gclitoolbar-input-node:not([focused=true])::before  {
   filter: invert(1);
 }
 
@@ -6033,10 +6033,10 @@ svg|line.css-transform-line {
   -moz-image-region: rect(0px, 64px, 16px, 48px);
 }
 
-:root[devtoolstheme="light"] #developer-toolbar-toolbox-button[checked=true]:hover > image {
+[devtoolstheme="light"] #developer-toolbar-toolbox-button[checked=true]:hover > image {
   filter: brightness(.75) saturate(1.25);
 }
-:root[devtoolstheme="dark"]  #developer-toolbar-toolbox-button[checked=true]:hover > image {
+[devtoolstheme="dark"]  #developer-toolbar-toolbox-button[checked=true]:hover > image {
   filter: brightness(1.1875) saturate(.875);
 }
 
@@ -6594,6 +6594,8 @@ toolbar[brighttext] #downloads-indicator-counter {
   background-image: linear-gradient(#B4211B, #8A1915);
   border-radius: 1px;
   -moz-margin-end: 5px;
+  margin-inline-end: 5px;
+  padding: 0 3px 0 2px;
 }
 
 #developer-toolbar-toolbox-button[error-count]:hover::before {
@@ -8148,6 +8150,10 @@ menugroup > .menuitem-iconic[disabled="true"] > .menu-iconic-left {
           padding-bottom: 8px;
         }
 
+        #main-window[sizemode=maximized] #titlebar-buttonbox {
+          margin-bottom: -1px; /* To avoid exceeding a 27px height limit for #titlebar !?!? --johnGraciliano */
+        }
+
         .titlebar-button > .toolbarbutton-icon {
           width: 12px;
           height: 12px;
@@ -8767,36 +8773,54 @@ padding-right: 1px !important;
 /**************************************************************************************************************************************/
 /***  START TAB STYLES FOR CONTAINER TABS (this goes at a different location!) *******************************************************/
 /**************************************************************************************************************************************/
-tab.tabbrowser-tab[usercontextid="1"] {
-  --container-gradient: linear-gradient(to right, transparent 20%, rgb(0, 167, 224) 30%, rgb(0, 167, 224) 70%, transparent 80%);
-}
-tab.tabbrowser-tab[usercontextid="2"] {
-  --container-gradient: linear-gradient(to right, transparent 20%, rgb(248, 156, 36) 30%, rgb(248, 156, 36) 70%, transparent 80%);
-}
-tab.tabbrowser-tab[usercontextid="3"] {
-  --container-gradient: linear-gradient(to right, transparent 20%, rgb(125, 193, 76) 30%, rgb(125, 193, 76) 70%, transparent 80%);
-}
-tab.tabbrowser-tab[usercontextid="4"] {
-  --container-gradient: linear-gradient(to right, transparent 20%, rgb(238, 81, 149) 30%, rgb(238, 81, 149) 70%, transparent 80%);
-}
 
 .tabbrowser-tab[usercontextid] {
-  --container-gradient: linear-gradient(to right, transparent 20%, #909090 30%, #909090 70%, transparent 80%);
-  background-image: var(--container-gradient), var(--tabbrowser-tab-background-image) !important;
-  background-size: auto 2px, -moz-calc(100% - 2px) -moz-calc(100% - 2px) !important;
+  /* The !important clause is needed to overcome the 'style' settings before Firefox 52 */
+  --container-tab-color: #909090;
+  --container-identity-color: var(--identity-tab-color, var(--container-tab-color));
+  --container-gradient: linear-gradient(to right, transparent 20%, var(--container-identity-color) 30%, var(--container-identity-color) 70%, transparent 80%);
+  background-image: var(--container-gradient), var(--tabbrowser-tab-background-image);
+  background-size: auto 2px, calc(100% - 2px) calc(100% - 2px);
 }
 .tabbrowser-tab[usercontextid]:hover {
-  background-image: var(--container-gradient), var(--tabbrowser-tab-hover-background-image) !important;
+  background-image: var(--container-gradient), var(--tabbrowser-tab-hover-background-image);
 }
 .tabbrowser-tab[usercontextid][selected="true"] {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-selected-background-image);
+}
+
+/*
+ * Before Firefox 52, Firefox passed the gradient image through rules in the 'style' tag.
+ * To overcome those rules the background properties need the !important clause.
+ * However, this is problematic for light weight themes because the background-image property
+ * cannot be set !important in 'browser-lightweightTheme.css'.
+ * The next rules are needed for such case, yet, they allow the problem with the light weight themes.
+ */
+.tabbrowser-tab[usercontextid][style*="background-image"] {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-background-image) !important;
+  background-size: auto 2px, calc(100% - 2px) calc(100% - 2px) !important;
+}
+.tabbrowser-tab[usercontextid][style*="background-image"]:hover {
+  background-image: var(--container-gradient), var(--tabbrowser-tab-hover-background-image) !important;
+}
+.tabbrowser-tab[usercontextid][style*="background-image"][selected="true"] {
   background-image: var(--container-gradient), var(--tabbrowser-tab-selected-background-image) !important;
 }
 
-.tabbrowser-tab[usercontextid][selected="true"]:-moz-lwtheme {
-  background-attachment: scroll !important;
-  background-position:  1px 2px !important;
-  background-origin: border-box !important;
+/* The next rules set the color for Firefox 51 and earlier */
+.tabbrowser-tab[usercontextid="1"] {
+  --container-tab-color: rgb(0, 167, 224);
 }
+.tabbrowser-tab[usercontextid="2"] {
+  --container-tab-color: rgb(248, 156, 36);
+}
+.tabbrowser-tab[usercontextid="3"] {
+  --container-tab-color: rgb(125, 193, 76);
+}
+.tabbrowser-tab[usercontextid="4"] {
+  --container-tab-color: rgb(238, 81, 149);
+}
+
 /***  END TAB STYLES FOR CONTAINER TABS ***********************************************************************************************/
 
 
@@ -8823,7 +8847,7 @@ toolbarpaletteitem[place="palette"] > #containers-panelmenu[widget-type="view"] 
 
 /* URL Bar Decoration */
 
-@supports not (background-position-x: left) { /* Firefox < 49 */
+@supports not (background-position-x: left) { {} /* Firefox < 49 */
   #userContext-icons:not([usercontextid]) {
     display: none;
   }
@@ -8893,20 +8917,28 @@ toolbarpaletteitem[place="palette"] > #containers-panelmenu[widget-type="view"] 
     margin-inline-end: 4px;
   }
 
-  #userContext-indicator[style*=personal] {
+  #userContext-indicator[style*=personal],
+  #userContext-indicator[data-identity-icon="fingerprint"] /* Firefox 52+ */ {
     margin-left: 0;
     margin-right: 0;
   }
-  #userContext-indicator[style*=work] {
+  #userContext-indicator[style*=work],
+  #userContext-indicator[data-identity-icon="briefcase"] /* Firefox 52+ */ {
     margin-left: 1px;
     margin-right: 2px;
   }
-  #userContext-indicator[style*=banking] {
+  #userContext-indicator[style*=banking],
+  #userContext-indicator[data-identity-icon="dollar"] /* Firefox 52+ */ {
     margin-left: -2px;
     margin-right: -2px;
   }
-  #userContext-indicator[style*=shopping] {
+  #userContext-indicator[style*=shopping],
+  #userContext-indicator[data-identity-icon="cart"] /* Firefox 52+ */ {
     margin-left: 0px;
+    margin-right: 2px;
+  }
+  #userContext-indicator[data-identity-icon="circle"] /* Firefox 52+ */ {
+    margin-left: 2px;
     margin-right: 2px;
   }
 }
@@ -8930,3 +8962,28 @@ toolbar[brighttext] toolbarbutton:not(.toolbarbutton-1) > dropmarker {
 }
 
 /************/
+
+
+/* TEMPORARY FIX FOR A PROBLEM WITH THE SITE SUGGESTION BOX NOT ADOPTING THE CORRECT HEIGHT */
+@supports (display: flow-root) { {} /* This is only for Firefox 53+ */
+  #PopupAutoCompleteRichResult > richlistbox {
+    display: block;
+  }
+  #PopupAutoCompleteRichResult > richlistbox > scrollbox {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

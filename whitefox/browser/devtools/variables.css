@@ -148,10 +148,10 @@
   --theme-highlight-green: #2cbb0f;
   --theme-highlight-blue: #3477db; /* It was #0088cc as in '.theme-light'. This is #3455db in the default theme. --johnGraciliano */
   --theme-highlight-bluegrey: #0072ab;
-  --theme-highlight-purple: #5b5fff;
+  --theme-highlight-purple: #887ce6; /* It was #5b5fff as in '.theme-light'. */
   --theme-highlight-lightorange: #d97e00;
   --theme-highlight-orange: #f13c00;
-  --theme-highlight-red: #ed2655;
+  --theme-highlight-red: #e22f6f;  /* It was #ed2655 as in '.theme-light'. */
   --theme-highlight-pink: #b82ee5;
   --theme-highlight-gray: #dde1e4;
 

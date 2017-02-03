@@ -17,6 +17,11 @@
   display: none;
 }
 
+.tree-container:not([available]) {
+  display: none;
+}
+
+[available] > #tabList,
 #tabList[available] {
   display: -moz-box;
 }
@@ -48,4 +53,12 @@ treechildren::-moz-tree-image(partial) {
 }
 treechildren::-moz-tree-image(partial, selected) {
   list-style-image: url("chrome://global/skin/in-content/check-partial.svg#check-partial-inverted");
+}
+
+/* The following is due to a deficency in info-pages.css */
+@supports (scroll-snap-type:none) and (-moz-text-decoration-style:inherit) { {}/* Firefox = 39 */
+  tree {
+    min-height: 12em;
+    margin-top: 1.2em;
+  }
 }

@@ -32,13 +32,11 @@ svg {
 .edgePath path {
   stroke-width: 1px;
   fill: none;
-}
-
-.theme-dark .edgePath path {
   stroke: var(--theme-body-color-alt);
 }
-.theme-light .edgePath path {
-  stroke: var(--theme-splitter-color);
+
+marker#arrowhead path {
+  fill: var(--theme-body-color-alt);
 }
 
 /* AudioParam connection edges */
@@ -65,13 +63,13 @@ g.edgeLabel tspan {
 
 /* Audio Nodes */
 .nodes rect {
-  stroke-width: 1px;
   cursor: pointer;
-  stroke: #ebeced; /* = var(--theme-tab-toolbar-background) for Firebug theme  --johnGraciliano */
-  fill: #f0f1f2; /* = var(--theme-toolbar-background) for Firebug theme  --johnGraciliano */
+  stroke: var(--theme-splitter-color); /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
+}
+.theme-light rect {
+  fill: var(--theme-highlight-gray); /* This was var(--theme-tab-toolbar-background) --johnGraciliano */
 }
 .theme-dark rect {
-  stroke: var(--theme-tab-toolbar-background);
   fill: var(--theme-toolbar-background);
 }
 
@@ -89,11 +87,9 @@ g.edgeLabel tspan {
   stroke: var(--theme-selection-background);
 }
 
-/*
 .nodes g.bypassed text {
-  opacity: 0.8;
+  opacity: 0.7;
 }
-*/
 
 /**
  * Selected Nodes

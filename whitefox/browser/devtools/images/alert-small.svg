@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12">
+  <defs>
+    <path id="glyphShape-warningTriangle" d="M9.9,8.6l-3.1-6C6.6,2.2,6.3,2,6,2C5.7,2,5.4,2.2,5.2,2.5l-3.1,6C2,8.9,2,9.3,2.1,9.6C2.3,9.8,2.6,10,2.9,10 h6.1c0.4,0,0.6-0.2,0.8-0.4C10,9.3,10,8.9,9.9,8.6z"/>
+    <path id="glyphShape-exclamationPoint" d="M6,7.7c-0.6,0-1,0.4-1,0.8C5,9,5.4,9.3,6,9.3c0.6,0,1-0.4,1-0.8 C7,8.1,6.6,7.7,6,7.7z M6,7c0.6,0,1-0.4,1-1V5c0-0.6-0.4-1-1-1S5,4.4,5,5v1C5,6.6,5.4,7,6,7z"/>
+    <path id="glyphShape-warningTriangleTOO" d="M9.9,8.6l-3.1-6C6.6,2.2,6.3,2,6,2C5.7,2,5.4,2.2,5.2,2.5l-3.1,6C2,8.9,2,9.3,2.1,9.6C2.3,9.8,2.6,10,2.9,10 h6.1c0.4,0,0.6-0.2,0.8-0.4C10,9.3,10,8.9,9.9,8.6z
+
+    M6,7.7c0.6,0 1,0.4 1,0.8  c0,0.4 -.4,0.8 -1,0.8   c-0.6,0,-1-0.4,-1-0.8 c0,-0.4 .4,-0.8 1,-0.8   z
+
+    M6,7c-0.6,0,-1-0.4,-1-1v-1c0-0.6,0.4-1,1-1 c0.6,0 1,0.4 1,1      v1c0,0.6 -0.4,1 -1,1z"/>
+<!--M6,7c0.6,0,1-0.4,1-1v-1c0-0.6-0.4-1-1-1 c-0.6,0-1 0.4-1,1      v1c0,0.6 0.4,1 1,1z"/-->
+<!--M6,7c0.6,0,1-0.4,1-1v-1c0-0.6-0.4-1-1-1S5,4.4,5,5v1c0,0.6 0.4,1 1,1z"/-->
+<!--M6,7c0.6,0,1-0.4,1-1v-1c0-0.6-0.4-1-1-1S5,4.4,5,5v1C5,6.6,5.4,7,6,7z"/-->
+    <!--M6,7c0.6,0,1-0.4,1-1V5c0-0.6-0.4-1-1-1S5,4.4,5,5v1C5,6.6,5.4,7,6,7z"/-->
+    <style>
+      .icon-colorSwatch-js {
+        fill: #fb9500;
+      }
+      .icon-glyphOverlay {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="icon-warningTriangle-js" transform="translate(0 0)" opacity="0">
+    <use xlink:href="#glyphShape-warningTriangle" class="icon-colorSwatch-js"/>
+    <use xlink:href="#glyphShape-exclamationPoint" class="icon-glyphOverlay"/>
+  </g>
+  <g id="icon-warningTriangleTOO-js" transform="translate(0 0)">
+    <use xlink:href="#glyphShape-warningTriangleTOO" class="icon-colorSwatch-js"/> <!--stroke="black" stroke-width=".3"/-->
+  </g>
+</svg>

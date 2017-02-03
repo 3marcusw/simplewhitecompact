@@ -16,7 +16,7 @@
   --gcli-menu-highlight-color: hsla(0,100%,0%,.125);
 }
 
-:root[devtoolstheme="dark"] {
+[devtoolstheme="dark"] {
   --gcli-background-color: #2e343c; /* --theme-toolbar-background (it was #343c45) */
   --gcli-input-focused-background: #252c33; /* --theme-tab-toolbar-background */
   --gcli-input-color: #b6babf; /* --theme-body-color-alt */

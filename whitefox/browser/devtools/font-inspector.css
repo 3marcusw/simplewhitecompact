@@ -53,6 +53,11 @@ div#sidebar-panel-fontinspector {  /* Firefox >= 50 */
 #font-container {
   overflow: auto;
   flex: auto;
+  height: calc(100% - 24px);
+  box-sizing: border-box;
+}
+.theme-firebug #font-container {
+  height: calc(100% - 30px);
 }
 
 #all-fonts {

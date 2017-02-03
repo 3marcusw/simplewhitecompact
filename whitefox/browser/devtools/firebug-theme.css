@@ -75,8 +75,16 @@
 .theme-firebug .cm-variable-3 {color: black;}
 .theme-firebug .cm-def {color: black;}
 
+.theme-firebug .cm-tag.cm-bracket,
+.theme-firebug .cm-tag.cm-bracket + .cm-tag {color: blue;}  /* For editing html */
+.theme-firebug .cm-attribute {color: #887ce6;} /* = var(--theme-highlight-purple) ** For editing html */
+
 .theme-firebug .cm-number {color: #04c;} /* Instead of darkblue */
-.theme-firebug .cm-string {color: #ed2655;} /* --theme-highlight-red */
+.theme-firebug .cm-string {color: #e22f6f;} /* = var(--theme-highlight-red) */
+
+/** .theme-firebug .cm-atom {color: black;} **|** This could help for the debugger (for [CDATA] sections) but not the style editor --johnGraciliano **/
+.theme-firebug .cm-atom {color: #1b0e7a;} /* = #218 × (.8) [Over Black] */
+
 /* End of Custom Changes ***************************/
 
 .theme-firebug .theme-fg-color3,
@@ -106,7 +114,7 @@
 
   Use !important to override even the rule in webconsole.css that uses
   ID in the selector. */
-.theme-firebug .devtools-tabbar 
+.theme-firebug .devtools-tabbar
 /* , .theme-firebug .devtools-sidebar-tabs tabs */  {  /* This selector is now only needend in the next rule --johnGraciliano */
   background-image: linear-gradient(rgba(253, 253, 253, 0.2), rgba(253, 253, 253, 0));
 /*border-bottom: 1px solid rgb(170, 188, 207) !important;  *** Removed. light-theme.css & toolbars.css use corrected color in variables.css --johnGraciliano */
@@ -130,6 +138,20 @@
   -moz-box-flex: initial;
   min-width: 0;
 }
+.theme-firebug button.devtools-tab /* Firefox 53+ */ {
+  padding-left: 4px;
+  padding-right: 4px;
+  flex-grow: 0;
+}
+
+.toolbox-tabs, /* Firefox 53+ */
+div#toolbox-option-container /* Firefox 53+ */ {
+  margin-bottom: -1px;
+}
+
+.theme-firebug button.devtools-tab /* Firefox 53+ */ {
+  margin-bottom: 0;
+}
 
 /* Also add negative bottom margin for side panel tabs*/
 .theme-firebug .devtools-sidebar-tabs tab {
@@ -149,14 +171,17 @@
 }
 
 .theme-firebug .devtools-tab[selected],
+.theme-firebug .devtools-tab.selected, /* Firefox 53+ */
 .theme-firebug .devtools-sidebar-tabs tab[selected] {
   background-color: rgb(247, 251, 254);
   border: 1px solid rgb(170, 188, 207) !important;
   border-bottom-width: 0 !important;
-  padding-bottom: 2px;
+  padding-bottom: 1px; /* This was 2px but 1px is the correct replacement for the bottom border width --johnGraciliano */
   color: inherit;
 }
 
+.theme-firebug .devtools-tabbar > .devtools-separator, /* Firefox 53+ */
+.theme-firebug .devtools-tab > img, /* Firefox 53+ */
 .theme-firebug .devtools-tab > spacer, /* Added '>' --johnGraciliano */
 .theme-firebug .devtools-tab > image { /* Added '>' --johnGraciliano */
   display: none;
@@ -179,6 +204,7 @@
 }
 
 .theme-firebug #panelSideBox .devtools-tab[selected],
+.theme-firebug #panelSideBox .devtools-tab.selected, /* Firefox 53+ */
 .theme-firebug .devtools-sidebar-tabs tab[selected] {
   background-color: white;
 }
@@ -194,8 +220,13 @@
   margin-inline-end: 4px;
   background-color: var(--theme-body-background);
 }
+.theme-firebug button#toolbox-tab-options /* Firefox 53+ */ {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
 
-.theme-firebug #toolbox-tab-options[selected] {
+.theme-firebug #toolbox-tab-options[selected],
+.theme-firebug #toolbox-tab-options.selected /* Firefox 53+ */ {
   padding-bottom: 1px; /* To keep the toolbar's height. --johnGraciliano */
 }
 
@@ -230,7 +261,8 @@
 /* The height is the same for all toolbars and side panels tabs */
 .theme-firebug .theme-toolbar,
 .theme-firebug .devtools-sidebar-tabs tabs,
-.theme-firebug .devtools-toolbar {
+.theme-firebug .devtools-toolbar,
+.theme-firebug .tabs-navigation {
   height: 28px !important;
 }
 
@@ -272,7 +304,8 @@
   min-width: 24px;
 }
 
-.theme-firebug #command-button-frames {
+/* The tag 'button' specifies the 'Toolbox' button and prevents affecting the checkbox in the 'Options' tab --johnGraciliano */
+.theme-firebug :-moz-any(toolbarbutton,button)#command-button-frames {
   min-width: 32px;
 }
 
@@ -301,3 +334,7 @@
   background-position: 1px center;
 }
 
+/* The next is for page `about:stylish-edit` from the *Stylish* extension */
+#errors.theme-toolbar {
+  height: auto !important;
+}

@@ -188,6 +188,10 @@ html, body, #app, #memory-tool {
   opacity: 1;
 }
 
+#diff-snapshots.checked::before {
+  filter: url(images/filters.svg#checked-icon-state);
+}
+
 /* I am excluding this bars --johnGraciliano *%
 #record-allocation-stacks-label,
 #pop-view-button-label {
@@ -312,6 +316,55 @@ html, body, #app, #memory-tool {
 .snapshot-list-item > .snapshot-title > input[type=checkbox] {
   margin: 0;
   margin-inline-end: 5px;
+}
+
+.theme-dark .snapshot-list-item > .snapshot-title {
+  position: relative;
+}
+.theme-dark .snapshot-list-item > .snapshot-title > input[type=checkbox] + span::before{
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #181d20;
+  content: "";
+  display: -moz-box;
+  border: 1px solid #666;
+  box-sizing: border-box;
+  height: 13px;
+  width: 13px;
+  line-height: 11px;
+}
+.theme-dark .snapshot-list-item > .snapshot-title > input[type=checkbox] + span:-moz-dir(rtl)::before{
+  left: unset;
+  right: 0;
+}
+.theme-dark .snapshot-list-item > .snapshot-title > input[type="checkbox"]:checked + span::before {
+  content: url(images/checkmark-dark-small.svg);
+}
+
+.theme-dark .snapshot-list-item:hover > .snapshot-title > input[type="checkbox"] + span::before {
+  border-color: var(--theme-selection-background);
+  border-color: #3896D6;
+  background-image: linear-gradient(rgba(56,150,214,.05),rgba(56,150,214,.05));
+}
+
+@supports (display: flow-root ) { {} /* Firefox 53+ */
+  .theme-dark input[type=checkbox] {
+    -moz-appearance: none;
+    background-color: #181d20;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666;
+  }
+  .theme-dark input[type=checkbox]:checked {
+    background-image: url(images/checkmark-dark-small.svg);
+    background-position: center center;
+  }
+  .theme-dark label:hover > input[type=checkbox] {
+    border-color: #3896D6;
+    background-color: #1a2329;
+  }
 }
 
 .snapshot-list-item > .snapshot-state,
@@ -646,17 +699,13 @@ html, body, #app, #memory-tool {
   width: 12px;
   height: 12px;
   max-height: 12px;
-  background-image: url(images/webconsole.svg);
-  background-size: 72px 60px;
-  background-position: -24px -24px;
+  background-image: url(images/alert-small.svg);
+  background-size: auto;
+  background-position: center;
   background-repeat: no-repeat;
   margin: 0px;
   margin-top: 2px;
   margin-inline-end: 5px;
-}
-
-.theme-light .error::before {
-  background-image: url(images/webconsole.svg#light-icons);
 }
 
 /**

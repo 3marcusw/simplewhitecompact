@@ -479,3 +479,360 @@ div.CodeMirror span.eval-text {
   background-position: -2.8px 50%;
   background-size: 19.25px 7px;
 }
+
+
+/****************************************************************************************************************************/
+
+.theme-dark menulist,
+.theme-dark select {
+  -moz-appearance: none;
+  font-family: inherit;
+  background-color: #181d20; /* = rgba(24, 29, 32, 1) = var(--theme-sidebar-background) */
+  color: #b8c8d9; /* = rgba(184, 200, 217, 1) */
+  -moz-padding-end: 14px;
+  padding-inline-end: 14px;
+  border: 1px solid var(--theme-splitter-color);
+  font: inherit;
+  background-image: url(images/dropmarkerLight.svg#dark);
+  background-repeat: no-repeat;
+  background-position: calc(100% - 4px) calc(50% - 1px);
+
+/* For Mac ***********************
+  border-radius: 5px;
+  -moz-padding-start: 5px;
+  padding-inline-start: 5px;
+ *********************************/
+}
+.theme-dark menulist:-moz-locale-dir(rtl) {
+  padding-right: 4px;
+  background-position: 4px calc(50% - 1px);
+}
+.theme-dark select:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl)) {
+  background-position: 4px calc(50% - 1px);
+}
+
+.theme-dark menulist > dropmarker {
+  display: none;
+}
+
+.theme-dark menulist > menupopup,
+.theme-dark select > option {
+  background-color: var(--theme-toolbar-background);
+}
+@supports not (-moz-osx-font-smoothing: auto) { {}/* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
+
+  .theme-dark menulist > menupopup {
+    -moz-appearance: none;
+    border: 1px solid var(--theme-splitter-color);
+    padding: 0px;
+    min-width: 1px;
+/* For Mac ***********************
+    border-radius: 5px;
+    padding: 5px 0;
+ *********************************/
+  }
+
+}
+
+.theme-dark menu:not([_moz-menuactive]):not([disabled="true"]),
+.theme-dark menuitem:not([_moz-menuactive]):not([disabled="true"]) {
+  color: #b8c8d9; /* = rgba(184, 200, 217, 1) */
+}
+@supports not (-moz-osx-font-smoothing: auto) { {}/* This detects NON mac OS X 10.6+ (For Windows & Linux */
+    .theme-dark:not(menulist) > menupopup  > menu[_moz-menuactive]:not([disabled="true"]),
+  .theme-dark  :not(menulist) > menupopup  > menu[_moz-menuactive]:not([disabled="true"]),
+  .theme-dark :not(menubar):not(menupopup) > menu[_moz-menuactive]:not([disabled="true"]),
+    .theme-dark:not(menulist) > menupopup  > menuitem[_moz-menuactive]:not([disabled="true"]),
+  .theme-dark  :not(menulist) > menupopup  > menuitem[_moz-menuactive]:not([disabled="true"]),
+  .theme-dark              :not(menupopup) > menuitem[_moz-menuactive]:not([disabled="true"]) {
+    color: #b8c8d9; /* = rgba(184, 200, 217, 1) */
+  }
+}
+
+@supports (-moz-osx-font-smoothing: auto) { {}/* This detects mac OS X 10.6+ */
+  .theme-dark menu:not([_moz-menuactive="true"]),
+  .theme-dark menuitem:not([_moz-menuactive="true"]) {
+    background-color: var(--theme-toolbar-background);
+  }
+  /* The next probably has no use in the developer tools */
+  .theme-dark menubar > menu[_moz-menuactive="true"] {
+    color: #b8c8d9;
+  }
+}
+
+/********************************************************************************************************/
+
+.theme-dark:not(menulist) > menupopup,
+.theme-dark :not(menulist) > menupopup {
+  -moz-appearance: none;
+  background-color: #181d20; /* = rgba(24, 29, 32, 1) = var(--theme-sidebar-background) */
+  border: 1px solid var(--theme-splitter-color);
+  padding: 2px;
+}
+
+.theme-dark:not(menulist) > menupopup > menu > .menu-right,
+.theme-dark :not(menulist) > menupopup > menu > .menu-right {
+  filter: invert(1);
+}
+
+.theme-dark:not(menulist) > menupopup > menuitem[checked="true"],
+.theme-dark :not(menulist) > menupopup > menuitem[checked="true"] {
+  -moz-appearance: menuitem;
+}
+
+.theme-dark:not(menulist) > menupopup > menuitem[checked="true"] > .menu-iconic-left,
+.theme-dark :not(menulist) > menupopup > menuitem[checked="true"] > .menu-iconic-left {
+  -moz-appearance: menuimage;
+}
+
+.theme-dark:not(menulist) > menupopup > menuitem[checked="true"] > .menu-iconic-left > .menu-iconic-icon,
+.theme-dark :not(menulist) > menupopup > menuitem[checked="true"] > .menu-iconic-left > .menu-iconic-icon {
+  list-style-image: url(images/checkmark-dark-med.svg);
+  display: -moz-box;      /* For non-mac */
+  -moz-margin-start: 0;   /* For mac */
+  margin-inline-start: 0;
+  width: 16px;            /* For mac */
+}
+
+.theme-dark:not(menulist) > menupopup > menuseparator,
+.theme-dark :not(menulist) > menupopup > menuseparator {
+  -moz-appearance: none;
+  height: 5px;
+  margin: 0;
+  border-width: 0;
+  padding: 2px 0;
+  background-clip: content-box;
+  background-color: var(--theme-splitter-color);
+}
+
+/***************************
+:root[platform="win"] ...{
+}
+****************************/
+@media (-moz-os-version) { /* For FF < 45 where the attribute platform is absent, this detects any Windows */
+
+  .theme-dark:not(menulist) > menupopup,
+  .theme-dark :not(menulist) > menupopup {
+    background-image: linear-gradient(var(--theme-splitter-color),var(--theme-splitter-color));
+    background-size: 1px calc(100% - 4px);
+    background-position: 29px 2px;
+    background-repeat: no-repeat;
+  }
+  .theme-dark:not(menulist) > menupopup:-moz-locale-dir(rtl),
+  .theme-dark :not(menulist) > menupopup:-moz-locale-dir(rtl) {
+    background-position: calc(100% - 29px) 2px;
+  }
+
+  .theme-dark:not(menulist) > menupopup > menuseparator,
+  .theme-dark :not(menulist) > menupopup > menuseparator {
+    -moz-padding-start: 28px;
+    padding-inline-start: 28px;
+  }
+}
+
+
+.theme-dark .checkbox-check {
+  -moz-appearance: none;
+  -moz-border-top-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  border: 1px solid #666;
+  background-color: #181d20;
+}
+
+.theme-dark checkbox[checked="true"] > .checkbox-check {
+  background-image: url(images/checkmark-dark-small.svg);
+}
+
+.theme-dark checkbox[checked="true"][disabled="true"] > .checkbox-check {
+  background-position: 1px 1px;
+  /* background-image: url("chrome://global/skin/checkbox/cbox-check-dis.gif") !important; */
+}
+
+
+/* radio > hbox.radio-check-box1 > hbox.radio-check-box2 > .radio-check */
+.theme-dark .radio-check-box1 {
+  -moz-appearance: none;
+  border: 1px solid #666;
+  background-color: #181d20;
+  min-width: 13px;
+  max-width: 13px;
+  min-height: 13px;
+  max-height: 13px;
+}
+
+.theme-dark .radio-check-box2 {
+  border-width: 0;
+  border-style: none;
+  border-color: transparent;
+  background-color: transparent;
+  padding: 0;
+}
+
+.theme-dark radio[selected="true"] > .radio-check-box1 > .radio-check-box2 {
+  list-style-image: url(images/selection-dark.svg);
+}
+
+.theme-dark radio[selected="true"][disabled="true"] > .radio-check-box1 > .radio-check-box2 {
+  padding: 3px;
+  /* list-style-image: url("chrome://global/skin/radio/radio-check-dis.gif") !important; */
+}
+
+.theme-dark radio:hover > .radio-check-box1,
+.theme-dark checkbox:hover > .checkbox-check {
+  border-color: var(--theme-selection-background);
+  border-color: #3896D6;
+  background-color: #1a2329;
+}
+@supports (-moz-osx-font-smoothing: auto) { {}/* For FF < 45 where the attribute platform is absent, this detects mac OS X 10.6+ */
+  .theme-dark .radio-check {
+    -moz-appearance: none;
+    width: auto;
+    height: auto;
+  }
+}
+/*********************************************************************************************/
+
+.theme-dark label > input[type="radio"] + span,
+.theme-dark label > input[type="checkbox"] + span {
+  position: relative;
+}
+
+.theme-dark label > input[type="radio"] + span::before,
+.theme-dark label > input[type="checkbox"] + span::before {
+  pointer-events: none;
+  position: absolute;
+  left: -16px;
+  top: calc(50% - 6.5px);
+  background-color: #181d20;
+  content:"";
+  display:-moz-box;
+  border:1px solid #666;
+  box-sizing: border-box;
+  height: 13px;
+  width: 13px;
+  line-height: 11px;
+}
+.theme-dark label > input[type="radio"] + span::before {
+  border-radius: 50%;
+}
+.theme-dark label > input[type="radio"] + span:-moz-dir(rtl)::before,
+.theme-dark label > input[type="checkbox"] + span:-moz-dir(rtl)::before {
+  left: unset;
+  right: -16px;
+}
+
+.theme-dark label > input[type="radio"]:checked + span::before {
+  content: url(images/selection-dark.svg);
+}
+.theme-dark label > input[type="checkbox"]:checked + span::before {
+  content: url(images/checkmark-dark-small.svg);
+}
+
+.theme-dark label:hover > input[type="radio"] + span::before,
+.theme-dark label:hover > input[type="checkbox"] + span::before {
+  border-color: var(--theme-selection-background);
+  border-color: #3896D6;
+  background-image: linear-gradient(rgba(56,150,214,.05),rgba(56,150,214,.05));
+}
+
+.theme-dark #options-panel label > input[type="checkbox"] + span::before {
+  top: 2px;
+}
+
+/***********************************************************
+ * This rule makes the original input boxes transparent.   *
+ * Normally, this is unnecessary because they are covered. *
+ * But this may not be the case always.                    *
+ ***********************************************************
+.theme-dark label > input[type="radio"],
+.theme-dark label > input[type="checkbox"] {
+  opacity: 0;
+}
+
+
+.theme-dark label > input[type="radio"],
+.theme-dark label > input[type="checkbox"] {
+  -moz-appearance: none;
+}
+/**********************************************************/
+
+
+/* Mask '#pseudo-class-panel > label > input' of 'Inspector: Rules' and 'input#browser-style-checkbox' of 'Inspector: Computed' of Firefox 50 and later */
+
+.theme-dark label#browser-style-checkbox-label,
+.theme-dark #pseudo-class-panel > label {
+  position: relative;
+}
+.theme-dark input#browser-style-checkbox,  /* Must have tag 'input' specific for Firefox 50 and later. --johnGraciliano */
+.theme-dark #pseudo-class-panel > label > input {
+  filter: invert(0.875);
+/*************************************
+  filter: invert(1);
+  -moz-appearance: none;
+  background-image: linear-gradient(#e7e2df,#e7e2df);
+ *************************************/
+  /** opacity: 1; /*** These input boxes must remain visible! --johnGraciliano **************************************/
+}
+
+.theme-dark input#browser-style-checkbox:not(:checked),
+.theme-dark #pseudo-class-panel > label > input:not(:checked) {
+/*********************************************
+  filter: invert(1);
+  -moz-appearance: none;
+  background-image: linear-gradient(#e6e1de,#e6e1de);
+ *********************************************/
+  filter: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(#181d20,#181d20);
+}
+
+
+.theme-dark label#browser-style-checkbox-label::after,
+.theme-dark #pseudo-class-panel > label::after {
+  pointer-events: none;
+  position: absolute;
+  left: 4px;
+  top: calc(50% - 6.5px);
+  background-color: rgba(72,87,96,.333);
+  content: "";
+  display: -moz-box;
+  border: 1px solid #666;
+  box-sizing: border-box;
+  height: 13px;
+  width: 13px;
+  line-height: 11px;
+  border-width: 2px;
+  -moz-border-top-colors: #666 #181d20;
+  -moz-border-right-colors: #666 #181d20;
+  -moz-border-bottom-colors: #666 #181d20;
+  -moz-border-left-colors: #666 #181d20;
+  background-color: transparent;
+}
+.theme-dark label#browser-style-checkbox-label::after {
+  left: 5px;
+}
+/*.theme-dark #pseudo-class-panel > label:-moz-dir(rtl)::after ,*/
+.theme-dark #pseudo-class-panel > label:-moz-any(:-moz-dir(rtl),:-moz-locale-dir(rtl))::after {
+  left: unset;
+  right: 4px;
+}
+.theme-dark input#browser-style-checkbox + label#browser-style-checkbox-label::after {  /* In Firefox 52 the input precedes the label */
+  left: -13px;
+  background-color: #181d20;
+  border-width: 1px;
+}
+.theme-dark input#browser-style-checkbox:checked + label#browser-style-checkbox-label::after {
+  content: url(images/checkmark-dark-small.svg);
+}
+.theme-dark input#browser-style-checkbox:hover + label#browser-style-checkbox-label::after,
+.theme-dark label#browser-style-checkbox-label:hover::after,
+.theme-dark #pseudo-class-panel > label:hover::after {
+  border-color: #3896D6;
+  background-image: linear-gradient(rgba(56,150,214,.05),rgba(56,150,214,.05));
+  -moz-border-top-colors: #3896D6 #1a2329;
+  -moz-border-right-colors: #3896D6 #1a2329;
+  -moz-border-bottom-colors: #3896D6 #1a2329;
+  -moz-border-left-colors: #3896D6 #1a2329;
+}
