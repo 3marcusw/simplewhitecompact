@@ -51,7 +51,7 @@
 }
 
 #main-window[tabsintitlebar] > #titlebar {
-  min-height: 23px;
+  min-height: 24px;
 }
 
 #main-window[tabsintitlebar] > #titlebar > #titlebar-content > #titlebar-buttonbox-container,

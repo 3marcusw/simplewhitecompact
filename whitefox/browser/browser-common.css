@@ -8705,7 +8705,7 @@ display: none;
 #navigator-toolbox #nav-bar .toolbarbutton-1:not(:-moz-any(#back-button, #forward-button)){
 margin-top: -4px !important;
 margin-bottom: -4px !important;
-max-height: 31px !important;
+max-height: 33px !important;
 padding-bottom: 0px !important;
 padding-top: 0px !important;
 }
@@ -8734,16 +8734,14 @@ padding-top: 0px !important;
     margin-top: 0;
 }
 
-
 /*Reduce horizontal padding of buttons icons*/
-#navigator-toolbox > #nav-bar .toolbarbutton-1:not([type=menu]):not(#back-button):not(#forward-button) > .toolbarbutton-icon,
-#navigator-toolbox > #nav-bar .toolbarbutton-1[type=menu]:not(#back-button):not(#forward-button):not(#feed-button),
-#navigator-toolbox > #nav-bar #feed-button > .toolbarbutton-icon,
-#navigator-toolbox > #nav-bar #bookmarks-menu-button > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-#navigator-toolbox > #nav-bar #bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-padding-left: 1px !important;
-padding-right: 1px !important;
 
+#nav-bar toolbarbutton { 
+  padding-left: 1px !important;  
+  padding-right: 1px !important;
+  margin-left: 2px !important; 
+  margin-right: 2px !important;  
+}
 /* All that follows is from the default in 44.0a2 and 45.0a1.  I am not sure of its use yet...  --johnGraciliano */
 
 .browser-extension-panel > .panel-arrowcontainer > .panel-arrowcontent {
