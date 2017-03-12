@@ -381,35 +381,17 @@ iframe {
 /* The following could be belong in toolbars.css but I only know it is needed for the inspector module --johnGraciliano */
 .theme-dark .tabs nav.tabs-navigation,
 .theme-light .tabs nav.tabs-navigation {
-  box-sizing: border-box;
-  height: 24px;   /* Needed in Firefox 50 --johnGraciliano */
   background-color: var(--theme-toolbar-background); /* Override resource://devtools/client/shared/components/tabs/tabs.css */
 }
 .theme-firebug .tabs nav.tabs-navigation {
-/*  background-color: rgb(219, 234, 249);  *** This fixed this is fixed in variables.css --johnGraciliano */
-  height: 28px;
   background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
 }
 
-.theme-firebug #inspector-sidebar > stack > tabs > tab[selected],  /* For Firefox 48-49 */
-.theme-firebug .tabs > * > * > li.tabs-menu-item.is-active > a {   /* For late Firefox 53 */
+.theme-firebug #inspector-sidebar > stack > tabs > tab[selected] { /* For Firefox 48-49 */
   background-color: rgb(247, 251, 254);
 }
 .theme-firebug #inspector-sidebar > stack > tabs > tab[selected]#sidebar-tab-layoutview {
   background-color: var(--theme-sidebar-background);
-}
-
-/* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
-/* Make sure panel content takes entire vertical space.
-  (minus the height of the tab bar) */
-.theme-firebug .tabs .panels {
-  height: calc(100% - 28px);
-}
-
-/* This is in deference to a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
-/* The rule should be in firebug-theme.css, but I placed it here because it only affects the inspector's tabs */
-.theme-firebug .tabs > * > .tabs-menu > .tabs-menu-item > a {  /* To superceed selector '.theme-firebug .tabs .tabs-menu-item a'*/
-  color: #565656; /* It was var(--theme-body-color)  --johnGraciliano */
 }
 
 /* A rule in 'firebug-theme.css' makes the tabs overflow visible (so the bottom margin can be covered).
