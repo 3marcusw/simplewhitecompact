@@ -6585,6 +6585,22 @@ toolbar[brighttext] #downloads-indicator-counter {
   background-image: linear-gradient(#4b5000, #515700);
 }
 
+/***  Start of aditional control for changes in Firefox 54     **********************************************************************************************/
+/* Ignore rules content/browser/browser.css and behave like .withProgressBar is present */
+#downloads-button[id] #downloads-indicator-progress-icon { /* '[id]' is to needed to raise the precedence */
+  visibility: hidden;
+}
+#downloads-button[id] #downloads-indicator-progress-area {
+  visibility: visible; /* This is the oposite of what is in the content css --johnGraciliano!!! */
+}
+
+/* These have to appear after the previous two rules so they get the proper precedence */
+#downloads-button:-moz-any([progress], [counter], [paused]) #downloads-indicator-icon,  /* The class ".withProgressBar" cannot be here. --johnGraciliano */
+#downloads-button:not(:-moz-any([progress], [counter], [paused])) #downloads-indicator-progress-area {
+  visibility: hidden;
+}
+/***  End of aditional control for changes in Firefox 54       **********************************************************************************************/
+
 /* Error counter */
 
 #developer-toolbar-toolbox-button[error-count]:before {
@@ -8792,7 +8808,7 @@ toolbarpaletteitem[place="palette"] > #containers-panelmenu[widget-type="view"] 
 
 /* URL Bar Decoration */
 
-@supports not (background-position-x: left) { {} /* Firefox < 49 */
+@supports not (background-position-x: left) { /* Firefox < 49 */
   #userContext-icons:not([usercontextid]) {
     display: none;
   }
@@ -8907,25 +8923,6 @@ toolbar[brighttext] toolbarbutton:not(.toolbarbutton-1) > dropmarker {
 }
 
 /************/
-
-
-/* TEMPORARY FIX FOR A PROBLEM WITH THE SITE SUGGESTION BOX NOT ADOPTING THE CORRECT HEIGHT */
-@supports (display: flow-root) { {} /* This is only for Firefox 53+ */
-  #PopupAutoCompleteRichResult > richlistbox {
-    display: block;
-  }
-  #PopupAutoCompleteRichResult > richlistbox > scrollbox {
-    width: 100%;
-  }
-}
-
-
-
-
-
-
-
-
 
 
 
