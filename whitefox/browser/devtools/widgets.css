@@ -762,13 +762,33 @@ widgets.css is overwritten. */
 .variables-view-scope:focus > .title,
 .variable-or-property:focus > .title {
   background-color: var(--theme-selection-background);
+  background-image: none; /* To override firebug theme */
   color: var(--theme-selection-color);
 }
 
-.variables-view-scope > .title {
-  border-top-width: 1px;
-  border-top-style: solid;
+.theme-light:not(.theme-firebug) .variables-view-scope:focus > .title > .theme-twisty,
+.theme-light:not(.theme-firebug) .variable-or-property:focus > .title > .theme-twisty {
+  background-position: -28px -14px;
+}
+
+.theme-light:not(.theme-firebug) .variables-view-scope:focus > .title > .theme-twisty[open],
+.theme-light:not(.theme-firebug) .variable-or-property:focus > .title > .theme-twisty[open],
+.theme-light:not(.theme-firebug) .variables-view-scope:focus > .title > .theme-twisty.open,
+.theme-light:not(.theme-firebug) .variable-or-property:focus > .title > .theme-twisty.open {
+  background-position: -42px -14px;
+}
+
+.variables-view-scope > .title.devtools-toolbar {
+  height: auto;
+  padding-top: 1px; /* To match the height from the borders in the data values */
+  padding-bottom: 1px;
+  /* A bottom border is implicit! */
+}
+
+.variables-view-scope + .variables-view-scope > .title {
   margin-top: -1px;
+  border-top-width: 1px ;
+  border-top-style: solid;
 }
 
 /* Custom scope stylings */
@@ -777,23 +797,21 @@ widgets.css is overwritten. */
   max-width: 14em;
 }
 
-.theme-firebug .variables-view-scope > .title {
-  height: auto;
-  border: none;
-}
-
-.theme-firebug .variables-view-scope > .title > .theme-twisty {
-  display: none;
-}
-
 /* Generic variables traits */
 
-.variables-view-variable:not(:last-child) {
-  border-bottom: 1px solid rgba(128, 128, 128, .15);
+.variables-view-variable {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(128, 128, 128, .15);
 }
 
 .theme-firebug .variables-view-variable {
-  border-bottom: 1px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.0625);
+}
+
+.variables-view-variable:last-child {
+  border-bottom-width: 0;
+  padding-bottom: 1px;
 }
 
 .variables-view-variable > .title > .name {
@@ -807,7 +825,7 @@ widgets.css is overwritten. */
 }
 
 .variables-view-container .theme-twisty {
-  margin: 2px;
+  margin: 0 2px; /* This was simply 2px --johnGraciliano */
 }
 
 .variable-or-property > .title > .theme-twisty {
@@ -1029,16 +1047,16 @@ widgets.css is overwritten. */
 /* Variables and properties input boxes */
 
 .variable-or-property > .title > .separator + .element-value-input {
-  -moz-margin-start: -2px !important;
+  -moz-margin-start: -1px !important;   /* This was -2px */
   -moz-margin-end: 2px !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: -1px !important;
   margin-inline-end: 2px !important;
 }
 
 .variable-or-property > .title > .separator[hidden=true] + .element-value-input {
-  -moz-margin-start: 4px !important;
+  -moz-margin-start: -1px !important;   /* This was 4px */ /* This value needs to be verified! !  !  */
   -moz-margin-end: 2px !important;
-  margin-inline-start: 4px !important;
+  margin-inline-start: -1px !important;
   margin-inline-end: 2px !important;
 }
 
@@ -1052,9 +1070,21 @@ widgets.css is overwritten. */
 
 .element-value-input,
 .element-name-input {
-  border: 1px solid rgba(128, 128, 128, .5) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgba(96,180,255,.75) !important; /* This was rgba(128, 128, 128, .5) */
   border-radius: 0;
   color: inherit;
+}
+.value.token-string { /* This corresponds to .element-value-input.  This is the normal state, i.e., when the value is not being edited.  */
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+
+  -moz-margin-start: -1px !important;
+  -moz-margin-end: 2px !important;
+  margin-inline-start: -1px !important;
+  margin-inline-end: 2px !important;
 }
 
 /* Variables and properties searching */
