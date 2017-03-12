@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/ */
 
- 
+
 #header, #main,
 #boxmodel-header, #boxmodel-main, #boxmodel-info {
   --expand: 1;
@@ -21,7 +21,10 @@
 
 #computedview-container #boxmodel-header,
 #computedview-container #boxmodel-main,
-#computedview-container #boxmodel-info {
+#computedview-container #boxmodel-info,
+.boxmodel-header,
+.boxmodel-main,
+.boxmodel-info {
   --expand: 0;
   --condense: 1px;
 }
@@ -29,10 +32,16 @@
 #computedview-container #boxmodel-main > p > input,
 #computedview-container .boxmodel-legend,
 #computedview-container #boxmodel-info > span,
-#computedview-container #boxmodel-info > section > span  {
+#computedview-container #boxmodel-info > section > span,
+.boxmodel-main > p > span,
+.boxmodel-main > p > input,
+.boxmodel-main             .boxmodel-legend,
+.boxmodel-info > span,
+.boxmodel-info > section > span  {
   font-size: 92%;
 }
-#computedview-container #boxmodel-container {
+#computedview-container #boxmodel-container,
+div.boxmodel-container { /* The tag 'div' is so the value for 'max-width' here preceeds the value in a rule below */
   max-width: 300px;
 }
 
@@ -52,7 +61,8 @@
 }
 
 body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rules elsewhere */
-#boxmodel-container {
+#boxmodel-container,
+.boxmodel-container {
   /* The view will grow bigger as the window gets resized, until 375px. */
   max-width: 375px; /* This is 400px in the default/classic theme --johnGraciliano */
   margin: 0px auto;
@@ -73,7 +83,8 @@ p#header{ /* Firefox <= 45 */
   padding-left: 13px;
 }
 
-#boxmodel-header{
+#boxmodel-header,
+.boxmodel-header {
   display: flex;
   align-items: center;
   margin: 0;
@@ -83,7 +94,8 @@ p#header{ /* Firefox <= 45 */
   padding-left: 13px;
 }
 
-#boxmodel-info {
+#boxmodel-info,
+.boxmodel-info {
   display: flex;
   align-items: center;
   margin: 0;
@@ -99,25 +111,29 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 
 /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
 /* .theme-firebug #sidebar-panel-layoutview > * > * > #boxmodel-header, */
-.theme-firebug #boxmodel-header {
+.theme-firebug #boxmodel-header,
+.theme-firebug .boxmodel-header {
   padding-top: calc(3px + 6px * var(--expand));
   padding-left: 14px;
   padding-bottom: calc(3px + 6px * var(--expand));
   padding-right: 14px;
 }
 
-#layout-geometry-editor {
+#layout-geometry-editor,
+.layout-geometry-editor {
   visibility: hidden;
 }
 
-#layout-geometry-editor::before {
+#layout-geometry-editor::before,
+.layout-geometry-editor::before {
   background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
 }
 
 /* Main: contains the box-model regions */
 
 #main,
-#boxmodel-main {
+#boxmodel-main,
+.boxmodel-main {
   position: absolute;
   box-sizing: border-box;
   /* The regions are semi-transparent, so the white background is partly
@@ -128,7 +144,8 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
   margin: 0 14px 4px 14px;
   width: calc(100% - 2 * 14px);
 }
-#computedview-container #boxmodel-main{ /* Firefox >= 50*/
+#computedview-container #boxmodel-main,
+.boxmodel-main { /* Firefox >= 50*/
   position: relative;
 }
 
@@ -143,7 +160,8 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 /* Regions are 3 nested elements with wide borders and outlines */
 
 div#content,
-#boxmodel-content {
+#boxmodel-content,
+.boxmodel-content {
   height: calc(21px + 4px * var(--expand) - var(--condense));
 }
 
@@ -152,21 +170,26 @@ div#borders,
 div#padding,
 #boxmodel-margins,
 #boxmodel-borders,
-#boxmodel-padding {
+#boxmodel-padding,
+.boxmodel-margins,
+.boxmodel-borders,
+.boxmodel-paddings {
   border-width: calc(21px + 4px * var(--expand) - var(--condense));
   border-style: solid;
   outline: dotted 1px hsl(210,100%,85%);
 }
 
 div#borders, /* Added specificity so it supersedes rules elsewhere */
-div#boxmodel-borders{
+div#boxmodel-borders,
+div.boxmodel-borders {
   border-width: calc(22px + 3px * var(--expand) - var(--condense));
   padding:0;
   outline: dotted 1px hsl(210,100%,45%);
 }
 
 #margins,
-#boxmodel-margins {
+#boxmodel-margins,
+.boxmodel-margins {
   outline: dotted 1px hsl(210,100%,75%);
 }
 
@@ -176,22 +199,26 @@ div#boxmodel-borders{
 /* Regions colors */
 
 #margins,
-#boxmodel-margins {
+#boxmodel-margins,
+.boxmodel-margins {
   border-color: rgba(237, 255, 100, .8); /* #edff64 * 80% */
 }
 
 #borders,
-#boxmodel-borders {
+#boxmodel-borders,
+.boxmodel-borders {
   border-color: rgba(68, 68,68, .8); /* #444444 * 80% */
 }
 
 #padding,
-#boxmodel-padding {
+#boxmodel-padding,
+.boxmodel-paddings {
   border-color: rgba(106, 90, 205, .8); /* #6a5acd * 80% */
 }
 
 #content,
-#boxmodel-content {
+#boxmodel-content,
+.boxmodel-content {
   background-color: rgba(135, 206, 235, .8); /* #87ceeb * 80% */
 }
 
@@ -247,29 +274,37 @@ div#boxmodel-borders{
 *****/
 
 .theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-content {
+.theme-firebug #boxmodel-content,
+.theme-firebug .boxmodel-main,
+.theme-firebug .boxmodel-content {
   border: 1px solid transparent;
 }
 
 .theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-header {
+.theme-firebug #boxmodel-header,
+.theme-firebug .boxmodel-main,
+.theme-firebug .boxmodel-header {
   font-family: var(--proportional-font-family);
 }
 
 .theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-info {
+.theme-firebug #boxmodel-info,
+.theme-firebug .boxmodel-main,
+.theme-firebug .boxmodel-info {
   color: var(--theme-body-color);
   font-size: var(--theme-toolbar-font-size);
 }
 
-.theme-firebug #boxmodel-header {
+.theme-firebug #boxmodel-header,
+.theme-firebug .boxmodel-header {
   font-size: var(--theme-toolbar-font-size);
 }
 
 /* Editable region sizes are contained in absolutely positioned <p> */
 
 #main > p,
-#boxmodel-main > p {
+#boxmodel-main > p,
+.boxmodel-main > p {
   position: absolute;
   pointer-events: none;
   margin: 0;
@@ -279,7 +314,9 @@ div#boxmodel-borders{
 #main > p > span,
 #main > p > input,
 #boxmodel-main > p > span,
-#boxmodel-main > p > input {
+#boxmodel-main > p > input,
+.boxmodel-main > p > span,
+.boxmodel-main > p > input {
   vertical-align: middle;
   pointer-events: auto;
 }
@@ -422,6 +459,10 @@ p.border.right,
   position: relative;
   z-index: 5;
 }
+._content .boxmodel-left.boxmodel-editing,
+._content .boxmodel-right.boxmodel-editing {
+  position: absolute; /* Undo the setting in late Firefox 54.0a1 */
+}
 
 /* Coordinates should be different when the window is small, because we make
    the regions smaller then */
@@ -482,7 +523,10 @@ body.inactive > #header > #element-size,
 body.inactive > #main > p,
 #boxmodel-container.inactive > #boxmodel-header > #boxmodel-element-position,
 #boxmodel-container.inactive > #boxmodel-header > #boxmodel-element-size,
-#boxmodel-container.inactive > #boxmodel-main > p {
+#boxmodel-container.inactive > #boxmodel-main > p,
+.boxmodel-container.inactive > .boxmodel-header > #boxmodel-element-position,
+.boxmodel-container.inactive > .boxmodel-header > .boxmodel-element-size,
+.boxmodel-container.inactive > .boxmodel-main > p {
    visibility: hidden;
 }
 
@@ -490,11 +534,43 @@ body.inactive > #main > p,
 /* This section should be in the header section --johnGraciliano */
 
 #element-size, /* Firefox <= 45 */
-#boxmodel-element-size {
+#boxmodel-element-size,
+.boxmodel-element-size {
   flex: 1;
 }
 
 #boxmodel-position-group {
   display: flex;
   align-items: center;
+}
+
+
+/* Additional rules for Firefox 54.0a1 and later */
+
+._header[class][class][class]{
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 1.1em;
+  height: unset;
+  width: unset;
+  font-weight: bold;
+  background-image: none;
+  background-color: transparent;
+  border-bottom-width: 0;
+}
+._header[class][class][class]:hover{
+  background-color: rgba(128, 148, 142, 0.16);
+}
+.theme-firebug ._header[class][class][class] {
+  font-family: var(--proportional-font-family);
+}
+
+._header[class][class][class] > .arrow.theme-twisty {
+  margin-bottom: 2px;
+}
+
+._content[class][class] {
+  margin-top: 5px;
+  border-bottom-width: 0;
+  font-size: inherit;
 }
