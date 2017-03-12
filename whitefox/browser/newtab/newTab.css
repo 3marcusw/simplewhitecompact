@@ -77,11 +77,24 @@
   background-image: -moz-image-rect(url(chrome://browser/skin/newtab/controls.svg), 0, 64, 32, 32);
 }
 
+#newtab-horizontal-margin {
+  display: flex;
+}
+.newtab-side-margin {
+  flex-grow: 1;
+}
+#newtab-grid {
+  width: auto !important;
+}
+
 /* GRID 3D */
 #newtab-grid {
   backface-visibility: hidden;
   /* perspective: 1000px; ****** USED FOR THE SLANTED TILES ******************/
-  padding-bottom: 12px;
+  transition: opacity 100ms ease-out, max-height 200ms ease;
+  padding: 3px 5px 0px;
+  box-sizing: content-box;
+  overflow: hidden;
 }
 /****** USED FOR THE SLANTED TILES ************
 #newtab-grid[locked] {
@@ -89,9 +102,65 @@
 }
  **********************************************/
 
+#newtab-grid[locked] {overflow: visible;}
+
+/*
+  Limit the number of visible rows in the grid according to the window height.
+  s = <newtab-search-container height> + <newtab-search-container margin-top> + <newtab-search-container margin-bottom>
+    = 71px + 45px + 15px        (or 79px + 45px + 15px for Firefox < 40**)
+  t = <newtab-cell height> + <newtab-cell margin-top> + <newtab-cell margin-bottom>
+    = 210px + 20px + 25px       (or 180px + 20px + 25px for Firefox < 40)
+    = 210px + 22px + 23px       (or 180px + 22px + 23px for Firefox < 40)
+  q = <newtab-grid "pre-programmed" padding> = 7px
+  p = <newtab-grid padding-top> = 3px
+  VHNMH = s + (visible-rows+1) * t + q + p              (Next View Height Minimum Height)
+  GH = visible-rows * t + q                             (Grid Height)
+  for visible-rows = 8,7,...,1
+    @media not all and (min-height: NVHMH) { #newtab-grid:not([locked]) {max-height: GH !important; overflow: hidden;}}
+  **This would also be for Firefox 40 and 41, but this it is changed here.
+*/
+
+@supports (-moz-text-decoration-style:inherit) { {} /* Firefox < 40 */
+  #newtab-grid[style^="height: 2427px;"] {height: 2482px !important; max-height: 2482px !important;}
+  #newtab-grid[style^="height: 2207px;"] {height: 2257px !important; max-height: 2257px !important;}
+  #newtab-grid[style^="height: 1987px;"] {height: 2032px !important; max-height: 2032px !important;}
+  #newtab-grid[style^="height: 1767px;"] {height: 1807px !important; max-height: 1807px !important;}
+  #newtab-grid[style^="height: 1547px;"] {height: 1582px !important; max-height: 1582px !important;}
+  #newtab-grid[style^="height: 1327px;"] {height: 1357px !important; max-height: 1357px !important;}
+  #newtab-grid[style^="height: 1107px;"] {height: 1132px !important; max-height: 1132px !important;}
+  #newtab-grid[style^="height: 887px;"]  {height:  907px !important; max-height:  907px !important;}
+  #newtab-grid[style^="height: 667px;"]  {height:  682px !important; max-height:  682px !important;}
+  #newtab-grid[style^="height: 447px;"]  {height:  457px !important; max-height:  457px !important;}
+  #newtab-grid[style^="height: 227px;"]  {height:  232px !important; max-height:  232px !important;}
+
+  /*
+    The following computation is correct using integer arithmetic, with the length unit being 1/60 px, and division results rounded to the nearest unit:
+      #newtab-grid {
+        max-height: calc(((100vh - 149px - (225px/2)) / (225*60)) * (225*60) + 7px) !important;        = ((100vh - s - q - p - (t/2))/(t*60))*(t*60) + q
+      }
+  */
+  #newtab-grid {
+    max-height: calc( ((100vh - 261.5px) / 13500) * 13500 + 7px ) !important; /* ((100vh - s - q - p - (t/2))/(t*60))*(t*60) + q */
+  }
+}
+
+@supports (not (-moz-text-decoration-style:inherit))  { {} /* Firefox >= 40 */
+  form#newtab-search-form {height: 36px;} /* To have Firefox 40 and 42 match Firefox 42 and later, otherwise this would be 44px */
+
+  /*
+    The following computation is correct using integer arithmetic, with the length unit being 1/60 px, and division results rounded to the nearest unit:
+      #newtab-grid {
+        max-height: calc(((100vh - 141px - (255px/2)) / (255*60)) * (255*60) + 7px) !important;        = ((100vh - s - q - p - (t/2))/(t*60))*(t*60) + q
+      }
+  */
+  #newtab-grid {
+    max-height: calc(((100vh - 268.5px) / 15300) * 15300 + 7px) !important;
+  }
+}
+
 /* CELLS */
 .newtab-cell {
-  margin: 20px 10px 25px;
+  margin: 22px 10px 23px;
   /* transform: rotateX(-8deg); ****** USED FOR THE SLANTED TILES ******************/
   /* transform-origin: 0 0; ****** USED FOR THE SLANTED TILES ******************/
 }
@@ -142,12 +211,12 @@
 
 .newtab-thumbnail:first-child{
   background-color: white;
-  box-shadow: 0 20px 17px rgba(0,0,0,.15);
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.17), 0px 0px 6px rgba(0, 0, 0, 0.02);
   transition: transform 300ms, opacity 300ms, box-shadow 300ms;
 }
 
 .newtab-site:hover .newtab-thumbnail:first-child {
-  box-shadow: 0 29px 17px rgba(0,0,0,.12);
+  box-shadow: 0px 24px 15px rgba(0, 0, 0, 0.12), 0px 0px 6px rgba(0, 0, 0, 0.01);
 }
 
 .newtab-site:not([dragged]) > .newtab-link:focus > .newtab-thumbnail:first-child{
@@ -176,9 +245,9 @@
   border: 0;
   color: #000;
   background: none;
-  height: 17px;
-  font-size: 12px;
-  line-height: 17px;
+  height: 20px; /* This was 17px --johnGraciliano */
+  font-size: 14px; /* This was 12px --johnGraciliano */
+  line-height: 20px; /* This was 17px --johnGraciliano */
   text-align: center;
   opacity: 0;
   pointer-events: none;
