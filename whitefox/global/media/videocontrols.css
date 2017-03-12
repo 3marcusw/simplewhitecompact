@@ -2,17 +2,100 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace html url("http://www.w3.org/1999/xhtml");
 
-.controlBar {
+@supports (display: flow-root) { /* This is only for Firefox 53 and later, otherwise IT WILL CAUSE A CRASH!!!!  */
+video > xul|videocontrols,
+audio > xul|videocontrols {
+  writing-mode: horizontal-tb;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+/**** This rule is needed if we want to shrink the .controlBar to 28px when audio only media is played ****/
+/**** This is coordinated with TopLevelVideoDocument.css ****/
+[style*="height: 40px;"] > videocontrols/*.mediaControlsFrame*/ > div/*.controlsContainer*/ > div/*.controlsOverlay*/ > div.controlBar[size="hidden"][hidden] {
+  display: flex;
+}
+}
+
+.controlsContainer [hidden="true"],
+.controlBar[hidden] {
+  display: none;
+}
+
+.controlBar[size="hidden"] {
+  display: none;
+}
+
+.controlsContainer,
+div.progressContainer {
+  position: relative;
+  height: 100%;
+}
+
+.stackItem {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+div.statusOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(80,80,80);
+}
+
+div.controlsOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.controlsSpacerStack {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+div.controlsSpacer {
+  background-color: rgba(255,255,255,.4);
+}
+
+/* FIREFOX <= 52: */
+hbox.controlBar {
   height: 28px;
   background-color: rgba(35,31,32,.74);
 }
 
-.playButton,
-.muteButton,
-.fullscreenButton {
+div.controlBar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 28px; /* This was 40px */
+  padding: 0 6px; /* This was 0 9px */
+  background-color: rgba(26,26,26,.8);
+}
+/* Stretch to 40px height for media with audio track only (otherwise nothing is shown) ***
+[style*="height: 40px;"] > videocontrols/*.mediaControlsFrame* / > div/*.controlsContainer* / > div/*.controlsOverlay* / > div.controlBar {
+  height: 40px;
+}  this rule is temporarily removed ****/
+
+/* FIREFOX <= 52: */
+hbox > .playButton,
+hbox > .muteButton,
+hbox > .closedCaptionButton,
+hbox > .fullscreenButton {
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,61 +105,144 @@
   min-height: 28px;
   min-width: 28px;
   border: none;
-  opacity: 0.7;
+  /* opacity: 0.7; ************************* REMOVED FOR USING THE NEW SVG BUTTON IMAGES ******************************/
 }
 
-.playButton:hover,
-.muteButton:hover,
-.fullscreenButton:hover {
-  opacity: 1;
+div > .playButton,
+div > .muteButton,
+div > .closedCaptionButton,
+div > .fullscreenButton {
+  height: 100%;
+  min-height: 28px; /* This was 30px */
+  min-width: 28px; /* This was 30px */
+  padding: 5px; /* This was 6px */
+  border: 0;
+  margin: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-origin: content-box;
+  background-clip: content-box;
 }
 
-.playButton:hover:active,
-.muteButton:hover:active,
-.fullscreenButton:hover:active {
-  opacity: 0.4;
-}
-
-.playButton {
-  background-image: url(chrome://global/skin/media/pauseButton.png);
+/* Firefox <= 52 */
+hbox > .playButton {
   margin-right: -22px; /* 1/2 of scrubber thumb width, for overhang. */
   position: relative; /* Trick to work around negative margin interfering with clicking on the button. */
 }
 
+.playButton {
+  background-image: url(chrome://global/skin/media/pauseButton.svg#pause);
+}
+.playButton:hover {
+  background-image: url(chrome://global/skin/media/pauseButton.svg#pause-hover);
+}
+.playButton:hover:active {
+  background-image: url(chrome://global/skin/media/pauseButton.svg#pause-active);
+}
 .playButton[paused] {
-  background-image: url(chrome://global/skin/media/playButton.png);
+  background-image: url(chrome://global/skin/media/playButton.svg#play);
+}
+.playButton[paused]:hover {
+  background-image: url(chrome://global/skin/media/playButton.svg#play-hover);
+}
+.playButton[paused]:hover:active {
+  background-image: url(chrome://global/skin/media/playButton.svg#play-active);
 }
 
 .muteButton {
-  background-image: url(chrome://global/skin/media/muteButton.png);
-  min-width: 33px;
+  background-image: url(chrome://global/skin/media/muteButton.svg#unmute);
+}
+.muteButton:hover {
+  background-image: url(chrome://global/skin/media/muteButton.svg#unmute-hover);
+}
+.muteButton:hover:active {
+  background-image: url(chrome://global/skin/media/muteButton.svg#unmute-active);
 }
 .muteButton[muted] {
-  background-image: url(chrome://global/skin/media/unmuteButton.png);
+  background-image: url(chrome://global/skin/media/muteButton.svg#mute);
 }
-
-.muteButton[noAudio] {
-  background-image: url(chrome://global/skin/media/noAudio.png);
+.muteButton[muted]:hover {
+  background-image: url(chrome://global/skin/media/muteButton.svg#mute-hover);
 }
-
+.muteButton[muted]:hover:active {
+  background-image: url(chrome://global/skin/media/muteButton.svg#mute-active);
+}
+.muteButton[noAudio],
+.muteButton[noAudio]:hover,
+.muteButton[noAudio]:hover:active {
+  background-image: url(chrome://global/skin/media/muteButton.svg#noaudio);
+}
 .muteButton[noAudio] + .volumeStack {
   display: none;
 }
 
+.closedCaptionButton {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc-off);
+}
+.closedCaptionButton:hover {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc-off-hover);
+}
+.closedCaptionButton:hover:active {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc-off-active);
+}
+.closedCaptionButton[enabled] {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc);
+}
+.closedCaptionButton[enabled]:hover {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc-hover);
+}
+.closedCaptionButton[enabled]:hover:active {
+  background-image: url(chrome://global/skin/media/closedCaptionButton.svg#cc-active);
+}
+
 .fullscreenButton {
-  background-image: -moz-image-rect(url("chrome://global/skin/media/fullscreenButton.png"), 0, 16, 16, 0);
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#fullscreen);
 }
-
+.fullscreenButton:hover {
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#fullscreen-hover);
+}
+.fullscreenButton:hover:active {
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#fullscreen-active);
+}
 .fullscreenButton[fullscreened] {
-  background-image: -moz-image-rect(url("chrome://global/skin/media/fullscreenButton.png"), 0, 32, 16, 16);
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#unfullscreen);
+}
+.fullscreenButton[fullscreened]:hover {
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#unfullscreen-hover);
+}
+.fullscreenButton[fullscreened]:hover:active {
+  background-image: url(chrome://global/skin/media/fullscreenButton.svg#unfullscreen-active);
 }
 
-.volumeControl {
+.controlBarSpacer {
+  flex-grow: 1;
+}
+
+.volumeControl::-moz-range-thumb,
+.scrubber::-moz-range-thumb {
+  height: 13px;
+  width: 13px;
+  border: none;
+  border-radius: 50%;
+  background-color: #ffffff;
+  filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.65));
+}
+
+.volumeControl::-moz-focus-outer,
+.scrubber::-moz-focus-outer {
+  border: 0;
+}
+
+/***************************************************************************************************************/
+/***  The following large section of code is for Firefox 52 and earlier ****************************************/
+/***************************************************************************************************************/
+scale.volumeControl {
   width: 32px;
   opacity: 0;
 }
 
-.volumeBackground,
+/*box*/.volumeBackground,
 .volumeForeground {
   background-repeat: no-repeat;
   background-position: center;
@@ -92,9 +258,42 @@
   background-clip: content-box;
 }
 
-.controlBar[fullscreen-unavailable] > .volumeStack {
+.volumeStack:-moz-any(:hover,:focus,:active) .volumeBackground {
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
+}
+
+.volumeStack:-moz-any(:hover,:focus) .volumeForeground { /* Convert to #48a0f7 */
+  filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg height="0" xmlns="http://www.w3.org/2000/svg">\
+      <filter id="makeBlue">\
+        <feColorMatrix in="SourceGraphic"\
+          type="matrix"\
+          values=" 0  0  0 0.064 0 \
+                   0  0  0 0.352 0 \
+                   0  0  0 0.934 0 \
+                   0  0  0 1     0" />\
+      </filter>\
+    </svg>#makeBlue');
+}
+
+.volumeStack:active .volumeForeground { /* Convert to #2d89e6 */
+  filter: url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" standalone="no"?>\
+    <svg height="0" xmlns="http://www.w3.org/2000/svg">\
+      <filter id="makeBlue">\
+        <feColorMatrix in="SourceGraphic"\
+          type="matrix"\
+          values=" 0  0  0 0.0255 0 \
+                   0  0  0 0.251  0 \
+                   0  0  0 0.792  0 \
+                   0  0  0 1      0" />\
+      </filter>\
+    </svg>#makeBlue');
+}
+
+hbox.controlBar[fullscreen-unavailable] {
   /* This value is duplicated in the videocontrols.xml adjustControlSize function. */
-  -moz-margin-end: 8px;
+  -moz-padding-end: 8px;
+  padding-inline-end: 8px;
 }
 
 .volumeControl .scale-thumb {
@@ -104,34 +303,38 @@
 
 .durationBox {
   -moz-box-pack: center;
+  -moz-box-align: end;
 }
 
-.durationLabel {
+label.positionLabel,
+label.durationLabel {
   margin-left: -22px; /* 1/2 of scrubber thumb width, for overhang. */
   padding-left: 8px; /* don't bump into the scrubber bar */
   padding-top: 0; /* center vertically with scrubber bar */
   color: rgba(255,255,255,.75);
   font-size: 11px;
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif, message-box;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
 }
 
-.positionLabel {
-  display: none;
+label.positionLabel {
+  /* display: none; ************* This label will remain visible --johnGraciliano ***************/
+  color: white;
 }
 
 .backgroundBar {
-  /* margin top/bottom: make bar 8px tall (control height = 28, minus 2 * 10 margin) */
+  /* margin top/bottom: make bar 5px (it was 8px) tall (control height = 28, minus 2 * 11.5 margin) */
   /* margin left/right: 1/2 of scrubber thumb width, for overhang. */
-  margin: 10px 22px;
-  background-color: rgba(255,255,255,.5);
+  margin: 11.5px 22px; /* This was 10px 22px for an 8px height */
+  background-color: rgba(0,0,0,.5); /* Changed last from rgba(0,0,0,.25) */ /* This was rgba(255,255,255,.5) */
   border-radius: 2.5px;
 }
 
 .bufferBar,
 .progressBar {
-  /* margin top/bottom: make bar 8px tall (control height = 28, minus 2 * 10 margin) */
+  /* margin top/bottom: make bar 5px (it was 8px) tall (control height = 28, minus 2 * 11.5 margin) */
   /* margin left/right: 1/2 of scrubber thumb width, for overhang. */
-  margin: 10px 22px;
+  margin: 11.5px 22px; /* This was 10px 22px for an 8px height */
   -moz-appearance: none;
   border: none;
   background-color: transparent;
@@ -146,15 +349,26 @@
    * has the same background-color specified, the semitransparent
    * compositing gives it a different visual appearance.
    */
-  background-color: rgba(255,255,255,.5);
+  background-color: rgba(255,255,255,.65); /* This was rgba(255,255,255,.5) */
   border-radius: 2.5px;
   -moz-appearance: none;
+  -moz-padding-end: 13px; /* This padding accounts for the width of .scale-thumb */
+  padding-inline-end: 13px;
 }
 
 .progressBar .progress-bar {
   background-color: white;
   border-radius: 2.5px;
   -moz-appearance: none;
+
+  background-color: #00b6f0;
+  -moz-padding-end: 13px; /* This padding accounts for the width of .scale-thumb */
+  padding-inline-end: 13px;
+}
+
+.bufferBar .progress-remainder,
+.progressBar .progress-remainder {
+  background-color: transparent; /* Changed last from rgba(255,255,255,.125) */
 }
 
 /* .scale-slider is an element inside the <scale> implementation. */
@@ -167,9 +381,8 @@
 }
 
 .scrubber .scale-slider {
-  /* abs(margin-top) + margin-bottom + bar height == timeThumb height */
-  margin-top: -10px;
-  margin-bottom: 10px;
+  margin: 0 22px;
+  overflow: visible;
 }
 
 /* .scale-thumb is an element inside the <scale> implementation. */
@@ -181,21 +394,49 @@
   border: none;
 }
 
+.scrubber .scale-thumb {
+  height: 13px;
+  width: 13px;
+  border: none;
+  border-radius: 50%;
+  background-color: #ffffff;
+  filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.65));
+  min-width: 0;
+  min-height: 0;
+
+  -moz-box-pack: center;
+  -moz-box-align: center;
+}
+
+.scrubber:hover .scale-thumb {
+  background-color: #48a0f7;
+}
+
+.scrubber:active .scale-thumb {
+  background-color: #2d89e6;
+}
+
+
 .timeThumb {
   background: url(chrome://global/skin/media/scrubberThumb.png) no-repeat center;
   min-width: 45px;
   min-height: 28px;
   -moz-box-pack: center;
+  margin: -28px -22.5px 0;
 }
 
 .timeThumb[showhours="true"] {
   background-image: url(chrome://global/skin/media/scrubberThumbWide.png);
 }
 
+.scrubber:not(:active) .timeThumb {
+  display: none;
+}
+
 .timeLabel {
-  color: rgba(255,255,255,.75);
+  color: white; /* It was rgba(255,255,255,.75) */
   font-size: 10px;
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif, message-box;
   text-shadow: rgba(0,0,0,.3) 0 1px;
   padding-top: 5px;
 }
@@ -205,11 +446,221 @@
   -moz-box-pack: center;
   background-color: rgba(0,0,0,.55);
 }
+/***************************************************************************************************************/
+/*** This ends a large section of code for Firefox 52 and earlier **********************************************/
+/***************************************************************************************************************/
 
-.statusIcon {
+.progressBackgroundBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressStack {
+  position: relative;
+  width: 100%;
+  height: 5px;
+}
+
+div.scrubberStack {
+  min-width: 48px;
+  flex-basis: 48px;
+  flex-grow: 2;
+  flex-shrink: 0;
+  margin: 0 6px; /* This was 0 9px */
+}
+
+div.volumeStack {
+  max-width: 60px;
+  min-width: 48px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin-right: 6px;
+  margin-left: 4px;
+}
+
+progress.bufferBar,
+progress.progressBar,
+input.scrubber,
+:not(box).volumeBackground, /** The prefix :not(box) is to avoid conflict with Firefox <= 52. Another prefix may be better. */
+input.volumeControl {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 2.5px;
+  margin: 0;
+  background: none;
+  background-color: transparent;
+}
+
+progress.bufferBar,
+:not(box).volumeBackground { /** The prefix :not(box) is to avoid conflict with Firefox <= 52. Another prefix may be better. */
+  background-color: rgba(0,0,0,0.7);
+}
+
+.bufferBar::-moz-progress-bar,
+.progressBar::-moz-progress-bar,
+.volumeBackground::-moz-meter-bar {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 2.5px;
+  background: none;
+}
+
+.scrubber:hover::-moz-range-thumb,
+.volumeControl:hover::-moz-range-thumb {
+  background-color: #48a0f7;
+}
+
+.scrubber:active::-moz-range-thumb,
+.volumeControl:active::-moz-range-thumb {
+  background-color: #2d89e6;
+}
+
+.scrubber::-moz-range-track,
+.scrubber::-moz-range-progress {
+  background-color: transparent;
+}
+
+.volumeControl::-moz-range-progress,
+.volumeControl::-moz-range-track {
+  height: 5px;
+  border-radius: 2.5px;
+}
+
+.volumeControl::-moz-range-progress {
+  background-color: #ffffff;
+}
+
+.volumeControl::-moz-range-track {
+  background-color: rgba(0,0,0,0.7);
+}
+
+.bufferBar::-moz-progress-bar {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 2.5px;
+}
+
+.progressBar::-moz-progress-bar {
+  background-color: #00b6f0;
+}
+
+
+/*** Start of Firefox 52 and earlier section **********/
+vbox.textTrackList {
+  display: -moz-box;
+  -moz-appearance: none;
+  -moz-box-pack: end;
+  -moz-box-align: end;
+  padding: 0;
+}
+
+vbox.textTrackList[hidden] {
+  display: none;
+}
+
+vbox.textTrackList > html|*.textTrackItem {
+  -moz-appearance: none;
+  -moz-box-align: start;
+  text-align: start;
+  overflow: hidden;
+  margin: 0;
+  padding: 2px 10px;
+  -moz-margin-end: 10px;
+  margin-inline-end: 10px;
+  border: none;
+  color: rgba(255,255,255,.5);
+  background-color: rgba(35,31,32,.74);
+  white-space: nowrap;
+}
+
+vbox.textTrackList > html|*.textTrackItem[on] {
+  color: white;
+  background-color: black;
+}
+
+vbox.textTrackList > html|*.textTrackItem:hover {
+  background-color: rgba(0,0,0,.55);
+}
+/*** End of Firefox 52 and earlier section ************/
+
+
+div.textTrackList {
+  position: absolute;
+  right: 5px;
+  bottom: 45px;
+  max-width: 80%;
+  border: 1px solid #000000;
+  border-radius: 2.5px;
+  padding: 5px 0;
+  vertical-align: middle;
+  font-size: 12px;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+div.textTrackList > .textTrackItem {
+  display: block;
+  width: 100%;
+  height: 28px; /* This was 30px */
+  padding: 2px 10px;
+  border: none;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  color: #ffffff;
+  background-color: transparent;
+}
+
+div.textTrackList > .textTrackItem:hover {
+  background-color: #444444;
+}
+
+div.textTrackList > .textTrackItem[on] {
+  color: #48a0f7;
+}
+
+span.positionLabel,
+span.durationLabel {
+  display: none;
+}
+
+.positionDurationBox {
+  text-align: center;
+  padding-inline-start: 3px; /* This was 1px */
+  padding-inline-end: 3px; /* This was 9px */
+  white-space: nowrap;
+  font: message-box;
+  font-size: 13px;
+  font-size-adjust: 0.55;
+  color: #ffffff;
+}
+
+.duration {
+  display: inline-block;
+  white-space: pre;
+  color: #929292;
+}
+
+box.statusIcon {
   margin-bottom: 28px; /* same height as .controlBar, to keep icon centered above it */
   width: 36px;
   height: 36px;
+}
+
+div.statusIcon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 20px;
 }
 
 .statusIcon[type="throbber"] {
@@ -225,7 +676,7 @@
 }
 
 /* Overlay Play button */
-.clickToPlay {
+box.clickToPlay {
   width: 64px;
   height: 64px;
   -moz-box-pack: center;
@@ -238,10 +689,38 @@
   background-size: auto, 64px 64px;
   background-color: hsla(0,0%,10%,.5);
 }
-.clickToPlay:hover {
+box.clickToPlay:hover {
   opacity: 1;
 }
 
+div.clickToPlay {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  background-image: url(chrome://global/skin/media/playButton.svg#play);
+  background-repeat: no-repeat;
+  background-position: 54% 50%;
+  background-size: 40% 40%;
+  background-color: #1a1a1a;
+  opacity: 0.8;
+  position: relative;
+  top: 20px;
+}
+
+.controlsSpacerStack:hover > div.clickToPlay,
+div.clickToPlay:hover {
+  opacity: 0.55;
+}
+
+.controlsSpacerStack:hover > div.clickToPlay[fadeout] {
+  opacity: 0;
+}
+
+div.controlBar[fullscreen-unavailable] .fullscreenButton {
+  display: none;
+}
+
+/*** Start of Firefox 52 and earlier section **********/
 /* Statistics formatting */
 html|*.statsDiv {
   position: relative;
@@ -266,14 +745,26 @@ html|table {
   border-collapse: collapse;
   position: absolute;
 }
+/*** End of Firefox 52 and earlier section ************/
 
 /* CSS Transitions */
-.clickToPlay {
+box.clickToPlay { /* Firefox <= 52 */
   transition-property: opacity, background-size;
   transition-duration: 400ms, 400ms;
 }
-.clickToPlay[fadeout] {
+div.clickToPlay {
+  transition-property: transform, opacity;
+  transition-duration: 400ms, 400ms;
+}
+div.controlsSpacer[fadeout] {
+  opacity: 0;
+}
+box.clickToPlay[fadeout] { /* Firefox <= 52 */
   background-size: auto, 192px 192px;
+  opacity: 0;
+}
+div.clickToPlay[fadeout] {
+  transform: scale(3);
   opacity: 0;
 }
 .clickToPlay[fadeout][immediate] {
@@ -291,7 +782,7 @@ html|table {
   transition-property: opacity, margin-top;
   transition-duration: 200ms, 200ms;
 }
-.volumeStack[fadeout] {
+stack.volumeStack[fadeout] { /* Firefox <=52 */
   opacity: 0;
   margin-top: 0;
 }
@@ -305,7 +796,7 @@ html|table {
 }
 
 /* Error description formatting */
-.errorLabel {
+label.errorLabel {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 11px;
   color: #bbb;
@@ -317,3 +808,61 @@ html|table {
   padding: 0 10px;
   text-align: center;
 }
+
+span.errorLabel {
+  padding: 0 10px;
+  text-align: center;
+  font: message-box;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+span.errorLabel {
+  display: none;
+}
+
+[error="errorAborted"]         > [anonid="errorAborted"],
+[error="errorNetwork"]         > [anonid="errorNetwork"],
+[error="errorDecode"]          > [anonid="errorDecode"],
+[error="errorSrcNotSupported"] > [anonid="errorSrcNotSupported"],
+[error="errorNoSource"]        > [anonid="errorNoSource"],
+[error="errorGeneric"]         > [anonid="errorGeneric"] {
+  display: inline;
+}
+
+/* For high contrast theme in Windows */
+div.controlsSpacer,
+div.clickToPlay {
+  background-color: transparent;
+}
+
+@media (-moz-windows-default-theme) {
+  div.controlsSpacer {
+    background-color: rgba(255,255,255,.4);
+  }
+
+  div.clickToPlay {
+    background-color: #1a1a1a;
+  }
+}
+
+/*** Start of Firefox 52 and earlier section **********/
+@media (min-resolution: 1.3dppx) {
+  .volumeBackground {
+    background-image: url(chrome://global/skin/media/volume-empty@2x.png);
+    background-size: 32px 16px;
+  }
+  .volumeForeground {
+    background-image: url(chrome://global/skin/media/volume-full@2x.png);
+    background-size: 32px 16px;
+  }
+  .timeThumb {
+    background-image: url(chrome://global/skin/media/scrubberThumb@2x.png);
+    background-size: 33px 28px;
+  }
+  .timeThumb[showhours="true"] {
+    background-image: url(chrome://global/skin/media/scrubberThumbWide@2x.png);
+    background-size: 45px 28px;
+  }
+}
+/*** End of Firefox 52 and earlier section ************/
