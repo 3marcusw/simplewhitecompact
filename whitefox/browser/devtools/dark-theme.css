@@ -159,7 +159,8 @@ body {
 .cm-s-mozilla .cm-def,
 .cm-s-mozilla .cm-property,
 .cm-s-mozilla .cm-qualifier,
-.variables-view-variable > .title > .name {
+.variables-view-variable > .title > .name,
+.variables-view-variable > .title > .separator {
   color: var(--theme-highlight-blue);
 }
 
@@ -761,6 +762,7 @@ div.CodeMirror span.eval-text {
 
 /* Mask '#pseudo-class-panel > label > input' of 'Inspector: Rules' and 'input#browser-style-checkbox' of 'Inspector: Computed' of Firefox 50 and later */
 
+@supports (not (display: flow-root )) { {} /* Firefox < 53 */
 .theme-dark label#browser-style-checkbox-label,
 .theme-dark #pseudo-class-panel > label {
   position: relative;
@@ -826,6 +828,7 @@ div.CodeMirror span.eval-text {
 .theme-dark input#browser-style-checkbox:checked + label#browser-style-checkbox-label::after {
   content: url(images/checkmark-dark-small.svg);
 }
+
 .theme-dark input#browser-style-checkbox:hover + label#browser-style-checkbox-label::after,
 .theme-dark label#browser-style-checkbox-label:hover::after,
 .theme-dark #pseudo-class-panel > label:hover::after {
@@ -835,4 +838,34 @@ div.CodeMirror span.eval-text {
   -moz-border-right-colors: #3896D6 #1a2329;
   -moz-border-bottom-colors: #3896D6 #1a2329;
   -moz-border-left-colors: #3896D6 #1a2329;
+}
+
+}
+
+/*************************************************************************************************************************/
+
+@supports (display: flow-root) { {} /* Firefox 53+ */
+  /* .theme-dark input[type=checkbox] */
+  .theme-dark input#browser-style-checkbox,
+  .theme-dark #pseudo-class-panel > label > input {
+    -moz-appearance: none;
+    height: 13px;
+    width: 13px;
+    background-color: #181d20;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #666;
+  }
+  /* .theme-dark input[type=checkbox]:checked */
+  .theme-dark input#browser-style-checkbox:checked,
+  .theme-dark #pseudo-class-panel > label > input:checked {
+    background-image: url(images/checkmark-dark-small.svg);
+    background-position: center center;
+  }
+  /*.theme-dark label:hover > input[type=checkbox] */
+  .theme-dark input#browser-style-checkbox:hover,
+  .theme-dark #pseudo-class-panel > label > input:hover {
+    border-color: #3896D6;
+    background-color: #1a2329;
+  }
 }
