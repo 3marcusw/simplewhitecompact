@@ -28,7 +28,6 @@
   --toolbar-button-border-color: rgba(170, 170, 170, .5);
 }
 
-
 /* Toolbars */
 .devtools-toolbar,
 .devtools-sidebar-tabs tabs {
@@ -62,6 +61,7 @@
   margin: 0 6px !important; /* overrides .checkbox-label from checkbox.css */
   padding: 0;
 }
+
 
 /* Toolbar buttons */
 
@@ -747,6 +747,16 @@ button#toolbox-dock-bottom-minimize:hover::before, /* button#toolbox-dock-bottom
   -moz-border-start-width: 1px;
   border-style: solid;
 }
+.theme-firebug .devtools-sidebar-alltabs {
+  margin: 0;
+  border-radius: 0;
+}
+.theme-firebug .devtools-sidebar-alltabs:-moz-locale-dir(ltr) {
+  border-bottom-left-radius: 4px;
+}
+.theme-firebug .devtools-sidebar-alltabs:-moz-locale-dir(rtl) {
+  border-bottom-right-radius: 4px;
+}
 
 .devtools-sidebar-alltabs .toolbarbutton-icon {
   display: none;
@@ -1184,6 +1194,22 @@ button.command-button{ /* For FF49 */
 }
 
 /* Tabs */
+
+.tabs > .tabs-navigation {
+  box-sizing: border-box;
+  height: 24px;   /* for Firefox 50 --johnGraciliano */
+}
+
+.theme-firebug .tabs > .tabs-navigation {
+  height: 28px;
+}
+
+/* Firebug theme version that is missing for a rule in resource://devtools/client/shared/components/tabs/tabs.css of Firefox 50 */
+/* Make sure panel content takes entire vertical space.
+  (minus the height of the tab bar) */
+.theme-firebug .tabs > .panels {
+  height: calc(100% - 28px);
+}
 
 .devtools-tabbar {
   -moz-appearance: none;
@@ -1687,6 +1713,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
  * Filter buttons
  * @TODO : Fix when https://bugzilla.mozilla.org/show_bug.cgi?id=1255116 lands
  */
+:-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button, /* Firefox 54.0a1 (2017.02.17) */
 .menu-filter-button {
   -moz-appearance: none;
   background: rgba(128,128,128,0.1);
@@ -1698,20 +1725,24 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   color: var(--theme-body-color);
 }
 
+:-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover, /* Firefox 54.0a1 (2017.02.17) */
 .menu-filter-button:hover {
   background: rgba(128,128,128,0.2);
 }
 
+:-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover:active, /* Firefox 54.0a1 (2017.02.17) */
 .menu-filter-button:hover:active {
   background-color: var(--theme-selection-background-semitransparent);
 }
 
+:-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button.checked, /* Firefox 54.0a1 (2017.02.17) */
 .menu-filter-button:not(:active).checked {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
 }
 
 
+.theme-firebug :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button, /* Firefox 54.0a1 (2017.02.17) */
 :root.theme-firebug .menu-filter-button {
   border: 1px solid transparent;
   background-color: transparent;
@@ -1722,6 +1753,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   margin-inline-end: 1px;
 }
 
+.theme-firebug :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover, /* Firefox 54.0a1 (2017.02.17) */
 :root.theme-firebug .menu-filter-button:hover {
   border-color: rgba(0, 0, 0, 0.2);
   background: transparent linear-gradient(rgba(255, 255, 255, 0.4),
@@ -1730,6 +1762,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
       0 0 2px rgba(0, 0, 0, 0.05);
 }
 
+.theme-firebug :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover:active, /* Firefox 54.0a1 (2017.02.17) */
 :root.theme-firebug .requests-menu-filter-button:hover:active {
   border-color: rgba(0, 0, 0, 0.3);
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.1) inset,
@@ -1737,6 +1770,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), transparent);
 }
 
+.theme-firebug :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:not(:active).checked, /* Firefox 54.0a1 (2017.02.17) */
 :root.theme-firebug .menu-filter-button:not(:active).checked {
   background: rgba(255,255,255,.05) linear-gradient(rgba(0, 0, 0, 0.1), transparent) no-repeat;
   color: inherit;
@@ -1749,6 +1783,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
 
 #requests-menu-clear-button{margin-top:1px;margin-bottom:1px;} /* For Console Tool */
 
+:root:not(.theme-firebug) .webconsole-filterbar-secondary > .devtools-button + .devtools-separator, /* Conosole tool */
 :root:not(.theme-firebug) .menu-filter-button + .devtools-separator {
   display: inline-block;
   background: transparent;
@@ -1756,6 +1791,7 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   margin: 0; /* To align this box with the buttons */
 }
 
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button {
   margin: 0;
   height: 100%;
@@ -1769,27 +1805,35 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   border-image-slice: 0 1;
   background-clip: padding-box;
 }
+:root:not(.theme-firebug) .webconsole-filterbar-secondary > .devtools-button.debug, /* Firefox 54.0a1 (2017.02.17) */
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:last-of-type, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button.debug, /* Conosole tool */
 :root:not(.theme-firebug) .menu-filter-button:last-of-type {
   border-inline-end: 1px solid;
 }
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button {
   background-color: var(--theme-toolbar-background);
 }
+:root:not(.theme-firebug).theme-light :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug).theme-light .menu-filter-button:hover {
   background-color: #e1e1e1;  /* = var(--theme-toolbar-background) + rgba(0, 0, 0, 0.1) */
 }
+:root:not(.theme-firebug).theme-dark :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug).theme-dark .menu-filter-button:hover {
   background-color: #292f36;  /* = var(--theme-toolbar-background) + rgba(0, 0, 0, 0.1) */
 }
+:root:not(.theme-firebug).theme-light :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover:active, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug).theme-light .menu-filter-button:hover:active {
   background-color: #e0ecf5; /*  = var(--theme-toolbar-background) + var(--theme-selection-background-semitransparent) */
 }
+:root:not(.theme-firebug).theme-dark :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:hover:active, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug).theme-dark .menu-filter-button:hover:active {
   color: var(--theme-selection-color);
   background-color: #264258; /*  = var(--theme-toolbar-background) + var(--theme-selection-background-semitransparent) */
 }
 
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:not(:active).checked, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button:not(:active).checked {
   background-color: var(--theme-selection-background);
   color: var(--theme-selection-color);
@@ -1797,10 +1841,13 @@ button.devtools-tab:not(.highlighted) > .highlighted-icon, /* Firefox 53+ */ /* 
   border-image-source: linear-gradient(var(--theme-splitter-color), var(--theme-splitter-color));
   box-shadow: 1px 0 0 0 var(--theme-splitter-color);
 }
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:not(:active).checked:-moz-locale-dir(rtl), /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button:not(:active).checked:-moz-locale-dir(rtl) {
   box-shadow: -1px 0 0 0 var(--theme-splitter-color);
 }
 
+:root:not(.theme-firebug) .webconsole-filterbar-secondary > .devtools-button:not(:active).checked.debug, /* Conosole tool */
+:root:not(.theme-firebug) :-moz-any(.webconsole-filterbar-secondary,[id=requests-menu-filter-buttons],[id=requests-list-filter-buttons],.requests-list-filter-buttons) > .devtools-button:not(:active).checked:last-of-type, /* Firefox 54.0a1 (2017.02.17) */
 :root:not(.theme-firebug) .menu-filter-button:not(:active).checked.debug, /* Conosole tool */
 :root:not(.theme-firebug) .menu-filter-button:not(:active).checked:last-of-type {
   box-shadow: none;
