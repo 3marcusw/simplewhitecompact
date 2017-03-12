@@ -352,7 +352,7 @@ ul.children + .tag-line::before {
 /* In case a node isn't displayed in the page, we fade the syntax highlighting */
 .not-displayed .open,
 .not-displayed .close {
-  opacity: .7;
+  opacity: .6; /* This was .7 and changed to .5 in 'default/classic' --johnGraciliano */
 }
 
 /* Events */
