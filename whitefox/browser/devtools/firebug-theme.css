@@ -101,6 +101,7 @@
 /* Variables View */
 
 .theme-firebug .variables-view-variable > .title > .name,
+.theme-firebug .variables-view-variable > .title > .separator,
 .theme-firebug .variables-view-variable > .title > .value {
   color: var(--theme-body-color);
 }
@@ -120,6 +121,7 @@
 /*border-bottom: 1px solid rgb(170, 188, 207) !important;  *** Removed. light-theme.css & toolbars.css use corrected color in variables.css --johnGraciliano */
 }
 
+.theme-firebug .tabs nav.tabs-navigation, /* Added for Firefox 54 */
 .theme-firebug .devtools-sidebar-tabs tabs {
 /*background-color: rgb(219, 234, 249) !important;  *** Removed because light-theme.css uses corrected color from variables.css --johnGraciliano */
   background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
@@ -168,6 +170,24 @@ div#toolbox-option-container /* Firefox 53+ */ {
 .theme-firebug .devtools-sidebar-tabs tab:hover {
   border: 1px solid #C8C8C8 !important;
   border-bottom: 1px solid transparent;
+}
+
+.theme-firebug .tabs li.tabs-menu-item > a {
+  color: #565656;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.theme-firebug .tabs li.tabs-menu-item.is-active > a {
+  background-color: rgb(247, 251, 254);
+  color: #18191a; /* var(--theme-body-color) */
+  border-bottom-width: 0; /* This is to make the bottom corners show */
+  padding-bottom: 5px;    /* a sharp right angle --johnGraciliano */
+}
+
+.theme-firebug .netInfoBody > .tabs li.tabs-menu-item.is-active > a { /* Fix for Web Console tool --johnGraciliano */
+  background-color: var(--theme-body-background);
+  padding-bottom: 3px;
 }
 
 .theme-firebug .devtools-tab[selected],
@@ -264,6 +284,7 @@ div#toolbox-option-container /* Firefox 53+ */ {
 .theme-firebug .devtools-toolbar,
 .theme-firebug .tabs-navigation {
   height: 28px !important;
+  box-sizing: border-box;
 }
 
 /* Do not set the fixed height for rule viewtoolbar. This toolbar
@@ -333,6 +354,21 @@ div#toolbox-option-container /* Firefox 53+ */ {
 .theme-firebug .theme-selected ~ .theme-twisty[open] {
   background-position: 1px center;
 }
+
+
+
+.theme-firebug div.all-tabs-menu {
+  height: calc(100% - 4px);
+  border-bottom: 1px solid var(--theme-splitter-color);
+  border-bottom-left-radius: 5px;
+  width: 13px;
+}
+
+.theme-firebug div.all-tabs-menu:-moz-locale-dir(rtl) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 5px;
+}
+
 
 /* The next is for page `about:stylish-edit` from the *Stylish* extension */
 #errors.theme-toolbar {
