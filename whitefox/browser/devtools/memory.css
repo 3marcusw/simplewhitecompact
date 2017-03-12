@@ -142,6 +142,10 @@ html, body, #app, #memory-tool {
   filter: none;
 }
 
+.heap-view-panel > .devtools-button.take-snapshot::before { /* Firefox 54 ******************************************************** --johnGraciliano */
+  content: none;
+}
+
 #clear-snapshots::before {
   background-image: url(images/clear.svg);
 }
@@ -352,6 +356,8 @@ html, body, #app, #memory-tool {
 @supports (display: flow-root ) { {} /* Firefox 53+ */
   .theme-dark input[type=checkbox] {
     -moz-appearance: none;
+    height:13px;
+    width:13px;
     background-color: #181d20;
     border-width: 1px;
     border-style: solid;
