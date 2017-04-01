@@ -9,3 +9,10 @@ body {
 video {
   box-shadow: 0 4px 15px rgba(0,0,0,.7);
 }
+
+@supports (display: flow-root) { /* This is only for Firefox 53 and later */
+/* This is coordinated with videocontrols.css */
+video[style*="height: 40px;"] {
+  height: 28px !important;
+}
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18">
+  <style>
+    use:not(:target) {
+      display: none;
+    }
+    use {
+      fill: #ffffff;
+    }
+    use[id$="-hover"] {
+      fill: #48a0f7;
+    }
+    use[id$="-active"] {
+      fill: #2d89e6;
+    }
+    use[id$="-focus"] {
+      fill: #48a0f7;
+    }
+    use[id$="-disabled"] {
+      fill: #ffffff;
+    }
+  </style>
+  <symbol id="unmute-shape">
+    <path d="M2.7,6h1.3l5-5v16l-5,-5h-1.3a1.7,1.7 0 0,1 -1.7-1.7v-2.6a1.7,1.7 0 0,1 1.7,-1.7z"/>
+    <path d="M11,9v-2.2a2.2,2.2 0 0,1 2.2,2.2a2.2,2.2 0 0,1 -2.2,2.2v-2.2z"/>
+    <path d="M15.9,9a7,5.4 0 0,0 -2.9-4l1.3-1.8a9,7 0 0,1 3.6,5.8a9,7 0 0,1 -3.6,5.8l-1.3,-1.8a7,5.4 0 0,0 2.9-4z"/>
+  </symbol>
+  <symbol id="mute-shape">
+    <path d="M2.7,6h1.3l5-5v16l-5,-5h-1.3a1.7,1.7 0 0,1 -1.7-1.7v-2.6a1.7,1.7 0 0,1 1.7,-1.7z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138L13.155,12.066z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L11.998,7.204z"/>
+  </symbol>
+  <symbol id="noaudio-shape">
+    <path d="M4.7,6h1.3l5-5v5.82l3.8,-3.12l1.3,1.3l-12.9,10.6l-1.3,-1.3l2.8-2.3a1.7,1.7 0 0,1 -1.7-1.7v-2.6a1.7,1.7 0 0,1 1.7,-1.7z"/>
+    <path d="M11,11.56l0,5.44l-2.99-2.99l2.99-2.45"/>
+  </symbol>
+  <use id="unmute" xlink:href="#unmute-shape"/>
+  <use id="unmute-hover" xlink:href="#unmute-shape"/>
+  <use id="unmute-active" xlink:href="#unmute-shape"/>
+  <use id="unmute-focus" xlink:href="#unmute-shape"/>
+  <use id="unmute-disabled" xlink:href="#unmute-shape"/>
+
+  <use id="mute" xlink:href="#mute-shape"/>
+  <use id="mute-hover" xlink:href="#mute-shape"/>
+  <use id="mute-active" xlink:href="#mute-shape"/>
+  <use id="mute-focus" xlink:href="#mute-shape"/>
+  <use id="mute-disabled" xlink:href="#mute-shape"/>
+
+  <use id="noaudio" xlink:href="#noaudio-shape"/>
+</svg>

@@ -2,14 +2,14 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/ */
 
-
+ 
 #header, #main,
-#boxmodel-header, #boxmodel-main, #boxmodel-info {
+#old-boxmodel-header, #old-boxmodel-main, #old-boxmodel-info {
   --expand: 1;
   --condense: 0px;
 }
 @media (max-height: 252px) {
-  #boxmodel-header, #boxmodel-main, #boxmodel-info {
+  #old-boxmodel-header, #old-boxmodel-main, #old-boxmodel-info {
     --expand: 0;
   }
 }
@@ -19,29 +19,20 @@
   }
 }
 
-#computedview-container #boxmodel-header,
-#computedview-container #boxmodel-main,
-#computedview-container #boxmodel-info,
-.boxmodel-header,
-.boxmodel-main,
-.boxmodel-info {
+#computedview-container #old-boxmodel-header,
+#computedview-container #old-boxmodel-main,
+#computedview-container #old-boxmodel-info {
   --expand: 0;
   --condense: 1px;
 }
-#computedview-container #boxmodel-main > p > span,
-#computedview-container #boxmodel-main > p > input,
-#computedview-container .boxmodel-legend,
-#computedview-container #boxmodel-info > span,
-#computedview-container #boxmodel-info > section > span,
-.boxmodel-main > p > span,
-.boxmodel-main > p > input,
-.boxmodel-main             .boxmodel-legend,
-.boxmodel-info > span,
-.boxmodel-info > section > span  {
+#computedview-container #old-boxmodel-main > p > span,
+#computedview-container #old-boxmodel-main > p > input,
+#computedview-container .old-boxmodel-legend,
+#computedview-container #old-boxmodel-info > span,
+#computedview-container #old-boxmodel-info > section > span  {
   font-size: 92%;
 }
-#computedview-container #boxmodel-container,
-div.boxmodel-container { /* The tag 'div' is so the value for 'max-width' here preceeds the value in a rule below */
+#computedview-container #old-boxmodel-container {
   max-width: 300px;
 }
 
@@ -54,20 +45,19 @@ div.boxmodel-container { /* The tag 'div' is so the value for 'max-width' here p
   overflow: auto;
 }
 
-#computedview-container-focusable > #boxmodel-wrapper { /* Firefox >= 50 */
+#computedview-container-focusable > #old-boxmodel-wrapper { /* Firefox >= 50 */
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-color: var(--theme-splitter-color);
 }
 
 body.theme-sidebar.devtools-monospace, /* Added specificity so it supersedes rules elsewhere */
-#boxmodel-container,
-.boxmodel-container {
+#old-boxmodel-container {
   /* The view will grow bigger as the window gets resized, until 375px. */
   max-width: 375px; /* This is 400px in the default/classic theme --johnGraciliano */
   margin: 0px auto;
   padding: 0;
-  /* "Contain" the absolutely positioned #boxmodel-main element */
+  /* "Contain" the absolutely positioned #old-boxmodel-main element */
   position: relative;
 }
 
@@ -83,8 +73,7 @@ p#header{ /* Firefox <= 45 */
   padding-left: 13px;
 }
 
-#boxmodel-header,
-.boxmodel-header {
+#old-boxmodel-header{
   display: flex;
   align-items: center;
   margin: 0;
@@ -94,8 +83,7 @@ p#header{ /* Firefox <= 45 */
   padding-left: 13px;
 }
 
-#boxmodel-info,
-.boxmodel-info {
+#old-boxmodel-info {
   display: flex;
   align-items: center;
   margin: 0;
@@ -110,30 +98,26 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 }
 
 /* Raise the diagram to prevent hiding the bottom in full size  --johnGraciliano */
-/* .theme-firebug #sidebar-panel-layoutview > * > * > #boxmodel-header, */
-.theme-firebug #boxmodel-header,
-.theme-firebug .boxmodel-header {
+/* .theme-firebug #sidebar-panel-layoutview > * > * > #old-boxmodel-header, */
+.theme-firebug #old-boxmodel-header {
   padding-top: calc(3px + 6px * var(--expand));
   padding-left: 14px;
   padding-bottom: calc(3px + 6px * var(--expand));
   padding-right: 14px;
 }
 
-#layout-geometry-editor,
-.layout-geometry-editor {
+#layout-geometry-editor {
   visibility: hidden;
 }
 
-#layout-geometry-editor::before,
-.layout-geometry-editor::before {
+#layout-geometry-editor::before {
   background: url(images/geometry-editor.svg) no-repeat center center / 16px 16px;
 }
 
 /* Main: contains the box-model regions */
 
 #main,
-#boxmodel-main,
-.boxmodel-main {
+#old-boxmodel-main {
   position: absolute;
   box-sizing: border-box;
   /* The regions are semi-transparent, so the white background is partly
@@ -144,15 +128,14 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
   margin: 0 14px 4px 14px;
   width: calc(100% - 2 * 14px);
 }
-#computedview-container #boxmodel-main,
-.boxmodel-main { /* Firefox >= 50*/
+#computedview-container #old-boxmodel-main{ /* Firefox >= 50*/
   position: relative;
 }
 
 .margin,
 .size,
-:root:not(.theme-firebug) .boxmodel-margin,
-:root:not(.theme-firebug) .boxmodel-size {
+:root:not(.theme-firebug) .old-boxmodel-margin,
+:root:not(.theme-firebug) .old-boxmodel-size {
   color: var(--theme-highlight-blue);
   color: #0088cc; /* The color for the margin and size values */
 }
@@ -160,36 +143,30 @@ span#element-size:-moz-dir(rtl) { /* Undo a rule in 'chrome://browser/content/de
 /* Regions are 3 nested elements with wide borders and outlines */
 
 div#content,
-#boxmodel-content,
-.boxmodel-content {
+#old-boxmodel-content {
   height: calc(21px + 4px * var(--expand) - var(--condense));
 }
 
 div#margins,
 div#borders,
 div#padding,
-#boxmodel-margins,
-#boxmodel-borders,
-#boxmodel-padding,
-.boxmodel-margins,
-.boxmodel-borders,
-.boxmodel-paddings {
+#old-boxmodel-margins,
+#old-boxmodel-borders,
+#old-boxmodel-padding {
   border-width: calc(21px + 4px * var(--expand) - var(--condense));
   border-style: solid;
   outline: dotted 1px hsl(210,100%,85%);
 }
 
 div#borders, /* Added specificity so it supersedes rules elsewhere */
-div#boxmodel-borders,
-div.boxmodel-borders {
+div#old-boxmodel-borders{
   border-width: calc(22px + 3px * var(--expand) - var(--condense));
   padding:0;
   outline: dotted 1px hsl(210,100%,45%);
 }
 
 #margins,
-#boxmodel-margins,
-.boxmodel-margins {
+#old-boxmodel-margins {
   outline: dotted 1px hsl(210,100%,75%);
 }
 
@@ -199,112 +176,100 @@ div.boxmodel-borders {
 /* Regions colors */
 
 #margins,
-#boxmodel-margins,
-.boxmodel-margins {
+#old-boxmodel-margins {
   border-color: rgba(237, 255, 100, .8); /* #edff64 * 80% */
 }
 
 #borders,
-#boxmodel-borders,
-.boxmodel-borders {
+#old-boxmodel-borders {
   border-color: rgba(68, 68,68, .8); /* #444444 * 80% */
 }
 
 #padding,
-#boxmodel-padding,
-.boxmodel-paddings {
+#old-boxmodel-padding {
   border-color: rgba(106, 90, 205, .8); /* #6a5acd * 80% */
 }
 
 #content,
-#boxmodel-content,
-.boxmodel-content {
+#old-boxmodel-content {
   background-color: rgba(135, 206, 235, .8); /* #87ceeb * 80% */
 }
 
 /*
-.tab-panel-box[id] #boxmodel-main {
+.tab-panel-box[id] #old-boxmodel-main {
   color: #1A1C22;
 }
 
-.tab-panel-box[id] #boxmodel-margins {
+.tab-panel-box[id] #old-boxmodel-margins {
   border-color: #9ebce1cc;
   outline: 1px solid #2f5b8e;
   opacity: 1;
 }
 
-.tab-panel-box[id] #boxmodel-borders {
+.tab-panel-box[id] #old-boxmodel-borders {
   border-color: #b3c8e2cc;
   outline: 1px solid #3b72b3;
 }
 
-.tab-panel-box[id] #boxmodel-padding {
+.tab-panel-box[id] #old-boxmodel-padding {
   border-color: #7fe3cccc;
   outline: 1px solid #00c79a;
 }
 
-.tab-panel-box[id] #boxmodel-content {
+.tab-panel-box[id] #old-boxmodel-content {
   background-color: #f0f7ffcc;
   border: 1px solid #eaf4ff;
 }
 
-.tab-panel-box[id] #boxmodel-main {
+.tab-panel-box[id] #old-boxmodel-main {
   border-width: 0px;
   background-color: #f8f8f899;
 }
 */
 
 /*****
-.tab-panel-box[id] .boxmodel-margin,
-.tab-panel-box[id] .boxmodel-border,
-.tab-panel-box[id] .boxmodel-padding,
-.tab-panel-box[id] .boxmodel-size {
+.tab-panel-box[id] .old-boxmodel-margin,
+.tab-panel-box[id] .old-boxmodel-border,
+.tab-panel-box[id] .old-boxmodel-padding,
+.tab-panel-box[id] .old-boxmodel-size {
   color: #1A1C22;
 }
 
-.tab-panel-box[id] #boxmodel-main > .boxmodel-legend {
+.tab-panel-box[id] #old-boxmodel-main > .old-boxmodel-legend {
   color: #7b852c;
 }
-.tab-panel-box[id] #boxmodel-margins > .boxmodel-legend {
+.tab-panel-box[id] #old-boxmodel-margins > .old-boxmodel-legend {
   color: #222222;
 }
-.tab-panel-box[id] #boxmodel-borders > .boxmodel-legend {
+.tab-panel-box[id] #old-boxmodel-borders > .old-boxmodel-legend {
   color: #443c74;
 }
 *****/
 
-.theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-content,
-.theme-firebug .boxmodel-main,
-.theme-firebug .boxmodel-content {
+.theme-firebug #old-boxmodel-main,
+.theme-firebug #old-boxmodel-content {
   border: 1px solid transparent;
 }
 
-.theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-header,
-.theme-firebug .boxmodel-main,
-.theme-firebug .boxmodel-header {
+.theme-firebug #old-boxmodel-main,
+.theme-firebug #old-boxmodel-header {
   font-family: var(--proportional-font-family);
 }
 
-.theme-firebug #boxmodel-main,
-.theme-firebug #boxmodel-info,
-.theme-firebug .boxmodel-main,
-.theme-firebug .boxmodel-info {
+.theme-firebug #old-boxmodel-main,
+.theme-firebug #old-boxmodel-info {
   color: var(--theme-body-color);
   font-size: var(--theme-toolbar-font-size);
 }
 
-.theme-firebug #boxmodel-header,
-.theme-firebug .boxmodel-header {
+.theme-firebug #old-boxmodel-header {
   font-size: var(--theme-toolbar-font-size);
 }
 
 /* Editable region sizes are contained in absolutely positioned <p> */
 
 #main > p,
-#boxmodel-main > p,
-.boxmodel-main > p {
+#old-boxmodel-main > p {
   position: absolute;
   pointer-events: none;
   margin: 0;
@@ -313,10 +278,8 @@ div.boxmodel-borders {
 
 #main > p > span,
 #main > p > input,
-#boxmodel-main > p > span,
-#boxmodel-main > p > input,
-.boxmodel-main > p > span,
-.boxmodel-main > p > input {
+#old-boxmodel-main > p > span,
+#old-boxmodel-main > p > input {
   vertical-align: middle;
   pointer-events: auto;
 }
@@ -325,39 +288,39 @@ div.boxmodel-borders {
 
 .top,
 .bottom,
-.boxmodel-top,
-.boxmodel-bottom {
+.old-boxmodel-top,
+.old-boxmodel-bottom {
   width: calc(100% - 2px);
   text-align: center;
 }
 
 p.padding.top,
-.boxmodel-padding.boxmodel-top {
+.old-boxmodel-padding.old-boxmodel-top {
   top: calc(46px + 9px * var(--expand) - 2 * var(--condense));
 }
 
 p.padding.bottom,
-.boxmodel-padding.boxmodel-bottom {
+.old-boxmodel-padding.old-boxmodel-bottom {
   bottom: calc(46px + 11px * var(--expand) - 2 * var(--condense));
 }
 
 p.border.top,
-.boxmodel-border.boxmodel-top {
+.old-boxmodel-border.old-boxmodel-top {
   top: calc(24px + 6px * var(--expand) - var(--condense));
 }
 
 p.border.bottom,
-.boxmodel-border.boxmodel-bottom {
+.old-boxmodel-border.old-boxmodel-bottom {
   bottom: calc(24px + 7px * var(--expand) - var(--condense));
 }
 
 p.margin.top,
-.boxmodel-margin.boxmodel-top {
+.old-boxmodel-margin.old-boxmodel-top {
   top: calc(2px + 3px * var(--expand));
 }
 
 p.margin.bottom,
-.boxmodel-margin.boxmodel-bottom {
+.old-boxmodel-margin.old-boxmodel-bottom {
   bottom: calc(2px + 4px * var(--expand));
 }
 
@@ -368,19 +331,19 @@ p.border.left,
 p.border.right,
 p.padding.left,
 p.padding.right,
-.boxmodel-size,
-.boxmodel-margin.boxmodel-left,
-.boxmodel-margin.boxmodel-right,
-.boxmodel-border.boxmodel-left,
-.boxmodel-border.boxmodel-right,
-.boxmodel-padding.boxmodel-left,
-.boxmodel-padding.boxmodel-right {
+.old-boxmodel-size,
+.old-boxmodel-margin.old-boxmodel-left,
+.old-boxmodel-margin.old-boxmodel-right,
+.old-boxmodel-border.old-boxmodel-left,
+.old-boxmodel-border.old-boxmodel-right,
+.old-boxmodel-padding.old-boxmodel-left,
+.old-boxmodel-padding.old-boxmodel-right {
   top:  calc(65px + 14px * var(--expand) - 2 * var(--condense));
   line-height: initial;
 }
 
 .size,
-.boxmodel-size {
+.old-boxmodel-size {
   width: calc(100% - 2px);
 }
 
@@ -390,78 +353,74 @@ p.border.left,
 p.border.right,
 p.padding.right,
 p.padding.left,
-.boxmodel-margin.boxmodel-right,
-.boxmodel-margin.boxmodel-left,
-.boxmodel-border.boxmodel-left,
-.boxmodel-border.boxmodel-right,
-.boxmodel-padding.boxmodel-right,
-.boxmodel-padding.boxmodel-left {
+.old-boxmodel-margin.old-boxmodel-right,
+.old-boxmodel-margin.old-boxmodel-left,
+.old-boxmodel-border.old-boxmodel-left,
+.old-boxmodel-border.old-boxmodel-right,
+.old-boxmodel-padding.old-boxmodel-right,
+.old-boxmodel-padding.old-boxmodel-left {
   width: calc(21px + 4px * var(--expand));
 }
 
 p.padding.left,
-.boxmodel-padding.boxmodel-left {
+.old-boxmodel-padding.old-boxmodel-left {
   left: calc(43px + 9px * var(--expand) - 2 * var(--condense));
 }
 
 p.padding.right,
-.boxmodel-padding.boxmodel-right {
+.old-boxmodel-padding.old-boxmodel-right {
   right: calc(43px + 8px * var(--expand) - 2 * var(--condense));
 }
 
 p.border.left,
-.boxmodel-border.boxmodel-left {
+.old-boxmodel-border.old-boxmodel-left {
   left: calc(22px + 4px * var(--expand) - var(--condense));
 }
 
 p.border.right,
-.boxmodel-border.boxmodel-right {
+.old-boxmodel-border.old-boxmodel-right {
   right: calc(22px + 4px * var(--expand) - var(--condense));
 }
 
 .margin.right,
-.boxmodel-margin.boxmodel-right {
+.old-boxmodel-margin.old-boxmodel-right {
   right: 0;
 }
 
 .margin.left,
-.boxmodel-margin.boxmodel-left {
+.old-boxmodel-margin.old-boxmodel-left {
   left: 0;
 }
 
 .rotate.left:not(.editing),
-.boxmodel-rotate.boxmodel-left:not(.boxmodel-editing) {
+.old-boxmodel-rotate.old-boxmodel-left:not(.old-boxmodel-editing) {
   transform: rotate(-90deg);
 }
 .rotate.left:not(.editing) > .editable,
-.boxmodel-rotate.boxmodel-left:not(.boxmodel-editing) > .boxmodel-editable {
+.old-boxmodel-rotate.old-boxmodel-left:not(.old-boxmodel-editing) > .old-boxmodel-editable {
   margin-left: calc(-2px * (1 - var(--expand)));
 }
 .padding.rotate:not(.editing) > .editable,
-.boxmodel-padding.boxmodel-rotate:not(.boxmodel-editing) > .boxmodel-editable {
+.old-boxmodel-padding.old-boxmodel-rotate:not(.old-boxmodel-editing) > .old-boxmodel-editable {
   text-shadow: 0 0 2px #6a5acd, 0 0 2px #6a5acd, 0 0 2px #6a5acd;
 }
 /*
-.tab-panel-box[id] .boxmodel-padding.boxmodel-rotate:not(.boxmodel-editing) > .boxmodel-editable {
+.tab-panel-box[id] .old-boxmodel-padding.old-boxmodel-rotate:not(.old-boxmodel-editing) > .old-boxmodel-editable {
   text-shadow: 0 0 2px #7fe3cc, 0 0 2px #7fe3cc, 0 0 2px #7fe3cc;
 }
 */
 
 .rotate.right:not(.editing),
-.boxmodel-rotate.boxmodel-right:not(.boxmodel-editing) {
+.old-boxmodel-rotate.old-boxmodel-right:not(.old-boxmodel-editing) {
   transform: rotate(90deg);
 }
 
 .left.editing,
 .right.editing,
-.boxmodel-left.boxmodel-editing,
-.boxmodel-right.boxmodel-editing {
+.old-boxmodel-left.old-boxmodel-editing,
+.old-boxmodel-right.old-boxmodel-editing {
   position: relative;
   z-index: 5;
-}
-._content .boxmodel-left.boxmodel-editing,
-._content .boxmodel-right.boxmodel-editing {
-  position: absolute; /* Undo the setting in late Firefox 54.0a1 */
 }
 
 /* Coordinates should be different when the window is small, because we make
@@ -471,36 +430,36 @@ p.border.right,
 /* Legend, displayed inside regions */
 
 span.legend,
-.boxmodel-legend {
+.old-boxmodel-legend {
   position: absolute;
   margin: calc(2px + 3px * var(--expand)) 6px;
   z-index: auto; /* This was 1 --johnGraciliano */
 }
 
 span.legend[data-box="margin"],
-.boxmodel-legend[data-box="margin"] {
+.old-boxmodel-legend[data-box="margin"] {
   color: #7b852c;
 }
 span.legend[data-box="border"],
-.boxmodel-legend[data-box="border"] {
+.old-boxmodel-legend[data-box="border"] {
   color: #222222;
 }
 span.legend[data-box="padding"],
-.boxmodel-legend[data-box="padding"] {
+.old-boxmodel-legend[data-box="padding"] {
   color: #443c74;
 }
 
 /* Editable fields */
 
 .editable,
-.boxmodel-editable {
+.old-boxmodel-editable {
   border: 1px dashed transparent;
   -moz-user-select: text;
   direction: ltr; /* So the period character will not be moved to the left when entering a decimal fraction --johnGraciliano */
 }
 
 .editable:hover,
-.boxmodel-editable:hover {
+.old-boxmodel-editable:hover {
   border-bottom-color: hsl(0, 0%, 50%);
 }
 
@@ -512,7 +471,7 @@ span.legend[data-box="padding"],
 /* Make sure the content size doesn't appear as editable like the other sizes */
 
 .size > span,
-.boxmodel-size > span {
+.old-boxmodel-size > span {
   cursor: default;
 }
 
@@ -521,12 +480,9 @@ span.legend[data-box="padding"],
 body.inactive > #header > #element-position,
 body.inactive > #header > #element-size,
 body.inactive > #main > p,
-#boxmodel-container.inactive > #boxmodel-header > #boxmodel-element-position,
-#boxmodel-container.inactive > #boxmodel-header > #boxmodel-element-size,
-#boxmodel-container.inactive > #boxmodel-main > p,
-.boxmodel-container.inactive > .boxmodel-header > #boxmodel-element-position,
-.boxmodel-container.inactive > .boxmodel-header > .boxmodel-element-size,
-.boxmodel-container.inactive > .boxmodel-main > p {
+#old-boxmodel-container.inactive > #old-boxmodel-header > #old-boxmodel-element-position,
+#old-boxmodel-container.inactive > #old-boxmodel-header > #old-boxmodel-element-size,
+#old-boxmodel-container.inactive > #old-boxmodel-main > p {
    visibility: hidden;
 }
 
@@ -534,43 +490,11 @@ body.inactive > #main > p,
 /* This section should be in the header section --johnGraciliano */
 
 #element-size, /* Firefox <= 45 */
-#boxmodel-element-size,
-.boxmodel-element-size {
+#old-boxmodel-element-size {
   flex: 1;
 }
 
-#boxmodel-position-group {
+#old-boxmodel-position-group {
   display: flex;
   align-items: center;
-}
-
-
-/* Additional rules for Firefox 54.0a1 and later */
-
-._header[class][class][class]{
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-size: 1.1em;
-  height: unset;
-  width: unset;
-  font-weight: bold;
-  background-image: none;
-  background-color: transparent;
-  border-bottom-width: 0;
-}
-._header[class][class][class]:hover{
-  background-color: rgba(128, 148, 142, 0.16);
-}
-.theme-firebug ._header[class][class][class] {
-  font-family: var(--proportional-font-family);
-}
-
-._header[class][class][class] > .arrow.theme-twisty {
-  margin-bottom: 2px;
-}
-
-._content[class][class] {
-  margin-top: 5px;
-  border-bottom-width: 0;
-  font-size: inherit;
 }
